@@ -1,0 +1,17 @@
+.pagination{
+  margin:0;
+  float:right;
+}
+
+#backButton{
+  margin-right: 10px;
+}
+
+.help-block2{
+	display:none;
+	color: red;
+}
+
+.img-prev{
+  cursor: pointer;
+}
