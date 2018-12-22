@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class City extends Model
+class GoodsCondition extends Model
 {
     use SoftDeletes;
-    protected $table = "city";
+    protected $table = "goods_condition";
     protected $dates = ['deleted_at'];
 }

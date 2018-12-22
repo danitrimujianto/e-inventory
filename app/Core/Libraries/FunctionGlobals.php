@@ -520,6 +520,7 @@ class FunctionGlobals {
 
     public static function normalNumber($obj)
     {
+      $obj = "0";
       return str_replace(",", "", str_replace(".", "", $obj));
     }
 
@@ -657,5 +658,20 @@ class FunctionGlobals {
     elseif ($nilai=='12')
     {return "Des.";}
     //end function
+    }
+
+    public static function bgStatus($obj)
+    {
+      $statusGreen = array('Aktif', '0');
+      $statusRed = array('Tidak Aktif', '1');
+
+      if(in_array($obj, $statusGreen))
+      {
+        $bg = 'bg-green';
+      }else{
+        $bg = 'bg-red';
+      }
+
+      return $bg;
     }
 }
