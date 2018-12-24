@@ -21,8 +21,8 @@
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 
-					<div class="text-right p-t-8 p-b-31">
-						&nbsp;
+					<div class="p-t-8 p-b-31">
+						<span class="label-input100" style=" color: #c51ae2;"><input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember me</span>
 					</div>
 
 					<div class="container-login100-form-btn">

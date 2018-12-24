@@ -6,6 +6,7 @@
   <title>e - INVENTORY | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" href="{{ asset('/dist/img/inventory-icon.png') }}"/>
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->

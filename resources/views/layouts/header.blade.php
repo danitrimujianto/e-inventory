@@ -4,9 +4,10 @@
   <a href="index2.html" class="logo">
 
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>e - INVENTORY</b></span>
+    <span class="logo-mini"><img src="{{ asset('/dist/img/inventory-icon-white.png') }}" style=" width: 30px; height: 30px;"></span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>e - INVENTORY</b></span>
+    <span class="logo-lg">
+      <img src="{{ asset('/dist/img/inventory-icon-white.png') }}" style=" width: 30px; height: 30px;">&nbsp;&nbsp;<b>e - INVENTORY</b></span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">

@@ -32,6 +32,50 @@
           <li><a href="/karyawan"><i class="fa fa-ellipsis-v"></i> Karyawan</a></li>
         </ul>
       </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Mutasi</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/activities"><i class="fa fa-ellipsis-v"></i> All Ho Activities</a></li>
+          <li><a href="/submission"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
+          <li><a href="/acceptance"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/alatkaryawan">
+          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li>
+        <a href="/newtools">
+          <i class="fa fa-th"></i> <span>Pengajuan Tools Baru</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li>
+        <a href="/service">
+          <i class="fa fa-th"></i> <span>Service</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Report</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/rep/mutasi"><i class="fa fa-ellipsis-v"></i> Mutasi Tools Karyawan</a></li>
+          <li><a href="/rep/newtools"><i class="fa fa-ellipsis-v"></i> Pengajuan Tools Baru</a></li>
+          <li><a href="/rep/alatkaryawan"><i class="fa fa-ellipsis-v"></i> Data Alat Karyawan</a></li>
+          <li><a href="/rep/service"><i class="fa fa-ellipsis-v"></i> Service</a></li>
+          <li><a href="/rep/stoktools"><i class="fa fa-ellipsis-v"></i> Stok Tools</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->
