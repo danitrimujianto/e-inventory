@@ -76,6 +76,17 @@
           <li><a href="/rep/stoktools"><i class="fa fa-ellipsis-v"></i> Stok Tools</a></li>
         </ul>
       </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-gear"></i>
+          <span>Setting</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/user"><i class="fa fa-ellipsis-v"></i> User</a></li>
+          <li><a href="/tipeuser"><i class="fa fa-ellipsis-v"></i> Tipe User</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

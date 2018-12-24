@@ -14,6 +14,40 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 
+/* Router User */
+Route::middleware('auth')->prefix("/user")->group(function() {
+    Route::get("/", 'UserController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'UserController@add'); /* action insert or add data to system*/
+      Route::post("/", 'UserController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'UserController@edit'); /* action get data by id */
+        Route::get("/detail", 'UserController@show'); /* action show data by id */
+        Route::put("/", 'UserController@update'); /* action edit data by id */
+        Route::delete("/", 'UserController@destroy'); /* action delete data by id */
+    });
+});
+
+/* Router Tipe User */
+Route::middleware('auth')->prefix("/tipeuser")->group(function() {
+    Route::get("/", 'TipeUserController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'TipeUserController@add'); /* action insert or add data to system*/
+      Route::post("/", 'TipeUserController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'TipeUserController@edit'); /* action get data by id */
+        Route::get("/detail", 'TipeUserController@show'); /* action show data by id */
+        Route::put("/", 'TipeUserController@update'); /* action edit data by id */
+        Route::delete("/", 'TipeUserController@destroy'); /* action delete data by id */
+    });
+});
+
 /* Router Area */
 Route::middleware('auth')->prefix("/area")->group(function() {
     Route::get("/", 'AreaController@index'); /* action get list of developers */
