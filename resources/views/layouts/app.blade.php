@@ -32,6 +32,10 @@
   <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <!-- sweetalert -->
 	<link rel="stylesheet" href="{{ asset('plugins/sweetalert/sweetalert.css') }}" />
+    <!-- Bootstrap styling for Typeahead -->
+    <link href="{{ asset('dist/css/tokenfield-typeahead.css') }}" type="text/css" rel="stylesheet" />
+    <!-- Tokenfield CSS -->
+    <link href="{{ asset('dist/css/bootstrap-tokenfield.css') }}" type="text/css" rel="stylesheet" />
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('css/cssglobal.css') }}">
   <link  href="{{ asset('css/viewer.css') }}" rel="stylesheet">
@@ -75,6 +79,9 @@
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- daterangepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script type="text/javascript" src="{{ asset('dist/js/bootstrap-tokenfield.js') }}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{ asset('dist/js/typeahead.bundle.js') }}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{ asset('dist/js/bootstrap3-typeahead.js') }}"></script>
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- datepicker -->
 <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>

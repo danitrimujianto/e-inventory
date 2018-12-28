@@ -24,5 +24,6 @@ class GlobalServiceProvider extends ServiceProvider
     public function register()
     {
         require_once app_path() . '/Core/Libraries/FunctionGlobals.php';
+        require_once app_path() . '/Core/Libraries/FunctionLocals.php';
     }
 }

@@ -14,6 +14,11 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 
+/* Router Modal */
+Route::middleware('auth')->prefix("/modal")->group(function() {
+    Route::get("/reject", 'ModalController@reject'); /* action get list of developers */
+});
+
 /* Router User */
 Route::middleware('auth')->prefix("/user")->group(function() {
     Route::get("/", 'UserController@index'); /* action get list of developers */
@@ -252,6 +257,11 @@ Route::middleware('auth')->prefix("/project")->group(function() {
 /* Router tools */
 Route::middleware('auth')->prefix("/tools")->group(function() {
     Route::get("/", 'ToolsController@index'); /* action get list of developers */
+    Route::get("/list", 'ToolsController@list'); /* action get list of developers */
+    Route::get("/select", 'ToolsController@selectData'); /* action get list of developers */
+    Route::middleware('auth')->prefix("/search")->group(function() {
+      Route::get("/mutasi", 'ToolsController@listMutasi'); /* action insert or add data to system*/
+    });
 
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'ToolsController@add'); /* action insert or add data to system*/
@@ -280,5 +290,76 @@ Route::middleware('auth')->prefix("/karyawan")->group(function() {
         Route::get("/detail", 'KaryawanController@show'); /* action show data by id */
         Route::put("/", 'KaryawanController@update'); /* action edit data by id */
         Route::delete("/", 'KaryawanController@destroy'); /* action delete data by id */
+    });
+});
+
+/* Router All HO Activities */
+Route::middleware('auth')->prefix("/allhoactivities")->group(function() {
+    Route::get("/", 'AllhoActivitiesController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'AllhoActivitiesController@add'); /* action insert or add data to system*/
+      Route::post("/", 'AllhoActivitiesController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'AllhoActivitiesController@edit'); /* action get data by id */
+        Route::get("/detail", 'AllhoActivitiesController@show'); /* action show data by id */
+        Route::put("/", 'AllhoActivitiesController@update'); /* action edit data by id */
+        Route::delete("/", 'AllhoActivitiesController@destroy'); /* action delete data by id */
+    });
+});
+
+/* Router All HO Activities */
+Route::middleware('auth')->prefix("/allhoactivities")->group(function() {
+    Route::get("/", 'AllhoActivitiesController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'AllhoActivitiesController@add'); /* action insert or add data to system*/
+      Route::post("/", 'AllhoActivitiesController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'AllhoActivitiesController@edit'); /* action get data by id */
+        Route::get("/detail", 'AllhoActivitiesController@show'); /* action show data by id */
+        Route::put("/", 'AllhoActivitiesController@update'); /* action edit data by id */
+        Route::delete("/", 'AllhoActivitiesController@destroy'); /* action delete data by id */
+    });
+});
+
+/* Router Handover Submission */
+Route::middleware('auth')->prefix("/handover")->group(function() {
+    Route::get("/", 'HandoverController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'HandoverController@add'); /* action insert or add data to system*/
+      Route::post("/", 'HandoverController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'HandoverController@edit'); /* action get data by id */
+        Route::get("/detail", 'HandoverController@show'); /* action show data by id */
+        Route::post("/cancel", 'HandoverController@cancel'); /* action accept data by id */
+        Route::put("/", 'HandoverController@update'); /* action edit data by id */
+        Route::delete("/", 'HandoverController@destroy'); /* action delete data by id */
+    });
+});
+
+/* Router Handover Acceptance */
+Route::middleware('auth')->prefix("/hoaccept")->group(function() {
+    Route::get("/", 'HandoverAcceptanceController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'HandoverAcceptanceController@add'); /* action insert or add data to system*/
+      Route::post("/", 'HandoverAcceptanceController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'HandoverAcceptanceController@edit'); /* action get data by id */
+        Route::get("/detail", 'HandoverAcceptanceController@show'); /* action show data by id */
+        Route::get("/accept", 'HandoverAcceptanceController@acc'); /* action accept data by id */
+        Route::post("/reject", 'HandoverAcceptanceController@reject'); /* action accept data by id */
+        Route::put("/", 'HandoverAcceptanceController@update'); /* action edit data by id */
+        Route::delete("/", 'HandoverAcceptanceController@destroy'); /* action delete data by id */
     });
 });

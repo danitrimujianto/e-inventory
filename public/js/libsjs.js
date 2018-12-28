@@ -85,6 +85,48 @@ function actRestore(id, modulPage)
   document.fGlobal.submit();
 }
 
+function actAccept(id, modulPage)
+{
+  document.fGlobal.id.value=id;
+  //$("#method").val();
+  document.fGlobal._method.value="get";
+  document.fGlobal.action="/"+modulPage+"/"+id+"/accept";
+  document.fGlobal.submit();
+}
+
+function actReject(id, title, modulPage)
+{
+  document.fGlobal.id.value=id;
+  var urlModal = '/modal/reject/', titleModal='Reject '+title;
+  var param = "&urlPos=/"+modulPage+"/"+id+"/reject";
+  modalPage(id, urlModal, titleModal, 80, param);
+  $('#myModal').find('.modal-footer').hide();
+}
+
+function actCancel(id, title, modulPage)
+{
+  document.fGlobal.id.value=id;
+  var urlModal = '/modal/reject/', titleModal='Cancel '+title;
+  var param = "&urlPos=/"+modulPage+"/"+id+"/cancel";
+  modalPage(id, urlModal, titleModal, 80, param);
+  $('#myModal').find('.modal-footer').hide();
+}
+
+function saveModal($el)
+{
+  if(document.fReject.keterangan_batal.value.trim() != ''){
+    document.fReject.submit();
+    $el.html('<i class="fa fa-refresh fa-spin"></i>');
+    $el.prop('disabled', 'true');
+  }
+}
+
+function closeModal()
+{
+  $("#myModal").find("#tombol-close-modal").click();
+  $('#myModal').find('.modal-footer').show();
+}
+
 function alertSweet(ket, id, field, kode, modulPage, pos)
 {
 
@@ -101,11 +143,16 @@ function alertSweet(ket, id, field, kode, modulPage, pos)
 	).then((result) => {
 		if(result.value)
 		{
-      if(pos == 'Hapus')
-      {
+      if(pos == 'Hapus'){
         actDel(id, modulPage)
       }else if(pos == 'Restore'){
         actRestore(id, modulPage)
+      }else if(pos == 'Accept'){
+        actAccept(id, modulPage)
+      }else if(pos == 'Reject'){
+        actReject(id, kode, modulPage)
+      }else if(pos == 'Cancel'){
+        actCancel(id, kode, modulPage)
       }
 		}
 	});
@@ -257,4 +304,31 @@ function tgl_sql_to_indo(obj)
     bj = '';
   }
   return bj;
+}
+
+function modalPage(id, url, title, width=40, param = null){
+	$("#myModal .modal-dialog").css({"width":width+"%"});
+	$("#myModal .modal-title").html(title);
+	$("#myModal .modal-body").html('<div style=" font-size: 30px; text-align: center; height: 200px; margin-top: 20%;"><i class="fa fa-spinner fa-spin" ></i></div>');
+	$.ajax({
+		url: url, // Url to which the request is send
+
+		type: "GET",             // Type of request to be send, called as method
+
+		data: "id="+id+"&ajax=true"+param, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+
+		contentType: false,       // The content type used when sending data to the server.
+
+		cache: false,             // To unable request pages to be cached
+
+		processData:false,        // To send DOMDocument or non processed data file it is set to false
+
+		success: function(data)   // A function to be called if request succeeds
+
+		{
+			$("#myModal .modal-body").html(data);
+		}
+	});
+	//$("#myModal .modal-body").load(page+".inc.php?id="+id);
+	$("#tombol-modal").click();
 }

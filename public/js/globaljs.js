@@ -30,6 +30,17 @@ $(document).ready(function(){
     document.location.href='/'+modulPage;
   });
 
+  //save modal
+  $("body").on('click', '.saveModal', function(){
+    var $el = $(this);
+    saveModal($el);
+  });
+
+  //close modal
+  $("body").on('click', '.closeModal', function(){
+    closeModal();
+  });
+
   //onchange submit
   $(".changeSubmit").change(function(){
     //document.fKategori.action='/'+modulPage;
@@ -75,6 +86,13 @@ $(document).ready(function(){
     var id = $(this).parent('td').parent('tr').attr('data-id');
     var field = $(this).parent('td').parent('tr').attr('data-field');
     var value = $(this).parent('td').parent('tr').attr('data-value');
+    document.location.href="/"+modulPage+"/"+id+"/detail";
+  });
+
+  $(".viewRowButton td:not(:last-child)").click(function(){
+    var id = $(this).parent('tr').attr('data-id');
+    var field = $(this).parent('tr').attr('data-field');
+    var value = $(this).parent('tr').attr('data-value');
     document.location.href="/"+modulPage+"/"+id+"/detail";
   });
 

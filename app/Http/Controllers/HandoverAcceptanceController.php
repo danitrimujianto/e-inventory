@@ -4,24 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Core\Handlers\AddToolsHandler;
-use App\Core\Handlers\UpdateToolsHandler;
-use App\Core\Handlers\DeleteToolsHandler;
-use App\Core\Readers\ToolsReader;
-use App\Core\Readers\ToolsMutasiReader;
-use App\Core\Readers\GetToolsReader;
-use App\Core\Readers\SelectToolsReader;
+use App\Core\Handlers\AddAllhoActivitiesHandler;
+use App\Core\Handlers\UpdateAllhoActivitiesHandler;
+use App\Core\Handlers\DeleteAllhoActivitiesHandler;
+use App\Core\Handlers\AcceptAllhoActivitiesHandler;
+use App\Core\Handlers\RejectAllhoActivitiesHandler;
+use App\Core\Readers\AllhoActivitiesAcceptReader;
+use App\Core\Readers\GetAllhoActivitiesReader;
 
 //others table
-use App\Core\Readers\DivisionReader;
-use App\Core\Readers\BarangReader;
+use App\Core\Readers\DeliveryReader;
+use App\Core\Readers\GoodsConditionReader;
+use App\Core\Readers\KaryawanReader;
+use App\Core\Readers\ProjectReader;
+use App\Core\Readers\AreaReader;
 
 
 use Session;
 use HelpMe;
 use DB;
 
-class ToolsController extends ApplicationController
+class HandoverAcceptanceController extends ApplicationController
 {
   /**
    * Create a new controller instance.
@@ -31,8 +34,8 @@ class ToolsController extends ApplicationController
   public function __construct()
   {
       $this->middleware('auth');
-      $this->modul = "tools"; //disetiap __construct controller harus ada
-      $this->modulName = "Tools"; //disetiap __construct controller harus ada
+      $this->modul = "hoaccept"; //disetiap __construct controller harus ada
+      $this->modulName = "Handover Acceptance"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -53,7 +56,7 @@ class ToolsController extends ApplicationController
       $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
 
       try {
-        $reader = new ToolsReader($request);
+        $reader = new AllhoActivitiesAcceptReader($request);
         $data = $reader->read();
 
         if(session()->get('procMsg')){
@@ -89,13 +92,25 @@ class ToolsController extends ApplicationController
       $this->returnData['data'] = "";
 
       try{
-        $reader = new DivisionReader($request);
-        $dDivision = $reader->read();
-        $this->returnData['dDivision'] = $dDivision;
+        $reader = new DeliveryReader($request);
+        $dDelivery = $reader->read();
+        $this->returnData['dDelivery'] = $dDelivery;
 
-        $reader = new BarangReader($request);
-        $dBarang = $reader->read();
-        $this->returnData['dBarang'] = $dBarang;
+        $reader = new GoodsConditionReader($request);
+        $dCondition = $reader->read();
+        $this->returnData['dCondition'] = $dCondition;
+
+        $reader = new KaryawanReader($request);
+        $dKaryawan = $reader->read();
+        $this->returnData['dKaryawan'] = $dKaryawan;
+
+        $reader = new ProjectReader($request);
+        $dProject = $reader->read();
+        $this->returnData['dProject'] = $dProject;
+
+        $reader = new AreaReader($request);
+        $dArea = $reader->read();
+        $this->returnData['dArea'] = $dArea;
 
         return view('home', $this->returnData);
       }catch(\Exception $e){
@@ -114,7 +129,7 @@ class ToolsController extends ApplicationController
   {
     $pos = "add";
     try {
-      $handler = new AddToolsHandler($request);
+      $handler = new AddAllhoActivitiesHandler($request);
       $data = $handler->handle();
 
       $this->createAlert("info", $pos." Succeeded");
@@ -132,20 +147,42 @@ class ToolsController extends ApplicationController
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Request $request, $id)
   {
+    $pos = 'view';
     $this->theme["page"] = 'view'; //disetiap class dan function controller harus ada
     $this->returnData['theme'] = $this->theme;
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetToolsReader($id);
+      $reader = new GetAllhoActivitiesReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
+
+      $reader = new DeliveryReader($request);
+      $dDelivery = $reader->read();
+      $this->returnData['dDelivery'] = $dDelivery;
+
+      $reader = new GoodsConditionReader($request);
+      $dCondition = $reader->read();
+      $this->returnData['dCondition'] = $dCondition;
+
+      $reader = new KaryawanReader($request);
+      $dKaryawan = $reader->read();
+      $this->returnData['dKaryawan'] = $dKaryawan;
+
+      $reader = new ProjectReader($request);
+      $dProject = $reader->read();
+      $this->returnData['dProject'] = $dProject;
+
+      $reader = new AreaReader($request);
+      $dArea = $reader->read();
+      $this->returnData['dArea'] = $dArea;
+
       return view('home', $this->returnData);
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
+      return dd($msg);
     }
   }
 
@@ -163,17 +200,29 @@ class ToolsController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetToolsReader($id);
+      $reader = new GetAllhoActivitiesReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
 
-      $reader = new DivisionReader($request);
-      $dDivision = $reader->read();
-      $this->returnData['dDivision'] = $dDivision;
+      $reader = new DeliveryReader($request);
+      $dDelivery = $reader->read();
+      $this->returnData['dDelivery'] = $dDelivery;
 
-      $reader = new BarangReader($request);
-      $dBarang = $reader->read();
-      $this->returnData['dBarang'] = $dBarang;
+      $reader = new GoodsConditionReader($request);
+      $dCondition = $reader->read();
+      $this->returnData['dCondition'] = $dCondition;
+
+      $reader = new KaryawanReader($request);
+      $dKaryawan = $reader->read();
+      $this->returnData['dKaryawan'] = $dKaryawan;
+
+      $reader = new ProjectReader($request);
+      $dProject = $reader->read();
+      $this->returnData['dProject'] = $dProject;
+
+      $reader = new AreaReader($request);
+      $dArea = $reader->read();
+      $this->returnData['dArea'] = $dArea;
 
       return view('home', $this->returnData);
     } catch (\Exception $e) {
@@ -194,7 +243,7 @@ class ToolsController extends ApplicationController
     $pos = "edit";
     try {
       //dd($request);
-      $handler = new UpdateToolsHandler($request);
+      $handler = new UpdateAllhoActivitiesHandler($request);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -215,7 +264,7 @@ class ToolsController extends ApplicationController
   {
     $pos = "delete";
     try {
-      $handler = new DeleteToolsHandler($id);
+      $handler = new DeleteAllhoActivitiesHandler($id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -226,48 +275,33 @@ class ToolsController extends ApplicationController
     }
   }
 
-   public function list(Request $request)
+   public function acc($id)
    {
-     $pos = "list";
+     $pos = "accept";
      try {
-       $reader = new ToolsReader($request);
-       $data = $reader->read();
-       $this->returnData['data'] = $data;
+       $handler = new AcceptAllhoActivitiesHandler($id);
+       $data = $handler->handle();
+       $this->createAlert("info", $pos." Succeeded");
 
-       return view('moduls.tools.list', $this->returnData);
+       return redirect($this->modul);
      } catch (\Exception $e) {
        $msg = $this->resultException($e, $pos);
-       return dd($msg);
+       return redirect($this->modul);
      }
    }
 
-    public function listMutasi(Request $request)
-    {
-      $pos = "listMutasi";
-      try {
-        $reader = new ToolsMutasiReader($request);
-        $data = $reader->read();
-        // dd($data);
-        return response()->json($data);
-        // return $data;
-      } catch (\Exception $e) {
-        $msg = $this->resultException($e, $pos);
-        return dd($msg);
-      }
-    }
+   public function reject(Request $request, $id)
+   {
+     $pos = "Reject";
+     try {
+       $handler = new RejectAllhoActivitiesHandler($request, $id);
+       $data = $handler->handle();
+       $this->createAlert("info", $pos." Succeeded");
 
-  public function selectData(Request $request)
-  {
-    $pos = "selectData";
-    try {
-      $reader = new SelectToolsReader($request);
-      $data = $reader->read();
-      // dd($data);
-      return response()->json($data);
-      // return $data;
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return dd($msg);
-    }
-  }
+       return redirect($this->modul);
+     } catch (\Exception $e) {
+       $msg = $this->resultException($e, $pos);
+       return redirect($this->modul);
+     }
+   }
 }

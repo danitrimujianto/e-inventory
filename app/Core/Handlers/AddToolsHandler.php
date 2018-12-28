@@ -59,7 +59,7 @@ class AddToolsHandler implements Handler
 
     private function kodeTools($division_id, $barang_id)
     {
-      $tools = Tools::where('division_id', $division_id)->where('barang_id', $barang_id)->orderBy('id', 'desc')->first();
+      $tools = DB::table('tools')->where('division_id', $division_id)->where('barang_id', $barang_id)->orderBy('id', 'desc')->first();
       $code = ($tools['urut']+1);
 
       if(strlen($code) == 1)

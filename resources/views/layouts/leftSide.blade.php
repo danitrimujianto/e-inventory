@@ -1,3 +1,6 @@
+<?php
+$usertype = Auth::user()->usertype_id;
+?>
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
@@ -9,6 +12,7 @@
           <i class="fa fa-dashboard"></i> <span>Home</span>
         </a>
       </li>
+      @if($usertype == 1)
       <li class="treeview">
         <a href="#">
           <i class="fa fa-book"></i>
@@ -39,9 +43,9 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/activities"><i class="fa fa-ellipsis-v"></i> All Ho Activities</a></li>
-          <li><a href="/submission"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
-          <li><a href="/acceptance"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li>
+          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
         </ul>
       </li>
       <li>
@@ -87,6 +91,105 @@
           <li><a href="/tipeuser"><i class="fa fa-ellipsis-v"></i> Tipe User</a></li>
         </ul>
       </li>
+      <!-- Menu General Admin -->
+      @elseif($usertype == 2)
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Mutasi</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/alatkaryawan">
+          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li>
+        <a href="/newtools">
+          <i class="fa fa-th"></i> <span>Pengajuan Tools Baru</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li>
+        <a href="/service">
+          <i class="fa fa-th"></i> <span>Service</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Report</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/rep/mutasi"><i class="fa fa-ellipsis-v"></i> Mutasi Tools Karyawan</a></li>
+          <li><a href="/rep/newtools"><i class="fa fa-ellipsis-v"></i> Pengajuan Tools Baru</a></li>
+          <li><a href="/rep/alatkaryawan"><i class="fa fa-ellipsis-v"></i> Data Alat Karyawan</a></li>
+          <li><a href="/rep/service"><i class="fa fa-ellipsis-v"></i> Service</a></li>
+          <li><a href="/rep/stoktools"><i class="fa fa-ellipsis-v"></i> Stok Tools</a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-gear"></i>
+          <span>Setting</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/user"><i class="fa fa-ellipsis-v"></i> User</a></li>
+        </ul>
+      </li>
+      <!-- Menu Manager -->
+      @elseif($usertype == 3)
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Mutasi</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/alatkaryawan">
+          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li>
+        <a href="/newtools">
+          <i class="fa fa-th"></i> <span>Pengajuan Tools Baru</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <!-- Menu User -->
+      @elseif($usertype == 4)
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Mutasi</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li>
+          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/alatkaryawan">
+          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      @endif
     </ul>
   </section>
   <!-- /.sidebar -->

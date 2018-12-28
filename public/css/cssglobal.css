@@ -15,3 +15,7 @@
 .img-prev{
   cursor: pointer;
 }
+
+.viewRowButton{
+  cursor: pointer;
+}

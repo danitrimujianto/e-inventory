@@ -225,6 +225,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'HelpMe' => App\Core\Libraries\FunctionGlobals::class,
+        'HelpLocal' => App\Core\Libraries\FunctionLocals::class,
 
     ],
 
