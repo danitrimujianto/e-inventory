@@ -169,13 +169,13 @@ Route::middleware('auth')->prefix("/delivery")->group(function() {
     });
 });
 
-/* Router Delivery */
+/* Router Goods Condition */
 Route::middleware('auth')->prefix("/goodscondition")->group(function() {
-    Route::get("/", 'GoodsconditionController@index'); /* action get list of developers */
+    Route::get("/", 'GoodsConditionController@index'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/add")->group(function() {
-      Route::get("/", 'GoodsconditionController@add'); /* action insert or add data to system*/
-      Route::post("/", 'GoodsconditionController@store'); /* action insert or add data to system*/
+      Route::get("/", 'GoodsConditionController@add'); /* action insert or add data to system*/
+      Route::post("/", 'GoodsConditionController@store'); /* action insert or add data to system*/
     });
 
     Route::prefix("/{id}")->group(function() {
