@@ -73,8 +73,8 @@
             <div>
               <select class="form-control" name="assignmentarea_id" id="assignmentarea_id">
                 <option value="">-- Choose Assignment --</option>
-                @foreach($dArea AS $area)
-                  <option value="{{ $area->id }}">{{ $area->name }}</option>
+                @foreach($dCity AS $city)
+                  <option value="{{ $city->id }}">{{ $city->name }}</option>
                 @endforeach
               </select>
             </div>

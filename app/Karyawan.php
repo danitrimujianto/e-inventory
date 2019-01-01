@@ -33,6 +33,6 @@ class Karyawan extends Model
 
     public function assignmentarea()
     {
-      return $this->belongsTo('App\Area', 'assignmentarea_id');
+      return $this->belongsTo('App\City', 'assignmentarea_id');
     }
 }

@@ -47,18 +47,36 @@ class AcceptAllhoActivitiesHandler implements Handler
           // dd($detail);
           // dd($detail->toSql());
           // $detail->get();
+          $getDet = $detail->get();
+          $total = $getDet->count();
+
           $bindings = $detail->getBindings();
 
-          $insertQuery = 'INSERT INTO tools_karyawan (accepted_date, karyawan_id,tools_id,goods_condition_id) '.$detail->toSql();
-          $insertQuery = str_replace(") select ", ") select NOW(), ".$tab->recipient_id.", ", $insertQuery);
+          $insertQuery = 'INSERT INTO tools_karyawan (allho_activities_id, accepted_date, karyawan_id,tools_id,goods_condition_id) '.$detail->toSql();
+          $insertQuery = str_replace(") select ", ") select ".$tab->id.", NOW(), ".$tab->recipient_id.", ", $insertQuery);
           // dd($insertQuery);
           \DB::insert($insertQuery, $bindings);
 
-          $updet = "";
-          foreach($detail->get() AS $det){
-            $updet .= 'UPDATE tools SET karyawan_id = "'.$tab->recipient_id.'" WHERE id = "'.$det['tools_id'].'"';
+          $updet = 'UPDATE tools SET karyawan_id = CASE id ';
+          $delExist = 'DELETE FROM tools_karyawan WHERE (karyawan_id, tools_id) IN ';
+
+          $idUpdate = "";
+          $idExist = "";
+          $counter = 0;
+          foreach($getDet AS $det){
+            $counter++;
+            $updet .= ' WHEN '.$det['tools_id'].' THEN "'.$tab->recipient_id.'"';
+            $idUpdate .= $det['tools_id']. ($counter < $total ? "," : "");
+            $idExist .= '('.$tab->sender_id.', '.$det['tools_id'].')'. ($counter < $total ? "," : "");
           }
+
+          $updet .= " END WHERE id IN(".$idUpdate.")";
           \DB::insert($updet);
+
+          $delExist .= '('.$idExist.')';
+          // dd($delExist);
+
+          \DB::insert($delExist);
         }
 
         return $tab;

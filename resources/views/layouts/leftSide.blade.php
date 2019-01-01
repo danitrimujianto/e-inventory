@@ -178,15 +178,25 @@ $usertype = Auth::user()->usertype_id;
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li>
+          <!-- <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li> -->
           <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
           <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
         </ul>
       </li>
+      <!-- <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Tools Employee</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/renewtools"><i class="fa fa-ellipsis-v"></i> Renew Tools</a></li>
+          <li><a href="/mytools"><i class="fa fa-ellipsis-v"></i> My Tools</a></li>
+        </ul>
+      </li> -->
       <li>
         <a href="/alatkaryawan">
           <i class="fa fa-th"></i> <span>Alat Karyawan</span>
-          <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
       @endif

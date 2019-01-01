@@ -31,7 +31,7 @@ class ToolsReader implements Reader
         $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
       }
 
-      $data = $data->paginate($batas);
+      $data = $data->orderBy('id', 'desc')->paginate($batas);
       return $data;
     }
 }

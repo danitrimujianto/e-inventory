@@ -10,6 +10,8 @@
   @csrf
   <input type="hidden" name="id" id="idFGlobal" value="">
   <input type="hidden" name="_method" id="method" value="">
+  <input type="hidden" name="sf" value="">
+  <input type="hidden" name="sq" value="">
 </form>
 
 

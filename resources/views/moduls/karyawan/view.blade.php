@@ -75,8 +75,8 @@
             <div>
               <select class="form-control" name="assignmentarea_id" id="assignmentarea_id" disabled>
                 <option value="">-- Choose Assignment --</option>
-                @foreach($dArea AS $area)
-                  <option value="{{ $area->id }}" @if($area->id == $data->assignmentarea_id) selected @endif>{{ $area->name }}</option>
+                @foreach($dCity AS $city)
+                  <option value="{{ $dCity->id }}" @if($dCity->id == $data->assignmentarea_id) selected @endif>{{ $dCity->name }}</option>
                 @endforeach
               </select>
             </div>

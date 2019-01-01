@@ -4,25 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Core\Handlers\AddKaryawanHandler;
-use App\Core\Handlers\UpdateKaryawanHandler;
-use App\Core\Handlers\DeleteKaryawanHandler;
-use App\Core\Readers\KaryawanReader;
-use App\Core\Readers\GetKaryawanReader;
+use App\Core\Export\AlatKaryawanExcel;
+use App\Core\Readers\AlatKaryawanReader;
+use App\Core\Readers\GetAlatKaryawanReader;
+use App\Core\Handlers\RenewAlatKaryawanHandler;
 
 //others table
-use App\Core\Readers\DepartemenReader;
-use App\Core\Readers\PositionReader;
+use App\Core\Readers\DeliveryReader;
+use App\Core\Readers\GoodsConditionReader;
+use App\Core\Readers\KaryawanReader;
 use App\Core\Readers\ProjectReader;
 use App\Core\Readers\AreaReader;
-use App\Core\Readers\CityReader;
 
 
 use Session;
 use HelpMe;
 use DB;
 
-class KaryawanController extends ApplicationController
+class AlatKaryawanController extends ApplicationController
 {
   /**
    * Create a new controller instance.
@@ -32,8 +31,8 @@ class KaryawanController extends ApplicationController
   public function __construct()
   {
       $this->middleware('auth');
-      $this->modul = "karyawan"; //disetiap __construct controller harus ada
-      $this->modulName = "Karyawan"; //disetiap __construct controller harus ada
+      $this->modul = "alatkaryawan"; //disetiap __construct controller harus ada
+      $this->modulName = "Alat Karyawan"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -54,7 +53,7 @@ class KaryawanController extends ApplicationController
       $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
 
       try {
-        $reader = new KaryawanReader($request);
+        $reader = new AlatKaryawanReader($request);
         $data = $reader->read();
 
         if(session()->get('procMsg')){
@@ -90,25 +89,9 @@ class KaryawanController extends ApplicationController
       $this->returnData['data'] = "";
 
       try{
-        $reader = new DepartemenReader($request);
-        $dDepartemen = $reader->read();
-        $this->returnData['dDepartemen'] = $dDepartemen;
-
-        $reader = new PositionReader($request);
-        $dPosition = $reader->read();
-        $this->returnData['dPosition'] = $dPosition;
-
-        $reader = new ProjectReader($request);
-        $dProject = $reader->read();
-        $this->returnData['dProject'] = $dProject;
-
-        $reader = new AreaReader($request);
-        $dArea = $reader->read();
-        $this->returnData['dArea'] = $dArea;
-
-        $reader = new CityReader($request);
-        $dCity = $reader->read();
-        $this->returnData['dCity'] = $dCity;
+        $reader = new DeliveryReader($request);
+        $dDelivery = $reader->read();
+        $this->returnData['dDelivery'] = $dDelivery;
 
         return view('home', $this->returnData);
       }catch(\Exception $e){
@@ -127,7 +110,7 @@ class KaryawanController extends ApplicationController
   {
     $pos = "add";
     try {
-      $handler = new AddKaryawanHandler($request);
+      $handler = new AddAllhoActivitiesHandler($request);
       $data = $handler->handle();
 
       $this->createAlert("info", $pos." Succeeded");
@@ -153,30 +136,9 @@ class KaryawanController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetKaryawanReader($id);
+      $reader = new GetAlatKaryawanReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
-
-
-        $reader = new DepartemenReader($request);
-        $dDepartemen = $reader->read();
-        $this->returnData['dDepartemen'] = $dDepartemen;
-
-        $reader = new PositionReader($request);
-        $dPosition = $reader->read();
-        $this->returnData['dPosition'] = $dPosition;
-
-        $reader = new ProjectReader($request);
-        $dProject = $reader->read();
-        $this->returnData['dProject'] = $dProject;
-
-        $reader = new AreaReader($request);
-        $dArea = $reader->read();
-        $this->returnData['dArea'] = $dArea;
-
-        $reader = new CityReader($request);
-        $dCity = $reader->read();
-        $this->returnData['dCity'] = $dCity;
 
       return view('home', $this->returnData);
     } catch (\Exception $e) {
@@ -199,17 +161,21 @@ class KaryawanController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetKaryawanReader($id);
+      $reader = new GetAllhoActivitiesReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
 
-      $reader = new DepartemenReader($request);
-      $dDepartemen = $reader->read();
-      $this->returnData['dDepartemen'] = $dDepartemen;
+      $reader = new DeliveryReader($request);
+      $dDelivery = $reader->read();
+      $this->returnData['dDelivery'] = $dDelivery;
 
-      $reader = new PositionReader($request);
-      $dPosition = $reader->read();
-      $this->returnData['dPosition'] = $dPosition;
+      $reader = new GoodsConditionReader($request);
+      $dCondition = $reader->read();
+      $this->returnData['dCondition'] = $dCondition;
+
+      $reader = new KaryawanReader($request);
+      $dKaryawan = $reader->read();
+      $this->returnData['dKaryawan'] = $dKaryawan;
 
       $reader = new ProjectReader($request);
       $dProject = $reader->read();
@@ -218,10 +184,6 @@ class KaryawanController extends ApplicationController
       $reader = new AreaReader($request);
       $dArea = $reader->read();
       $this->returnData['dArea'] = $dArea;
-
-      $reader = new CityReader($request);
-      $dCity = $reader->read();
-      $this->returnData['dCity'] = $dCity;
 
       return view('home', $this->returnData);
     } catch (\Exception $e) {
@@ -242,7 +204,7 @@ class KaryawanController extends ApplicationController
     $pos = "edit";
     try {
       //dd($request);
-      $handler = new UpdateKaryawanHandler($request);
+      $handler = new UpdateAllhoActivitiesHandler($request);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -263,7 +225,7 @@ class KaryawanController extends ApplicationController
   {
     $pos = "delete";
     try {
-      $handler = new DeleteKaryawanHandler($id);
+      $handler = new DeleteAllhoActivitiesHandler($id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -273,4 +235,78 @@ class KaryawanController extends ApplicationController
       return redirect($this->modul);
     }
   }
+
+   public function acc($id)
+   {
+     $pos = "accept";
+     try {
+       $handler = new AcceptAllhoActivitiesHandler($id);
+       $data = $handler->handle();
+       $this->createAlert("info", $pos." Succeeded");
+
+       return redirect($this->modul);
+     } catch (\Exception $e) {
+       $msg = $this->resultException($e, $pos);
+       return redirect($this->modul);
+     }
+   }
+
+   public function reject(Request $request, $id)
+   {
+     $pos = "Reject";
+     try {
+       $handler = new RejectAllhoActivitiesHandler($request, $id);
+       $data = $handler->handle();
+       $this->createAlert("info", $pos." Succeeded");
+
+       return redirect($this->modul);
+     } catch (\Exception $e) {
+       $msg = $this->resultException($e, $pos);
+       return redirect($this->modul);
+     }
+   }
+
+   public function print(Request $request)
+   {
+     $pos = "Print";
+     try {
+       $reader = new AlatKaryawanReader($request);
+       $data = $reader->read();
+
+       $this->returnData['modul'] = $this->modul;
+       $this->returnData['data'] = $data;
+
+       return view('layouts.print', $this->returnData);
+     } catch (\Exception $e) {
+       $msg = $this->resultException($e, $pos);
+       return dd($msg);
+     }
+   }
+
+   public function renew(Request $request)
+   {
+     $pos = "Update Date";
+     try {
+       $handler = new RenewAlatKaryawanHandler($request);
+       $data = $handler->handle();
+       $this->createAlert("info", $pos." Succeeded");
+
+       return redirect($this->modul);
+     } catch (\Exception $e) {
+       $msg = $this->resultException($e, $pos);
+       return dd($msg);
+     }
+   }
+
+   public function excel(Request $request)
+   {
+     $pos = "Export Excel";
+     try {
+       return (new AlatKaryawanExcel($request))->download('alat-karyawan.xls');
+       // return Excel::download(new AlatKaryawanExcel($request), 'alat-karyawan.xlsx');
+     } catch (\Exception $e) {
+       $msg = $this->resultException($e, $pos);
+       return dd($msg);
+     }
+   }
 }

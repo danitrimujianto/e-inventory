@@ -363,3 +363,19 @@ Route::middleware('auth')->prefix("/hoaccept")->group(function() {
         Route::delete("/", 'HandoverAcceptanceController@destroy'); /* action delete data by id */
     });
 });
+
+/* Router Alat Karyawan */
+Route::middleware('auth')->prefix("/alatkaryawan")->group(function() {
+    Route::get("/", 'AlatKaryawanController@index'); /* action get list of developers */
+    Route::get("/renew", 'AlatKaryawanController@renew'); /* action get list of developers */
+    Route::get("/print", 'AlatKaryawanController@print'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/export")->group(function() {
+      Route::get("/excel", 'AlatKaryawanController@excel'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'AlatKaryawanController@edit'); /* action get data by id */
+        Route::get("/detail", 'AlatKaryawanController@show'); /* action show data by id */
+    });
+});

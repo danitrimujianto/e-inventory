@@ -130,7 +130,7 @@
                 @foreach($tools AS $detail)
                 <tr>
                     <td>{{ $detail->tools->code.' - '.$detail->tools->item }}</td>
-                    <td>{{ $detail->condition->name }}</td>
+                    <td>{{ optional($detail->condition)->name }}</td>
                     <td>{{ $detail->tools->merk }}</td>
                     <td>{{ $detail->tools->type }}</td>
                     <td>{{ $detail->tools->serial_number }}</td>

@@ -96,6 +96,22 @@ $(document).ready(function(){
     document.location.href="/"+modulPage+"/"+id+"/detail";
   });
 
+  //print button
+  $("#printButton").click(function(){
+      document.fGlobal.method="GET";
+      document.fGlobal.action="/"+modulPage+"/print/";
+      document.fGlobal.target="_blank";
+      document.fGlobal.submit();
+  });
+
+  //excel button
+  $("#excelButton").click(function(){
+      document.fGlobal.method="GET";
+      document.fGlobal.action="/"+modulPage+"/export/excel";
+      document.fGlobal.target="_blank";
+      document.fGlobal.submit();
+  });
+
   //upload button
   $(".showUploadButton").click(function(){
     $('.fileArea').hide();
