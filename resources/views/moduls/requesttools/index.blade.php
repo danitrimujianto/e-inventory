@@ -49,7 +49,7 @@
             <td>{{ $d->pr_no }}</td>
             <td>{{ $d->karyawan->name }}</td>
             <td>
-              @if(Auth::user()->usertype_id == 2 || Auth::user()->usertype_id == 1)
+              @if(Auth::user()->usertype_id != 3)
               @if($d->status >= 0 && $d->status < 1)
                 <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
                 <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button>
