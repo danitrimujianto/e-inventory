@@ -189,6 +189,12 @@ $usertype = Auth::user()->usertype_id;
           <i class="fa fa-th"></i> <span>Employee Tools</span>
         </a>
       </li>
+      <li>
+        <a href="/requesttools">
+          <i class="fa fa-th"></i> <span>Request Tools</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
       @endif
     </ul>
   </section>
