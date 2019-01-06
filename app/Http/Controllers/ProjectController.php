@@ -8,6 +8,7 @@ use App\Core\Handlers\AddProjectHandler;
 use App\Core\Handlers\UpdateProjectHandler;
 use App\Core\Handlers\DeleteProjectHandler;
 use App\Core\Readers\ProjectReader;
+use App\Core\Readers\SearchProjectReader;
 use App\Core\Readers\GetProjectReader;
 
 //others table
@@ -244,6 +245,20 @@ class ProjectController extends ApplicationController
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return redirect($this->modul);
+    }
+  }
+
+  public function search(Request $request)
+  {
+    $pos = "search";
+    try {
+      $reader = new SearchProjectReader($request);
+      $data = $reader->read();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return dd($msg);
     }
   }
 }

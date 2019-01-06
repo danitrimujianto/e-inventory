@@ -8,6 +8,7 @@ use App\Core\Handlers\AddDeliveryHandler;
 use App\Core\Handlers\UpdateDeliveryHandler;
 use App\Core\Handlers\DeleteDeliveryHandler;
 use App\Core\Readers\DeliveryReader;
+use App\Core\Readers\SearchDeliveryReader;
 use App\Core\Readers\GetDeliveryReader;
 
 use Session;
@@ -190,6 +191,20 @@ class DeliveryController extends ApplicationController
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return redirect($this->modul);
+    }
+  }
+
+  public function search(Request $request)
+  {
+    $pos = "search";
+    try {
+      $reader = new SearchDeliveryReader($request);
+      $data = $reader->read();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return dd($msg);
     }
   }
 }

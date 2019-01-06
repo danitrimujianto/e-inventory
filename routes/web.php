@@ -56,6 +56,7 @@ Route::middleware('auth')->prefix("/tipeuser")->group(function() {
 /* Router Area */
 Route::middleware('auth')->prefix("/area")->group(function() {
     Route::get("/", 'AreaController@index'); /* action get list of developers */
+    Route::get("/search", 'AreaController@search'); /* action get list of developers */
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'AreaController@add'); /* action insert or add data to system*/
       Route::post("/", 'AreaController@store'); /* action insert or add data to system*/
@@ -155,6 +156,7 @@ Route::middleware('auth')->prefix("/vendor")->group(function() {
 /* Router Delivery */
 Route::middleware('auth')->prefix("/delivery")->group(function() {
     Route::get("/", 'DeliveryController@index'); /* action get list of developers */
+    Route::get("/search", 'DeliveryController@search'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'DeliveryController@add'); /* action insert or add data to system*/
@@ -240,6 +242,7 @@ Route::middleware('auth')->prefix("/barang")->group(function() {
 /* Router project */
 Route::middleware('auth')->prefix("/project")->group(function() {
     Route::get("/", 'ProjectController@index'); /* action get list of developers */
+    Route::get("/search", 'ProjectController@search'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'ProjectController@add'); /* action insert or add data to system*/

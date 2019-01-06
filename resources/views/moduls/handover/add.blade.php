@@ -10,21 +10,21 @@
       <!-- form start -->
       <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         @csrf
-
+        <input type="hidden" class="" name="recipient_id" id="recipient_id" value="" />
+        <input type="hidden" class="" name="delivery_id" id="delivery_id" value="" />
+        <input type="hidden" class="" name="project_id" id="project_id" value="" />
+        <input type="hidden" class="" name="fromarea_id" id="fromarea_id" value="" />
+        <input type="hidden" class="" name="toarea_id" id="toarea_id" value="" />
         <div class="box-body">
           @if(Auth::user()->usertype_id == 1)
+          <input type="hidden" class="" name="sender_id" id="sender_id" value="{{ Auth::user()->karyawan_id }}" />
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Sender</label>
                 <div>
-                  <select class="form-control needed" name="sender_id" id="sender_id">
-                    <option value="">-- Choose Sender --</option>
-                    @foreach($dKaryawan AS $karyawan)
-                      <option value="{{ $karyawan->id }}">{{ $karyawan->name }}</option>
-                    @endforeach
-                  </select>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
+                  <input type="text" class="form-control needed" name="karyawan_name" id="lookup_karyawan" value="" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -36,7 +36,7 @@
                 <label for="name">Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ date('d/m/Y') }}">
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -54,13 +54,8 @@
               <div class="form-group">
                 <label for="name">Recipient</label>
                 <div>
-                  <select class="form-control needed" name="recipient_id" id="recipient_id">
-                    <option value="">-- Choose Recipient --</option>
-                    @foreach($dKaryawan AS $karyawan)
-                      <option value="{{ $karyawan->id }}">{{ $karyawan->name }}</option>
-                    @endforeach
-                  </select>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
+                  <input type="text" class="form-control needed" name="recipient_name" id="lookup_recipient" value="" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -68,12 +63,8 @@
               <div class="form-group">
                 <label for="name">Project</label>
                 <div>
-                  <select class="form-control" name="project_id" id="project_id">
-                    <option value="">-- Choose Project --</option>
-                    @foreach($dProject AS $project)
-                      <option value="{{ $project->id }}">{{ $project->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -83,12 +74,8 @@
               <div class="form-group">
                 <label for="name">Delivery By</label>
                 <div>
-                  <select class="form-control" name="delivery_id" id="delivery_id">
-                    <option value="">-- Choose Delivery --</option>
-                    @foreach($dDelivery AS $delivery)
-                      <option value="{{ $delivery->id }}">{{ $delivery->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="delivery_name" id="lookup_delivery" value="" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -106,12 +93,8 @@
               <div class="form-group">
                 <label for="name">From Area</label>
                 <div>
-                  <select class="form-control" name="fromarea_id" id="fromarea_id">
-                    <option value="">-- Choose From Area --</option>
-                    @foreach($dArea AS $area)
-                      <option value="{{ $area->id }}">{{ $area->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="fromarea_name" id="lookup_fromarea" value="" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -119,12 +102,8 @@
               <div class="form-group">
                 <label for="name">To Area</label>
                 <div>
-                  <select class="form-control" name="toarea_id" id="toarea_id">
-                    <option value="">-- Choose To Area --</option>
-                    @foreach($dArea AS $area)
-                      <option value="{{ $area->id }}">{{ $area->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="toarea_name" id="lookup_toarea" value="" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -254,6 +233,156 @@ $(document).ready(function(){
 
       }
   	});
+  });
+
+  var listKaryawan = {};
+  $('body').on('keyup', '#lookup_karyawan', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/karyawan/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listKaryawan[item.name] = item.id;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#sender_id").val(listKaryawan[data]);
+      }
+    });
+  });
+
+  var listRecipient = {};
+  $('body').on('keyup', '#lookup_recipient', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/karyawan/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listRecipient[item.name] = item.id;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#recipient_id").val(listRecipient[data]);
+      }
+    });
+  });
+
+  var listDelivery = {};
+  $('body').on('keyup', '#lookup_delivery', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/delivery/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listDelivery[item.name] = item.id;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#delivery_id").val(listDelivery[data]);
+      }
+    });
+  });
+
+  var listProject = {};
+  $('body').on('keyup', '#lookup_project', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/project/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listProject[item.name] = item.id;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#project_id").val(listProject[data]);
+      }
+    });
+  });
+
+  var listFromArea = {};
+  $('body').on('keyup', '#lookup_fromarea', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/area/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listFromArea[item.name] = item.id;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#fromarea_id").val(listFromArea[data]);
+      }
+    });
+  });
+
+  var listToArea = {};
+  $('body').on('keyup', '#lookup_toarea', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/area/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listToArea[item.name] = item.id;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#toarea_id").val(listToArea[data]);
+      }
+    });
   });
 
   $('body').on('change', '.SearchEl', function(){

@@ -8,6 +8,7 @@ use App\Core\Handlers\AddAreaHandler;
 use App\Core\Handlers\UpdateAreaHandler;
 use App\Core\Handlers\DeleteAreaHandler;
 use App\Core\Readers\AreaReader;
+use App\Core\Readers\SearchAreaReader;
 use App\Core\Readers\GetAreaReader;
 
 use Session;
@@ -189,6 +190,20 @@ class AreaController extends ApplicationController
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return redirect($this->modul);
+    }
+  }
+
+  public function search(Request $request)
+  {
+    $pos = "search";
+    try {
+      $reader = new SearchAreaReader($request);
+      $data = $reader->read();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return dd($msg);
     }
   }
 }

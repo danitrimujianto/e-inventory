@@ -20,12 +20,6 @@
                 <label for="name">Employee</label>
                 <div>
                   <input type="text" class="form-control needed" name="karyawan_name" id="lookup_karyawan" value="" autocomplete="off"/>
-                  <!-- <select class="form-control needed" name="karyawan_id" id="karyawan_id">
-                    <option value="">-- Choose Employee --</option>
-                    @foreach($dKaryawan AS $karyawan)
-                      <option value="{{ $karyawan->id }}">{{ $karyawan->name }}</option>
-                    @endforeach
-                  </select> -->
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Please Fill</span>
                 </div>
               </div>

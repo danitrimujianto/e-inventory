@@ -13,34 +13,19 @@
         <input type="hidden" name="_method" value="put">
         <input type="hidden" name="id" value="{{ $data->id }}">
         @csrf
+        <input type="hidden" class="" name="recipient_id" id="recipient_id" value="{{ $data->recipient_id }}" />
+        <input type="hidden" class="" name="delivery_id" id="delivery_id" value="{{ $data->delivery_id }}" />
+        <input type="hidden" class="" name="project_id" id="project_id" value="{{ $data->project_id }}" />
+        <input type="hidden" class="" name="fromarea_id" id="fromarea_id" value="{{ $data->fromarea_id }}" />
+        <input type="hidden" class="" name="toarea_id" id="toarea_id" value="{{ $data->toarea_id }}" />
         <div class="box-body">
-          @if(Auth::user()->usertype_id == 1)
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Sender</label>
+                <label for="name">Date</label>
                 <div>
-                  <select class="form-control needed" name="sender_id" id="sender_id">
-                    <option value="">-- Choose Sender --</option>
-                    @foreach($dKaryawan AS $karyawan)
-                      <option value="{{ $karyawan->id }}" @if($data->sender_id == $karyawan->id) selected @endif>{{ $karyawan->name }}</option>
-                    @endforeach
-                  </select>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          @else
-          <input type="hidden" name="sender_id" value="{{ $data->sender_id }}">
-          @endif
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Tanggal</label>
-                <div>
-                  <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tgl) }}">
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
+                  <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ date('d/m/Y') }}">
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -58,13 +43,8 @@
               <div class="form-group">
                 <label for="name">Recipient</label>
                 <div>
-                  <select class="form-control needed" name="recipient_id" id="recipient_id">
-                    <option value="">-- Choose Recipient --</option>
-                    @foreach($dKaryawan AS $karyawan)
-                      <option value="{{ $karyawan->id }}" @if($data->recipient_id == $karyawan->id) selected @endif>{{ $karyawan->name }}</option>
-                    @endforeach
-                  </select>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
+                  <input type="text" class="form-control needed" name="recipient_name" id="lookup_recipient" value="{{ $data->karyawan->name }}" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -72,12 +52,8 @@
               <div class="form-group">
                 <label for="name">Project</label>
                 <div>
-                  <select class="form-control" name="project_id" id="project_id">
-                    <option value="">-- Choose Project --</option>
-                    @foreach($dProject AS $project)
-                      <option value="{{ $project->id }}" @if($data->project_id == $project->id) selected @endif>{{ $project->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="{{ $data->project->name }}" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -87,12 +63,8 @@
               <div class="form-group">
                 <label for="name">Delivery By</label>
                 <div>
-                  <select class="form-control" name="delivery_id" id="delivery_id">
-                    <option value="">-- Choose Delivery --</option>
-                    @foreach($dDelivery AS $delivery)
-                      <option value="{{ $delivery->id }}" @if($data->delivery_id == $delivery->id) selected @endif>{{ $delivery->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="delivery_name" id="lookup_delivery" value="{{ $data->delivery->name }}" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -110,12 +82,8 @@
               <div class="form-group">
                 <label for="name">From Area</label>
                 <div>
-                  <select class="form-control" name="fromarea_id" id="fromarea_id">
-                    <option value="">-- Choose From Area --</option>
-                    @foreach($dArea AS $area)
-                      <option value="{{ $area->id }}" @if($data->fromarea_id == $area->id) selected @endif>{{ $area->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="fromarea_name" id="lookup_fromarea" value="{{ $data->fromarea->name }}" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -123,16 +91,13 @@
               <div class="form-group">
                 <label for="name">To Area</label>
                 <div>
-                  <select class="form-control" name="toarea_id" id="toarea_id">
-                    <option value="">-- Choose To Area --</option>
-                    @foreach($dArea AS $area)
-                      <option value="{{ $area->id }}" @if($data->toarea_id == $area->id) selected @endif>{{ $area->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control needed" name="toarea_name" id="lookup_toarea" value="{{ $data->toarea->name }}" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="row" style=" display:none; ">
             <div class="col-md-6">
               <div class="form-group">
@@ -149,8 +114,9 @@
             </div>
           </div>
           <section id="tools">
-            <?php $tools = App\AllhoActivities::find($data->id)->AllhoDetail; ?>
-            <h4 class="page-header">Tools</h4>
+            <h4 class="page-header">Tools
+              <!-- <button type="button" class="btn btn-primary pull-right btn-xs" id="btnListTools"><i class="fa fa-plus"></i> Add</button> -->
+            </h4>
             <table class="table table-bordered">
                 <tr>
                   <th>Item</th>
@@ -162,6 +128,7 @@
                   <th style="width: 40px">Action</th>
                 </tr>
                 <tbody id="listTools">
+                <?php $tools = App\AllhoActivities::find($data->id)->AllhoDetail; ?>
                 @foreach($tools AS $detail)
                 <tr>
                     <td><input type="hidden" class="idTools" name="idTools[]" value="{{ $detail->tools_id }}" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="{{ $detail->tools->code.' - '.$detail->tools->item }}" autocomplete="off"/></td>
@@ -294,6 +261,155 @@ $(document).ready(function(){
     }
   });
 
+    var listKaryawan = {};
+    $('body').on('keyup', '#lookup_karyawan', function(){
+      $(this).typeahead({
+        source: function (query, result) {
+          // alert('asd');
+          $.ajax({
+            url: "/karyawan/search",
+            data: 'sf=name&sq=' + query,
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+              // console.log(data);
+              result($.map(data, function (item) {
+                listKaryawan[item.name] = item.id;
+                return item.name;
+              }));
+            }
+          });
+        },
+        afterSelect: function(data){
+          $("#sender_id").val(listKaryawan[data]);
+        }
+      });
+    });
+
+    var listRecipient = {};
+    $('body').on('keyup', '#lookup_recipient', function(){
+      $(this).typeahead({
+        source: function (query, result) {
+          // alert('asd');
+          $.ajax({
+            url: "/karyawan/search",
+            data: 'sf=name&sq=' + query,
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+              // console.log(data);
+              result($.map(data, function (item) {
+                listRecipient[item.name] = item.id;
+                return item.name;
+              }));
+            }
+          });
+        },
+        afterSelect: function(data){
+          $("#recipient_id").val(listRecipient[data]);
+        }
+      });
+    });
+
+    var listDelivery = {};
+    $('body').on('keyup', '#lookup_delivery', function(){
+      $(this).typeahead({
+        source: function (query, result) {
+          // alert('asd');
+          $.ajax({
+            url: "/delivery/search",
+            data: 'sf=name&sq=' + query,
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+              // console.log(data);
+              result($.map(data, function (item) {
+                listDelivery[item.name] = item.id;
+                return item.name;
+              }));
+            }
+          });
+        },
+        afterSelect: function(data){
+          $("#delivery_id").val(listDelivery[data]);
+        }
+      });
+    });
+
+    var listProject = {};
+    $('body').on('keyup', '#lookup_project', function(){
+      $(this).typeahead({
+        source: function (query, result) {
+          // alert('asd');
+          $.ajax({
+            url: "/project/search",
+            data: 'sf=name&sq=' + query,
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+              // console.log(data);
+              result($.map(data, function (item) {
+                listProject[item.name] = item.id;
+                return item.name;
+              }));
+            }
+          });
+        },
+        afterSelect: function(data){
+          $("#project_id").val(listProject[data]);
+        }
+      });
+    });
+
+    var listFromArea = {};
+    $('body').on('keyup', '#lookup_fromarea', function(){
+      $(this).typeahead({
+        source: function (query, result) {
+          // alert('asd');
+          $.ajax({
+            url: "/area/search",
+            data: 'sf=name&sq=' + query,
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+              // console.log(data);
+              result($.map(data, function (item) {
+                listFromArea[item.name] = item.id;
+                return item.name;
+              }));
+            }
+          });
+        },
+        afterSelect: function(data){
+          $("#fromarea_id").val(listFromArea[data]);
+        }
+      });
+    });
+
+    var listToArea = {};
+    $('body').on('keyup', '#lookup_toarea', function(){
+      $(this).typeahead({
+        source: function (query, result) {
+          // alert('asd');
+          $.ajax({
+            url: "/area/search",
+            data: 'sf=name&sq=' + query,
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+              // console.log(data);
+              result($.map(data, function (item) {
+                listToArea[item.name] = item.id;
+                return item.name;
+              }));
+            }
+          });
+        },
+        afterSelect: function(data){
+          $("#toarea_id").val(listToArea[data]);
+        }
+      });
+    });
 });
 </script>
 @endsection
