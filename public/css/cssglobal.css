@@ -19,3 +19,16 @@
 .viewRowButton{
   cursor: pointer;
 }
+
+.subtotal{
+  text-align: right;
+}
+.price{
+  text-align: right;
+}
+.total{
+  text-align: right;
+}
+#total{
+  text-align: right;
+}

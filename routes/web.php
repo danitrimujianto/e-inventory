@@ -260,6 +260,7 @@ Route::middleware('auth')->prefix("/tools")->group(function() {
     Route::get("/list", 'ToolsController@list'); /* action get list of developers */
     Route::get("/select", 'ToolsController@selectData'); /* action get list of developers */
     Route::middleware('auth')->prefix("/search")->group(function() {
+      Route::get("/", 'ToolsController@search'); /* action insert or add data to system*/
       Route::get("/mutasi", 'ToolsController@listMutasi'); /* action insert or add data to system*/
     });
 
@@ -279,6 +280,7 @@ Route::middleware('auth')->prefix("/tools")->group(function() {
 /* Router karyawan */
 Route::middleware('auth')->prefix("/karyawan")->group(function() {
     Route::get("/", 'KaryawanController@index'); /* action get list of developers */
+    Route::get("/search", 'KaryawanController@search'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'KaryawanController@add'); /* action insert or add data to system*/
@@ -377,5 +379,42 @@ Route::middleware('auth')->prefix("/alatkaryawan")->group(function() {
     Route::prefix("/{id}")->group(function() {
         Route::get("/", 'AlatKaryawanController@edit'); /* action get data by id */
         Route::get("/detail", 'AlatKaryawanController@show'); /* action show data by id */
+    });
+});
+
+/* Router Request Tools */
+Route::middleware('auth')->prefix("/requesttools")->group(function() {
+    Route::get("/", 'RequestToolsController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'RequestToolsController@add'); /* action insert or add data to system*/
+      Route::post("/", 'RequestToolsController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'RequestToolsController@edit'); /* action get data by id */
+        Route::get("/detail", 'RequestToolsController@show'); /* action show data by id */
+        Route::post("/cancel", 'RequestToolsController@cancel'); /* action cancel data by id */
+        Route::get("/accept", 'RequestToolsController@acc'); /* action accept data by id */
+        Route::post("/reject", 'RequestToolsController@reject'); /* action reject data by id */
+        Route::put("/", 'RequestToolsController@update'); /* action edit data by id */
+        Route::delete("/", 'RequestToolsController@destroy'); /* action delete data by id */
+    });
+});
+
+/* Router Service */
+Route::middleware('auth')->prefix("/service")->group(function() {
+    Route::get("/", 'ServiceController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'ServiceController@add'); /* action insert or add data to system*/
+      Route::post("/", 'ServiceController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'ServiceController@edit'); /* action get data by id */
+        Route::get("/detail", 'ServiceController@show'); /* action show data by id */
+        Route::put("/", 'ServiceController@update'); /* action edit data by id */
+        Route::delete("/", 'ServiceController@destroy'); /* action delete data by id */
     });
 });

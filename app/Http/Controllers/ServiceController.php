@@ -4,25 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Core\Handlers\AddToolsHandler;
-use App\Core\Handlers\UpdateToolsHandler;
-use App\Core\Handlers\DeleteToolsHandler;
-use App\Core\Readers\ToolsReader;
-use App\Core\Readers\SearchToolsReader;
-use App\Core\Readers\ToolsMutasiReader;
-use App\Core\Readers\GetToolsReader;
-use App\Core\Readers\SelectToolsReader;
+use App\Core\Handlers\AddServiceHandler;
+use App\Core\Handlers\UpdateServiceHandler;
+use App\Core\Handlers\DeleteServiceHandler;
+use App\Core\Readers\ServiceReader;
+use App\Core\Readers\GetServiceReader;
 
 //others table
-use App\Core\Readers\DivisionReader;
-use App\Core\Readers\BarangReader;
+use App\Core\Readers\DeliveryReader;
+use App\Core\Readers\GoodsConditionReader;
+use App\Core\Readers\KaryawanReader;
+use App\Core\Readers\ProjectReader;
+use App\Core\Readers\AreaReader;
 
 
 use Session;
 use HelpMe;
 use DB;
 
-class ToolsController extends ApplicationController
+class ServiceController extends ApplicationController
 {
   /**
    * Create a new controller instance.
@@ -32,8 +32,8 @@ class ToolsController extends ApplicationController
   public function __construct()
   {
       $this->middleware('auth');
-      $this->modul = "tools"; //disetiap __construct controller harus ada
-      $this->modulName = "Tools"; //disetiap __construct controller harus ada
+      $this->modul = "service"; //disetiap __construct controller harus ada
+      $this->modulName = "Service"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -54,7 +54,7 @@ class ToolsController extends ApplicationController
       $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
 
       try {
-        $reader = new ToolsReader($request);
+        $reader = new ServiceReader($request);
         $data = $reader->read();
 
         if(session()->get('procMsg')){
@@ -90,13 +90,10 @@ class ToolsController extends ApplicationController
       $this->returnData['data'] = "";
 
       try{
-        $reader = new DivisionReader($request);
-        $dDivision = $reader->read();
-        $this->returnData['dDivision'] = $dDivision;
 
-        $reader = new BarangReader($request);
-        $dBarang = $reader->read();
-        $this->returnData['dBarang'] = $dBarang;
+        $reader = new GoodsConditionReader($request);
+        $dCondition = $reader->read();
+        $this->returnData['dCondition'] = $dCondition;
 
         return view('home', $this->returnData);
       }catch(\Exception $e){
@@ -115,7 +112,7 @@ class ToolsController extends ApplicationController
   {
     $pos = "add";
     try {
-      $handler = new AddToolsHandler($request);
+      $handler = new AddServiceHandler($request);
       $data = $handler->handle();
 
       $this->createAlert("info", $pos." Succeeded");
@@ -133,20 +130,26 @@ class ToolsController extends ApplicationController
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Request $request, $id)
   {
+    $pos = 'view';
     $this->theme["page"] = 'view'; //disetiap class dan function controller harus ada
     $this->returnData['theme'] = $this->theme;
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetToolsReader($id);
+      $reader = new GetServiceReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
+
+      $reader = new GoodsConditionReader($request);
+      $dCondition = $reader->read();
+      $this->returnData['dCondition'] = $dCondition;
+
       return view('home', $this->returnData);
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
+      return dd($msg);
     }
   }
 
@@ -164,17 +167,13 @@ class ToolsController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetToolsReader($id);
+      $reader = new GetServiceReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
-
-      $reader = new DivisionReader($request);
-      $dDivision = $reader->read();
-      $this->returnData['dDivision'] = $dDivision;
-
-      $reader = new BarangReader($request);
-      $dBarang = $reader->read();
-      $this->returnData['dBarang'] = $dBarang;
+      
+      $reader = new GoodsConditionReader($request);
+      $dCondition = $reader->read();
+      $this->returnData['dCondition'] = $dCondition;
 
       return view('home', $this->returnData);
     } catch (\Exception $e) {
@@ -195,7 +194,7 @@ class ToolsController extends ApplicationController
     $pos = "edit";
     try {
       //dd($request);
-      $handler = new UpdateToolsHandler($request);
+      $handler = new UpdateServiceHandler($request);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -216,7 +215,7 @@ class ToolsController extends ApplicationController
   {
     $pos = "delete";
     try {
-      $handler = new DeleteToolsHandler($id);
+      $handler = new DeleteServiceHandler($id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -226,63 +225,4 @@ class ToolsController extends ApplicationController
       return redirect($this->modul);
     }
   }
-
-   public function list(Request $request)
-   {
-     $pos = "list";
-     try {
-       $reader = new ToolsReader($request);
-       $data = $reader->read();
-       $this->returnData['data'] = $data;
-
-       return view('moduls.tools.list', $this->returnData);
-     } catch (\Exception $e) {
-       $msg = $this->resultException($e, $pos);
-       return dd($msg);
-     }
-   }
-
-    public function listMutasi(Request $request)
-    {
-      $pos = "listMutasi";
-      try {
-        $reader = new ToolsMutasiReader($request);
-        $data = $reader->read();
-        // dd($data);
-        return response()->json($data);
-        // return $data;
-      } catch (\Exception $e) {
-        $msg = $this->resultException($e, $pos);
-        return dd($msg);
-      }
-    }
-
-  public function selectData(Request $request)
-  {
-    $pos = "selectData";
-    try {
-      $reader = new SelectToolsReader($request);
-      $data = $reader->read();
-      // dd($data);
-      return response()->json($data);
-      // return $data;
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return dd($msg);
-    }
-  }
-
- public function search(Request $request)
- {
-   $pos = "search";
-   try {
-     $reader = new SearchToolsReader($request);
-     $data = $reader->read();
-
-     return response()->json($data);
-   } catch (\Exception $e) {
-     $msg = $this->resultException($e, $pos);
-     return dd($msg);
-   }
- }
 }

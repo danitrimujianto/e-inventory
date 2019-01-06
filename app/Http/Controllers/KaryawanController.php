@@ -8,6 +8,7 @@ use App\Core\Handlers\AddKaryawanHandler;
 use App\Core\Handlers\UpdateKaryawanHandler;
 use App\Core\Handlers\DeleteKaryawanHandler;
 use App\Core\Readers\KaryawanReader;
+use App\Core\Readers\SearchKaryawanReader;
 use App\Core\Readers\GetKaryawanReader;
 
 //others table
@@ -271,6 +272,20 @@ class KaryawanController extends ApplicationController
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return redirect($this->modul);
+    }
+  }
+
+  public function search(Request $request)
+  {
+    $pos = "search";
+    try {
+      $reader = new SearchKaryawanReader($request);
+      $data = $reader->read();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return dd($msg);
     }
   }
 }

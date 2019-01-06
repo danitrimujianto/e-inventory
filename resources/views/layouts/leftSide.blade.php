@@ -29,17 +29,17 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/delivery"><i class="fa fa-ellipsis-v"></i> Delivery</a></li>
           <li><a href="/division"><i class="fa fa-ellipsis-v"></i> Division</a></li>
           <li><a href="/goodscondition"><i class="fa fa-ellipsis-v"></i> Condition</a></li>
-          <li><a href="/barang"><i class="fa fa-ellipsis-v"></i> Barang</a></li>
+          <li><a href="/barang"><i class="fa fa-ellipsis-v"></i> Goods</a></li>
           <li><a href="/tools"><i class="fa fa-ellipsis-v"></i> Tools</a></li>
           <li><a href="/warehouse"><i class="fa fa-ellipsis-v"></i> Warehouse</a></li>
           <li><a href="/project"><i class="fa fa-ellipsis-v"></i> Projects</a></li>
-          <li><a href="/karyawan"><i class="fa fa-ellipsis-v"></i> Karyawan</a></li>
+          <li><a href="/karyawan"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
         </ul>
       </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-book"></i>
-          <span>Mutasi</span>
+          <span>Handover</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -50,13 +50,13 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <li>
         <a href="/alatkaryawan">
-          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <i class="fa fa-th"></i> <span>Employee Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
       <li>
-        <a href="/newtools">
-          <i class="fa fa-th"></i> <span>Pengajuan Tools Baru</span>
+        <a href="/requesttools">
+          <i class="fa fa-th"></i> <span>Request Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -96,22 +96,23 @@ $usertype = Auth::user()->usertype_id;
       <li class="treeview">
         <a href="#">
           <i class="fa fa-book"></i>
-          <span>Mutasi</span>
+          <span>Handover</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
           <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li>
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
         </ul>
       </li>
       <li>
         <a href="/alatkaryawan">
-          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <i class="fa fa-th"></i> <span>Employee Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
       <li>
-        <a href="/newtools">
-          <i class="fa fa-th"></i> <span>Pengajuan Tools Baru</span>
+        <a href="/requesttools">
+          <i class="fa fa-th"></i> <span>Request Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -147,25 +148,25 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <!-- Menu Manager -->
       @elseif($usertype == 3)
-      <li class="treeview">
+      <!-- <li class="treeview">
         <a href="#">
           <i class="fa fa-book"></i>
-          <span>Mutasi</span>
+          <span>Handover</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
           <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
         </ul>
-      </li>
+      </li> -->
       <li>
         <a href="/alatkaryawan">
-          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <i class="fa fa-th"></i> <span>Employee Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
       <li>
-        <a href="/newtools">
-          <i class="fa fa-th"></i> <span>Pengajuan Tools Baru</span>
+        <a href="/requesttools">
+          <i class="fa fa-th"></i> <span>Request Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -174,7 +175,7 @@ $usertype = Auth::user()->usertype_id;
       <li class="treeview">
         <a href="#">
           <i class="fa fa-book"></i>
-          <span>Mutasi</span>
+          <span>Handover</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -183,20 +184,9 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
         </ul>
       </li>
-      <!-- <li class="treeview">
-        <a href="#">
-          <i class="fa fa-book"></i>
-          <span>Tools Employee</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="/renewtools"><i class="fa fa-ellipsis-v"></i> Renew Tools</a></li>
-          <li><a href="/mytools"><i class="fa fa-ellipsis-v"></i> My Tools</a></li>
-        </ul>
-      </li> -->
       <li>
         <a href="/alatkaryawan">
-          <i class="fa fa-th"></i> <span>Alat Karyawan</span>
+          <i class="fa fa-th"></i> <span>Employee Tools</span>
         </a>
       </li>
       @endif

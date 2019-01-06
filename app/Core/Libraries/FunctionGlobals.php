@@ -520,7 +520,7 @@ class FunctionGlobals {
 
     public static function normalNumber($obj)
     {
-      $obj = "0";
+      $obj = (empty($obj) ? "0" : $obj);
       return str_replace(",", "", str_replace(".", "", $obj));
     }
 

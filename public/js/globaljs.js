@@ -155,6 +155,19 @@ $(document).ready(function(){
     $(this).val(nominal(isi));
 	});
 
+  //desimal
+  $('body').on('keyup', '.desimal', function(event) {
+    // skip for arrow keys
+	  if(event.which >= 37 && event.which <= 40){
+		event.preventDefault();
+	  }
+	  $(this).val(function(index, value) {
+		return value
+		  .replace(/\D/g, "")
+		  .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+	  });
+	});
+
   //action pilih kabupaten by provinsi
   $('#pilihProv').change(function(){
     var id = $(this).val();

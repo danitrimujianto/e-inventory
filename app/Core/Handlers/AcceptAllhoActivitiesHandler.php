@@ -31,7 +31,7 @@ class AcceptAllhoActivitiesHandler implements Handler
         $usertype = Auth::user()->usertype_id;
 
         $tab = AllhoActivities::find($id);
-        if($usertype == "3"){
+        if($usertype == "2"){
           $tab->approved_date = date("Y-m-d H:i:s");
           $tab->status = "1";
         }elseif($usertype == "4"){

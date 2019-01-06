@@ -1,0 +1,93 @@
+<?php
+namespace App\Core\Handlers;
+
+use App\PurchaseRequest;
+use App\PurchaseRequestDetail;
+use App\Core\Handler;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use DB;
+use HelpMe;
+
+class AddRequestToolsHandler implements Handler
+{
+    private $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
+    public function handle()
+    {
+        $request = $this->request;
+        $data = $this->saveDB($request);
+        return $data;
+    }
+
+    private function saveDB($request)
+    {
+        $path = "";
+        $usertype = Auth::user()->usertype_id;
+
+        $sender = ($usertype != 1 ? Auth::user()->karyawan_id : $request->sender_id);
+        $status = (($usertype == 2 || $usertype == 1) ? "1" : "0");
+        $type = (($usertype == 2 || $usertype == 1) ? "office" : "user");
+
+        $kode = $this->kode();
+        $type = 'Tools';
+
+        $tab = new PurchaseRequest();
+        $tab->tanggal = HelpMe::tgl_indo_to_sql($request->tanggal);
+        $tab->karyawan_id = $request->karyawan_id;
+        $tab->type = $type;
+        $tab->pr_no = $kode;
+        $tab->status = '0';
+        $tab->save();
+
+        $tools = array();
+        $isToll = false;
+        $no=0;
+        foreach($request->item AS $item){
+          if(!empty($item)){
+            $tools[] = array(
+                          'purchase_request_id'=>$tab->id,
+                          'item'=>$item,
+                          'merk'=>$request->merk[$no],
+                          'type'=>$request->type[$no],
+                          'quantity'=>HelpMe::normalNumber($request->quantity[$no]),
+                          'price'=>HelpMe::normalNumber($request->price[$no]),
+                          'total'=>HelpMe::normalNumber($request->subtotal[$no])
+                        );
+            $isTool = true;
+          }
+          $no++;
+        }
+        // dd($request->price);
+        if($isTool) $bulkTools = PurchaseRequestDetail::insert($tools);
+        return $tab;
+    }
+
+    private function kode()
+    {
+      $prefix = "PR/";
+      $bln = (strlen(date('m')) == 1 ? '0'.date('m') : date('m'));
+      $thn = date('Y');
+
+      $data = PurchaseRequest::whereMonth('tanggal', $bln)->whereYear('tanggal', $thn)->orderBy('id', 'desc')->first();
+      $new_no = (substr($data["pr_no"], 3, 4)+1);
+
+      if(strlen($new_no) == 1)
+      { $new_no = "000".$new_no; }
+      if(strlen($new_no) == 2)
+      { $new_no = "00".$new_no; }
+      if(strlen($new_no) == 3)
+      { $new_no = "0".$new_no; }
+      if(strlen($new_no) == 4)
+      { $new_no = $new_no; }
+
+      $new_no = $prefix.$new_no.'/'.$bln.'/'.substr($thn, 2, 2);
+      return $new_no;
+    }
+}
