@@ -53,11 +53,11 @@
           <tr data-id="{{ $d->id }}" data-field="{{ 'Karyawan' }}" data-value="{{ $d->name }}">
             <td>{{ $d->id_karyawan }}</td>
             <td>{{ $d->name }}</td>
-            <td>{{ $d->departemen->name }}</td>
-            <td>{{ $d->position->position }}</td>
-            <td>{{ $d->project->name }}</td>
-            <td>{{ $d->homebasearea->name }}</td>
-            <td>{{ $d->assignmentarea->name }}</td>
+            <td>{{ optional($d->departemen)->name }}</td>
+            <td>{{ optional($d->position)->position }}</td>
+            <td>{{ optional($d->project)->name }}</td>
+            <td>{{ optional($d->homebasearea)->name }}</td>
+            <td>{{ optional($d->assignmentarea)->name }}</td>
             <td>{{ $d->phone_number }}</td>
             <td>{{ $d->email }}</td>
             <td><small class="label {{ HelpMe::bgStatus($d->status) }}">{{ $d->status }}</small></td>
