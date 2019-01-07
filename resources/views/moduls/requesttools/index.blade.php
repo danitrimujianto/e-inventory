@@ -47,7 +47,7 @@
             <td><?php echo HelpLocal::checkPurchaseRequest($d->status, $d->type) ?></td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->tanggal) }}</td>
             <td>{{ $d->pr_no }}</td>
-            <td>{{ $d->karyawan->name }}</td>
+            <td>{{ optional($d->karyawan)->name }}</td>
             <td>
               @if(Auth::user()->usertype_id != 3)
               @if($d->status >= 0 && $d->status < 1)

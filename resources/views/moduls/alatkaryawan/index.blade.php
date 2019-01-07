@@ -61,12 +61,12 @@
             <td>{{ $d->tools->code }}</td>
             <td>{{ $d->tools->item }}</td>
             <td>{{ optional($d->condition)->name }}</td>
-            <td>{{ $d->handover->project->name }}</td>
-            <td>{{ $d->karyawan->name }}</td>
-            <td>{{ $d->handover->toarea->name }}</td>
-            <td>{{ $d->karyawan->assignmentarea->name }}</td>
+            <td>{{ optional($d->handover->project)->name }}</td>
+            <td>{{ optional($d->karyawan)->name }}</td>
+            <td>{{ optional($d->handover->toarea)->name }}</td>
+            <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
-            <td>{{ HelpMe::cost($d->tools->price) }}</td>
+            <td>{{ HelpMe::cost(optional($d->tools)->price) }}</td>
           </tr>
           @endforeach
         </table>

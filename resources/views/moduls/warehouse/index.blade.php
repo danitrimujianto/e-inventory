@@ -46,7 +46,7 @@
           <tr data-id="{{ $d->id }}" data-field="{{ 'Warehouse' }}" data-value="{{ $d->name }}">
             <td>{{ $d->code }}</td>
             <td>{{ $d->name }}</td>
-            <td>{{ $d->area->name.', '.$d->city->name }}</td>
+            <td>{{ optional($d->area)->name.', '.optional($d->city)->name }}</td>
             <td><small class="label {{ HelpMe::bgStatus($d->status) }}">{{ $d->status }}</small></td>
             <td>
               <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button>
