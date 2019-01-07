@@ -25,7 +25,7 @@ class BarangController extends ApplicationController
   {
       $this->middleware('auth');
       $this->modul = "barang"; //disetiap __construct controller harus ada
-      $this->modulName = "Barang"; //disetiap __construct controller harus ada
+      $this->modulName = "Goods"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
