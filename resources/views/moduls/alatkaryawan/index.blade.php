@@ -58,8 +58,8 @@
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
-            <td>{{ $d->tools->code }}</td>
-            <td>{{ $d->tools->item }}</td>
+            <td>{{ optional($d->tools)->code }}</td>
+            <td>{{ optional($d->tools)->item }}</td>
             <td>{{ optional($d->condition)->name }}</td>
             <td>{{ optional($d->handover->project)->name }}</td>
             <td>{{ optional($d->karyawan)->name }}</td>
