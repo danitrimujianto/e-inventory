@@ -48,12 +48,12 @@
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Service' }}" data-value="{{ $d->tools->item }}">
-            <td>{{ $d->tools->code }}</td>
-            <td>{{ $d->tools->item }}</td>
+            <td>{{ optional($d->tools)->code }}</td>
+            <td>{{ optional($d->tools)->item }}</td>
             <td>{{ $d->problem }}</td>
             <td>{{ $d->service }}</td>
-            <td>{{ $d->condition->name }}</td>
-            <td>{{ $d->after->name }}</td>
+            <td>{{ optional($d->condition)->name }}</td>
+            <td>{{ optional($d->after)->name }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->start_date) }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->finish_date) }}</td>
             <td>
