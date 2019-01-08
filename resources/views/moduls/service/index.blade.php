@@ -47,7 +47,7 @@
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
-          <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Service' }}" data-value="{{ $d->tools->item }}">
+          <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Service' }}" data-value="{{ optional($d->tools)->item }}">
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
             <td>{{ $d->problem }}</td>
