@@ -30,7 +30,7 @@
                 <label for="name">Item</label>
                 <div>
                   <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="{{ $data->tools_id }}">
-                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="{{ $data->tools->item }}" readonly>
+                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="{{ optional($data->tools)->item }}" readonly>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -39,7 +39,7 @@
               <div class="form-group">
                 <label for="name">ID Tools</label>
                 <div>
-                  <input type="text" class="form-control" name="code" id="code" placeholder="" autocomplete="off" value="{{ $data->tools->code }}" readonly>
+                  <input type="text" class="form-control" name="code" id="code" placeholder="" autocomplete="off" value="{{ optional($data->tools)->code }}" readonly>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
