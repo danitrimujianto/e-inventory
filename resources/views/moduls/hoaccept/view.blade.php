@@ -19,7 +19,7 @@
               <div class="form-group">
                 <label for="name">Sender</label>
                 <div>
-                  <input type="text" class="form-control" name="sender_id" value="{{ $data->sender->name }}" readonly>
+                  <input type="text" class="form-control" name="sender_id" value="{{ optional($data->sender)->name }}" readonly>
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@
               <div class="form-group">
                 <label for="name">Recipient</label>
                 <div>
-                  <input type="text" class="form-control" name="recipient_id" id="recipient_id" placeholder="" autocomplete="off" value="{{ $data->karyawan->name }}" readonly>
+                  <input type="text" class="form-control" name="recipient_id" id="recipient_id" placeholder="" autocomplete="off" value="{{ optional($data->karyawan)->name }}" readonly>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
                 </div>
               </div>
@@ -58,7 +58,7 @@
               <div class="form-group">
                 <label for="name">Project</label>
                 <div>
-                  <input type="text" class="form-control" name="project_id" id="project_id" placeholder="" autocomplete="off" value="{{ $data->project->name }}" readonly>
+                  <input type="text" class="form-control" name="project_id" id="project_id" placeholder="" autocomplete="off" value="{{ optional($data->project)->name }}" readonly>
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@
               <div class="form-group">
                 <label for="name">Delivery By</label>
                 <div>
-                  <input type="text" class="form-control" name="delivery_id" id="delivery_id" placeholder="" autocomplete="off" value="{{ $data->delivery->name }}" readonly>
+                  <input type="text" class="form-control" name="delivery_id" id="delivery_id" placeholder="" autocomplete="off" value="{{ optional($data->delivery)->name }}" readonly>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@
               <div class="form-group">
                 <label for="name">From Area</label>
                 <div>
-                  <input type="text" class="form-control" name="fromarea_id" id="fromarea_id" placeholder="" autocomplete="off" value="{{ $data->fromarea->name }}" readonly />
+                  <input type="text" class="form-control" name="fromarea_id" id="fromarea_id" placeholder="" autocomplete="off" value="{{ optional($data->fromarea)->name }}" readonly />
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@
               <div class="form-group">
                 <label for="name">To Area</label>
                 <div>
-                  <input type="text" class="form-control" name="toarea_id" id="toarea_id" placeholder="" autocomplete="off" value="{{ $data->toarea->name }}" readonly />
+                  <input type="text" class="form-control" name="toarea_id" id="toarea_id" placeholder="" autocomplete="off" value="{{ optional($data->toarea)->name }}" readonly />
                 </div>
               </div>
             </div>
@@ -129,12 +129,12 @@
                 <tbody id="listTools">
                 @foreach($tools AS $detail)
                 <tr>
-                    <td>{{ $detail->tools->code.' - '.$detail->tools->item }}</td>
-                    <td>{{ $detail->condition->name }}</td>
-                    <td>{{ $detail->tools->merk }}</td>
-                    <td>{{ $detail->tools->type }}</td>
-                    <td>{{ $detail->tools->serial_number }}</td>
-                    <td>{{ $detail->tools->imei }}</td>
+                    <td>{{ optional($detail->tools)->code.' - '.optional($detail->tools)->item }}</td>
+                    <td>{{ optional($detail->condition)->name }}</td>
+                    <td>{{ optional($detail->tools)->merk }}</td>
+                    <td>{{ optional($detail->tools)->type }}</td>
+                    <td>{{ optional($detail->tools)->serial_number }}</td>
+                    <td>{{ optional($detail->tools)->imei }}</td>
                 </tr>
                 @endforeach
                 @if(!$tools)

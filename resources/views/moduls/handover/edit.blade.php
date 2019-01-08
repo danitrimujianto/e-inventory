@@ -57,7 +57,7 @@
               <div class="form-group">
                 <label for="name">Recipient</label>
                 <div>
-                  <input type="text" class="form-control needed" name="recipient_name" id="lookup_recipient" value="{{ $data->karyawan->name }}" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="recipient_name" id="lookup_recipient" value="{{ optional($data->karyawan)->name }}" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -66,7 +66,7 @@
               <div class="form-group">
                 <label for="name">Project</label>
                 <div>
-                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="{{ $data->project->name }}" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="{{ optional($data->project)->name }}" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -77,7 +77,7 @@
               <div class="form-group">
                 <label for="name">Delivery By</label>
                 <div>
-                  <input type="text" class="form-control needed" name="delivery_name" id="lookup_delivery" value="{{ $data->delivery->name }}" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="delivery_name" id="lookup_delivery" value="{{ optional($data->delivery)->name }}" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -96,7 +96,7 @@
               <div class="form-group">
                 <label for="name">From Area</label>
                 <div>
-                  <input type="text" class="form-control needed" name="fromarea_name" id="lookup_fromarea" value="{{ $data->fromarea->name }}" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="fromarea_name" id="lookup_fromarea" value="{{ optional($data->fromarea)->name }}" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -105,7 +105,7 @@
               <div class="form-group">
                 <label for="name">To Area</label>
                 <div>
-                  <input type="text" class="form-control needed" name="toarea_name" id="lookup_toarea" value="{{ $data->toarea->name }}" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="toarea_name" id="lookup_toarea" value="{{ optional($data->toarea)->name }}" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -145,7 +145,7 @@
                 <?php $tools = App\AllhoActivities::find($data->id)->AllhoDetail; ?>
                 @foreach($tools AS $detail)
                 <tr>
-                    <td><input type="hidden" class="idTools" name="idTools[]" value="{{ $detail->tools_id }}" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="{{ $detail->tools->code.' - '.$detail->tools->item }}" autocomplete="off"/></td>
+                    <td><input type="hidden" class="idTools" name="idTools[]" value="{{ $detail->tools_id }}" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="{{ optional($detail->tools)->code.' - '.optional($detail->tools)->item }}" autocomplete="off"/></td>
                     <td>
                       <select class="form-control goods_condition_id" name="goods_condition_id[]">
                         <option value="">-- Choose Condition --</option>
@@ -154,10 +154,10 @@
                         @endforeach
                       </select>
                     </td>
-                    <td><input type="text" class="form-control merk" value="{{ $detail->tools->merk }}" id="" readonly /></td>
-                    <td><input type="text" class="form-control type" value="{{ $detail->tools->type }}" id="" readonly/></td>
-                    <td><input type="text" class="form-control serial_number" value="{{ $detail->tools->serial_number }}"  id="" readonly/></td>
-                    <td><input type="text" class="form-control imei" value="{{ $detail->tools->imei }}" id="" readonly/></td>
+                    <td><input type="text" class="form-control merk" value="{{ optional($detail->tools)->merk }}" id="" readonly /></td>
+                    <td><input type="text" class="form-control type" value="{{ optional($detail->tools)->type }}" id="" readonly/></td>
+                    <td><input type="text" class="form-control serial_number" value="{{ optional($detail->tools)->serial_number }}"  id="" readonly/></td>
+                    <td><input type="text" class="form-control imei" value="{{ optional($detail->tools)->imei }}" id="" readonly/></td>
                     <td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Hapus</button></td>
                 </tr>
                 @endforeach

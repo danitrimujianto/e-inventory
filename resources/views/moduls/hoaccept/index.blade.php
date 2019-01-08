@@ -51,11 +51,11 @@
             <td><?php echo HelpLocal::checkStatusAllHo($d->status, $d->type) ?></td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->tgl) }}</td>
             <td>{{ $d->outgoing_no }}</td>
-            <td>@if($d->type == 'office') {{ ucwords($d->type) }} @else {{ $d->sender->name }} @endif</td>
-            <td>{{ $d->delivery->name }}</td>
-            <td>{{ $d->project->name }}</td>
-            <td>{{ $d->fromarea->name }}</td>
-            <td>{{ $d->toarea->name }}</td>
+            <td>@if($d->type == 'office') {{ ucwords($d->type) }} @else {{ optional($d->sender)->name }} @endif</td>
+            <td>{{ optional($d->delivery)->name }}</td>
+            <td>{{ optional($d->project)->name }}</td>
+            <td>{{ optional($d->fromarea)->name }}</td>
+            <td>{{ optional($d->toarea)->name }}</td>
             <td>
               <!-- <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button> -->
               @if($d->status >= 0 && $d->status < 2)
