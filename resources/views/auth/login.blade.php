@@ -6,11 +6,11 @@
           @csrf
 					<span class="login100-form-title p-b-49">
 						<img src="{{ asset('/dist/img/inventory-icon.png') }}" style=" width: 80px; height: 80px;">
-						<span style=" color: #c51ae2; font-size: 40px;font-family: Poppins-Regular; ">e - INVENTORY</span><br/>
+						<span style=" color: #c51ae2; font-size: 40px;font-family: Poppins-Regular; font-weight:bold;">e - INVENTORY</span><br/>
 						<small style=" font-size: 25px; font-family: Poppins-Regular; color: #c51ae2; line-height: 1.5; ">PT. Sinergi AITIKOM</small>
 					</span>
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Email is required">
-						<span class="label-input100" style=" color: #c51ae2;">Username</span>
+						<span class="label-input100" style=" color: #c51ae2;">Email</span>
 						<input class="input100" type="text" name="email" placeholder="Type your email">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>

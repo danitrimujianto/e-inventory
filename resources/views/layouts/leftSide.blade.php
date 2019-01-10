@@ -43,7 +43,7 @@ $usertype = Auth::user()->usertype_id;
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li>
+          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> Handover Warehouse</a></li>
           <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
           <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
         </ul>
@@ -56,7 +56,7 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <li>
         <a href="/requesttools">
-          <i class="fa fa-th"></i> <span>Request Tools</span>
+          <i class="fa fa-th"></i> <span>Request New Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -112,7 +112,7 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <li>
         <a href="/requesttools">
-          <i class="fa fa-th"></i> <span>Request Tools</span>
+          <i class="fa fa-th"></i> <span>Request New Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -166,7 +166,7 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <li>
         <a href="/requesttools">
-          <i class="fa fa-th"></i> <span>Request Tools</span>
+          <i class="fa fa-th"></i> <span>Request New Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -191,7 +191,7 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <li>
         <a href="/requesttools">
-          <i class="fa fa-th"></i> <span>Request Tools</span>
+          <i class="fa fa-th"></i> <span>Request New Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>

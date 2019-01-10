@@ -44,6 +44,12 @@
               <input type="text" class="form-control datepicker" name="date" id="date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->date) }}" readonly>
             </div>
           </div>
+          <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <div>
+              <textarea class="form-control" name="remarks" id="remarks" disabled>{{ $data->remarks }}</textarea>
+            </div>
+          </div>
         </div>
         <!-- /.box-body -->
 

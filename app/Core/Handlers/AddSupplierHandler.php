@@ -35,6 +35,7 @@ class AddSupplierHandler implements Handler
         $tab->contact_person = $request->contact_person;
         $tab->phone = $request->phone;
         $tab->date = HelpMe::tgl_indo_to_sql($request->date);
+        $tab->remarks = $request->remarks;
         $tab->save();
 
         return $tab;

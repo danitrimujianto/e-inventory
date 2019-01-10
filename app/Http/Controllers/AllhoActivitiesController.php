@@ -33,7 +33,7 @@ class AllhoActivitiesController extends ApplicationController
   {
       $this->middleware('auth');
       $this->modul = "allhoactivities"; //disetiap __construct controller harus ada
-      $this->modulName = "All HO Activities"; //disetiap __construct controller harus ada
+      $this->modulName = "Handover Warehouse"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -201,7 +201,7 @@ class AllhoActivitiesController extends ApplicationController
       $reader = new GetAllhoActivitiesReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
-      
+
       $reader = new DeliveryReader($request);
       $dDelivery = $reader->read();
       $this->returnData['dDelivery'] = $dDelivery;

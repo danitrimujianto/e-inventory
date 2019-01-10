@@ -42,10 +42,10 @@
             <th>Departemen</th>
             <th>Position</th>
             <th>Project</th>
-            <th>Home Area</th>
+            <!-- <th>Home Area</th> -->
             <th>Assignment Area</th>
             <th>Phone</th>
-            <th>Email</th>
+            <!-- <th>Email</th> -->
             <th>Status</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
@@ -56,10 +56,10 @@
             <td>{{ optional($d->departemen)->name }}</td>
             <td>{{ optional($d->position)->position }}</td>
             <td>{{ optional($d->project)->name }}</td>
-            <td>{{ optional($d->homebasearea)->name }}</td>
+            <!-- <td>{{ optional($d->homebasearea)->name }}</td> -->
             <td>{{ optional($d->assignmentarea)->name }}</td>
             <td>{{ $d->phone_number }}</td>
-            <td>{{ $d->email }}</td>
+            <!-- <td>{{ $d->email }}</td> -->
             <td><small class="label {{ HelpMe::bgStatus($d->status) }}">{{ $d->status }}</small></td>
             <td>
               <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button>

@@ -42,6 +42,12 @@
               <input type="text" class="form-control datepicker" name="date" id="date" placeholder="" autocomplete="off">
             </div>
           </div>
+          <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <div>
+              <textarea class="form-control" name="remarks" id="remarks"></textarea>
+            </div>
+          </div>
         </div>
         <!-- /.box-body -->
 
