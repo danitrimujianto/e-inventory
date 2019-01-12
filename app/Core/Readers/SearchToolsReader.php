@@ -24,6 +24,7 @@ class SearchToolsReader implements Reader
       $req = $this->request;
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
+      $sender_id = (isset($req->sender_id) ? $req->sender_id : '');
 
       $data = new Tools;
       if(!empty($sq))

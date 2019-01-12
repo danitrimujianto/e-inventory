@@ -41,9 +41,14 @@ class AllhoActivities extends Model
       return $this->belongsTo('App\Area', 'fromarea_id');
     }
 
-    public function toarea()
+    public function tocity()
     {
-      return $this->belongsTo('App\Area', 'toarea_id');
+      return $this->belongsTo('App\City', 'tocity_id');
+    }
+
+    public function fromcity()
+    {
+      return $this->belongsTo('App\City', 'fromcity_id');
     }
 
     public function AllhoDetail()

@@ -1,3 +1,6 @@
+<?php
+$price = (Auth::user()->usertype_id == 4 ? false : true);
+?>
 <!-- Small boxes (Stat box) -->
 <div class="row">
   <div class="col-xs-12">
@@ -48,25 +51,33 @@
           <tr>
             <th>ID Tools</th>
             <th>Item</th>
+            <th>Serial Number</th>
+            <th>Imei</th>
             <th>Condition</th>
             <th>Project</th>
             <th>Karyawan</th>
             <th>Area</th>
             <th>City</th>
             <th>Update Date</th>
-            <th>Price</th>
+            @if($price)
+              <th>Price</th>
+            @endif
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
+            <td>{{ optional($d->tools)->serial_number }}</td>
+            <td>{{ optional($d->tools)->imei }}</td>
             <td>{{ optional($d->condition)->name }}</td>
             <td>{{ optional($d->handover->project)->name }}</td>
             <td>{{ optional($d->karyawan)->name }}</td>
             <td>{{ optional($d->handover->toarea)->name }}</td>
             <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
-            <td>{{ HelpMe::cost(optional($d->tools)->price) }}</td>
+            @if($price)
+              <td>{{ HelpMe::cost(optional($d->tools)->price) }}</td>
+            @endif
           </tr>
           @endforeach
         </table>

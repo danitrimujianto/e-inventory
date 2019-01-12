@@ -1,14 +1,14 @@
 <?php
 namespace App\Core\Readers;
 
-use App\PurchaseRequest;
+use App\City;
 use App\Core\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 
-class RequestToolsReader implements Reader
+class SearchCityReader implements Reader
 {
     private $request;
     /** constructor, fungsinya untuk memudahkan passing variable dari controller */
@@ -24,22 +24,14 @@ class RequestToolsReader implements Reader
       $req = $this->request;
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
-      $sf = (isset($req->sf) ? $req->sf : '');
 
-      $data = PurchaseRequest::where('type', 'Tools');
+      $data = new City;
       if(!empty($sq))
       {
-        if($sf == "user_request"){
-          $data = $data->with('Karyawan')->whereHas('Karyawan', function($q) use ($sq){
-            $q->where('name', 'like', '%'.$sq.'%');
-          });
-        }else{
-          $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
-        }
+        $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
       }
-      if(Auth::user()->usertype_id == 4){ $data = $data->where('karyawan_id', Auth::user()->karyawan_id); }
 
-      $data = $data->orderBy('id','desc')->paginate($batas);
+      $data = $data->get();
       return $data;
     }
 }

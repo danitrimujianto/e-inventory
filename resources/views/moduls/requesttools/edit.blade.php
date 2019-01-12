@@ -53,6 +53,24 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Due Date</label>
+                <div>
+                  <input type="text" class="form-control datepicker" name="due_date" id="due_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->due_date) }}">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Decription</label>
+                <div>
+                  <textarea class="form-control" name="description" id="description">{{ $data->description }}</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
           <section id="tools">
             <h4 class="page-header">Items
               <!-- <button type="button" class="btn btn-primary pull-right btn-xs" id="btnListTools"><i class="fa fa-plus"></i> Add</button> -->

@@ -34,7 +34,7 @@ class KaryawanController extends ApplicationController
   {
       $this->middleware('auth');
       $this->modul = "karyawan"; //disetiap __construct controller harus ada
-      $this->modulName = "Karyawan"; //disetiap __construct controller harus ada
+      $this->modulName = "Employee"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -159,25 +159,25 @@ class KaryawanController extends ApplicationController
       $this->returnData['data'] = $data;
 
 
-        $reader = new DepartemenReader($request);
-        $dDepartemen = $reader->read();
-        $this->returnData['dDepartemen'] = $dDepartemen;
+      $reader = new DepartemenReader($request);
+      $dDepartemen = $reader->read();
+      $this->returnData['dDepartemen'] = $dDepartemen;
 
-        $reader = new PositionReader($request);
-        $dPosition = $reader->read();
-        $this->returnData['dPosition'] = $dPosition;
+      $reader = new PositionReader($request);
+      $dPosition = $reader->read();
+      $this->returnData['dPosition'] = $dPosition;
 
-        $reader = new ProjectReader($request);
-        $dProject = $reader->read();
-        $this->returnData['dProject'] = $dProject;
+      $reader = new ProjectReader($request);
+      $dProject = $reader->read();
+      $this->returnData['dProject'] = $dProject;
 
-        $reader = new AreaReader($request);
-        $dArea = $reader->read();
-        $this->returnData['dArea'] = $dArea;
+      $reader = new AreaReader($request);
+      $dArea = $reader->read();
+      $this->returnData['dArea'] = $dArea;
 
-        $reader = new CityReader($request);
-        $dCity = $reader->read();
-        $this->returnData['dCity'] = $dCity;
+      $reader = new CityReader($request);
+      $dCity = $reader->read();
+      $this->returnData['dCity'] = $dCity;
 
       return view('home', $this->returnData);
     } catch (\Exception $e) {

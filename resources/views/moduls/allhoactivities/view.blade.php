@@ -13,22 +13,10 @@
         <input type="hidden" name="id" value="{{ $data->id }}">
         @csrf
         <div class="box-body">
-          @if(Auth::user()->usertype_id == 1)
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Sender</label>
-                <div>
-                  <input type="text" class="form-control" name="sender_id" value="{{ $data->sender->name }}" readonly>
-                </div>
-              </div>
-            </div>
-          </div>
-          @endif
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Tanggal</label>
+                <label for="name">Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tgl) }}" readonly>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
@@ -82,19 +70,20 @@
               </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="form-group">
                 <label for="name">From Area</label>
                 <div>
                   <input type="text" class="form-control" name="fromarea_id" id="fromarea_id" placeholder="" autocomplete="off" value="{{ optional($data->fromarea)->name }}" readonly />
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">To Area</label>
+                <label for="name">To City</label>
                 <div>
-                  <input type="text" class="form-control" name="toarea_id" id="toarea_id" placeholder="" autocomplete="off" value="{{ optional($data->toarea)->name }}" readonly />
+                  <input type="text" class="form-control needed" name="tocity_name" id="lookup_tocity" value="{{ optional($data->tocity)->name }}" autocomplete="off" readonly/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>

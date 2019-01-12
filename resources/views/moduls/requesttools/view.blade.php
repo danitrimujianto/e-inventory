@@ -10,7 +10,7 @@
       <!-- form start -->
       <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
-        <input type="hidden" name="id" value="{{ $data->id }}">
+        <input type="hidden" name="id" id="id" value="{{ $data->id }}">
         @csrf
         <div class="box-body">
           <input type="hidden" class="" name="karyawan_id" id="karyawan_id" value="{{ $data->karyawan_id }}" />
@@ -48,6 +48,25 @@
                 <label for="name">Purchase No</label>
                 <div>
                   <input type="text" class="form-control" name="pr_no" id="pr_no" placeholder="" autocomplete="off" value="{{ $data->pr_no }}" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Due Date</label>
+                <div>
+                  <input type="text" class="form-control datepicker" name="due_date" id="due_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->due_date) }}" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Decription</label>
+                <div>
+                  <textarea class="form-control" name="description" id="description" readonly>{{ $data->description }}</textarea>
                 </div>
               </div>
             </div>
@@ -103,6 +122,11 @@
 
         <div class="box-footer">
           <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
+
+          @if(Auth::user()->usertype_id == 3 && $data->status == 0)
+          <button title="" type="button" class="btn btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button>
+          <button title="" type="button" class="btn btn-danger pull-right rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
+          @endif
         </div>
       </form>
     </div>
@@ -112,3 +136,24 @@
 <div >
 </div>
 <!-- /.row (main row) -->
+@section('scriptAdd')
+<script>
+$(document).ready(function(){
+  $(".acceptButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $("#id").val();
+    var field = "Purchase No";
+    var value = $("#pr_no").val();
+    alertSweet("Are you sure to approve  ", id, field, value, modulPage, 'Accept');
+  });
+
+  $(".rejectButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $("#id").val();
+    var field = "Purchase No";
+    var value = $("#pr_no").val();
+    alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
+  });
+});
+</script>
+@endsection

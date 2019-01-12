@@ -15,7 +15,7 @@
         @csrf
         <div class="box-body">
           <div class="form-group">
-            <label for="code">ID Karyawan (NIK)</label>
+            <label for="code">ID Employee (NIK)</label>
             <div>
               <input type="text" class="form-control needed" name="id_karyawan" id="id_karyawan" placeholder="" autocomplete="off" value="{{ $data->id_karyawan }}">
   						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>

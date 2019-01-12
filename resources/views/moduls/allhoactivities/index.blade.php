@@ -42,7 +42,7 @@
             <th>Recipient</th>
             <th>Delivery</th>
             <th>Project</th>
-            <th>From Area</th>
+            <!-- <th>From Area</th> -->
             <th>To Area</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
@@ -54,8 +54,8 @@
             <td>{{ optional($d->karyawan)->name }}</td>
             <td>{{ optional($d->delivery)->name }}</td>
             <td>{{ optional($d->project)->name }}</td>
-            <td>{{ optional($d->fromarea)->name }}</td>
-            <td>{{ optional($d->toarea)->name }}</td>
+            <!-- <td>{{ optional($d->fromarea)->name }}</td> -->
+            <td>{{ optional($d->tocity)->name }}</td>
             <td>
               <!-- <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button> -->
               @if($d->status >= 0 && $d->status < 2)
@@ -104,3 +104,16 @@
   </div>
 </div>
 <!-- /.row (main row) -->
+@section('scriptAdd')
+<script>
+$(document).ready(function(){
+  $(".cancelButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to cancel  ", id, field, value, modulPage, 'Cancel');
+  });
+});
+</script>
+@endsection

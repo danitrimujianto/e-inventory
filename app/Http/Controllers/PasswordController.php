@@ -3,19 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Core\Handlers\AddBarangHandler;
-use App\Core\Handlers\UpdateBarangHandler;
-use App\Core\Handlers\DeleteBarangHandler;
-use App\Core\Readers\BarangReader;
-use App\Core\Readers\SelectBarangReader;
-use App\Core\Readers\GetBarangReader;
 
 use Session;
 use HelpMe;
 use DB;
 
-class BarangController extends ApplicationController
+class PasswordController extends ApplicationController
 {
   /**
    * Create a new controller instance.
@@ -24,11 +17,6 @@ class BarangController extends ApplicationController
    */
   public function __construct()
   {
-      $this->middleware('auth');
-      $this->modul = "barang"; //disetiap __construct controller harus ada
-      $this->modulName = "Goods"; //disetiap __construct controller harus ada
-      $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
-      $this->returnData = array();
       $this->HelpMe = new HelpMe();
   }
 
@@ -37,34 +25,14 @@ class BarangController extends ApplicationController
    *
    * @return \Illuminate\Http\Response
    */
-  public function index(Request $request)
+  public function request(Request $request)
   {
-      $pos = "index";
-      $this->theme["page"] = 'index'; //disetiap class dan function controller harus ada
-      $sf = (isset($_GET['sf']) ? $_GET['sf'] : '');
-      $sq = (isset($_GET['sq']) ? $_GET['sq'] : '');
-      $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
-
+    
       try {
-        $reader = new BarangReader($request);
-        $data = $reader->read();
-        $alert = "";
-        if(session()->get('procMsg')){
-          $st = session()->get('procMsg');
-          $alert = HelpMe::procMsg($st);
-          session()->forget('procMsg');
-        }
-        $this->returnData['theme'] = $this->theme;
-        $this->returnData['data'] = $data;
-        $this->returnData['sf'] = $sf;
-        $this->returnData['sq'] = $sq;
-        $this->returnData['bts'] = $bts;
-        $this->returnData['alert'] = $alert;
-
         return view('home', $this->returnData);
       } catch (\Exception $e) {
         $msg = $this->resultException($e, $pos);
-        return dd($msg);
+        return redirect($this->modul);
       }
   }
 
@@ -92,7 +60,7 @@ class BarangController extends ApplicationController
   {
     $pos = "add";
     try {
-      $handler = new AddBarangHandler($request);
+      $handler = new AddCityHandler($request);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -116,7 +84,7 @@ class BarangController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetBarangReader($id);
+      $reader = new GetCityReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
       return view('home', $this->returnData);
@@ -140,7 +108,7 @@ class BarangController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetBarangReader($id);
+      $reader = new GetCityReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
       return view('home', $this->returnData);
@@ -162,7 +130,7 @@ class BarangController extends ApplicationController
     $pos = "edit";
     try {
       //dd($request);
-      $handler = new UpdateBarangHandler($request);
+      $handler = new UpdateCityHandler($request);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -183,7 +151,7 @@ class BarangController extends ApplicationController
   {
     $pos = "delete";
     try {
-      $handler = new DeleteBarangHandler($id);
+      $handler = new DeleteCityHandler($id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 
@@ -194,17 +162,18 @@ class BarangController extends ApplicationController
     }
   }
 
-  public function select(Request $request)
-  {
-    $pos = "select";
-    try {
-      $reader = new SelectBarangReader($request);
-      $data = $reader->read();
 
-      return response()->json($data);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return dd($msg);
+    public function search(Request $request)
+    {
+      $pos = "search";
+      try {
+        $reader = new SearchCityReader($request);
+        $data = $reader->read();
+
+        return response()->json($data);
+      } catch (\Exception $e) {
+        $msg = $this->resultException($e, $pos);
+        return dd($msg);
+      }
     }
-  }
 }

@@ -32,6 +32,7 @@ class AcceptRequestToolsHandler implements Handler
 
         $tab = PurchaseRequest::find($id);
         $tab->approved_date = date("Y-m-d H:i:s");
+        $tab->approved_by = Auth::user()->karyawan_id;
         $tab->status = "1";
         $tab->save();
 

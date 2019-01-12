@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\Karyawan;
+use App\User;
 use App\Core\Handler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,9 @@ class AddKaryawanHandler implements Handler
     {
         $path = "";
 
+        $TipeUser = '4';
+        $PassUser = 'sinergi123';
+
         $tab = new Karyawan();
         $tab->id_karyawan = $request->id_karyawan;
         $tab->name = $request->name;
@@ -41,6 +45,14 @@ class AddKaryawanHandler implements Handler
         $tab->email = $request->email;
         $tab->status = $request->status;
         $tab->save();
+
+        $AddUser = new User();
+        $AddUser->usertype_id = $TipeUser;
+        $AddUser->name = $request->name;
+        $AddUser->email = $request->email;
+        $AddUser->karyawan_id = $tab->id;
+        $AddUser->password = bcrypt($PassUser);
+        $AddUser->save();
 
         return $tab;
     }

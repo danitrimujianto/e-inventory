@@ -40,7 +40,7 @@ class UpdateAllhoActivitiesHandler implements Handler
         $tab->delivery_id = $request->delivery_id;
         // $tab->goods_condition_id = $request->goods_condition_id;
         $tab->fromarea_id = $request->fromarea_id;
-        $tab->toarea_id = $request->toarea_id;
+        $tab->tocity_id = $request->tocity_id;
         $tab->recipient_id = $request->recipient_id;
         $tab->project_id = $request->project_id;
         $tab->receipt_no = $request->receipt_no;

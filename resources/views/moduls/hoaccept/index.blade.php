@@ -42,8 +42,8 @@
             <th>From</th>
             <th>Delivery</th>
             <th>Project</th>
-            <th>From Area</th>
-            <th>To Area</th>
+            <th>From City</th>
+            <th>To City</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
@@ -54,8 +54,8 @@
             <td>@if($d->type == 'office') {{ ucwords($d->type) }} @else {{ optional($d->sender)->name }} @endif</td>
             <td>{{ optional($d->delivery)->name }}</td>
             <td>{{ optional($d->project)->name }}</td>
-            <td>{{ optional($d->fromarea)->name }}</td>
-            <td>{{ optional($d->toarea)->name }}</td>
+            <td>{{ optional($d->fromcity)->name }}</td>
+            <td>{{ optional($d->tocity)->name }}</td>
             <td>
               <!-- <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button> -->
               @if($d->status >= 0 && $d->status < 2)

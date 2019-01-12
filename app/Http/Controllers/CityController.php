@@ -8,6 +8,7 @@ use App\Core\Handlers\AddCityHandler;
 use App\Core\Handlers\UpdateCityHandler;
 use App\Core\Handlers\DeleteCityHandler;
 use App\Core\Readers\CityReader;
+use App\Core\Readers\SearchCityReader;
 use App\Core\Readers\GetCityReader;
 
 use Session;
@@ -191,4 +192,19 @@ class CityController extends ApplicationController
       return redirect($this->modul);
     }
   }
+
+
+    public function search(Request $request)
+    {
+      $pos = "search";
+      try {
+        $reader = new SearchCityReader($request);
+        $data = $reader->read();
+
+        return response()->json($data);
+      } catch (\Exception $e) {
+        $msg = $this->resultException($e, $pos);
+        return dd($msg);
+      }
+    }
 }

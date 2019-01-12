@@ -36,28 +36,31 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Status</th>
+            <th>Admin Status</th>
+            <th>Recipient Status</th>
             <th>Date</th>
             <th>Outgoing No</th>
+            <th>Sender</th>
             <th>Recipient</th>
             <th>Delivery</th>
             <th>Project</th>
-            <th>From Area</th>
-            <th>To Area</th>
+            <th>From City</th>
+            <th>To City</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
             <td><?php echo HelpLocal::checkStatusAllHo($d->status, $d->type) ?></td>
+            <td><?php echo HelpLocal::checkRecipient($d->accepted_date) ?></td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->tgl) }}</td>
             <td>{{ $d->outgoing_no }}</td>
-            <td>{{ $d->karyawan->name }}</td>
+            <td>{{ optional($d->sender)->name }}</td>
+            <td>{{ optional($d->karyawan)->name }}</td>
             <td>{{ optional($d->delivery)->name }}</td>
             <td>{{ optional($d->project)->name }}</td>
-            <td>{{ optional($d->fromarea)->name }}</td>
-            <td>{{ optional($d->toarea)->name }}</td>
+            <td>{{ optional($d->fromcity)->name }}</td>
+            <td>{{ optional($d->tocity)->name }}</td>
             <td>
-              <!-- <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button> -->
               @if($d->status >= 0 && $d->status < 2)
                 <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
                 <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button>

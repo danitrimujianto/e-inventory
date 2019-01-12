@@ -3,7 +3,9 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
+        @if(Auth::user()->usertype_id != 3)
         <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Add New</button>
+        @endif
         <div class="box-tools">
           <button class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
         </div>
@@ -37,6 +39,8 @@
         <table class="table table-hover">
           <tr>
             <th>Status</th>
+            <th>Approved By</th>
+            <th>Rejected By</th>
             <th>Date</th>
             <th>Purchase No.</th>
             <th>User Request</th>
@@ -45,6 +49,8 @@
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Purchase No' }}" data-value="{{ $d->pr_no }}">
             <td><?php echo HelpLocal::checkPurchaseRequest($d->status, $d->type) ?></td>
+            <td><span class="label label-primary">{{ optional($d->acc_by)->name }}</span></td>
+            <td><span class="label label-danger">{{ optional($d->reject_by)->name }}</span></td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->tanggal) }}</td>
             <td>{{ $d->pr_no }}</td>
             <td>{{ optional($d->karyawan)->name }}</td>
@@ -57,7 +63,7 @@
               @endif
               @elseif(Auth::user()->usertype_id == 3)
               @if($d->status == 0)
-              <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Accept</button>
+              <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button>
               <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
               @endif
               @endif
@@ -116,7 +122,7 @@ $(document).ready(function(){
     var id = $(this).parent('td').parent('tr').attr('data-id');
     var field = $(this).parent('td').parent('tr').attr('data-field');
     var value = $(this).parent('td').parent('tr').attr('data-value');
-    alertSweet("Are you sure to accept  ", id, field, value, modulPage, 'Accept');
+    alertSweet("Are you sure to approve  ", id, field, value, modulPage, 'Accept');
   });
 
   $(".rejectButton").click(function(){

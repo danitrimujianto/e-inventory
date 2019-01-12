@@ -16,6 +16,16 @@ class PurchaseRequest extends Model
       return $this->belongsTo('App\Karyawan', 'karyawan_id');
     }
 
+    public function acc_by()
+    {
+      return $this->belongsTo('App\Karyawan', 'approved_by');
+    }
+
+    public function reject_by()
+    {
+      return $this->belongsTo('App\Karyawan', 'rejected_by', 'id');
+    }
+
     public function purchase_detail()
     {
       return $this->hasMany('App\PurchaseRequestDetail', 'purchase_request_id');

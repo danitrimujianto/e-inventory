@@ -108,3 +108,23 @@
   </div>
 </div>
 <!-- /.row (main row) -->
+@section('scriptAdd')
+<script>
+$(document).ready(function(){
+  $('#barang_id').change(function(){
+    var id = $(this).val();
+    $.ajax({
+      url: "/barang/select",
+      data: 'id=' + id,
+      dataType: "json",
+      type: "GET",
+      success: function (data) {
+        // console.log(data);
+        $('#item').val(data.name);
+        $('#type').val(data.type);
+      }
+    });
+  });
+});
+</script>
+@endsection

@@ -38,6 +38,8 @@
           <tr>
             <th>ID Tools</th>
             <th>Items</th>
+            <th>Serial Number</th>
+            <th>Imei</th>
             <th>Problem</th>
             <th>Service</th>
             <th>Condition</th>
@@ -50,6 +52,8 @@
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Service' }}" data-value="{{ optional($d->tools)->item }}">
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
+            <td>{{ optional($d->tools)->serial_number }}</td>
+            <td>{{ optional($d->tools)->imei }}</td>
             <td>{{ $d->problem }}</td>
             <td>{{ $d->service }}</td>
             <td>{{ optional($d->condition)->name }}</td>

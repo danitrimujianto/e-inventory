@@ -14,6 +14,12 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 
+/* Router Lupa Password */
+Route::prefix("/password")->group(function() {
+    Route::get("/request", 'PasswordController@request'); /* action get list of developers */
+
+});
+
 /* Router Modal */
 Route::middleware('auth')->prefix("/modal")->group(function() {
     Route::get("/reject", 'ModalController@reject'); /* action get list of developers */
@@ -73,6 +79,8 @@ Route::middleware('auth')->prefix("/area")->group(function() {
 /* Router City */
 Route::middleware('auth')->prefix("/city")->group(function() {
     Route::get("/", 'CityController@index'); /* action get list of developers */
+    Route::get("/search", 'CityController@search'); /* action get list of developers */
+
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'CityController@add'); /* action insert or add data to system*/
       Route::post("/", 'CityController@store'); /* action insert or add data to system*/
@@ -225,6 +233,7 @@ Route::middleware('auth')->prefix("/warehouse")->group(function() {
 /* Router Barang */
 Route::middleware('auth')->prefix("/barang")->group(function() {
     Route::get("/", 'BarangController@index'); /* action get list of developers */
+    Route::get("/select", 'BarangController@select'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'BarangController@add'); /* action insert or add data to system*/
@@ -310,6 +319,7 @@ Route::middleware('auth')->prefix("/allhoactivities")->group(function() {
     Route::prefix("/{id}")->group(function() {
         Route::get("/", 'AllhoActivitiesController@edit'); /* action get data by id */
         Route::get("/detail", 'AllhoActivitiesController@show'); /* action show data by id */
+        Route::post("/cancel", 'AllhoActivitiesController@cancel'); /* action accept data by id */
         Route::put("/", 'AllhoActivitiesController@update'); /* action edit data by id */
         Route::delete("/", 'AllhoActivitiesController@destroy'); /* action delete data by id */
     });

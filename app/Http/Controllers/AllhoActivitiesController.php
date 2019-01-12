@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Core\Handlers\AddAllhoActivitiesHandler;
 use App\Core\Handlers\UpdateAllhoActivitiesHandler;
 use App\Core\Handlers\DeleteAllhoActivitiesHandler;
+use App\Core\Handlers\CancelAllhoActivitiesHandler;
 use App\Core\Readers\AllhoActivitiesReader;
 use App\Core\Readers\GetAllhoActivitiesReader;
 
@@ -16,6 +17,7 @@ use App\Core\Readers\GoodsConditionReader;
 use App\Core\Readers\KaryawanReader;
 use App\Core\Readers\ProjectReader;
 use App\Core\Readers\AreaReader;
+use App\Core\Readers\CityReader;
 
 
 use Session;
@@ -110,6 +112,10 @@ class AllhoActivitiesController extends ApplicationController
         $dArea = $reader->read();
         $this->returnData['dArea'] = $dArea;
 
+        $reader = new CityReader($request);
+        $dCity = $reader->read();
+        $this->returnData['dCity'] = $dCity;
+
         return view('home', $this->returnData);
       }catch(\Exception $e){
         $msg = $this->resultException($e, $pos);
@@ -177,6 +183,10 @@ class AllhoActivitiesController extends ApplicationController
       $dArea = $reader->read();
       $this->returnData['dArea'] = $dArea;
 
+      $reader = new CityReader($request);
+      $dCity = $reader->read();
+      $this->returnData['dCity'] = $dCity;
+
       return view('home', $this->returnData);
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
@@ -222,6 +232,10 @@ class AllhoActivitiesController extends ApplicationController
       $dArea = $reader->read();
       $this->returnData['dArea'] = $dArea;
 
+      $reader = new CityReader($request);
+      $dCity = $reader->read();
+      $this->returnData['dCity'] = $dCity;
+
       return view('home', $this->returnData);
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
@@ -263,6 +277,21 @@ class AllhoActivitiesController extends ApplicationController
     $pos = "delete";
     try {
       $handler = new DeleteAllhoActivitiesHandler($id);
+      $data = $handler->handle();
+      $this->createAlert("info", $pos." Succeeded");
+
+      return redirect($this->modul);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return redirect($this->modul);
+    }
+  }
+
+  public function cancel(Request $request, $id)
+  {
+    $pos = "Cancel";
+    try {
+      $handler = new CancelAllhoActivitiesHandler($request, $id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 

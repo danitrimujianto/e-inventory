@@ -92,9 +92,10 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">To Area</label>
+                <label for="name">To City</label>
                 <div>
-                  <input type="text" class="form-control" name="toarea_id" id="toarea_id" placeholder="" autocomplete="off" value="{{ optional($data->toarea)->name }}" readonly />
+                  <input type="text" class="form-control needed" name="tocity_name" id="lookup_tocity" value="{{ optional($data->tocity)->name }}" autocomplete="off" readonly/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>

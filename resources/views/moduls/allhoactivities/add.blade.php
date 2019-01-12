@@ -13,8 +13,8 @@
         <input type="hidden" class="" name="recipient_id" id="recipient_id" value="" />
         <input type="hidden" class="" name="delivery_id" id="delivery_id" value="" />
         <input type="hidden" class="" name="project_id" id="project_id" value="" />
-        <input type="hidden" class="" name="fromarea_id" id="fromarea_id" value="" />
-        <input type="hidden" class="" name="toarea_id" id="toarea_id" value="" />
+        <input type="hidden" class="" name="fromcity_id" id="fromcity_id" value="" />
+        <input type="hidden" class="" name="tocity_id" id="tocity_id" value="" />
         <div class="box-body">
           <div class="row">
             <div class="col-md-6">
@@ -75,20 +75,20 @@
               </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="form-group">
-                <label for="name">From Area</label>
+                <label for="name">From City</label>
                 <div>
-                  <input type="text" class="form-control needed" name="fromarea_name" id="lookup_fromarea" value="" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="fromcity_name" id="lookup_fromcity" value="" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">To Area</label>
+                <label for="name">To City</label>
                 <div>
-                  <input type="text" class="form-control needed" name="toarea_name" id="lookup_toarea" value="" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="tocity_name" id="lookup_tocity" value="" autocomplete="off" readonly/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -172,7 +172,7 @@ $(document).ready(function(){
   $("#tambahBaris").click(function(){
     urut++;
     var listTools = $('#listTools');
-    var el ='<tr><td><input type="hidden" class="idTools" name="idTools[]" value="" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="" autocomplete="off"/></td><td>'+$('#conditionList').html()+'</td><td><input type="text" class="form-control merk" value="" id="" readonly /></td><td><input type="text" class="form-control type" value="" id="" readonly/></td><td><input type="text" class="form-control serial_number" value=""  id="" readonly/></td><td><input type="text" class="form-control imei" value="" id="" readonly/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
+    var el ='<tr><td><input type="hidden" class="idTools" name="idTools[]" value="" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="" autocomplete="off"/></td><td>'+$('#conditionList').html()+'</td><td><input type="text" class="form-control merk" value="" id="" readonly /></td><td><input type="text" class="form-control type" value="" id="" readonly/></td><td><input type="text" class="form-control serial_number" value="" /></td><td><input type="text" class="form-control imei" value="" id="" readonly/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
 
 
     var chekEmpty = listTools.find('#item').length;
@@ -205,12 +205,35 @@ $(document).ready(function(){
   		source: function (query, result) {
         $.ajax({
   				url: "/tools/search/mutasi",
-  				data: 'sf=as&sq=' + query,
+  				data: 'sf=items&sq=' + query,
   				dataType: "json",
   				type: "GET",
   				success: function (data) {
     					result($.map(data, function (item) {
     						return item.code+" - "+item.item;
+    					}));
+  				}
+  			});
+  		},
+      afterSelect: function(data){
+
+      }
+  	});
+  });
+
+  var listBarang = {};
+  $('body').on('keyup', '.serial_number', function(){
+    $(this).typeahead({
+  		source: function (query, result) {
+        $.ajax({
+  				url: "/tools/search/mutasi",
+  				data: 'sf=serial_number&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+            // console.log(data);
+    					result($.map(data, function (item) {
+    						return item.serial_number;
     					}));
   				}
   			});
@@ -260,6 +283,8 @@ $(document).ready(function(){
             // console.log(data);
             result($.map(data, function (item) {
               listRecipient[item.name] = item.id;
+              listRecipient[item.name+'-city'] = item.assignmentarea.name;
+              listRecipient[item.name+'-idcity'] = item.assignmentarea.id;
               return item.name;
             }));
           }
@@ -267,6 +292,9 @@ $(document).ready(function(){
       },
       afterSelect: function(data){
         $("#recipient_id").val(listRecipient[data]);
+        $("#lookup_tocity").val(listRecipient[data+'-city']);
+        $("#tocity_id").val(listRecipient[data+'-idcity']);
+        // alert(listRecipient[data+'-city']);
       }
     });
   });
@@ -346,27 +374,28 @@ $(document).ready(function(){
     });
   });
 
-  var listToArea = {};
-  $('body').on('keyup', '#lookup_toarea', function(){
+  var listToCity = {};
+  $('body').on('keyup', '#lookup_tocity', function(){
+    // alert('asd');
     $(this).typeahead({
       source: function (query, result) {
         // alert('asd');
         $.ajax({
-          url: "/area/search",
+          url: "/city/search",
           data: 'sf=name&sq=' + query,
           dataType: "json",
           type: "GET",
           success: function (data) {
             // console.log(data);
             result($.map(data, function (item) {
-              listToArea[item.name] = item.id;
+              listToCity[item.name] = item.id;
               return item.name;
             }));
           }
         });
       },
       afterSelect: function(data){
-        $("#toarea_id").val(listToArea[data]);
+        $("#tocity_id").val(listToCity[data]);
       }
     });
   });
@@ -385,6 +414,34 @@ $(document).ready(function(){
         success: function (data) {
 
           el.find('.idTools').val(data.id);
+          el.find('.merk').val(data.merk);
+          el.find('.type').val(data.type);
+          el.find('.serial_number').val(data.serial_number);
+          el.find('.imei').val(data.imei);
+
+        }
+      });
+    } else {
+      // Nothing is active so it is a new value (or maybe empty value)
+    }
+  });
+
+  $('body').on('change', '.serial_number', function(){
+  // alert(code);
+    var current = $(this).typeahead("getActive");
+    if (current) {
+      var code = current.split("-")[0].trim();
+      var el = $(this).parent('td').parent('tr');
+      // alert(code);
+      $.ajax({
+        url: "/tools/select",
+        data: 'sf=serial_number&sq=' + code,
+        dataType: "json",
+        type: "GET",
+        success: function (data) {
+
+          el.find('.idTools').val(data.id);
+          el.find('.SearchEl').val(data.code+" - "+data.item);
           el.find('.merk').val(data.merk);
           el.find('.type').val(data.type);
           el.find('.serial_number').val(data.serial_number);

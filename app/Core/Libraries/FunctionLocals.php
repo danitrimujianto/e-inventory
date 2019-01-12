@@ -20,7 +20,7 @@ class FunctionLocals {
         $ret = '<span class="badge bg-green">Admin Approved</span>';
         }
     	}elseif($obj == "2"){
-    		$ret = '<span class="badge bg-green">Accepted</span>';
+      $ret = '<span class="badge bg-green">Admin Approved</span>';
     	}elseif($obj == "98"){
     		$ret = '<span class="badge bg-red">Canceled</span>';
     	}elseif($obj == "99"){
@@ -41,6 +41,15 @@ class FunctionLocals {
        $ret = '<span class="badge bg-red">Canceled</span>';
      }elseif($obj == "99"){
        $ret = '<span class="badge bg-red">Rejected</span>';
+     }
+
+     return $ret;
+    }
+
+    public static function checkRecipient($obj) {
+      $ret = "";
+     if(!empty($obj)){
+       $ret = '<span class="badge bg-green">Accepted</span>';
      }
 
      return $ret;

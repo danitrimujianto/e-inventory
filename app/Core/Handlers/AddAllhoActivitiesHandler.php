@@ -34,17 +34,19 @@ class AddAllhoActivitiesHandler implements Handler
         $sender = ($usertype != 1 ? Auth::user()->karyawan_id : $request->sender_id);
         $status = (($usertype == 2 || $usertype == 1) ? "1" : "0");
         $type = (($usertype == 2 || $usertype == 1) ? "office" : "user");
-
+        if(!empty($request->sender_id)){ $type = "user"; }
         $kode = $this->kode();
 
         $tab = new AllhoActivities();
         $tab->tgl = HelpMe::tgl_indo_to_sql($request->tgl);
         $tab->delivery_id = $request->delivery_id;
         // $tab->goods_condition_id = $request->goods_condition_id;
-        $tab->fromarea_id = $request->fromarea_id;
-        $tab->toarea_id = $request->toarea_id;
+        // $tab->fromarea_id = $request->fromarea_id;
+        // $tab->toarea_id = $request->toarea_id;
         $tab->recipient_id = $request->recipient_id;
         $tab->project_id = $request->project_id;
+        $tab->fromcity_id = $request->fromcity_id;
+        $tab->tocity_id = $request->tocity_id;
         $tab->outgoing_no = $kode;
         $tab->receipt_no = $request->receipt_no;
         $tab->sender_id = $sender;

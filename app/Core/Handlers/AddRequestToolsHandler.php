@@ -41,6 +41,8 @@ class AddRequestToolsHandler implements Handler
         $tab = new PurchaseRequest();
         $tab->tanggal = HelpMe::tgl_indo_to_sql($request->tanggal);
         $tab->karyawan_id = $request->karyawan_id;
+        $tab->due_date = HelpMe::tgl_indo_to_sql($request->due_date);
+        $tab->description = $request->description;
         $tab->type = $type;
         $tab->pr_no = $kode;
         $tab->status = '0';
