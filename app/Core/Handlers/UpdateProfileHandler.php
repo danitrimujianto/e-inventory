@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 use HelpMe;
-
+use Storage;
 class UpdateProfileHandler implements Handler
 {
     private $request;
@@ -33,7 +33,7 @@ class UpdateProfileHandler implements Handler
         $karyawan_id = (!empty(Auth::user()->karyawan_id) ? Auth::user()->karyawan_id : null);
 
         if($request->file('avatar')){
-          Storage::delete($request->file_lama);
+          if(Storage::exists($request->file_lama)){ Storage::delete($request->file_lama); }
           $info = pathinfo($request->file('avatar')->getClientOriginalName());
           $ext = $info['extension'];
           /* proses upload file */
