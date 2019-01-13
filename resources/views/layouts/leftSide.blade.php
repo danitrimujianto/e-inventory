@@ -195,6 +195,44 @@ $usertype = Auth::user()->usertype_id;
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
+      @elseif($usertype == 5)
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Handover</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <!-- <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li> -->
+          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/alatkaryawan">
+          <i class="fa fa-th"></i> <span>Employee Tools</span>
+        </a>
+      </li>
+      <li>
+        <a href="/requesttools">
+          <i class="fa fa-th"></i> <span>Request New Tools</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Report</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="/rep/mutasi"><i class="fa fa-ellipsis-v"></i> Mutasi Tools Karyawan</a></li>
+          <li><a href="/rep/newtools"><i class="fa fa-ellipsis-v"></i> Pengajuan Tools Baru</a></li>
+          <li><a href="/rep/alatkaryawan"><i class="fa fa-ellipsis-v"></i> Data Alat Karyawan</a></li>
+          <li><a href="/rep/service"><i class="fa fa-ellipsis-v"></i> Service</a></li>
+          <li><a href="/rep/stoktools"><i class="fa fa-ellipsis-v"></i> Stok Tools</a></li>
+        </ul>
+      </li>
       @endif
     </ul>
   </section>
