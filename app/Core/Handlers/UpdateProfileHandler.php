@@ -39,7 +39,7 @@ class UpdateProfileHandler implements Handler
           /* proses upload file */
           $avatarImg = $request->file('avatar');
           $avatar = $avatarImg->getClientOriginalName();
-          $avatar = 'avatar_'.$request->email.'.'.$ext;
+          $avatar = 'avatar_'.bcrypt($request->id).str_replace('/','',$avatar);
           $PathAvatar = $avatarImg->storeAs('avatars', $avatar);
         }else{
           $PathAvatar = $request->file_lama;
