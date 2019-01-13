@@ -40,6 +40,7 @@
             <th>Date</th>
             <th>Outgoing No</th>
             <th>From</th>
+            @if(Auth::user()->usertype_id != 4)<th>To</th>@endif
             <th>Delivery</th>
             <th>Project</th>
             <th>From City</th>
@@ -52,6 +53,9 @@
             <td>{{ HelpMe::tgl_sql_to_indo($d->tgl) }}</td>
             <td>{{ $d->outgoing_no }}</td>
             <td>@if($d->type == 'office') {{ ucwords($d->type) }} @else {{ optional($d->sender)->name }} @endif</td>
+            @if(Auth::user()->usertype_id != 4)
+            <td>{{ optional($d->karyawan)->name }}</td>
+            @endif
             <td>{{ optional($d->delivery)->name }}</td>
             <td>{{ optional($d->project)->name }}</td>
             <td>{{ optional($d->fromcity)->name }}</td>
