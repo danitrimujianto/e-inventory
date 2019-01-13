@@ -64,7 +64,7 @@ $price = (Auth::user()->usertype_id == 4 ? false : true);
             @endif
           </tr>
           @foreach($data AS $d)
-          <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
+          <tr class="" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
             <td>{{ optional($d->tools)->serial_number }}</td>
