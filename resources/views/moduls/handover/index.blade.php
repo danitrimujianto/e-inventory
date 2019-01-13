@@ -50,7 +50,7 @@
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
-            <td><?php echo HelpLocal::checkStatusAllHo($d->status, $d->type) ?></td>
+            <td><?php echo HelpLocal::checkAdminStatus($d->status, $d->type) ?></td>
             <td><?php echo HelpLocal::checkRecipient($d->accepted_date) ?></td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->tgl) }}</td>
             <td>{{ $d->outgoing_no }}</td>

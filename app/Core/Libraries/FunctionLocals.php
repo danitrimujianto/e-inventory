@@ -20,7 +20,7 @@ class FunctionLocals {
         $ret = '<span class="badge bg-green">Admin Approved</span>';
         }
     	}elseif($obj == "2"){
-      $ret = '<span class="badge bg-green">Admin Approved</span>';
+      $ret = '<span class="badge bg-green">Accepted</span>';
     	}elseif($obj == "98"){
     		$ret = '<span class="badge bg-red">Canceled</span>';
     	}elseif($obj == "99"){
@@ -28,6 +28,19 @@ class FunctionLocals {
     	}
 
     	return $ret;
+    }
+
+    public static function checkAdminStatus($obj, $type){
+      $ret = "";
+      if($obj >= 1){
+        if($type == "office"){
+            $ret = '<span class="badge bg-grey">Pending</span>';
+        }else{
+          $ret = '<span class="badge bg-green">Admin Approved</span>';
+        }
+      }
+
+      return $ret;
     }
 
     public static function checkPurchaseRequest($obj, $type) {
