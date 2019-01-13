@@ -70,17 +70,14 @@
               </select>
             </div>
           </div>
+
           <div class="form-group">
             <label for="name">Assignment Area</label>
             <div>
-              <select class="form-control" name="assignmentarea_id" id="assignmentarea_id" disabled>
-                <option value="">-- Choose Assignment --</option>
-                @foreach($dCity AS $city)
-                  <option value="{{ $dCity->id }}" @if($dCity->id == $data->assignmentarea_id) selected @endif>{{ $dCity->name }}</option>
-                @endforeach
-              </select>
+              <input type="text" class="form-control" name="assignmentarea_id" id="assignmentarea_id" placeholder="" autocomplete="off" value="{{ $data->assignmentarea->name }}" disabled>
             </div>
           </div>
+          
           <div class="form-group">
             <label for="name">Phone Number</label>
             <div>

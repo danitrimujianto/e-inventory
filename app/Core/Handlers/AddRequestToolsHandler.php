@@ -1,6 +1,7 @@
 <?php
 namespace App\Core\Handlers;
 
+use App\User;
 use App\PurchaseRequest;
 use App\PurchaseRequestDetail;
 use App\Core\Handler;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 use HelpMe;
+use Mail;
 
 class AddRequestToolsHandler implements Handler
 {
@@ -68,6 +70,15 @@ class AddRequestToolsHandler implements Handler
         }
         // dd($request->price);
         if($isTool) $bulkTools = PurchaseRequestDetail::insert($tools);
+
+        $user = User::where('id', 3)->first();
+        // $emails = array($user['email']);
+        // foreach($user AS $val){
+        //   array_push($emails, $val->email);
+        // }
+
+        // dd($emails);
+        $sendmail = $this->sendmail($user['email'], $tab);
         return $tab;
     }
 
@@ -91,5 +102,15 @@ class AddRequestToolsHandler implements Handler
 
       $new_no = $prefix.$new_no.'/'.$bln.'/'.substr($thn, 2, 2);
       return $new_no;
+    }
+
+    private function sendmail($email, $data)
+    {
+      Mail::send('emails.purchase_request', $data, function($message) use ($email){
+        $message->subject('Purchase Request');
+        $message->from('info@sinergitelecom.net', 'SINERGI TELECOM');
+        $message->to($email);
+      });
+      // var_dump( Mail:: failures());
     }
 }
