@@ -1,12 +1,12 @@
-@section('title', 'Data Alat Karyawan')
+@section('title', 'Report Employee Tools')
   <!-- Table row -->
   <div class="row">
-    <div class="col-xs-12 table-responsive">
-      <table class="table table-striped">
+    <div class="col-xs-12">
+      <table class="table table-striped" style=" width: 100%; ">
         <thead>
         <tr>
-          <th colspan="14"><h2>Data Alat Karyawan</h2></th>
-          <th style=" text-align:right;">Print date: {{ date('d/m/Y') }}</th>
+          <th colspan="13"><h2>@yield('title')</h2></th>
+          <th colspan="2" style=" text-align:right;">Print date: {{ date('d/m/Y') }}</th>
         </tr>
         <tr style="">
           <th>NO.</th>
@@ -34,18 +34,18 @@
         @php $no++; @endphp
         <tr>
           <td>{{ $no.'.' }}</td>
-          <td>{{ $d->tools->code }}</td>
-          <td>{{ $d->tools->item }}</td>
-          <td>{{ $d->tools->merk }}</td>
-          <td>{{ $d->tools->type }}</td>
-          <td>{{ $d->tools->serial_number }}</td>
-          <td>{{ $d->tools->imei }}</td>
-          <td>{{ $d->handover->toarea->name }}</td>
-          <td>{{ $d->karyawan->assignmentarea->name }}</td>
-          <td>{{ $d->handover->project->name }}</td>
-          <td>{{ $d->karyawan->id_karyawan }}</td>
-          <td>{{ $d->karyawan->name }}</td>
-          <td>{{ $d->karyawan->position->name }}</td>
+          <td>{{ optional($d->tools)->code }}</td>
+          <td>{{ optional($d->tools)->item }}</td>
+          <td>{{ optional($d->tools)->merk }}</td>
+          <td>{{ optional($d->tools)->type }}</td>
+          <td>{{ optional($d->tools)->serial_number }}</td>
+          <td>{{ optional($d->tools)->imei }}</td>
+          <td>{{ optional($d->handover->toarea)->name }}</td>
+          <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
+          <td>{{ optional($d->handover->project)->name }}</td>
+          <td>{{ optional($d->karyawan)->id_karyawan }}</td>
+          <td>{{ optional($d->karyawan)->name }}</td>
+          <td>{{ optional($d->karyawan->position)->name }}</td>
           <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
           <td>{{ optional($d->condition)->name }}</td>
           <!-- <td>{{ HelpMe::tgl_sql_to_indo($d->tools->date) }}</td>

@@ -446,3 +446,56 @@ Route::middleware('auth')->prefix("/service")->group(function() {
         Route::delete("/", 'ServiceController@destroy'); /* action delete data by id */
     });
 });
+
+/* Router Report */
+Route::middleware('auth')->prefix("/rephandover")->group(function() {
+  Route::get("/", 'ReportHandoverController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportHandoverController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportHandoverController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportHandoverController@excel'); /* action get data by id */
+  });
+});
+
+Route::middleware('auth')->prefix("/repreqtools")->group(function() {
+  Route::get("/", 'ReportReqToolsController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportReqToolsController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportReqToolsController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportReqToolsController@excel'); /* action get data by id */
+  });
+});
+
+Route::middleware('auth')->prefix("/repemployeetools")->group(function() {
+  Route::get("/", 'ReportEmployeeToolsController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportEmployeeToolsController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportEmployeeToolsController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportEmployeeToolsController@excel'); /* action get data by id */
+  });
+});
+
+Route::middleware('auth')->prefix("/repservice")->group(function() {
+  Route::get("/", 'ReportServiceController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportServiceController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportServiceController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportServiceController@excel'); /* action get data by id */
+  });
+});
+
+Route::middleware('auth')->prefix("/repstoktools")->group(function() {
+  Route::get("/", 'ReportStokToolsController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportStokToolsController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportStokToolsController@print'); /* action get data by id */
+  Route::get("/print", 'ReportStokToolsController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportStokToolsController@excel'); /* action get data by id */
+      Route::get("/excel", 'ReportStokToolsController@excel'); /* action get data by id */
+  });
+});

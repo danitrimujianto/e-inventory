@@ -73,11 +73,11 @@ $usertype = Auth::user()->usertype_id;
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/rep/mutasi"><i class="fa fa-ellipsis-v"></i> Mutasi Tools Karyawan</a></li>
-          <li><a href="/rep/newtools"><i class="fa fa-ellipsis-v"></i> Pengajuan Tools Baru</a></li>
-          <li><a href="/rep/alatkaryawan"><i class="fa fa-ellipsis-v"></i> Data Alat Karyawan</a></li>
-          <li><a href="/rep/service"><i class="fa fa-ellipsis-v"></i> Service</a></li>
-          <li><a href="/rep/stoktools"><i class="fa fa-ellipsis-v"></i> Stok Tools</a></li>
+          <li><a href="/rephandover"><i class="fa fa-ellipsis-v"></i> Handover</a></li>
+          <li><a href="/repreqtools"><i class="fa fa-ellipsis-v"></i> Request New Tools</a></li>
+          <li><a href="/repemployeetools"><i class="fa fa-ellipsis-v"></i> Employee Tools</a></li>
+          <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Service</a></li>
+          <li><a href="/repstoktools"><i class="fa fa-ellipsis-v"></i> Tool Stock</a></li>
         </ul>
       </li>
       <li class="treeview">

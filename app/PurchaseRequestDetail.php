@@ -12,5 +12,5 @@ class PurchaseRequestDetail extends Model
     {
       return $this->belongsTo('App\PurchaseRequest', 'purchase_request_id');
     }
-    
+
 }

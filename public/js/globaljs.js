@@ -112,6 +112,20 @@ $(document).ready(function(){
       document.fGlobal.submit();
   });
 
+  //excel report button
+  $("#ReportExcelButton").click(function(){
+      document.fReport.action="/"+modulPage+"/export/excel";
+      document.fReport.target="_blank";
+      document.fReport.submit();
+  });
+
+  //print report button
+  $("#ReportPrintButton").click(function(){
+      document.fReport.action="/"+modulPage+"/print";
+      document.fReport.target="_blank";
+      document.fReport.submit();
+  });
+
   //upload button
   $(".showUploadButton").click(function(){
     $('.fileArea').hide();
