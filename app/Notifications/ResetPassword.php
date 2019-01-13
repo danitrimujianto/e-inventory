@@ -43,7 +43,7 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         $subject = sprintf("[%s] %s", config('app.name'), "Reset Password");
-        return (new Mailable($this->token, $notifiable)->subjeect($subject)->to($notifiable->email));
+        return (new Mailable($this->token, $notifiable))->subject($subject)->to($notifiable->email);
         // return (new MailMessage)
         //             ->line('The introduction to the notification.')
         //             ->action('Notification Action', url('/'))
