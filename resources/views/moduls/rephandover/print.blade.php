@@ -48,6 +48,7 @@
           <td>{{ optional($d->allhoactivities->project)->name }}</td>
           <td>{{ optional($d->allhoactivities->fromcity)->name }}</td>
           <td>{{ optional($d->allhoactivities->tocity)->name }}</td>
+        </tr>
         @endforeach
         </tbody>
       </table>

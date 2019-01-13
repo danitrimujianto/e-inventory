@@ -36,6 +36,7 @@
           <td>{{ $d->quantity }}</td>
           <td style=" text-align: right; ">{{ HelpMe::cost2($d->price) }}</td>
           <td style=" text-align: right; ">{{ HelpMe::cost2($d->total) }}</td>
+        </tr>
         @endforeach
         </tbody>
       </table>
