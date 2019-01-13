@@ -20,6 +20,21 @@ Route::prefix("/password")->group(function() {
 
 });
 
+/* Router Profile */
+Route::middleware('auth')->prefix("/profile")->group(function() {
+    Route::get("/", 'ProfileController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/developer/edit/{id}")->group(function() {
+      Route::get("/", 'ProfileController@editDeveloper'); /* action insert or add data to system*/
+      Route::put("/", 'ProfileController@updateDeveloper'); /* action insert or add data to system*/
+    });
+
+    Route::middleware('auth')->prefix("/edit/{id}")->group(function() {
+        Route::get("/", 'ProfileController@edit'); /* action get data by id */
+        Route::put("/", 'ProfileController@update'); /* action edit data by id */
+    });
+});
+
 /* Router Modal */
 Route::middleware('auth')->prefix("/modal")->group(function() {
     Route::get("/reject", 'ModalController@reject'); /* action get list of developers */

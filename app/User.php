@@ -34,6 +34,11 @@ class User extends Authenticatable
       return $this->belongsTo('App\TipeUser', 'usertype_id');
     }
 
+    public function karyawan()
+    {
+      return $this->belongsTo('App\Karyawan', 'karyawan_id');
+    }
+
     public function sendPasswordResetNotification($token)
     {
 

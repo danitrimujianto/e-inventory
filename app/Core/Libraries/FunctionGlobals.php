@@ -3,6 +3,7 @@ namespace App\Core\Libraries;
 
 use Illuminate\Support\Facades\DB;
 
+use Storage;
 
 class FunctionGlobals {
     /**
@@ -583,7 +584,9 @@ class FunctionGlobals {
     {
       if(empty($obj))
       {
-        $obj = 'dist/img/user-icon.jpg';
+        $obj = asset('/dist/img/user-icon.jpg');
+      }else{
+        $obj = Storage::url($obj);
       }
 
       return $obj;

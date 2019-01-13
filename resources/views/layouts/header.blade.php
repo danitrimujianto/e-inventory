@@ -27,7 +27,7 @@
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <!-- <img src="" class="img-circle" alt="User Image"> -->
+              <img src="{{ HelpMe::cekImg(Auth::user()->avatar) }}" class="img-circle" alt="User Image">
               <p>
                 {{ ucwords(Auth::user()->name) }}
               </p>

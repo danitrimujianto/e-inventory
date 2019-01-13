@@ -20,12 +20,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style=" background-color: #c51ae2;">
+<body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" >
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style=" background-color: #c51ae2;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    PT. Sinergi AITIKOM
+                <a class="navbar-brand" href="{{ url('/') }}" style=" color: #fff; font-weight: bold; ">
+                    <img src="{{ asset('/dist/img/inventory-icon-white.png') }}" style=" width: 50px; height: 50px; "> e-INVENTORY | PT. Sinergi AITIKOM
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -41,8 +41,8 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <li class="nav-item" >
+                                <a class="nav-link" href="{{ route('login') }}" style=" color: #fff; font-weight: bold; ">{{ __('Login') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
