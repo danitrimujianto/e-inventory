@@ -33,6 +33,7 @@ class UpdateProfileHandler implements Handler
         $karyawan_id = (!empty(Auth::user()->karyawan_id) ? Auth::user()->karyawan_id : null);
 
         if($request->file('avatar')){
+          Storage::delete($request->file_lama);
           $info = pathinfo($request->file('avatar')->getClientOriginalName());
           $ext = $info['extension'];
           /* proses upload file */
@@ -40,12 +41,6 @@ class UpdateProfileHandler implements Handler
           $avatar = $avatarImg->getClientOriginalName();
           $avatar = 'avatar_'.$request->email.'.'.$ext;
           $PathAvatar = $avatarImg->storeAs('avatars', $avatar);
-
-          /* file lama pindah ke sampah */
-          // $moveTrash = new TrashFile;
-          // $moveTrash->file = $request->file_lama;
-          // $moveTrash->from = 'tb_proyek';
-          // $moveTrash->save();
         }else{
           $PathAvatar = $request->file_lama;
         }

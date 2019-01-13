@@ -84,7 +84,7 @@ $search = "";
               <input type="text" class="form-control" name="name" id="name" value="{{ $data->name }}" placeholder="" autocomplete="off">
             </div>
           </div>
-          @if(Auth::user()->usertype_id)
+          @if(Auth::user()->usertype_id != 1)
           <div class="form-group">
             <label for="phone">Phone Number</label>
             <div>
