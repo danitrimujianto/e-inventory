@@ -25,6 +25,14 @@ class AddRequestToolsHandler implements Handler
     {
         $request = $this->request;
         $data = $this->saveDB($request);
+        $der = [];
+        $user = User::where('usertype_id', 3)->get();
+        $emails = array();
+        foreach($user AS $val){
+          array_push($emails, $val->email);
+        }
+
+        $sendmail = $this->sendmail($emails, $der);
         return $data;
     }
 
@@ -71,14 +79,8 @@ class AddRequestToolsHandler implements Handler
         // dd($request->price);
         if($isTool) $bulkTools = PurchaseRequestDetail::insert($tools);
 
-        $user = User::where('id', 3)->first();
-        // $emails = array($user['email']);
-        // foreach($user AS $val){
-        //   array_push($emails, $val->email);
-        // }
 
         // dd($emails);
-        $sendmail = $this->sendmail($user['email'], $tab);
         return $tab;
     }
 
