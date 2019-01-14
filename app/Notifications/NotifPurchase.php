@@ -20,7 +20,7 @@ class NotifPurchase extends Notification
      public $token;
     public function __construct($data)
     {
-      $this->token = $data;
+      $this->data = $data;
     }
 
     /**
@@ -40,8 +40,9 @@ class NotifPurchase extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable, $data)
+    public function toMail($notifiable)
     {
+      $data = $this->data;
       $subject = "Purchase Request";
       // $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
       return (new Mailable($notifiable, $data))->subject($subject)->to($notifiable->email);
