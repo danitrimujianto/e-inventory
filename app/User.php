@@ -47,10 +47,10 @@ class User extends Authenticatable
 
     }
 
-    public function NotifPurchase($data)
+    public function NotifPurchase($data, $email)
     {
 
-    $this->notify(new NotifPurchase($data));
+    $this->notify(new NotifPurchase($data, $email));
 
     }
 }
