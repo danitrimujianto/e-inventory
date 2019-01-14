@@ -21,7 +21,6 @@ class AddRequestToolsHandler implements Handler
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->token = $token;
     }
 
     public function handle()
