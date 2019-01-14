@@ -43,7 +43,7 @@ class NotifPurchase extends Notification
     public function toMail($notifiable, $data)
     {
       $subject = "Purchase Request";
-      $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
+      // $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
       return (new Mailable($notifiable, $data))->subject($subject)->to($notifiable->email);
     }
 
