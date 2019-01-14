@@ -8,9 +8,11 @@ use App\Core\Handler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 use DB;
 use HelpMe;
 use Mail;
+use Notifiable;
 
 class AddRequestToolsHandler implements Handler
 {
@@ -19,6 +21,7 @@ class AddRequestToolsHandler implements Handler
     public function __construct(Request $request)
     {
         $this->request = $request;
+        $this->token = $token;
     }
 
     public function handle()
@@ -29,10 +32,11 @@ class AddRequestToolsHandler implements Handler
         $user = User::where('usertype_id', 3)->get();
         $emails = array();
         foreach($user AS $val){
-          array_push($emails, $val->email);
+          $sendmail = $val->NotifPurchase($der);
         }
 
-        $sendmail = $this->sendmail($emails, $der);
+        // $sendmail = $this->notify(new NotifPurchase($this->token));
+        // $sendmail = $this->sendmail($emails, $der);
         return $data;
     }
 

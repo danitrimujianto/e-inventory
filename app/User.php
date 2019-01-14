@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
+use App\Notifications\NotifPurchase as NotifPurchase;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,6 +44,13 @@ class User extends Authenticatable
     {
 
     $this->notify(new ResetPasswordNotification($token));
+
+    }
+
+    public function NotifPurchase($data)
+    {
+
+    $this->notify(new NotifPurchase($data));
 
     }
 }
