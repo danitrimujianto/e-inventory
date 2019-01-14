@@ -18,12 +18,9 @@ class NotifPurchase extends Notification
      * @return void
      */
      public $token;
-     public $data;
-     public $email;
-    public function __construct($data, $email)
+    public function __construct($data)
     {
       $this->data = $data;
-        $this->email = $email;
     }
 
     /**
@@ -48,7 +45,7 @@ class NotifPurchase extends Notification
       $data = $this->data;
       $subject = "Purchase Request";
       // $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
-      return (new Mailable($notifiable, $data))->subject($subject)->to($this->email);
+      return (new Mailable($notifiable, $data))->subject($subject)->to($notifiable->email);
     }
 
     /**
