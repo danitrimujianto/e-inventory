@@ -410,6 +410,22 @@ Route::middleware('auth')->prefix("/alatkaryawan")->group(function() {
     });
 });
 
+/* Router Other Employee Tool */
+Route::middleware('auth')->prefix("/otheremployeetools")->group(function() {
+    Route::get("/", 'OtherEmployeeToolsController@index'); /* action get list of developers */
+    Route::get("/renew", 'OtherEmployeeToolsController@renew'); /* action get list of developers */
+    Route::get("/print", 'OtherEmployeeToolsController@print'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/export")->group(function() {
+      Route::get("/excel", 'OtherEmployeeToolsController@excel'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'OtherEmployeeToolsController@edit'); /* action get data by id */
+        Route::get("/detail", 'OtherEmployeeToolsController@show'); /* action show data by id */
+    });
+});
+
 /* Router Request Tools */
 Route::middleware('auth')->prefix("/requesttools")->group(function() {
     Route::get("/", 'RequestToolsController@index'); /* action get list of developers */

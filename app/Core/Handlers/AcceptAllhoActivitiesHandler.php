@@ -34,14 +34,14 @@ class AcceptAllhoActivitiesHandler implements Handler
         if($usertype == "2"){
           $tab->approved_date = date("Y-m-d H:i:s");
           $tab->status = "1";
-        }elseif($usertype == "4"){
+        }elseif($usertype == "4" || $usertype == "5"){
           $tab->accepted_date = date("Y-m-d H:i:s");
           $tab->status = "2";
         }
         $tab->save();
 
 
-        if($usertype == "4")
+        if($usertype == "4" || $usertype == "5")
         {
           $detail = AllhoActivitiesDetail::where("allho_activities_id", '=', $id)->select('tools_id', 'goods_condition_id');
           // dd($detail);

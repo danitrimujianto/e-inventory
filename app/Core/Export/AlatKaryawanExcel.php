@@ -26,8 +26,41 @@ class AlatKaryawanExcel implements FromView
     {
       $req = $this->request;
 
-        $reader = new AlatKaryawanReader($req);
-        $data = $reader->read();
+      $data = new ToolsKaryawan;
+      
+      if(Auth::user()->usertype_id == 4 || Auth::user()->usertype_id == 5){
+        $data = $data->where('karyawan_id', Auth::user()->karyawan_id);
+      }
+
+      if(!empty($sq))
+      {
+        if($sf == "item")
+        {
+          $data = $data->whereHas('tools', function($q) use ($sq){
+            $q->where('item', 'like', '%'.$sq.'%');
+          });
+        }
+        elseif($sf == "code_tools")
+        {
+          $data = $data->whereHas('tools', function($q) use ($sq){
+            $q->where('code', 'like', '%'.$sq.'%');
+          });
+        }
+        elseif($sf == "karyawan")
+        {
+          $data = $data->whereHas('karyawan', function($q) use ($sq){
+            $q->where('name', 'like', '%'.$sq.'%');
+          });
+        }
+        elseif($sf == "project")
+        {
+          $data = $data->whereHas('project', function($q) use ($sq){
+            $q->where('name', 'like', '%'.$sq.'%');
+          });
+        }
+      }
+
+      $data = $data->orderBy('id','desc')->get();
 
         return view('layouts.print', [
             'data' => $data,

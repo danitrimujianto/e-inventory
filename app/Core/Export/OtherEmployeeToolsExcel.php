@@ -1,37 +1,37 @@
 <?php
-namespace App\Core\Readers;
+namespace App\Core\Export;
 
 use App\ToolsKaryawan;
-use App\Core\Reader;
+use App\Karyawan;
+use App\Core\Readers\AlatKaryawanReader;
+
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 
-class AlatKaryawanReader implements Reader
+class OtherEmployeeToolsExcel implements FromView
 {
-    private $request;
-    /** constructor, fungsinya untuk memudahkan passing variable dari controller */
+    use Exportable;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
     }
 
-    /** method ini digunakan untuk mengeksekusi query */
-    public function read()
+    public function view(): View
     {
-
       $req = $this->request;
-      $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
-      $sq = (isset($req->sq) ? $req->sq : '');
-      $sf = (isset($req->sf) ? $req->sf : '');
-      $usertype = Auth::user()->usertype_id;
 
       $data = new ToolsKaryawan;
 
-      if(Auth::user()->usertype_id == 4 || Auth::user()->usertype_id == 5){
-        $data = $data->where('karyawan_id', Auth::user()->karyawan_id);
-      }
+      $data = $data->where('karyawan_id', '!=', Auth::user()->karyawan_id)->whereHas('karyawan', function($q) use($assignmentarea_id){
+        $q->where('assignmentarea_id', $assignmentarea_id);
+      });
 
       if(!empty($sq))
       {
@@ -61,8 +61,12 @@ class AlatKaryawanReader implements Reader
         }
       }
 
-      $data = $data->orderBy('id','desc')->paginate($batas);
+      $data = $data->orderBy('id','desc')->get();
 
-      return $data;
+        return view('layouts.print', [
+            'data' => $data,
+            'modul' => 'alatkaryawan'
+        ]);
     }
+
 }

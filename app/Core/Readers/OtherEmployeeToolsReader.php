@@ -2,13 +2,14 @@
 namespace App\Core\Readers;
 
 use App\ToolsKaryawan;
+use App\Karyawan;
 use App\Core\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 
-class AlatKaryawanReader implements Reader
+class OtherEmployeeToolsReader implements Reader
 {
     private $request;
     /** constructor, fungsinya untuk memudahkan passing variable dari controller */
@@ -27,11 +28,14 @@ class AlatKaryawanReader implements Reader
       $sf = (isset($req->sf) ? $req->sf : '');
       $usertype = Auth::user()->usertype_id;
 
+      $user = Karyawan::find(Auth::user()->karyawan_id);
+      $assignmentarea_id = $user->assignmentarea_id;
+
       $data = new ToolsKaryawan;
 
-      if(Auth::user()->usertype_id == 4 || Auth::user()->usertype_id == 5){
-        $data = $data->where('karyawan_id', Auth::user()->karyawan_id);
-      }
+      $data = $data->where('karyawan_id', '!=', Auth::user()->karyawan_id)->whereHas('karyawan', function($q) use($assignmentarea_id){
+        $q->where('assignmentarea_id', $assignmentarea_id);
+      });
 
       if(!empty($sq))
       {

@@ -29,7 +29,7 @@ class AllhoActivitiesAcceptReader implements Reader
       // $status = ((Auth::user()->usertype_id == "3") ? "0" :
       //             (Auth::user()->usertype_id == "4") ? "1" : "");
 
-      if($usertype == 4)
+      if($usertype == 4 || $usertype == 5)
       {
         $opr = ">=";
         $status = "1";
@@ -57,7 +57,7 @@ class AllhoActivitiesAcceptReader implements Reader
           $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
         }
       }
-      if(Auth::user()->usertype_id == 4){ $data = $data->where('recipient_id', Auth::user()->karyawan_id); }
+      if(Auth::user()->usertype_id == 4 || Auth::user()->usertype_id == 5){ $data = $data->where('recipient_id', Auth::user()->karyawan_id); }
 
       $data = $data->orderBy('id','desc')->paginate($batas);
 

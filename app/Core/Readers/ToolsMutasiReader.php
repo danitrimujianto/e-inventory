@@ -44,7 +44,7 @@ class ToolsMutasiReader implements Reader
         }
       }
 
-      if($usertype == 4)
+      if($usertype == 4 || $usertype == 5)
       {
         $data = $data->where('karyawan_id', $karyawan_id);
       }elseif($usertype == 2 || $usertype == 1){

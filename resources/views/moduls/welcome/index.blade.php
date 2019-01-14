@@ -7,7 +7,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <h4>Hello {{ Auth::user()->name }}, You currently in Administrator page</h4>
+              <h4>Hello {{ Auth::user()->name }}, You currently in {{ Auth::user()->tipeuser->type_name }} page</h4>
             </div>
             <!-- /.box-body -->
           </div>
