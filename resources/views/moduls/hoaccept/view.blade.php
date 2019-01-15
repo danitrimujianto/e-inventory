@@ -10,7 +10,7 @@
       <!-- form start -->
       <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
-        <input type="hidden" name="id" value="{{ $data->id }}">
+        <input type="hidden" name="id" id="id" value="{{ $data->id }}">
         @csrf
         <div class="box-body">
           @if(Auth::user()->usertype_id == 1)
@@ -170,17 +170,17 @@
 $(document).ready(function(){
   $(".acceptButton").click(function(){
     var modulPage = $("#modulPage").val();
-    var id = $(this).parent('td').parent('tr').attr('data-id');
-    var field = $(this).parent('td').parent('tr').attr('data-field');
-    var value = $(this).parent('td').parent('tr').attr('data-value');
+    var id = $("#id").val();
+    var field = "Outgoing No";
+    var value = $("#outgoing_no").val();
     alertSweet("Are you sure to accept  ", id, field, value, modulPage, 'Accept');
   });
 
   $(".rejectButton").click(function(){
     var modulPage = $("#modulPage").val();
-    var id = $(this).parent('td').parent('tr').attr('data-id');
-    var field = $(this).parent('td').parent('tr').attr('data-field');
-    var value = $(this).parent('td').parent('tr').attr('data-value');
+    var id = $("#id").val();
+    var field = "Outgoing No";
+    var value = $("#outgoing_no").val();
     alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
   });
 });
