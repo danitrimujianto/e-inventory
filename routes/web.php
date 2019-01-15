@@ -515,3 +515,21 @@ Route::middleware('auth')->prefix("/repstoktools")->group(function() {
       Route::get("/excel", 'ReportStokToolsController@excel'); /* action get data by id */
   });
 });
+
+/* Router Email External */
+Route::middleware('auth')->prefix("/emailexternal")->group(function() {
+    Route::get("/", 'EmailExternalController@index'); /* action get list of developers */
+    Route::get("/search", 'EmailExternalController@search'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'EmailExternalController@add'); /* action insert or add data to system*/
+      Route::post("/", 'EmailExternalController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'EmailExternalController@edit'); /* action get data by id */
+        Route::get("/detail", 'EmailExternalController@show'); /* action show data by id */
+        Route::put("/", 'EmailExternalController@update'); /* action edit data by id */
+        Route::delete("/", 'EmailExternalController@destroy'); /* action delete data by id */
+    });
+});

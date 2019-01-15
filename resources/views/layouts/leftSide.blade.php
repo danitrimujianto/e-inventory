@@ -34,6 +34,7 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/warehouse"><i class="fa fa-ellipsis-v"></i> Warehouse</a></li>
           <li><a href="/project"><i class="fa fa-ellipsis-v"></i> Projects</a></li>
           <li><a href="/karyawan"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
+          <li><a href="/emailexternal"><i class="fa fa-ellipsis-v"></i> Email External</a></li>
         </ul>
       </li>
       <li class="treeview">

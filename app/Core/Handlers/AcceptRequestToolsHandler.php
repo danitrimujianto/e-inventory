@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\PurchaseRequest;
+use App\EmailExternal;
 use App\AllhoActivitiesDetail;
 use App\Core\Handler;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 use DB;
 use HelpMe;
+use Notifiable;
 
 class AcceptRequestToolsHandler implements Handler
 {
@@ -38,5 +40,18 @@ class AcceptRequestToolsHandler implements Handler
         $tab->save();
 
         return $tab;
+    }
+
+
+    private function notifFinance($data, $detail)
+    {
+      $returnData['data'] = $data;
+      $returnData['detail'] = $detail;
+      $user = EmailExternal::where('type', 'Finance')->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifPurchase($returnData, $val->email);
+      }
     }
 }
