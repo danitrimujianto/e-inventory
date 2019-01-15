@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 use DB;
 use HelpMe;
 use Mail;
-use Notifiable;
 
 class AddRequestToolsHandler implements Handler
 {

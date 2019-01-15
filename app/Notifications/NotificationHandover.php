@@ -2,13 +2,13 @@
 
 namespace App\Notifications;
 
-use App\Mail\NotifFinancePurchase as Mailable;
+use App\Mail\NotificationHandover as Mailable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NotifFinancePurchase extends Notification
+class NotificationHandover extends Notification
 {
     use Queueable;
 
@@ -47,7 +47,7 @@ class NotifFinancePurchase extends Notification
     {
       $data = $this->data;
       $data['url'] = '';
-      $subject = "[Approved] ".$data['data']->pr_no." Request New Tool";
+      $subject = $data['data']->outgoing_no." Handover Tool";
       // $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
       return (new Mailable($notifiable, $data))->subject($subject)->to($this->email);
     }

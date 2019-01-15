@@ -23,6 +23,9 @@ class AddAllhoActivitiesHandler implements Handler
     {
         $request = $this->request;
         $data = $this->saveDB($request);
+        $detail = $this->getHandoverDetail($data->id);
+        $sendnotif = $this->sendnotif($data, $detail);
+        
         return $data;
     }
 
@@ -91,5 +94,22 @@ class AddAllhoActivitiesHandler implements Handler
 
       $new_no = $prefix.substr($thn, 2, 2).$bln.$new_no;
       return $new_no;
+    }
+
+    private function sendnotif($data, $detail)
+    {
+      $returnData['data'] = $data;
+      $returnData['detail'] = $detail;
+      $user = User::where('usertype_id', 2)->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifHandover($returnData, $val->email);
+      }
+    }
+
+    private function getHandoverDetail($id){
+      $data = AllhoActivitiesDetail::where('allho_activities_id', $id)->get();
+      return $data;
     }
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use App\Notifications\NotifPurchase as NotifPurchase;
+use App\Notifications\NotificationHandover as NotificationHandover;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,6 +52,13 @@ class User extends Authenticatable
     {
 
     $this->notify(new NotifPurchase($data, $email));
+
+    }
+
+    public function NotifHandover($data, $email)
+    {
+
+    $this->notify(new NotificationHandover($data, $email));
 
     }
 }
