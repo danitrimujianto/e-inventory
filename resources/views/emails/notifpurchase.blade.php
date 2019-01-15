@@ -52,7 +52,7 @@ Request details
     <td align="right">{{ HelpMe::cost2($det->price) }}</td>
     <td align="right">{{ HelpMe::cost2($det->total) }}</td>
   </tr>
-  @php $total = $total+$det->price; @endphp
+  @php $total = $total+$det->total; @endphp
   @endforeach
   <tr>
     <td colspan="5" align="right">Total:</td>
