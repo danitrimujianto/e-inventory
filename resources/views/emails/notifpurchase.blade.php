@@ -10,19 +10,25 @@ Position              : {{ optional($data->karyawan->position)->position }}
 Assignment Area       : {{ optional($data->karyawan->assignmentarea)->name }}
 
 Request details
+@component('mail::table')
+    | Laravel       | Table         | Example  |
+    | ------------- |:-------------:| --------:|
+    | Col 2 is      | Centered      | $10      |
+    | Col 3 is      | Right-Aligned | $20      |
+    @endcomponent
+
+@component('mail::table')
 ----------------------------------------------------------------------------
 | Item | Merk   |   Type    |     Quantity    |   Price     |   Subtotal   |
-@component('mail::table')
 @foreach($detail AS $det)
 ----------------------------------------------------------------------------
-| {{ $det->item }} | {{ $det->merk }} | {{ $det->type }} | {{ $det->quantity }} | {{ $det->price }} |
+| {{ $det->item }} | {{ ($det->merk ?? '') }} | {{ $det->type }} | {{ $det->quantity }} | {{ $det->price }} |
 ----------------------------------------------------------------------------
 @php $total = $total+$det->price; @endphp
 @endforeach
-@endcomponent
 |                                                 Total      |     {{ $total }}     |
 ----------------------------------------------------------------------------
-
+@endcomponent
 Please reponse this request.
 
 Thank You,<br>
