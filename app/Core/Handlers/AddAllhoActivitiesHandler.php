@@ -3,6 +3,7 @@ namespace App\Core\Handlers;
 
 use App\AllhoActivities;
 use App\AllhoActivitiesDetail;
+use App\User;
 use App\Core\Handler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class AddAllhoActivitiesHandler implements Handler
         $data = $this->saveDB($request);
         $detail = $this->getHandoverDetail($data->id);
         $sendnotif = $this->sendnotif($data, $detail);
-        
+
         return $data;
     }
 
