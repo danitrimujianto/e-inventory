@@ -1,6 +1,6 @@
 @php $total = '0'; @endphp
 @component('mail::message')
-# Request New Tool
+# Handover Tool
 
 We recieved handover tool from:
 <br>
