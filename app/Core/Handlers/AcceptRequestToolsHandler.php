@@ -26,6 +26,8 @@ class AcceptRequestToolsHandler implements Handler
     {
         $id = $this->id;
         $data = $this->saveDB($id);
+        $detail = $this->getPurchaseDetail($data->id);
+        $sendmail = $this->notifFinance($data, $detail);
         return $data;
     }
 
@@ -42,6 +44,11 @@ class AcceptRequestToolsHandler implements Handler
         return $tab;
     }
 
+    private function getPurchaseDetail($id){
+      $data = PurchaseRequestDetail::where('purchase_request_id', $id)->get();
+
+      return $data;
+    }
 
     private function notifFinance($data, $detail)
     {
