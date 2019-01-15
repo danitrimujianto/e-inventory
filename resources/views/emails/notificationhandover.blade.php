@@ -42,7 +42,7 @@ To:
   <tr>
     <td width="40%">Name</td>
     <td width="1%">:</td>
-    <td>{{ $data->sender->name }}</td>
+    <td>{{ $data->karyawan->name }}</td>
   </tr>
   <tr>
     <td>Project</td>
@@ -91,9 +91,9 @@ List Tools:
     </tbody>
   </table>
 <br><br>
-Please reponse this request.
+Please reponse this handover.
 @component('mail::button', ['url' => $url])
-Response Request
+Response Handover
 @endcomponent
 <br>
 Thank You,<br>
