@@ -13,9 +13,7 @@ Request details
 
 @component('mail::table')
 | Item       | Type         | Merk  | Quantity  | Price  | Subtotal |
-| -----------|:------------:|:-----:|:---------:|:------:|:--------:|
 @foreach($detail AS $det)
-| Col 2 is      | Centered      | $10      |
 | -----------|:------------:|:-----:|:---------:|:------:|:--------:|
 | {{ $det->item }} | {{ ($det->type ?? '') }} | {{ $det->merk }} | {{ $det->quantity }} | {{ HelpMe::cost2($det->price) }} |
 | -----------|:------------:|:-----:|:---------:|:------:|:--------:|
