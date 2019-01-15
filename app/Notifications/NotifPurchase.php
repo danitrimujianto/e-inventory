@@ -46,7 +46,7 @@ class NotifPurchase extends Notification
     public function toMail($notifiable)
     {
       $data = $this->data;
-      $subject = "[".$data->pr_no."] Request New Tools";
+      $subject = "[".$data['data']->pr_no."] Request New Tools";
       // $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
       return (new Mailable($notifiable, $data))->subject($subject)->to($this->email);
     }
