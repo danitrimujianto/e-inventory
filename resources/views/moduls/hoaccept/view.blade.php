@@ -152,7 +152,7 @@
           <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
 
 
-          @if($d->status >= 0 && $d->status < 2)
+          @if($data->status >= 0 && $data->status < 2)
           <button title="" type="button" class="btn btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button>
           <button title="" type="button" class="btn btn-danger pull-right rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
           @endif
