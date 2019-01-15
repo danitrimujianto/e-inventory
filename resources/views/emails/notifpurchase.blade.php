@@ -3,15 +3,38 @@
 # Request New Tools
 
 We recieved request new tools from:
-Name                  : {{ $data->karyawan->name }}
-Project               : {{ optional($data->karyawan->project)->name }}
-Departemen            : {{ optional($data->karyawan->departemen)->name }}
-Position              : {{ optional($data->karyawan->position)->position }}
-Assignment Area       : {{ optional($data->karyawan->assignmentarea)->name }}
-
+<br>
+<table width="100%">
+  <tr>
+    <td>Name</td>
+    <td>:</td>
+    <td>{{ $data->karyawan->name }}</td>
+  </tr>
+  <tr>
+    <td>Project</td>
+    <td>:</td>
+    <td>{{ optional($data->karyawan->project)->name }}</td>
+  </tr>
+  <tr>
+    <td>Departemen</td>
+    <td>:</td>
+    <td>{{ optional($data->karyawan->departemen)->name }}</td>
+  </tr>
+  <tr>
+    <td>Position</td>
+    <td>:</td>
+    <td>{{ optional($data->karyawan->position)->position }}</td>
+  </tr>
+  <tr>
+    <td>Assignment Area</td>
+    <td>:</td>
+    <td>{{ optional($data->karyawan->assignmentarea)->name }}</td>
+  </tr>
+</table>
+<br>
 Request details
-
-<table width="100%" border="1">
+<br>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th>Item</th>
     <th>Type</th>
