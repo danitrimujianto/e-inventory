@@ -27,11 +27,14 @@ class AddRequestToolsHandler implements Handler
     {
         $request = $this->request;
         $data = $this->saveDB($request);
-        $der = [];
+        $detail = $this->getPurchaseDetail($data->id);
+        // dd($data->id);
+        $returnData['data'] = $data;
+        $returnData['detail'] = $detail;
         $user = User::where('usertype_id', 3)->get();
         $emails = array();
         foreach($user AS $val){
-          $sendmail = $val->NotifPurchase($data, $val->email);
+          $sendmail = $val->NotifPurchase($returnData, $val->email);
         }
 
         // $sendmail = $this->notify(new NotifPurchase($this->token));
@@ -85,6 +88,12 @@ class AddRequestToolsHandler implements Handler
 
         // dd($emails);
         return $tab;
+    }
+
+    private function getPurchaseDetail($id){
+      $data = PurchaseRequestDetail::where('purchase_request_id', $id)->get();
+
+      return $data;
     }
 
     private function kode()
