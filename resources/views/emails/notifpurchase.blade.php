@@ -6,7 +6,7 @@ We recieved request new tools from:
 <br>
 <table width="100%" class="table">
   <tr>
-    <td width="5%">Name</td>
+    <td width="15%">Name</td>
     <td width="1%">:</td>
     <td>{{ $data->karyawan->name }}</td>
   </tr>
@@ -34,7 +34,7 @@ We recieved request new tools from:
 <br>
 Request details
 <br>
-<table class="table" width="100%" border="1" cellpadding="0" cellspacing="0">
+<table class="table">
   <tr>
     <th>Item</th>
     <th>Type</th>
