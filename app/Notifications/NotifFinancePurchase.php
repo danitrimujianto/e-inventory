@@ -47,7 +47,7 @@ class NotifFinancePurchase extends Notification
     {
       $data = $this->data;
       $data['url'] = '';
-      $subject = $data['data']->pr_no." Request New Tool";
+      $subject = "[Approved] ".$data['data']->pr_no." Request New Tool";
       // $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
       return (new Mailable($notifiable, $data))->subject($subject)->to($this->email);
     }
