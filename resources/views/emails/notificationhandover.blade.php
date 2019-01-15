@@ -88,11 +88,6 @@ List Tools:
         <td>{{ optional($detail->tools)->imei }}</td>
     </tr>
     @endforeach
-    @if(!$tools)
-    <tr>
-      <td colspan="6" class="text-center">Empty</td>
-    </tr>
-    @endif
     </tbody>
   </table>
 <br><br>
