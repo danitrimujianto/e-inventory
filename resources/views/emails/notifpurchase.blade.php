@@ -34,6 +34,20 @@ We recieved request new tools from:
 <br>
 Request details
 <br>
+<table width="100%" class="table">
+  <tr>
+    <td width="40%">Purchase Nomor</td>
+    <td width="1%">:</td>
+    <td>{{ $data->pr_no }}</td>
+  </tr>
+  <tr>
+    <td>Due Date</td>
+    <td>:</td>
+    <td>{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}</td>
+  </tr>
+</table>
+<br>
+<br>
 <table class="table"  width="100%">
   <tr>
     <th>Item</th>
