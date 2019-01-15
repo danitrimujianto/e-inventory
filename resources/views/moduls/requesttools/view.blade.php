@@ -38,7 +38,7 @@
               <div class="form-group">
                 <label for="name">Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}" readonly />
+                  <input type="text" class="form-control" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}" readonly />
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Dipilih</span>
                 </div>
               </div>
@@ -58,7 +58,7 @@
               <div class="form-group">
                 <label for="name">Due Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="due_date" id="due_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->due_date) }}" readonly />
+                  <input type="text" class="form-control" name="due_date" id="due_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->due_date) }}" readonly />
                 </div>
               </div>
             </div>
@@ -75,6 +75,7 @@
             <h4 class="page-header">Items
               <!-- <button type="button" class="btn btn-primary pull-right btn-xs" id="btnListTools"><i class="fa fa-plus"></i> Add</button> -->
             </h4>
+            <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
                   <th>Item</th>
@@ -116,6 +117,7 @@
                 </tr>
                 </tfooter>
               </table>
+            </div>
           </section>
         </div>
         <!-- /.box-body -->
