@@ -31,7 +31,7 @@ class AddRequestToolsHandler implements Handler
         $user = User::where('usertype_id', 3)->get();
         $emails = array();
         foreach($user AS $val){
-          $sendmail = $val->NotifPurchase($der, $val->email);
+          $sendmail = $val->NotifPurchase($data, $val->email);
         }
 
         // $sendmail = $this->notify(new NotifPurchase($this->token));
