@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\PurchaseRequest;
+use App\PurchaseRequestDetail;
 use App\EmailExternal;
 use App\AllhoActivitiesDetail;
 use App\Core\Handler;
