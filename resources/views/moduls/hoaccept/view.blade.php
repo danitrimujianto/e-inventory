@@ -150,6 +150,12 @@
 
         <div class="box-footer">
           <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
+
+
+          @if($d->status >= 0 && $d->status < 2)
+          <button title="" type="button" class="btn btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button>
+          <button title="" type="button" class="btn btn-danger pull-right rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
+          @endif
         </div>
       </form>
     </div>
@@ -159,3 +165,24 @@
 <div >
 </div>
 <!-- /.row (main row) -->
+@section('scriptAdd')
+<script>
+$(document).ready(function(){
+  $(".acceptButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to accept  ", id, field, value, modulPage, 'Accept');
+  });
+
+  $(".rejectButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
+  });
+});
+</script>
+@endsection
