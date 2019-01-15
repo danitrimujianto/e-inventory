@@ -28,7 +28,7 @@ class AddRequestToolsHandler implements Handler
         $request = $this->request;
         $data = $this->saveDB($request);
         $detail = $this->getPurchaseDetail($data->id);
-        $sendnotif = $this->sendnotif($data, $detail)
+        $sendnotif = $this->sendnotif($data, $detail);
 
         return $data;
     }
