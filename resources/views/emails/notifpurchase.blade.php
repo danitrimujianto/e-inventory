@@ -1,6 +1,6 @@
 @php $total = '0'; @endphp
 @component('mail::message')
-# Request New Tools
+# Request New Tool
 
 We recieved request new tools from:
 <br>
@@ -32,7 +32,7 @@ We recieved request new tools from:
   </tr>
 </table>
 <br>
-Request details
+Request detail
 <br>
 <table width="100%" class="table">
   <tr>
@@ -75,7 +75,10 @@ Request details
 </table>
 <br><br>
 Please reponse this request.
-
+@component('mail::button', ['url' => $url])
+Response Request
+@endcomponent
+<br>
 Thank You,<br>
 {{ config('app.name') }}
 @endcomponent
