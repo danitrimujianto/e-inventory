@@ -28,18 +28,8 @@ class AddRequestToolsHandler implements Handler
         $request = $this->request;
         $data = $this->saveDB($request);
         $detail = $this->getPurchaseDetail($data->id);
-        // dd($data->id);
-        $returnData['data'] = $data;
-        $returnData['detail'] = $detail;
-        $user = User::where('usertype_id', 3)->get();
-        // dd($returnData);
-        $emails = array();
-        foreach($user AS $val){
-          $sendmail = $val->NotifPurchase($returnData, $val->email);
-        }
+        $sendnotif = $this->sendnotif($data, $detail)
 
-        // $sendmail = $this->notify(new NotifPurchase($this->token));
-        // $sendmail = $this->sendmail($emails, $der);
         return $data;
     }
 
@@ -119,13 +109,15 @@ class AddRequestToolsHandler implements Handler
       return $new_no;
     }
 
-    private function sendmail($email, $data)
+    private function sendnotif($data, $detail)
     {
-      Mail::send('emails.purchase_request', $data, function($message) use ($email){
-        $message->subject('Purchase Request');
-        $message->from('info@sinergitelecom.net', 'SINERGI TELECOM');
-        $message->to($email);
-      });
-      // var_dump( Mail:: failures());
+      $returnData['data'] = $data;
+      $returnData['detail'] = $detail;
+      $user = User::where('usertype_id', 3)->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifPurchase($returnData, $val->email);
+      }
     }
 }
