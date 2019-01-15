@@ -10,25 +10,21 @@ Position              : {{ optional($data->karyawan->position)->position }}
 Assignment Area       : {{ optional($data->karyawan->assignmentarea)->name }}
 
 Request details
-@component('mail::table')
-    | Laravel       | Table         | Example  |
-    | ------------- |:-------------:| --------:|
-    | Col 2 is      | Centered      | $10      |
-    | Col 3 is      | Right-Aligned | $20      |
-    @endcomponent
 
 @component('mail::table')
-----------------------------------------------------------------------------
-| Item | Merk   |   Type    |     Quantity    |   Price     |   Subtotal   |
+| Item       | Type         | Merk  | Quantity  | Price  | Subtotal |
+| -----------|:------------:|:-----:|:---------:|:------:|:--------:|
 @foreach($detail AS $det)
-----------------------------------------------------------------------------
-| {{ $det->item }} | {{ ($det->merk ?? '') }} | {{ $det->type }} | {{ $det->quantity }} | {{ $det->price }} |
-----------------------------------------------------------------------------
+| Col 2 is      | Centered      | $10      |
+| -----------|:------------:|:-----:|:---------:|:------:|:--------:|
+| {{ $det->item }} | {{ ($det->type ?? '') }} | {{ $det->merk }} | {{ $det->quantity }} | {{ HelpMe::cost2($det->price) }} |
+| -----------|:------------:|:-----:|:---------:|:------:|:--------:|
 @php $total = $total+$det->price; @endphp
 @endforeach
-|                                                 Total      |     {{ $total }}     |
-----------------------------------------------------------------------------
+|                                 Total      |     {{ HelpMe::cost2($total) }}     |
+| -----------|:------------:|:-----:|:---------:|:------:|:--------:|
 @endcomponent
+
 Please reponse this request.
 
 Thank You,<br>
