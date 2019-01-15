@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Decription</label>
+                <label for="name">Description</label>
                 <div>
                   <textarea class="form-control" name="description" id="description">{{ $data->description }}</textarea>
                 </div>
