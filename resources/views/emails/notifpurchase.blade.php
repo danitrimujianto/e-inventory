@@ -6,7 +6,7 @@ We recieved request new tools from:
 <br>
 <table width="100%" class="table">
   <tr>
-    <td width="20%">Name</td>
+    <td width="40%">Name</td>
     <td width="1%">:</td>
     <td>{{ $data->karyawan->name }}</td>
   </tr>
