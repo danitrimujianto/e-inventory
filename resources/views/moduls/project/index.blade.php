@@ -46,9 +46,9 @@
           @foreach($data AS $d)
           <tr data-id="{{ $d->id }}" data-field="{{ 'Project' }}" data-value="{{ $d->name }}">
             <td>{{ $d->name }}</td>
-            <td>{{ $d->vendor->name }}</td>
-            <td>{{ $d->area->name }}</td>
-            <td>{{ $d->city->name }}</td>
+            <td>{{ optional($d->vendor)->name }}</td>
+            <td>{{ optional($d->area)->name }}</td>
+            <td>{{ optional($d->city)->name }}</td>
             <td>{{ $d->remarks }}</td>
             <td>
               <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button>
