@@ -103,6 +103,14 @@
               </select>
             </div>
           </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="request_tool" id="request_tool" value="1" @if($data->request_tools == 1) checked @endif disabled/>
+                Give access to <strong>Request New Tools</strong>
+              </label>
+            </div>
+          </div>
         </div>
         <!-- /.box-body -->
 

@@ -190,12 +190,14 @@ $usertype = Auth::user()->usertype_id;
           <i class="fa fa-th"></i> <span>Employee Tools</span>
         </a>
       </li>
+      @if(Auth::user()->request_tools == 1)
       <li>
         <a href="/requesttools">
           <i class="fa fa-th"></i> <span>Request New Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
+      @endif
       @elseif($usertype == 5)
       <li class="treeview">
         <a href="#">

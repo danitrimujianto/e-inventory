@@ -38,6 +38,7 @@ class UpdateUserHandler implements Handler
         $tab->name = $request->name;
         $tab->email = $request->email;
         $tab->karyawan_id = $karyawan_id;
+        $tab->request_tools = $request->request_tools;
 
         if(!empty($request->password))
           $tab->password = bcrypt($request->password);

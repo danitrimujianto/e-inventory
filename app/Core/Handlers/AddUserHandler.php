@@ -38,6 +38,7 @@ class AddUserHandler implements Handler
         $tab->name = $request->name;
         $tab->email = $request->email;
         $tab->karyawan_id = $karyawan_id;
+        $tab->request_tools = $request->request_tools;
         $tab->password = bcrypt($request->password);
         $tab->save();
 

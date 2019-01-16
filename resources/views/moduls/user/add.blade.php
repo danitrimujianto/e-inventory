@@ -43,6 +43,14 @@
               <input type="password" class="form-control" name="password" id="password" placeholder="" autocomplete="off">
             </div>
           </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="request_tools" id="request_tools" value="1" />
+                Give access to <strong>Request New Tools</strong>
+              </label>
+            </div>
+          </div>
         </div>
         <!-- /.box-body -->
 

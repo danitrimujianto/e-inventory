@@ -47,6 +47,14 @@
   						<span class="help-block" style=" margin-top:0; margin-bottom: 0; clear:both;">kosongkan bila tidak diganti</span>
             </div>
           </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="request_tools" id="request_tools" value="1" @if($data->request_tools == 1) checked @endif/>
+                Give access to <strong>Request New Tools</strong>
+              </label>
+            </div>
+          </div>
         </div>
         <!-- /.box-body -->
 
