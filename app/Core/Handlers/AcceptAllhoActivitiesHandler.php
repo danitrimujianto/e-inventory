@@ -3,6 +3,7 @@ namespace App\Core\Handlers;
 
 use App\AllhoActivities;
 use App\AllhoActivitiesDetail;
+use App\ToolsKaryawan;
 use App\Core\Handler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,10 +44,9 @@ class AcceptAllhoActivitiesHandler implements Handler
 
         if($usertype == "4" || $usertype == "5")
         {
+          $tools_karyawan = ToolsKaryawan::where('karyawan_id', $tab->recipient_id)->get();
           $detail = AllhoActivitiesDetail::where("allho_activities_id", '=', $id)->select('tools_id', 'goods_condition_id');
-          // dd($detail);
-          // dd($detail->toSql());
-          // $detail->get();
+
           $getDet = $detail->get();
           $total = $getDet->count();
 
@@ -54,7 +54,7 @@ class AcceptAllhoActivitiesHandler implements Handler
 
           $insertQuery = 'INSERT INTO tools_karyawan (allho_activities_id, accepted_date, karyawan_id,tools_id,goods_condition_id) '.$detail->toSql();
           $insertQuery = str_replace(") select ", ") select ".$tab->id.", NOW(), ".$tab->recipient_id.", ", $insertQuery);
-          // dd($insertQuery);
+
           \DB::insert($insertQuery, $bindings);
 
           $updet = 'UPDATE tools SET karyawan_id = CASE id ';
@@ -75,8 +75,11 @@ class AcceptAllhoActivitiesHandler implements Handler
 
           $delExist .= '('.$idExist.')';
           // dd($delExist);
-
-          \DB::insert($delExist);
+          if($tab->type == 'user')
+          {
+            if($tools_karyawan->count() > 0)
+              \DB::insert($delExist);
+          }
         }
 
         return $tab;
