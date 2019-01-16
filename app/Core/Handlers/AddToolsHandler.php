@@ -67,7 +67,7 @@ class AddToolsHandler implements Handler
         $nmr = $tools->urut;
       }
 
-      $code = (+1);
+      $code = ($nmr+1);
 
       if(strlen($code) == 1)
       { $code = '00000'.$code; }
