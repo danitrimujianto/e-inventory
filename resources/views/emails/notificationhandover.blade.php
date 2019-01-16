@@ -10,11 +10,13 @@ We recieved handover tool from:
     <td width="1%">:</td>
     <td>{{ $data->outgoing_no }}</td>
   </tr>
+  @if($data->type == 'user')
   <tr>
     <td width="40%">Name</td>
     <td width="1%">:</td>
-    <td>{{ $data->sender->name }}</td>
+    <td>{{ optional($data->sender)->name }}</td>
   </tr>
+  @endif
   <tr>
     <td>Project</td>
     <td>:</td>
