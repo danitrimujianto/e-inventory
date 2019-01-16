@@ -28,7 +28,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Status</label>-->
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
 				  <div class="col-md-5 col-xs-12">
-  					<select name="sf" class="form-control">
+  					<select name="sf" id="sf" class="form-control">
               <option value="item" @if($sf == "item") {{ 'selected' }} @endif>Item</option>
               <option value="code_tools" @if($sf == "code_tools") {{ 'selected' }} @endif>ID Tools</option>
               <option value="karyawan" @if($sf == "karyawan") {{ 'selected' }} @endif>Karyawan</option>

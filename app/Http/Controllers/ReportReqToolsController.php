@@ -35,9 +35,12 @@ class ReportReqToolsController extends ApplicationController
    */
   public function index(Request $request)
   {
+    $pos = "index";
       $this->theme["page"] = 'index'; //disetiap class dan function controller harus ada
-      $first_date = (isset($_GET['first_date']) ? $_GET['first_date'] : '');
-      $second_date = (isset($_GET['second_date']) ? $_GET['second_date'] : '');
+      $first_date = (isset($_REQUEST['first_date']) ? $_REQUEST['first_date'] : '');
+      $second_date = (isset($_REQUEST['second_date']) ? $_REQUEST['second_date'] : '');
+      $sf = (isset($_GET['sf']) ? $_GET['sf'] : '');
+      $sq = (isset($_GET['sq']) ? $_GET['sq'] : '');
       $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
 
       try {
@@ -51,6 +54,8 @@ class ReportReqToolsController extends ApplicationController
         $this->returnData['second_date'] = $second_date;
         $this->returnData['bts'] = $bts;
         $this->returnData['data'] = $data;
+        $this->returnData['sf'] = $sf;
+        $this->returnData['sq'] = $sq;
         $this->returnData['alert'] = $alert;
 
         return view('home', $this->returnData);

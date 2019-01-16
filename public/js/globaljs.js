@@ -56,6 +56,11 @@ $(document).ready(function(){
   $("#resetFilter").click(function(){
     document.location.href='/'+modulPage;
   });
+  $("#resetFilterReport").click(function(){
+    $("#sf").val("");
+    $("#sq").val("");
+    document.sReport.submit();
+  });
 
   //delete button
   $(".deleteButton").click(function(){

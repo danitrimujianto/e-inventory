@@ -55,8 +55,10 @@ class AlatKaryawanReader implements Reader
         }
         elseif($sf == "project")
         {
-          $data = $data->whereHas('project', function($q) use ($sq){
-            $q->where('name', 'like', '%'.$sq.'%');
+          $data = $data->whereHas('karyawan', function($q) use ($sq){
+            $q->whereHas('project', function($q2) use ($sq){
+              $q2->where('name', 'like', '%'.$sq.'%');
+            });
           });
         }
       }
