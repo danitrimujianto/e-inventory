@@ -25,7 +25,7 @@ class AddAllhoActivitiesHandler implements Handler
         $request = $this->request;
         $data = $this->saveDB($request);
         $detail = $this->getHandoverDetail($data->id);
-        $sendnotif = $this->sendnotif($data, $detail);
+        if($data->type == 'user'){ $sendnotif = $this->sendnotif($data, $detail); }
 
         return $data;
     }
