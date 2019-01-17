@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 
-class SearchKaryawanReader implements Reader
+class ReportKaryawanReader implements Reader
 {
     private $request;
     /** constructor, fungsinya untuk memudahkan passing variable dari controller */
@@ -25,12 +25,12 @@ class SearchKaryawanReader implements Reader
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
 
-      $data = Karyawan::with('assignmentarea')->with('project');
+      $data = new Karyawan;
       if(!empty($sq))
       {
         $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
       }
-      $data = $data->get();
+      $data = $data->orderBy('id', 'desc')->paginate($batas);
       return $data;
     }
 }

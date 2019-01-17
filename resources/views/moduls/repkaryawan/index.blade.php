@@ -3,9 +3,10 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Add New</button>
+        <button class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
         <div class="box-tools">
-          <button class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
+            <button class="btn btn-danger " id="excelButton"><i class="fa fa-file-excel-o"></i> Excel</button>
+            <button class="btn btn-primary " id="printButton"><i class="fa fa-print"></i> Print</button>
         </div>
         <div class="row" id="searchForm" style=" display:none; ">
 				<div class="col-md-12" >
@@ -17,7 +18,9 @@
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
 				  <div class="col-md-5 col-xs-12">
   					<select name="sf" class="form-control">
+              <option value="id_karyawan" @if($sf == "id_karyawan") {{ 'selected' }} @endif>ID Karyawan</option>
               <option value="name" @if($sf == "name") {{ 'selected' }} @endif>Name</option>
+              <option value="email" @if($sf == "email") {{ 'selected' }} @endif>Email</option>
   					</select>
 					</div>
 				  <div class="col-md-5 col-xs-12">
@@ -35,27 +38,29 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
+            <th>ID Employee</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Contact Person</th>
+            <th>Departemen</th>
+            <th>Position</th>
+            <th>Project</th>
+            <!-- <th>Home Area</th> -->
+            <th>Assignment Area</th>
             <th>Phone</th>
-            <th>Date</th>
-            <th>Remarks</th>
-            <th style=" width: 16%; ">Action</th>
+            <!-- <th>Email</th> -->
+            <th>Status</th>
           </tr>
           @foreach($data AS $d)
-          <tr data-id="{{ $d->id }}" data-field="{{ 'Supplier' }}" data-value="{{ $d->name }}">
+          <tr data-id="{{ $d->id }}" data-field="{{ 'Tool' }}" data-value="{{ $d->item }}">
+            <td>{{ $d->id_karyawan }}</td>
             <td>{{ $d->name }}</td>
-            <td>{{ $d->address }}</td>
-            <td>{{ $d->contact_person }}</td>
-            <td>{{ $d->phone }}</td>
-            <td>{{ HelpMe::tgl_sql_to_indo($d->date) }}</td>
-            <td>{{ $d->remarks }}</td>
-            <td>
-              <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button>
-              <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
-              <button title="" type="button" class="btn btn-xs tooltips btn-danger deleteButton"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
-            </td>
+            <td>{{ optional($d->departemen)->name }}</td>
+            <td>{{ optional($d->position)->position }}</td>
+            <td>{{ optional($d->project)->name }}</td>
+            <!-- <td>{{ optional($d->homebasearea)->name }}</td> -->
+            <td>{{ optional($d->assignmentarea)->name }}</td>
+            <td>{{ $d->phone_number }}</td>
+            <!-- <td>{{ $d->email }}</td> -->
+            <td><small class="label {{ HelpMe::bgStatus($d->status) }}">{{ $d->status }}</small></td>
           </tr>
           @endforeach
         </table>

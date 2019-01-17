@@ -16,6 +16,16 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="name">Item</label>
+                <div>
+                  <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="">
+                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="">
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="name">Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ date('d/m/Y') }}">
@@ -27,10 +37,9 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Item</label>
+                <label for="name">Serial Number</label>
                 <div>
-                  <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="">
-                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="">
+                  <input type="text" class="form-control serialSearch" name="serial_number" id="serial_number" placeholder="" autocomplete="off" value="">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -133,6 +142,38 @@
 $(document).ready(function(){
   var list = [];
   var listData = {};
+  var listSerial = [];
+  var listDataSerial = {};
+
+  $('body').on('keyup', '.serialSearch', function(){
+    $(this).typeahead({
+  		source: function (query, result) {
+        $.ajax({
+  				url: "/tools/search",
+  				data: 'sf=serial_number&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+    					result($.map(data, function (item) {
+                listDataSerial[item.serial_number] = [];
+                listDataSerial[item.serial_number]['id'] = item.id;
+                listDataSerial[item.serial_number]['item'] = item.item;
+                listDataSerial[item.serial_number]['serial_number'] = item.serial_number;
+                listDataSerial[item.serial_number]['code'] = item.code;
+                listSerial.push(listDataSerial);
+                return item.serial_number;
+    					}));
+  				}
+  			});
+  		},
+      afterSelect: function(data){
+        $('#tools_id').val(listDataSerial[data]['id']);
+        $('#item').val(listDataSerial[data]['item']);
+        $('#code').val(listDataSerial[data]['code']);
+        $('#serial_number').val(listDataSerial[data]['serial_number']);
+      }
+  	});
+  });
 
   $('body').on('keyup', '.itemSearch', function(){
     $(this).typeahead({
@@ -146,6 +187,8 @@ $(document).ready(function(){
     					result($.map(data, function (item) {
                 listData[item.item] = [];
                 listData[item.item]['id'] = item.id;
+                listData[item.item]['item'] = item.item;
+                listData[item.item]['serial_number'] = item.serial_number;
                 listData[item.item]['code'] = item.code;
                 list.push(listData);
                 return item.item;
@@ -155,7 +198,9 @@ $(document).ready(function(){
   		},
       afterSelect: function(data){
         $('#tools_id').val(listData[data]['id']);
+        $('#item').val(listData[data]['item']);
         $('#code').val(listData[data]['code']);
+        $('#serial_number').val(listData[data]['serial_number']);
         // console.log(listData[data]['']);
       }
   	});

@@ -17,7 +17,7 @@
           <div class="form-group">
             <label for="name">Name</label>
             <div>
-              <input type="text" class="form-control needed" name="name" id="name" placeholder="" autocomplete="off" value="{{ $data->name }}">
+              <input type="text" class="form-control needed karyawanSearch" name="name" id="name" placeholder="" autocomplete="off" value="{{ $data->name }}">
   						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
             </div>
           </div>
@@ -68,3 +68,41 @@
   </div>
 </div>
 <!-- /.row (main row) -->
+@section('scriptAdd')
+<script>
+$(document).ready(function(){
+
+  var listRecipient = {};
+  $('body').on('keyup', '.karyawanSearch', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/karyawan/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listRecipient[item.name] = item.id;
+              listRecipient[item.name+'-city'] = item.assignmentarea.name;
+              listRecipient[item.name+'-idcity'] = item.assignmentarea.id;
+              listRecipient[item.name+'-idproject'] = item.project_id;
+              listRecipient[item.name+'-projectname'] = item.project.name;
+              listRecipient[item.name+'-email'] = item.email;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#name").val(data);
+        $("#email").val(listRecipient[data+'-email']);
+      }
+    });
+  });
+
+});
+</script>
+@endsection

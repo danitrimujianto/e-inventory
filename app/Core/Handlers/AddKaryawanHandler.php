@@ -22,8 +22,14 @@ class AddKaryawanHandler implements Handler
     public function handle()
     {
         $request = $this->request;
-        $data = $this->saveDB($request);
-        return $data;
+        $valid = $this->checkFirst($request);
+        if(!$valid[1])
+        {
+          return abort(500, $valid[0]);
+        }else{
+          $data = $this->saveDB($request);
+          return $data;
+        }
     }
 
     private function saveDB($request)
@@ -55,5 +61,19 @@ class AddKaryawanHandler implements Handler
         $AddUser->save();
 
         return $tab;
+    }
+
+    private function checkFirst($request){
+      $msg = '';
+      $cek = Karyawan::where('email', $request->email)->first();
+      if(!empty($cek->email))
+      {
+        $msg = 'Duplicate Email';
+      }
+
+      if($msg != '')
+        return array($msg, false);
+      else
+        return array($msg, true);
     }
 }

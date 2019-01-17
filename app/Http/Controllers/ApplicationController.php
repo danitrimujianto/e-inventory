@@ -66,13 +66,13 @@ class ApplicationController extends Controller
 
     public static function messageException($errorFormat)
     {
-      $msg = "";
-      foreach($errorFormat AS $k=>$v)
-      {
-        $msg .= $k.": ".$v." <br>";
-      }
+      // $msg = "";
+      // foreach($errorFormat AS $k=>$v)
+      // {
+      //   $msg .= $k.": ".$v." <br>";
+      // }
 
-      return $msg;
+      return $errorFormat;
     }
 
     public function resultException(\Exception $e, $pos)
@@ -81,7 +81,7 @@ class ApplicationController extends Controller
       $msg = self::messageException($e);
 
       session()->put('procMsg.status', "danger");
-      session()->put('procMsg.msg', $pos." Failed"."<br>".$msg);
+      session()->put('procMsg.msg', $pos." Failed"."<br><br>Message: ".$msg['user_message']);
 
       return $msg;
     }

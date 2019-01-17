@@ -18,6 +18,16 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="name">Item</label>
+                <div>
+                  <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="{{ $data->tools_id }}">
+                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="{{ optional($data->tools)->item }}">
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="name">Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}">
@@ -29,11 +39,10 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Item</label>
+                <label for="name">Serial Number</label>
                 <div>
-                  <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="{{ $data->tools_id }}">
-                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="{{ optional($data->tools)->item }}">
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                  <input type="text" class="form-control serialSearch" name="serial_number" id="serial_number" placeholder="" autocomplete="off" value="{{ optional($data->tools)->serial_number }}">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -133,111 +142,71 @@
 @section('scriptAdd')
 <script>
 $(document).ready(function(){
+  var list = [];
+  var listData = {};
+  var listSerial = [];
+  var listDataSerial = {};
 
-  var urut = 0;
-
-  $('#btnListTools').click(function(){
-    modalPage('', '/tools/list', 'Tools', 80);
-  });
-  var list = {};
-  $('body').on('keyup', '#lookup_karyawan', function(){
+  $('body').on('keyup', '.serialSearch', function(){
     $(this).typeahead({
       source: function (query, result) {
-        // alert('asd');
         $.ajax({
-          url: "/karyawan/search",
-          data: 'sf=name&sq=' + query,
+          url: "/tools/search",
+          data: 'sf=serial_number&sq=' + query,
           dataType: "json",
           type: "GET",
           success: function (data) {
-            // console.log(data);
-            result($.map(data, function (item) {
-              list[item.name] = item.id;
-              return item.name;
-            }));
+              result($.map(data, function (item) {
+                listDataSerial[item.serial_number] = [];
+                listDataSerial[item.serial_number]['id'] = item.id;
+                listDataSerial[item.serial_number]['item'] = item.item;
+                listDataSerial[item.serial_number]['serial_number'] = item.serial_number;
+                listDataSerial[item.serial_number]['code'] = item.code;
+                listSerial.push(listDataSerial);
+                return item.serial_number;
+              }));
           }
         });
       },
       afterSelect: function(data){
-        $("#karyawan_id").val(list[data]);
+        $('#tools_id').val(listDataSerial[data]['id']);
+        $('#item').val(listDataSerial[data]['item']);
+        $('#code').val(listDataSerial[data]['code']);
+        $('#serial_number').val(listDataSerial[data]['serial_number']);
       }
     });
   });
 
-  $("#tambahBaris").click(function(){
-    urut++;
-    var listTools = $('#listTools');
-    var el ='<tr><td><input type="hidden" class="idTools" value="" /><input type="text" class="form-control" data-type="item" id="item" name="item[]" value="" autocomplete="off"/></td><td><input type="text" class="form-control merk" name="merk[]" value="" id=""  /></td><td><input type="text" class="form-control type" name="type[]" value="" id="" /></td><td><input type="text" class="form-control quantity desimal" name="quantity[]" value="0"  id="" /></td><td><input type="text" class="form-control price nominal" name="price[]" value="0" id="" /></td><td><input type="text" class="form-control subtotal" name="subtotal[]" value="0" id="" readonly/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
-
-
-    var chekEmpty = listTools.find('#item').length;
-    if(chekEmpty == 0){
-      listTools.html(el);
-      $('#toolsTotal').show();
-    }else{
-      listTools.append(el);
-    }
-    // listTools.find('.goods_condition_id').prop('disabled', false);
-    // var er = $(this).parent('td').parent('tr').parent('tfooter').parent('table').find('#listTools').find('.goods_condition_id').prop('disabled');
-    // alert(er);
-
-  });
-  var total = 0;
-
-  $('body').on('click', '.delRow', function(){
-    var listTools = $('#listTools');
-    var el ='<tr><td colspan="6" class="text-center">Empty</td></tr>';
-
-    $(this).parent('td').parent('tr').remove();
-    var chekEmpty = listTools.find('#item').length;
-
-    if(chekEmpty == 0)
-    { listTools.html(el); $('#toolsTotal').hide(); }
-
-    total = hitungTotal();
-    $('#total').val(nominal(total));
-
-    urut--;
-  });
-  $('body').on('keyup', '.quantity', function(){
-    var el = $(this).parent('td').parent('tr');
-    var qty = parseInt($(this).val().trim().replace(".", ""));
-    var price = parseInt(el.find('.price').val().trim().replace(/,/g, ""));
-    var subtotal = parseInt(0);
-    if(qty >= 0 && price >= 0)
-    {
-      subtotal = qty*price;
-    }
-
-    el.find('.subtotal').val(nominal(subtotal));
-    total = hitungTotal();
-    $('#total').val(nominal(total));
-  });
-
-  $('body').on('keyup', '.price', function(){
-    var el = $(this).parent('td').parent('tr');
-    var qty = parseInt(el.find('.quantity').val().replace(".", ""));
-    var price = parseInt($(this).val().replace(/,/g, ""));
-    var subtotal = 0;
-    if(qty >= 0 && price >= 0)
-    {
-      subtotal = qty*price;
-    }
-    el.find('.subtotal').val(nominal(subtotal));
-    total = hitungTotal();
-    $('#total').val(nominal(total));
-    // alert(total);
+  $('body').on('keyup', '.itemSearch', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        $.ajax({
+          url: "/tools/search",
+          data: 'sf=item&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+              result($.map(data, function (item) {
+                listData[item.item] = [];
+                listData[item.item]['id'] = item.id;
+                listData[item.item]['item'] = item.item;
+                listData[item.item]['serial_number'] = item.serial_number;
+                listData[item.item]['code'] = item.code;
+                list.push(listData);
+                return item.item;
+              }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $('#tools_id').val(listData[data]['id']);
+        $('#item').val(listData[data]['item']);
+        $('#code').val(listData[data]['code']);
+        $('#serial_number').val(listData[data]['serial_number']);
+        // console.log(listData[data]['']);
+      }
+    });
   });
 });
-function hitungTotal(){
-  // $(".subtotal").length;
-  var val = 0, sub = 0;
-  $('.subtotal').each(function(){
-    sub = $(this).val().trim().replace(/,/g, "");
-    val = parseInt(val)+parseInt(sub);
-  });
-
-  return val;
-}
 </script>
 @endsection

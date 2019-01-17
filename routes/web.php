@@ -249,6 +249,7 @@ Route::middleware('auth')->prefix("/warehouse")->group(function() {
 Route::middleware('auth')->prefix("/barang")->group(function() {
     Route::get("/", 'BarangController@index'); /* action get list of developers */
     Route::get("/select", 'BarangController@select'); /* action get list of developers */
+    Route::get("/search", 'BarangController@search'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'BarangController@add'); /* action insert or add data to system*/
@@ -513,6 +514,18 @@ Route::middleware('auth')->prefix("/repstoktools")->group(function() {
   Route::prefix("/export")->group(function() {
       Route::post("/excel", 'ReportStokToolsController@excel'); /* action get data by id */
       Route::get("/excel", 'ReportStokToolsController@excel'); /* action get data by id */
+  });
+});
+
+Route::middleware('auth')->prefix("/repkaryawan")->group(function() {
+  Route::get("/", 'ReportKaryawanController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportKaryawanController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportKaryawanController@print'); /* action get data by id */
+  Route::get("/print", 'ReportKaryawanController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportKaryawanController@excel'); /* action get data by id */
+      Route::get("/excel", 'ReportKaryawanController@excel'); /* action get data by id */
   });
 });
 

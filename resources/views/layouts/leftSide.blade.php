@@ -79,6 +79,7 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/repemployeetools"><i class="fa fa-ellipsis-v"></i> Employee Tools</a></li>
           <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Service</a></li>
           <li><a href="/repstoktools"><i class="fa fa-ellipsis-v"></i> Tool Stock</a></li>
+          <li><a href="/repkaryawan"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
         </ul>
       </li>
       <li class="treeview">
@@ -135,6 +136,7 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/rep/alatkaryawan"><i class="fa fa-ellipsis-v"></i> Data Alat Karyawan</a></li>
           <li><a href="/rep/service"><i class="fa fa-ellipsis-v"></i> Service</a></li>
           <li><a href="/rep/stoktools"><i class="fa fa-ellipsis-v"></i> Stok Tools</a></li>
+          <li><a href="/rep/stoktools"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
         </ul>
       </li>
       <li class="treeview">

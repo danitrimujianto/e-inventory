@@ -40,9 +40,14 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="code">Goods</label>
+                <label for="code">Barang</label>
                 <div>
-                  <input type="text" class="form-control" name="barang_name" id="barang_name" value="{{ $data->barang->name }}" />
+                  <select class="form-control needed" name="barang_id2" id="barang_id2" disabled>
+                    <option value="">-- Choose Barang --</option>
+                    @foreach($dBarang AS $barang)
+                      <option value="{{ $barang->id }}" @if($data->barang_id == $barang->id) selected @endif>{{ $barang->name }}</option>
+                    @endforeach
+                  </select>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -106,35 +111,19 @@
 @section('scriptAdd')
 <script>
 $(document).ready(function(){
-  var listBarang = [];
-  var listDataBarang = {};
-
-  $('body').on('keyup', '#barang_name', function(){
-    $(this).typeahead({
-  		source: function (query, result) {
-        $.ajax({
-  				url: "/barang/search",
-  				data: 'sf=name&sq=' + query,
-  				dataType: "json",
-  				type: "GET",
-  				success: function (data) {
-    					result($.map(data, function (item) {
-                listDataBarang[item.name] = [];
-                listDataBarang[item.name]['id'] = item.id;
-                listDataBarang[item.name]['name'] = item.name;
-                listDataBarang[item.name]['type'] = item.type;
-                listBarang.push(listDataBarang);
-                return item.name;
-    					}));
-  				}
-  			});
-  		},
-      afterSelect: function(data){
-        $('#barang_id').val(listDataBarang[data]['id']);
-        $('#item').val(listDataBarang[data]['name']);
-        $('#type').val(listDataBarang[data]['type']);
+  $('#barang_id').change(function(){
+    var id = $(this).val();
+    $.ajax({
+      url: "/barang/select",
+      data: 'id=' + id,
+      dataType: "json",
+      type: "GET",
+      success: function (data) {
+        // console.log(data);
+        $('#item').val(data.name);
+        $('#type').val(data.type);
       }
-  	});
+    });
   });
 });
 </script>

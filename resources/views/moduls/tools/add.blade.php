@@ -10,6 +10,7 @@
       <!-- form start -->
       <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="barang_id" id="barang_id" value="" />
         <div class="box-body">
           <div class="form-group">
             <label for="code">Date</label>
@@ -37,12 +38,7 @@
               <div class="form-group">
                 <label for="code">Goods</label>
                 <div>
-                  <select class="form-control needed" name="barang_id" id="barang_id">
-                    <option value="">-- Choose Barang --</option>
-                    @foreach($dBarang AS $barang)
-                      <option value="{{ $barang->id }}">{{ $barang->name }}</option>
-                    @endforeach
-                  </select>
+                  <input type="text" class="form-control" name="barang_name" id="barang_name" value="" />
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -106,19 +102,36 @@
 @section('scriptAdd')
 <script>
 $(document).ready(function(){
-  $('#barang_id').change(function(){
-    var id = $(this).val();
-    $.ajax({
-      url: "/barang/select",
-      data: 'id=' + id,
-      dataType: "json",
-      type: "GET",
-      success: function (data) {
-        // console.log(data);
-        $('#item').val(data.name);
-        $('#type').val(data.type);
+
+  var listBarang = [];
+  var listDataBarang = {};
+
+  $('body').on('keyup', '#barang_name', function(){
+    $(this).typeahead({
+  		source: function (query, result) {
+        $.ajax({
+  				url: "/barang/search",
+  				data: 'sf=name&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+    					result($.map(data, function (item) {
+                listDataBarang[item.name] = [];
+                listDataBarang[item.name]['id'] = item.id;
+                listDataBarang[item.name]['name'] = item.name;
+                listDataBarang[item.name]['type'] = item.type;
+                listBarang.push(listDataBarang);
+                return item.name;
+    					}));
+  				}
+  			});
+  		},
+      afterSelect: function(data){
+        $('#barang_id').val(listDataBarang[data]['id']);
+        $('#item').val(listDataBarang[data]['name']);
+        $('#type').val(listDataBarang[data]['type']);
       }
-    });
+  	});
   });
 });
 </script>

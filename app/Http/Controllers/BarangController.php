@@ -8,6 +8,7 @@ use App\Core\Handlers\AddBarangHandler;
 use App\Core\Handlers\UpdateBarangHandler;
 use App\Core\Handlers\DeleteBarangHandler;
 use App\Core\Readers\BarangReader;
+use App\Core\Readers\SearchBarangReader;
 use App\Core\Readers\SelectBarangReader;
 use App\Core\Readers\GetBarangReader;
 
@@ -199,6 +200,20 @@ class BarangController extends ApplicationController
     $pos = "select";
     try {
       $reader = new SelectBarangReader($request);
+      $data = $reader->read();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return dd($msg);
+    }
+  }
+
+  public function search(Request $request)
+  {
+    $pos = "search";
+    try {
+      $reader = new SearchBarangReader($request);
       $data = $reader->read();
 
       return response()->json($data);
