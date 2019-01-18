@@ -13,8 +13,9 @@
 
         <div class="box-body">
           <input type="hidden" class="" name="karyawan_id" id="karyawan_id" value="{{ Auth::user()->karyawan_id }}" />
-          @if(Auth::user()->usertype_id == 1)
+          <input type="hidden" class="" name="project_id" id="project_id" value="" />
           <div class="row">
+            @if(Auth::user()->usertype_id == 1)
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Employee</label>
@@ -24,17 +25,17 @@
                 </div>
               </div>
             </div>
+            @endif
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Project</label>
                 <div>
-                  <input type="text" class="form-control needed" name="project" id="project" value="" autocomplete="off" disabled/>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Please Fill</span>
+                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="" autocomplete="off"/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
           </div>
-          @endif
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -214,6 +215,31 @@ $(document).ready(function(){
     total = hitungTotal();
     $('#total').val(nominal(total));
     // alert(total);
+  });
+
+  var listProject = {};
+  $('body').on('keyup', '#lookup_project', function(){
+    $(this).typeahead({
+      source: function (query, result) {
+        // alert('asd');
+        $.ajax({
+          url: "/project/search",
+          data: 'sf=name&sq=' + query,
+          dataType: "json",
+          type: "GET",
+          success: function (data) {
+            // console.log(data);
+            result($.map(data, function (item) {
+              listProject[item.name] = item.id;
+              return item.name;
+            }));
+          }
+        });
+      },
+      afterSelect: function(data){
+        $("#project_id").val(listProject[data]);
+      }
+    });
   });
 });
 function hitungTotal(){

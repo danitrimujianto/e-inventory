@@ -1,4 +1,4 @@
-@section('title', 'Report Handover')
+@section('title', 'Report Request Tools')
   <!-- Table row -->
   <div class="row">
     <div class="col-xs-12">
@@ -6,6 +6,7 @@
         <thead>
         <tr>
           <th colspan="8"><h2>@yield('title')</h2></th>
+          <th><h2>Periode: {{ }}</h2></th>
           <th colspan="2" style=" text-align:right;">Print date: {{ date('d/m/Y') }}</th>
         </tr>
         <tr>
@@ -13,6 +14,7 @@
           <th bgcolor="#CCCCCC">DATE</th>
           <th bgcolor="#CCCCCC">PURCHASE NO.</th>
           <th bgcolor="#CCCCCC">REQUESTOR</th>
+          <th bgcolor="#CCCCCC">PROJECT</th>
           <th bgcolor="#CCCCCC">ITEM</th>
           <th bgcolor="#CCCCCC">MERK</th>
           <th bgcolor="#CCCCCC">TYPE</th>
@@ -30,6 +32,7 @@
           <td>{{ HelpMe::tgl_sql_to_indo($d->purchase_request->tanggal) }}</td>
           <td>{{ optional($d->purchase_request)->pr_no }}</td>
           <td>{{ optional($d->purchase_request->karyawan)->name }}</td>
+          <td>{{ optional($d->purchase_request->project)->name }}</td>
           <td>{{ $d->item }}</td>
           <td>{{ $d->merk }}</td>
           <td>{{ $d->type }}</td>

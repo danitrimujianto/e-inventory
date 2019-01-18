@@ -32,7 +32,7 @@ class RequestToolsController extends ApplicationController
   {
       $this->middleware('auth');
       $this->modul = "requesttools"; //disetiap __construct controller harus ada
-      $this->modulName = "Request Tools"; //disetiap __construct controller harus ada
+      $this->modulName = "Request New Tools"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();

@@ -66,6 +66,7 @@
             <th bgcolor="#CCCCCC">DATE</th>
             <th bgcolor="#CCCCCC">PURCHASE NO.</th>
             <th bgcolor="#CCCCCC">REQUESTOR</th>
+            <th bgcolor="#CCCCCC">PROJECT</th>
             <th bgcolor="#CCCCCC">ITEM</th>
             <th bgcolor="#CCCCCC">MERK</th>
             <th bgcolor="#CCCCCC">TYPE</th>
@@ -83,6 +84,7 @@
             <td>{{ HelpMe::tgl_sql_to_indo($d->purchase_request->tanggal) }}</td>
             <td>{{ optional($d->purchase_request)->pr_no }}</td>
             <td>{{ optional($d->purchase_request->karyawan)->name }}</td>
+            <td>{{ optional($d->purchase_request->project)->name }}</td>
             <td>{{ $d->item }}</td>
             <td>{{ $d->merk }}</td>
             <td>{{ $d->type }}</td>

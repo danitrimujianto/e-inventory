@@ -49,6 +49,7 @@ class AddRequestToolsHandler implements Handler
         $tab->karyawan_id = $request->karyawan_id;
         $tab->due_date = HelpMe::tgl_indo_to_sql($request->due_date);
         $tab->description = $request->description;
+        $tab->project_id = $request->project_id;
         $tab->type = $type;
         $tab->pr_no = $kode;
         $tab->status = '0';

@@ -79,12 +79,14 @@ class ReportReqToolsController extends ApplicationController
   public function print(Request $request)
   {
     $pos = "Print";
+    $first_date = (isset($_REQUEST['first_date']) ? $_REQUEST['first_date'] : '');
+    $second_date = (isset($_REQUEST['second_date']) ? $_REQUEST['second_date'] : '');
     try {
 
       $reader = new ReportReqToolsReader($request);
       $data = $reader->read();
 
-      return view('layouts.print', ['data' => $data, 'modul' => $this->modul]);
+      return view('layouts.print', ['data' => $data, 'modul' => $this->modul, 'first_date' => $first_date, 'second_date' => $second_date, 'sf' => $sf, 'sq' => $sq]);
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return dd($msg);

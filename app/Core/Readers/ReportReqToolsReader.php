@@ -33,24 +33,41 @@ class ReportReqToolsReader implements Reader
       $sf = (isset($req->sf) ? $req->sf : '');
 
       $data = new PurchaseRequestDetail;
-      $data = $data->whereHas('purchase_request', function ($q) use($first_date, $second_date){
+      $data = $data->whereHas('purchase_request', function ($q) use($first_date, $second_date, $sf, $sq){
         $q->where('tanggal', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tanggal', '<=', HelpMe::tgl_indo_to_sql($second_date));
-      });
+        $q->where('status', '1');
+        $q->with('project');
 
-      if(!empty($sq))
-      {
-        if($sf == "user_request"){
-          $data = $data->whereHas('purchase_request', function($q) use ($sq){
+        if(!empty($sq))
+        {
+          if($sf == "user_request"){
             $q->whereHas('karyawan', function($q2) use ($sq){
               $q2->where('name', 'like', '%'.$sq.'%');
             });
-          });
-        }else{
-          $data = $data->whereHas('purchase_request', function($q) use ($sq, $sf){
-            $q->where($sf, 'like','%'.$sq.'%');
-          });
+          }else{
+              $q->where($sf, 'like', '%'.$sq.'%');
+          }
         }
-      }
+      });
+      //
+      // if(!empty($sq))
+      // {
+      //   if($sf == "user_request"){
+      //     $data = $data->whereHas('purchase_request', function($q) use ($sq){
+      //       $q->whereHas('karyawan', function($q2) use ($sq){
+      //         $q2->where('name', 'like', '%'.$sq.'%');
+      //       });
+      //       $q->where('status', '1');
+      //       $q->with('project');
+      //     });
+      //   }else{
+      //     $data = $data->whereHas('purchase_request', function($q) use ($sq, $sf){
+      //       $q->where($sf, 'like','%'.$sq.'%');
+      //       $q->where('status', '1');
+      //       $q->with('project');
+      //     });
+      //   }
+      // }
       $data = $data->get();
 
       return $data;

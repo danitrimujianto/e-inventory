@@ -30,4 +30,9 @@ class PurchaseRequest extends Model
     {
       return $this->hasMany('App\PurchaseRequestDetail', 'purchase_request_id');
     }
+
+    public function project()
+    {
+      return $this->belongsTo('App\Project', 'project_id');
+    }
 }
