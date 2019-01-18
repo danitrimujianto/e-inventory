@@ -48,6 +48,26 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="name">Serial Number</label>
+                <div>
+                  <input type="text" class="form-control serialSearch" name="serial_number" id="serial_number" placeholder="" autocomplete="off" value="{{ optional($data->tools)->serial_number }}" disabled>
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Imei</label>
+                <div>
+                  <input type="text" class="form-control imeiSearch" name="imei" id="imei" placeholder="" autocomplete="off" value="{{ optional($data->tools)->imei }}" disabled>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="name">Start Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="start_date" id="start_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->start_date) }}" readonly>

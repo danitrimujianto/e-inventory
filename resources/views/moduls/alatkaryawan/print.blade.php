@@ -16,11 +16,11 @@
           <th>TYPE</th>
           <th>SN</th>
           <th>IMEI</th>
-          <th>AREA</th>
-          <th>CITY</th>
           <th>PROJECT</th>
-          <th>NIK KARYAWAN</th>
-          <th>KARYAWAN</th>
+          <th>ID EMPLOYEE</th>
+          <th>EMPLOYEE</th>
+          <th>HOMEBASE</th>
+          <th>ASSIGNMENT</th>
           <th>POSITION</th>
           <th>UPDATE DATE</th>
           <th>CONDITION</th>
@@ -40,11 +40,11 @@
           <td>{{ optional($d->tools)->type }}</td>
           <td>{{ optional($d->tools)->serial_number }}</td>
           <td>{{ optional($d->tools)->imei }}</td>
-          <td>{{ optional($d->handover->toarea)->name }}</td>
-          <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
           <td>{{ optional($d->handover->project)->name }}</td>
           <td>{{ optional($d->karyawan)->id_karyawan }}</td>
           <td>{{ optional($d->karyawan)->name }}</td>
+          <td>{{ optional($d->handover->toarea)->name }}</td>
+          <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
           <td>{{ optional($d->karyawan->position)->name }}</td>
           <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
           <td>{{ optional($d->condition)->name }}</td>

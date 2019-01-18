@@ -56,9 +56,9 @@ $price = ((Auth::user()->usertype_id == 4 ||
             <th>Imei</th>
             <th>Condition</th>
             <th>Project</th>
-            <th>Karyawan</th>
-            <th>Area</th>
-            <th>City</th>
+            <th>Employee</th>
+            <th>Homebase</th>
+            <th>Assignment</th>
             <th>Update Date</th>
             @if($price)
               <th>Price</th>

@@ -26,11 +26,21 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}">
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">ID Tools</label>
+                <div>
+                  <input type="text" class="form-control" name="code" id="code" placeholder="" autocomplete="off" value="{{ optional($data->tools)->code }}" readonly>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -48,9 +58,9 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">ID Tools</label>
+                <label for="name">Imei</label>
                 <div>
-                  <input type="text" class="form-control" name="code" id="code" placeholder="" autocomplete="off" value="{{ optional($data->tools)->code }}" readonly>
+                  <input type="text" class="form-control imeiSearch" name="imei" id="imei" placeholder="" autocomplete="off" value="{{ optional($data->tools)->imei }}">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -146,67 +156,106 @@ $(document).ready(function(){
   var listData = {};
   var listSerial = [];
   var listDataSerial = {};
+  var listImei = [];
+  var listDataImei = {};
 
   $('body').on('keyup', '.serialSearch', function(){
     $(this).typeahead({
-      source: function (query, result) {
+  		source: function (query, result) {
         $.ajax({
-          url: "/tools/search",
-          data: 'sf=serial_number&sq=' + query,
-          dataType: "json",
-          type: "GET",
-          success: function (data) {
-              result($.map(data, function (item) {
+  				url: "/tools/search",
+  				data: 'sf=serial_number&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+    					result($.map(data, function (item) {
                 listDataSerial[item.serial_number] = [];
                 listDataSerial[item.serial_number]['id'] = item.id;
                 listDataSerial[item.serial_number]['item'] = item.item;
                 listDataSerial[item.serial_number]['serial_number'] = item.serial_number;
+                listDataSerial[item.serial_number]['imei'] = item.imei;
                 listDataSerial[item.serial_number]['code'] = item.code;
                 listSerial.push(listDataSerial);
                 return item.serial_number;
-              }));
-          }
-        });
-      },
+    					}));
+  				}
+  			});
+  		},
       afterSelect: function(data){
         $('#tools_id').val(listDataSerial[data]['id']);
         $('#item').val(listDataSerial[data]['item']);
         $('#code').val(listDataSerial[data]['code']);
         $('#serial_number').val(listDataSerial[data]['serial_number']);
+        $('#imei').val(listDataSerial[data]['imei']);
       }
-    });
+  	});
+  });
+
+  $('body').on('keyup', '.imeiSearch', function(){
+    $(this).typeahead({
+  		source: function (query, result) {
+        $.ajax({
+  				url: "/tools/search",
+  				data: 'sf=imei&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+    					result($.map(data, function (item) {
+                listDataImei[item.imei] = [];
+                listDataImei[item.imei]['id'] = item.id;
+                listDataImei[item.imei]['item'] = item.item;
+                listDataImei[item.imei]['serial_number'] = item.serial_number;
+                listDataImei[item.imei]['imei'] = item.imei;
+                listDataImei[item.imei]['code'] = item.code;
+                listImei.push(listDataImei);
+                return item.imei;
+    					}));
+  				}
+  			});
+  		},
+      afterSelect: function(data){
+        $('#tools_id').val(listDataImei[data]['id']);
+        $('#item').val(listDataImei[data]['item']);
+        $('#code').val(listDataImei[data]['code']);
+        $('#serial_number').val(listDataImei[data]['serial_number']);
+        $('#imei').val(listDataImei[data]['imei']);
+      }
+  	});
   });
 
   $('body').on('keyup', '.itemSearch', function(){
     $(this).typeahead({
-      source: function (query, result) {
+  		source: function (query, result) {
         $.ajax({
-          url: "/tools/search",
-          data: 'sf=item&sq=' + query,
-          dataType: "json",
-          type: "GET",
-          success: function (data) {
-              result($.map(data, function (item) {
+  				url: "/tools/search",
+  				data: 'sf=item&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+    					result($.map(data, function (item) {
                 listData[item.item] = [];
                 listData[item.item]['id'] = item.id;
                 listData[item.item]['item'] = item.item;
                 listData[item.item]['serial_number'] = item.serial_number;
+                listData[item.item]['imei'] = item.imei;
                 listData[item.item]['code'] = item.code;
                 list.push(listData);
                 return item.item;
-              }));
-          }
-        });
-      },
+    					}));
+  				}
+  			});
+  		},
       afterSelect: function(data){
         $('#tools_id').val(listData[data]['id']);
         $('#item').val(listData[data]['item']);
         $('#code').val(listData[data]['code']);
         $('#serial_number').val(listData[data]['serial_number']);
+        $('#imei').val(listData[data]['imei']);
         // console.log(listData[data]['']);
       }
-    });
+  	});
   });
 });
+
 </script>
 @endsection

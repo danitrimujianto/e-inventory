@@ -24,6 +24,15 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Project</label>
+                <div>
+                  <input type="text" class="form-control needed" name="project" id="project" value="" autocomplete="off" disabled/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Please Fill</span>
+                </div>
+              </div>
+            </div>
           </div>
           @endif
           <div class="row">
@@ -129,6 +138,7 @@ $(document).ready(function(){
             // console.log(data);
             result($.map(data, function (item) {
               list[item.name] = item.id;
+              list[item.name+'-project'] = item.project.name;
               return item.name;
             }));
           }
@@ -136,6 +146,7 @@ $(document).ready(function(){
       },
       afterSelect: function(data){
         $("#karyawan_id").val(list[data]);
+        $("#project").val(list[data+'-project']);
       }
     });
   });

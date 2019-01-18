@@ -41,11 +41,11 @@
             <th>Date</th>
             <th>Outgoing No</th>
             <th>Sender</th>
-            <th>Recipient</th>
-            <th>Delivery</th>
-            <th>Project</th>
             <th>From City</th>
+            <th>Recipient</th>
             <th>To City</th>
+            <th>Project</th>
+            <th>Delivery</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
@@ -55,11 +55,11 @@
             <td>{{ HelpMe::tgl_sql_to_indo($d->tgl) }}</td>
             <td>{{ $d->outgoing_no }}</td>
             <td>{{ optional($d->sender)->name }}</td>
-            <td>{{ optional($d->karyawan)->name }}</td>
-            <td>{{ optional($d->delivery)->name }}</td>
-            <td>{{ optional($d->project)->name }}</td>
             <td>{{ optional($d->fromcity)->name }}</td>
+            <td>{{ optional($d->karyawan)->name }}</td>
             <td>{{ optional($d->tocity)->name }}</td>
+            <td>{{ optional($d->project)->name }}</td>
+            <td>{{ optional($d->delivery)->name }}</td>
             <td>
               @if($d->status >= 0 && $d->status < 2)
                 <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>

@@ -31,6 +31,15 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Project</label>
+                <div>
+                  <input type="text" class="form-control needed" name="project" id="project" value="{{ optional($data->karyawan->project)->name }}" autocomplete="off" disabled/>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Please Fill</span>
+                </div>
+              </div>
+            </div>
           </div>
           @endif
           <div class="row">

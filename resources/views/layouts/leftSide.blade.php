@@ -22,7 +22,7 @@ $usertype = Auth::user()->usertype_id;
         <ul class="treeview-menu">
           <li><a href="/area"><i class="fa fa-ellipsis-v"></i> Area</a></li>
           <li><a href="/city"><i class="fa fa-ellipsis-v"></i> City</a></li>
-          <li><a href="/departemen"><i class="fa fa-ellipsis-v"></i> Departemen</a></li>
+          <li><a href="/departemen"><i class="fa fa-ellipsis-v"></i> Department</a></li>
           <li><a href="/position"><i class="fa fa-ellipsis-v"></i> Position</a></li>
           <li><a href="/supplier"><i class="fa fa-ellipsis-v"></i> Supplier</a></li>
           <li><a href="/vendor"><i class="fa fa-ellipsis-v"></i> Vendor</a></li>
