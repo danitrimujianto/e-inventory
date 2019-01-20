@@ -31,7 +31,7 @@ class UpdateUserHandler implements Handler
         $id = $request->id;
 
         $kar = Karyawan::where('email', $request->email)->where('status', 'Aktif')->first();
-        $karyawan_id = ($kar) ? $kar->id : null;
+        $karyawan_id = (!empty($kar->id) ? $kar->id : null);
 
         $tab = User::find($id);
         $tab->usertype_id = $request->usertype_id;
