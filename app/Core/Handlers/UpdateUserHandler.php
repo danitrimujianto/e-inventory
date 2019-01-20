@@ -45,6 +45,10 @@ class UpdateUserHandler implements Handler
 
         $tab->save();
 
+        $karyawan = Karyawan::find($tab->karyawan_id);
+        $karyawan->email = $request->email;
+        $karyawan->Save();
+        
         return $tab;
     }
 }
