@@ -17,7 +17,7 @@
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
 				  <div class="col-md-5 col-xs-12">
   					<select name="sf" class="form-control">
-              <option value="id_karyawan" @if($sf == "id_karyawan") {{ 'selected' }} @endif>ID Karyawan</option>
+              <option value="id_karyawan" @if($sf == "id_karyawan") {{ 'selected' }} @endif>ID Employee</option>
               <option value="name" @if($sf == "name") {{ 'selected' }} @endif>Name</option>
               <option value="email" @if($sf == "email") {{ 'selected' }} @endif>Email</option>
   					</select>
@@ -37,7 +37,7 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>ID Karyawan</th>
+            <th>ID Employee</th>
             <th>Name</th>
             <th>Departemen</th>
             <th>Position</th>
