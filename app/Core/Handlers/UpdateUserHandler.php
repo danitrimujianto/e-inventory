@@ -34,10 +34,10 @@ class UpdateUserHandler implements Handler
         $karyawan_id = (!empty($kar->id) ? $kar->id : null);
 
         $tab = User::find($id);
-        // $tab->usertype_id = $request->usertype_id;
+        $tab->usertype_id = $request->usertype_id;
         $tab->name = $request->name;
         $tab->email = $request->email;
-        $tab->karyawan_id = $karyawan_id;
+        // $tab->karyawan_id = $karyawan_id;
         $tab->request_tools = $request->request_tools;
 
         if(!empty($request->password))
