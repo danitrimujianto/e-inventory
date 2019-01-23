@@ -85,7 +85,7 @@ $(document).ready(function(){
               listRecipient[item.name+'-city'] = item.assignmentarea.name;
               listRecipient[item.name+'-idcity'] = item.assignmentarea.id;
               listRecipient[item.name+'-idproject'] = item.project_id;
-              listRecipient[item.name+'-projectname'] = item.project.name;
+              if(item.project.name){ listRecipient[item.name+'-projectname'] = item.project.name; }
               listRecipient[item.name+'-email'] = item.email;
               return item.name;
             }));

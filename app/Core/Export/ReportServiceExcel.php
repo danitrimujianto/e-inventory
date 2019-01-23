@@ -2,6 +2,7 @@
 namespace App\Core\Export;
 
 use App\Service;
+use App\Core\Readers\ReportServiceReader;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -29,15 +30,19 @@ class ReportServiceExcel implements FromView
       $req = $this->request;
       $first_date = (isset($req->first_date) ? $req->first_date : '');
       $second_date = (isset($req->second_date) ? $req->second_date : '');
+      $isExport = true;
 
 
-      $data = Service::where('tanggal', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tanggal', '<=', HelpMe::tgl_indo_to_sql($second_date));
-
-      $data = $data->orderBy('tanggal','asc')->get();
+      $reader = new ReportServiceReader($request, $isExport);
+      $data = $reader->read();
 
       return view('layouts.print', [
           'data' => $data,
-          'modul' => $this->modul
+          'modul' => $this->modul,
+          'first_date' => $first_date,
+          'second_date' => $second_date,
+          'sf' => $sf,
+          'sq' => $sq
       ]);
     }
 

@@ -3,6 +3,7 @@ namespace App\Core\Export;
 
 use App\PurchaseRequest;
 use App\PurchaseRequestDetail;
+use App\Core\Readers\ReportReqToolsReader;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -31,24 +32,32 @@ class ReportReqToolsExcel implements FromView
       $second_date = (isset($req->second_date) ? $req->second_date : '');
       $sq = (isset($req->sq) ? $req->sq : '');
       $sf = (isset($req->sf) ? $req->sf : '');
+      $isExport = true;
 
-      $data = new PurchaseRequestDetail;
-      $data = $data->whereHas('purchase_request', function ($q) use($first_date, $second_date, $sf, $sq){
-        $q->where('tanggal', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tanggal', '<=', HelpMe::tgl_indo_to_sql($second_date));
-        $q->where('status', '1');
-
-        if(!empty($sq))
-        {
-          if($sf == "user_request"){
-            $q->whereHas('karyawan', function($q2) use ($sq){
-              $q2->where('name', 'like', '%'.$sq.'%');
-            });
-          }else{
-              $q->where($sf, 'like', '%'.$sq.'%');
-          }
-        }
-      });
-      $data = $data->get();
+      $reader = new ReportReqToolsReader($req, $isExport);
+      $data = $reader->read();
+      //
+      // $data = new PurchaseRequestDetail;
+      // $data = $data->whereHas('purchase_request', function ($q) use($first_date, $second_date, $sf, $sq){
+      //   $q->where('tanggal', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tanggal', '<=', HelpMe::tgl_indo_to_sql($second_date));
+      //   $q->where('status', '1');
+      //
+      //   if(!empty($sq))
+      //   {
+      //     if($sf == "user_request"){
+      //       $q->whereHas('karyawan', function($q2) use ($sq){
+      //         $q2->where('name', 'like', '%'.$sq.'%');
+      //       });
+      //     }elseif($sf == "project"){
+      //       $q->whereHas('project', function($q2) use ($sq){
+      //         $q2->where('name', 'like', '%'.$sq.'%');
+      //       });
+      //     }else{
+      //         $q->where($sf, 'like', '%'.$sq.'%');
+      //     }
+      //   }
+      // });
+      // $data = $data->get();
 
       return view('layouts.print', [
           'data' => $data,

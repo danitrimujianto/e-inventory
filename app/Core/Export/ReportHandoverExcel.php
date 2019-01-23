@@ -3,6 +3,7 @@ namespace App\Core\Export;
 
 use App\AllhoActivities;
 use App\AllhoActivitiesDetail;
+use App\Core\Readers\ReportHandoverReader;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -21,6 +22,7 @@ class ReportHandoverExcel implements FromView
     public function __construct(Request $request)
     {
         $this->request = $request;
+        $this->modul    = 'rephandover';
     }
 
     public function view(): View
@@ -28,16 +30,20 @@ class ReportHandoverExcel implements FromView
       $req = $this->request;
       $first_date = (isset($req->first_date) ? $req->first_date : '');
       $second_date = (isset($req->second_date) ? $req->second_date : '');
+      $sq = (isset($req->sq) ? $req->sq : '');
+      $sf = (isset($req->sf) ? $req->sf : '');
+      $isExport = true;
 
-      $data = new AllhoActivitiesDetail;
-      $data = $data->whereHas('allhoactivities', function ($q) use($first_date, $second_date){
-        $q->where('tgl', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tgl', '<=', HelpMe::tgl_indo_to_sql($second_date));
-      });
-      $data = $data->get();
+      $reader = new ReportHandoverReader($req, $isExport);
+      $data = $reader->read();
 
       return view('layouts.print', [
           'data' => $data,
-          'modul' => 'rephandover'
+          'modul' => $this->modul,
+          'first_date' => $first_date,
+          'second_date' => $second_date,
+          'sf' => $sf,
+          'sq' => $sq
       ]);
     }
 

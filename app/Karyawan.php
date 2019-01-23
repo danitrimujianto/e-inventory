@@ -23,7 +23,7 @@ class Karyawan extends Model
 
     public function project()
     {
-      return $this->belongsTo('App\Project');
+      return $this->belongsTo('App\Project', 'project_id');
     }
 
     public function homebasearea()

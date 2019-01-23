@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     public function tipeuser()
     {
-      return $this->belongsTo('App\TipeUser', 'usertype_id');
+      return $this->belongsTo('App\UserType', 'usertype_id');
     }
 
     public function karyawan()

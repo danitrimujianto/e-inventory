@@ -625,10 +625,10 @@ class FunctionGlobals {
     ############################# FUNGSI MENCARI TGL, BULAN, TAHUN FORMAT INDONESIA #############################
     public static function tampiltgl2($valtgl)
     {
-    $temp=explode("-",$valtgl);
-    $tgl=$temp[2];
+    $temp=explode(substr($valtgl, 2, 1),$valtgl);
+    $tgl=$temp[0];
     $bulan=$temp[1];
-    $tahun=$temp[0];
+    $tahun=$temp[2];
     return $tgl." ".self::bulan_c($bulan)." ".$tahun;
     }
 
@@ -637,29 +637,29 @@ class FunctionGlobals {
     {
     //
     if ($nilai=='01')
-    {return "Jan.";}
+    {return "Jan";}
     elseif ($nilai=='02')
-    {return "Feb.";}
+    {return "Feb";}
     elseif ($nilai=='03')
-    {return "Mar.";}
+    {return "Mar";}
     elseif ($nilai=='04')
-    {return "Apr.";}
+    {return "Apr";}
     elseif ($nilai=='05')
     {return "Mei";}
     elseif ($nilai=='06')
-    {return "Jun.";}
+    {return "Jun";}
     elseif ($nilai=='07')
-    {return "Jul.";}
+    {return "Jul";}
     elseif ($nilai=='08')
-    {return "Agu.";}
+    {return "Agu";}
     elseif ($nilai=='09')
-    {return "Sep.";}
+    {return "Sep";}
     elseif ($nilai=='10')
-    {return "Okt.";}
+    {return "Okt";}
     elseif ($nilai=='11')
-    {return "Nov.";}
+    {return "Nov";}
     elseif ($nilai=='12')
-    {return "Des.";}
+    {return "Des";}
     //end function
     }
 

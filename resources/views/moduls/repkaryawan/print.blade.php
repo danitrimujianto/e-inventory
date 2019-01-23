@@ -2,12 +2,17 @@
   <!-- Table row -->
   <div class="row">
     <div class="col-xs-12">
+      <table style=" width: 100%; ">
+        <tr>
+          <th colspan="3" align="center"><h3 class="headerReport">@yield('title')</h3></th>
+        </tr>
+        <tr>
+          <th colspan="3">@if(!empty($sq)) Filter by {{ $sf.' : '.$sq }} @else &nbsp; @endif</th>
+          <th colspan="3" style=" text-align:right;">Print date: {{ date('d/m/Y') }}</th>
+        </tr>
+      </table>
       <table class="table table-striped" style=" width: 100%; ">
         <thead>
-        <tr>
-          <th colspan="7"><h2>@yield('title')</h2></th>
-          <th colspan="2" style=" text-align:right;">Print date: {{ date('d/m/Y') }}</th>
-        </tr>
         <tr style="">
           <th>No.</th>
           <th>ID Employee</th>

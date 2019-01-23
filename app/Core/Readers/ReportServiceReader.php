@@ -14,16 +14,19 @@ use HelpMe;
 class ReportServiceReader implements Reader
 {
     private $request;
+    private $isExport;
     /** constructor, fungsinya untuk memudahkan passing variable dari controller */
-    public function __construct(Request $request)
+    public function __construct(Request $request, $isExport = false)
     {
         $this->request = $request;
+        $this->isExport = $isExport;
     }
 
     /** method ini digunakan untuk mengeksekusi query */
     public function read()
     {
 
+      $isExport = $this->isExport;
       $req = $this->request;
       $first_date = (isset($req->first_date) ? $req->first_date : '');
       $second_date = (isset($req->second_date) ? $req->second_date : '');
@@ -47,11 +50,12 @@ class ReportServiceReader implements Reader
         }
       }
 
-      $data = $data->orderBy('tanggal','asc')->get();
+      $data = $data->orderBy('tanggal','asc');
 
-      // $data = $data->whereHas('purchase_request', function ($q) use($first_date, $second_date){
-      //   $q->where('tanggal', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tanggal', '<=', HelpMe::tgl_indo_to_sql($second_date));
-      // });
+      if($isExport)
+        $data = $data->get();
+      else
+        $data = $data->paginate($batas);
 
       return $data;
     }

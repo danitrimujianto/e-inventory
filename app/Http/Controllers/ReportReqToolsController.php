@@ -39,9 +39,9 @@ class ReportReqToolsController extends ApplicationController
       $this->theme["page"] = 'index'; //disetiap class dan function controller harus ada
       $first_date = (isset($_REQUEST['first_date']) ? $_REQUEST['first_date'] : '');
       $second_date = (isset($_REQUEST['second_date']) ? $_REQUEST['second_date'] : '');
-      $sf = (isset($_GET['sf']) ? $_GET['sf'] : '');
-      $sq = (isset($_GET['sq']) ? $_GET['sq'] : '');
-      $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
+      $sf = (isset($_REQUEST['sf']) ? $_REQUEST['sf'] : '');
+      $sq = (isset($_REQUEST['sq']) ? $_REQUEST['sq'] : '');
+      $bts = (isset($_REQUEST['bts']) ? $_REQUEST['bts'] : '');
 
       try {
         $alert = "";
@@ -61,7 +61,7 @@ class ReportReqToolsController extends ApplicationController
         return view('home', $this->returnData);
       } catch (\Exception $e) {
         $msg = $this->resultException($e, $pos);
-        return redirect($this->modul);
+        return dd($msg);
       }
   }
 
@@ -81,9 +81,12 @@ class ReportReqToolsController extends ApplicationController
     $pos = "Print";
     $first_date = (isset($_REQUEST['first_date']) ? $_REQUEST['first_date'] : '');
     $second_date = (isset($_REQUEST['second_date']) ? $_REQUEST['second_date'] : '');
+    $sf = (isset($_REQUEST['sf']) ? $_REQUEST['sf'] : '');
+    $sq = (isset($_REQUEST['sq']) ? $_REQUEST['sq'] : '');
+    $isExport = true;
     try {
 
-      $reader = new ReportReqToolsReader($request);
+      $reader = new ReportReqToolsReader($request, $isExport);
       $data = $reader->read();
 
       return view('layouts.print', ['data' => $data, 'modul' => $this->modul, 'first_date' => $first_date, 'second_date' => $second_date, 'sf' => $sf, 'sq' => $sq]);

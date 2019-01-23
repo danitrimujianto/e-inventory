@@ -95,7 +95,7 @@
 					</table>
 				</div>
         <div class="col-md-6" style="padding:0;">
-          @if(!empty($sq)) {{ $data->appends(['sf' => $sf,'sq' => $sq])->links() }} @else {{ $data->render() }} @endif
+          @if(!empty($sq)) {{ $data->appends(['bts'=>$bts, 'sf' => $sf,'sq' => $sq])->links() }} @else {{ $data->render() }} @endif
         </div>
       </div>
       <!-- /.box-footer -->

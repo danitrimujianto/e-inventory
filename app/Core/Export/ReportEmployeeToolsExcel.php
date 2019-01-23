@@ -2,6 +2,7 @@
 namespace App\Core\Export;
 
 use App\ToolsKaryawan;
+use App\Core\Readers\ReportEmployeeToolsReader;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -26,17 +27,23 @@ class ReportEmployeeToolsExcel implements FromView
 
     public function view(): View
     {
+      $isExport = true;
       $req = $this->request;
       $first_date = (isset($req->first_date) ? $req->first_date : '');
       $second_date = (isset($req->second_date) ? $req->second_date : '');
+      $sq = (isset($req->sq) ? $req->sq : '');
+      $sf = (isset($req->sf) ? $req->sf : '');
 
-      $data = ToolsKaryawan::where('renew_date', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('renew_date', '<=', HelpMe::tgl_indo_to_sql($second_date));
-
-      $data = $data->orderBy('renew_date','asc')->get();
+      $reader = new ReportEmployeeToolsReader($req, $isExport);
+      $data = $reader->read();
 
       return view('layouts.print', [
           'data' => $data,
-          'modul' => $this->modul
+          'modul' => $this->modul,
+          'first_date' => $first_date,
+          'second_date' => $second_date,
+          'sf' => $sf,
+          'sq' => $sq
       ]);
     }
 

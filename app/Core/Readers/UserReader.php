@@ -24,12 +24,20 @@ class UserReader implements Reader
       $req = $this->request;
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
+      $sf = (isset($req->sf) ? $req->sf : '');
 
       $data = new User;
       $data = $data->where('usertype_id', '!=', 1);
       if(!empty($sq))
       {
-        $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
+        if($sf == "type_name")
+        {
+          $data = $data->whereHas('tipeuser', function($q) use ($sq){
+            $q->where('type_name', 'like', '%'.$sq.'%');
+          });
+        }else{
+          $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
+        }
       }
 
       $data = $data->paginate($batas);

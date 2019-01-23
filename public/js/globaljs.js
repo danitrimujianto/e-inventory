@@ -14,6 +14,7 @@ $(document).ready(function(){
   //add button
   $("#addButton").click(function(){
     document.location.href='/'+modulPage+'/add';
+
   });
 
   //save button
@@ -59,7 +60,7 @@ $(document).ready(function(){
   $("#resetFilterReport").click(function(){
     $("#sf").val("");
     $("#sq").val("");
-    document.sReport.submit();
+    document.fReport.submit();
   });
 
   //delete button
@@ -115,6 +116,13 @@ $(document).ready(function(){
       document.fGlobal.action="/"+modulPage+"/export/excel";
       document.fGlobal.target="_blank";
       document.fGlobal.submit();
+  });
+
+  //excel report button
+  $("#ReportSubmitButton").click(function(){
+      document.fReport.action="/"+modulPage;
+      document.fReport.target="";
+      document.fReport.submit();
   });
 
   //excel report button

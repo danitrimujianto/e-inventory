@@ -79,215 +79,6 @@ class ReportKaryawanController extends ApplicationController
       }
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function add(Request $request)
-  {
-      $pos = "add";
-      $this->theme["page"] = 'add'; //disetiap class dan function controller harus ada
-      $this->returnData['theme'] = $this->theme;
-      $this->returnData['data'] = "";
-
-      try{
-        $reader = new DivisionReader($request);
-        $dDivision = $reader->read();
-        $this->returnData['dDivision'] = $dDivision;
-
-        $reader = new BarangReader($request);
-        $dBarang = $reader->read();
-        $this->returnData['dBarang'] = $dBarang;
-
-        return view('home', $this->returnData);
-      }catch(\Exception $e){
-        $msg = $this->resultException($e, $pos);
-        return dd($msg);
-      }
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(Request $request)
-  {
-    $pos = "add";
-    try {
-      $handler = new AddToolsHandler($request);
-      $data = $handler->handle();
-
-      $this->createAlert("info", $pos." Succeeded");
-
-      return redirect($this->modul);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    $this->theme["page"] = 'view'; //disetiap class dan function controller harus ada
-    $this->returnData['theme'] = $this->theme;
-    $this->returnData['data'] = "";
-
-    try {
-      $reader = new GetToolsReader($id);
-      $data = $reader->read();
-      $this->returnData['data'] = $data;
-      return view('home', $this->returnData);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(Request $request, $id)
-  {
-    $pos = "edit";
-    $this->theme["page"] = 'edit'; //disetiap class dan function controller harus ada
-    $this->returnData['theme'] = $this->theme;
-    $this->returnData['data'] = "";
-
-    try {
-      $reader = new GetToolsReader($id);
-      $data = $reader->read();
-      $this->returnData['data'] = $data;
-
-      $reader = new DivisionReader($request);
-      $dDivision = $reader->read();
-      $this->returnData['dDivision'] = $dDivision;
-
-      $reader = new BarangReader($request);
-      $dBarang = $reader->read();
-      $this->returnData['dBarang'] = $dBarang;
-
-      return view('home', $this->returnData);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    $pos = "edit";
-    try {
-      //dd($request);
-      $handler = new UpdateToolsHandler($request);
-      $data = $handler->handle();
-      $this->createAlert("info", $pos." Succeeded");
-
-      return redirect($this->modul);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy($id)
-  {
-    $pos = "delete";
-    try {
-      $handler = new DeleteToolsHandler($id);
-      $data = $handler->handle();
-      $this->createAlert("info", $pos." Succeeded");
-
-      return redirect($this->modul);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-   public function list(Request $request)
-   {
-     $pos = "list";
-     try {
-       $reader = new ToolsReader($request);
-       $data = $reader->read();
-       $this->returnData['data'] = $data;
-
-       return view('moduls.tools.list', $this->returnData);
-     } catch (\Exception $e) {
-       $msg = $this->resultException($e, $pos);
-       return dd($msg);
-     }
-   }
-
-    public function listMutasi(Request $request)
-    {
-      $pos = "listMutasi";
-      try {
-        $reader = new ToolsMutasiReader($request);
-        $data = $reader->read();
-        // dd($data);
-        return response()->json($data);
-        // return $data;
-      } catch (\Exception $e) {
-        $msg = $this->resultException($e, $pos);
-        return dd($msg);
-      }
-    }
-
-  public function selectData(Request $request)
-  {
-    $pos = "selectData";
-    try {
-      $reader = new SelectToolsReader($request);
-      $data = $reader->read();
-      // dd($data);
-      return response()->json($data);
-      // return $data;
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return dd($msg);
-    }
-  }
-
- public function search(Request $request)
- {
-   $pos = "search";
-   try {
-     $reader = new SearchToolsReader($request);
-     $data = $reader->read();
-
-     return response()->json($data);
-   } catch (\Exception $e) {
-     $msg = $this->resultException($e, $pos);
-     return dd($msg);
-   }
- }
-
  public function excel(Request $request)
  {
    $pos = "Export Excel";
@@ -303,12 +94,17 @@ class ReportKaryawanController extends ApplicationController
  public function print(Request $request)
  {
    $pos = "Print";
+   $first_date = (isset($_REQUEST['first_date']) ? $_REQUEST['first_date'] : '');
+   $second_date = (isset($_REQUEST['second_date']) ? $_REQUEST['second_date'] : '');
+   $sf = (isset($_REQUEST['sf']) ? $_REQUEST['sf'] : '');
+   $sq = (isset($_REQUEST['sq']) ? $_REQUEST['sq'] : '');
+   $isExport = true;
    try {
 
-     $reader = new ReportKaryawanPrint($request);
+     $reader = new ReportKaryawanReader($request, $isExport);
      $data = $reader->read();
 
-     return view('layouts.print', ['data' => $data, 'modul' => $this->modul]);
+    return view('layouts.print', ['data' => $data, 'modul' => $this->modul, 'first_date' => $first_date, 'second_date' => $second_date, 'sf' => $sf, 'sq' => $sq]);
    } catch (\Exception $e) {
      $msg = $this->resultException($e, $pos);
      return dd($msg);

@@ -35,12 +35,13 @@ class ReportHandoverController extends ApplicationController
    */
   public function index(Request $request)
   {
+      $pos = "handover";
       $this->theme["page"] = 'index'; //disetiap class dan function controller harus ada
       $first_date = (isset($_REQUEST['first_date']) ? $_REQUEST['first_date'] : '');
       $second_date = (isset($_REQUEST['second_date']) ? $_REQUEST['second_date'] : '');
-      $sf = (isset($_GET['sf']) ? $_GET['sf'] : '');
-      $sq = (isset($_GET['sq']) ? $_GET['sq'] : '');
-      $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
+      $sf = (isset($_REQUEST['sf']) ? $_REQUEST['sf'] : '');
+      $sq = (isset($_REQUEST['sq']) ? $_REQUEST['sq'] : '');
+      $bts = (isset($_REQUEST['bts']) ? $_REQUEST['bts'] : '');
       try {
         $alert = "";
 
@@ -59,134 +60,8 @@ class ReportHandoverController extends ApplicationController
         return view('home', $this->returnData);
       } catch (\Exception $e) {
         $msg = $this->resultException($e, $pos);
-        return redirect($this->modul);
+        return dd($msg);
       }
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function add()
-  {
-      $this->theme["page"] = 'add'; //disetiap class dan function controller harus ada
-      $this->returnData['theme'] = $this->theme;
-      $this->returnData['data'] = "";
-
-      return view('home', $this->returnData);
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(Request $request)
-  {
-    $pos = "add";
-    try {
-      $handler = new AddVendorHandler($request);
-      $data = $handler->handle();
-      $this->createAlert("info", $pos." Succeeded");
-
-      return redirect($this->modul);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    $this->theme["page"] = 'view'; //disetiap class dan function controller harus ada
-    $this->returnData['theme'] = $this->theme;
-    $this->returnData['data'] = "";
-
-    try {
-      $reader = new GetVendorReader($id);
-      $data = $reader->read();
-      $this->returnData['data'] = $data;
-      return view('home', $this->returnData);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    $pos = "edit";
-    $this->theme["page"] = 'edit'; //disetiap class dan function controller harus ada
-    $this->returnData['theme'] = $this->theme;
-    $this->returnData['data'] = "";
-
-    try {
-      $reader = new GetVendorReader($id);
-      $data = $reader->read();
-      $this->returnData['data'] = $data;
-      return view('home', $this->returnData);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    $pos = "edit";
-    try {
-      //dd($request);
-      $handler = new UpdateVendorHandler($request);
-      $data = $handler->handle();
-      $this->createAlert("info", $pos." Succeeded");
-
-      return redirect($this->modul);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy($id)
-  {
-    $pos = "delete";
-    try {
-      $handler = new DeleteVendorHandler($id);
-      $data = $handler->handle();
-      $this->createAlert("info", $pos." Succeeded");
-
-      return redirect($this->modul);
-    } catch (\Exception $e) {
-      $msg = $this->resultException($e, $pos);
-      return redirect($this->modul);
-    }
   }
 
   public function excel(Request $request)
@@ -203,12 +78,18 @@ class ReportHandoverController extends ApplicationController
   public function print(Request $request)
   {
     $pos = "Print";
+    $first_date = (isset($_REQUEST['first_date']) ? $_REQUEST['first_date'] : '');
+    $second_date = (isset($_REQUEST['second_date']) ? $_REQUEST['second_date'] : '');
+    $sf = (isset($_REQUEST['sf']) ? $_REQUEST['sf'] : '');
+    $sq = (isset($_REQUEST['sq']) ? $_REQUEST['sq'] : '');
+    $isExport = true;
+
     try {
 
-      $reader = new ReportHandoverReader($request);
+      $reader = new ReportHandoverReader($request, $isExport);
       $data = $reader->read();
 
-      return view('layouts.print', ['data' => $data, 'modul' => 'rephandover']);
+      return view('layouts.print', ['data' => $data, 'modul' => $this->modul, 'first_date' => $first_date, 'second_date' => $second_date, 'sf' => $sf, 'sq' => $sq]);
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return dd($msg);

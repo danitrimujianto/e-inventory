@@ -20,6 +20,7 @@
   					<select name="sf" class="form-control">
               <option value="code" @if($sf == "code") {{ 'selected' }} @endif>Code</option>
               <option value="item" @if($sf == "item") {{ 'selected' }} @endif>Item</option>
+              <option value="serial_number" @if($sf == "serial_number") {{ 'selected' }} @endif>Serial Number</option>
   					</select>
 					</div>
 				  <div class="col-md-5 col-xs-12">
@@ -71,6 +72,8 @@
                   @if(!empty($sq))
                     <input type="hidden" name="sf" value="{{ $sf }}">
                     <input type="hidden" name="sq" value="{{ $sq }}">
+                    <input type="hidden" name="first_date" value="{{ $first_date }}">
+                    <input type="hidden" name="second_date" value="{{ $second_date }}">
                   @endif
 									<select name="bts" id="batas" class="form-control input-sm" onchange=" submit(); ">
 										<option value="10" @if($bts == '10') {{ 'selected' }} @endif>10</option>
@@ -85,7 +88,7 @@
 					</table>
 				</div>
         <div class="col-md-6" style="padding:0;">
-          @if(!empty($sq)) {{ $data->appends(['sf' => $sf,'sq' => $sq])->links() }} @else {{ $data->render() }} @endif
+          @if(!empty($sq)) {{ $data->appends(['first_date' => $first_date, 'second_date' => $second_date, 'bts'=>$bts, 'sf' => $sf,'sq' => $sq])->links() }} @else {{ $data->render() }} @endif
         </div>
       </div>
       <!-- /.box-footer -->
