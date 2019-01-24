@@ -25,7 +25,7 @@
   					<button type="button" id="ReportExcelButton" class="btn btn-danger"><i class="fa fa-file-excel-o"></i> Excel</button>
           </div>
 				  <div class="col-md-2 col-xs-12 pull-right" style="  ">
-            <button class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
+            <button type="button" class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
 				  </div>
 				</div>
 				</div>
