@@ -1,5 +1,3 @@
-<?php
- ?>
 <!-- Small boxes (Stat box) -->
 <div class="row">
   <div class="col-xs-12">
@@ -50,7 +48,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="name">Project</label>
+            <label for="name">Project {{ $data->project_id }}</label>
             <div>
               <select class="form-control" name="project_id" id="project_id">
                 <option value="">-- Choose Project --</option>

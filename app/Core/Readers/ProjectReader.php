@@ -39,4 +39,25 @@ class ProjectReader implements Reader
 
       return $data;
     }
+    public function readData()
+    {
+
+      $req = $this->request;
+      $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
+      $sq = (isset($req->sq) ? $req->sq : '');
+
+      $data = new Project;
+      if(!empty($sq))
+      {
+        if($req->sf == 'vendor'){
+          $data = $data->leftJoin('vendor', 'project.vendor_id', '=', 'vendor.id')->where('vendor.name', 'like', '%'.$req->sq.'%');
+        }else{
+          $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
+        }
+      }
+
+      $data = $data->get();
+
+      return $data;
+    }
 }

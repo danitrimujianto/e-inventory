@@ -92,23 +92,23 @@ class KaryawanController extends ApplicationController
 
       try{
         $reader = new DepartemenReader($request);
-        $dDepartemen = $reader->read();
+        $dDepartemen = $reader->readData();
         $this->returnData['dDepartemen'] = $dDepartemen;
 
         $reader = new PositionReader($request);
-        $dPosition = $reader->read();
+        $dPosition = $reader->readData();
         $this->returnData['dPosition'] = $dPosition;
 
         $reader = new ProjectReader($request);
-        $dProject = $reader->read();
+        $dProject = $reader->readData();
         $this->returnData['dProject'] = $dProject;
 
         $reader = new AreaReader($request);
-        $dArea = $reader->read();
+        $dArea = $reader->readData();
         $this->returnData['dArea'] = $dArea;
 
         $reader = new CityReader($request);
-        $dCity = $reader->read();
+        $dCity = $reader->readData();
         $this->returnData['dCity'] = $dCity;
 
         return view('home', $this->returnData);
@@ -158,25 +158,24 @@ class KaryawanController extends ApplicationController
       $data = $reader->read();
       $this->returnData['data'] = $data;
 
-
       $reader = new DepartemenReader($request);
-      $dDepartemen = $reader->read();
+      $dDepartemen = $reader->readData();
       $this->returnData['dDepartemen'] = $dDepartemen;
 
       $reader = new PositionReader($request);
-      $dPosition = $reader->read();
+      $dPosition = $reader->readData();
       $this->returnData['dPosition'] = $dPosition;
 
       $reader = new ProjectReader($request);
-      $dProject = $reader->read();
+      $dProject = $reader->readData();
       $this->returnData['dProject'] = $dProject;
 
       $reader = new AreaReader($request);
-      $dArea = $reader->read();
+      $dArea = $reader->readData();
       $this->returnData['dArea'] = $dArea;
 
       $reader = new CityReader($request);
-      $dCity = $reader->read();
+      $dCity = $reader->readData();
       $this->returnData['dCity'] = $dCity;
 
       return view('home', $this->returnData);
@@ -203,25 +202,25 @@ class KaryawanController extends ApplicationController
       $reader = new GetKaryawanReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
-
+      
       $reader = new DepartemenReader($request);
-      $dDepartemen = $reader->read();
+      $dDepartemen = $reader->readData();
       $this->returnData['dDepartemen'] = $dDepartemen;
 
       $reader = new PositionReader($request);
-      $dPosition = $reader->read();
+      $dPosition = $reader->readData();
       $this->returnData['dPosition'] = $dPosition;
 
       $reader = new ProjectReader($request);
-      $dProject = $reader->read();
+      $dProject = $reader->readData();
       $this->returnData['dProject'] = $dProject;
 
       $reader = new AreaReader($request);
-      $dArea = $reader->read();
+      $dArea = $reader->readData();
       $this->returnData['dArea'] = $dArea;
 
       $reader = new CityReader($request);
-      $dCity = $reader->read();
+      $dCity = $reader->readData();
       $this->returnData['dCity'] = $dCity;
 
       return view('home', $this->returnData);

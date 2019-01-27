@@ -34,4 +34,20 @@ class SupplierReader implements Reader
       $data = $data->paginate($batas);
       return $data;
     }
+    public function readData()
+    {
+
+      $req = $this->request;
+      $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
+      $sq = (isset($req->sq) ? $req->sq : '');
+
+      $data = new Supplier;
+      if(!empty($sq))
+      {
+        $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
+      }
+
+      $data = $data->get();
+      return $data;
+    }
 }

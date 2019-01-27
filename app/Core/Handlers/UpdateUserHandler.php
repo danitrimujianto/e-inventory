@@ -22,8 +22,14 @@ class UpdateUserHandler implements Handler
     public function handle()
     {
         $request = $this->request;
-        $data = $this->saveDB($request);
-        return $data;
+        $err = $this->checkEmail($request);
+        // dd($err);
+        if(!$err['error']){
+          $data = $this->saveDB($request);
+          return $data;
+        }else{
+          return abort(500, $err['msg']);
+          }
     }
 
     private function saveDB($request)
@@ -37,7 +43,7 @@ class UpdateUserHandler implements Handler
         $tab->usertype_id = $request->usertype_id;
         $tab->name = $request->name;
         $tab->email = $request->email;
-        // $tab->karyawan_id = $karyawan_id;
+        $tab->karyawan_id = $karyawan_id;
         $tab->request_tools = $request->request_tools;
 
         if(!empty($request->password))
@@ -50,5 +56,16 @@ class UpdateUserHandler implements Handler
         // $karyawan->save();
 
         return $tab;
+    }
+
+    private function checkEmail($request){
+      $msg = array();
+      $kar = Karyawan::where('email', $request->email)->where('status', 'Aktif')->first();
+      // dd($kar);
+      if(empty($kar)){
+        return array('error' => true, 'msg' => 'Email NOT FOUND or Employee is NOT ACTIVE');
+      }else{
+        return array('error' => false, 'msg' => '');
+      }
     }
 }

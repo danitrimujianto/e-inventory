@@ -41,4 +41,27 @@ class AllhoActivitiesUserReader implements Reader
       $data = $data->orderBy('id','desc')->paginate($batas);
       return $data;
     }
+    public function readData()
+    {
+
+      $req = $this->request;
+      $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
+      $sq = (isset($req->sq) ? $req->sq : '');
+
+      $data = AllhoActivities::where('type', 'user');
+      if(!empty($sq))
+      {
+        if($sf == 'recipient'){
+          $data = $data->with('Karyawan')->whereHas('Karyawan', function($q) use ($sq){
+            $q->where('name', 'like', '%'.$sq.'%');
+          });
+        }else{
+          $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
+        }
+      }
+      if(Auth::user()->usertype_id != 1){ $data = $data->where('sender_id', Auth::user()->karyawan_id); }
+
+      $data = $data->orderBy('id','desc')->get();
+      return $data;
+    }
 }

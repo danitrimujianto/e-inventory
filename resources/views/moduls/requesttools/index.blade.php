@@ -38,7 +38,7 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Status</th>
+            <th>Status {{ Auth::user()->karyawan_id }}</th>
             <th>Approved By</th>
             <th>Rejected By</th>
             <th>Date</th>
