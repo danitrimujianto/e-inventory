@@ -287,6 +287,7 @@ Route::middleware('auth')->prefix("/tools")->group(function() {
     Route::get("/", 'ToolsController@index'); /* action get list of developers */
     Route::get("/list", 'ToolsController@list'); /* action get list of developers */
     Route::get("/select", 'ToolsController@selectData'); /* action get list of developers */
+    Route::get("/updatecode", 'ToolsController@updateCode'); /* action get list of developers */
     Route::middleware('auth')->prefix("/search")->group(function() {
       Route::get("/", 'ToolsController@search'); /* action insert or add data to system*/
       Route::get("/mutasi", 'ToolsController@listMutasi'); /* action insert or add data to system*/

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Core\Handlers\AddToolsHandler;
 use App\Core\Handlers\UpdateToolsHandler;
 use App\Core\Handlers\DeleteToolsHandler;
+use App\Core\Handlers\GenerateCodeToolsHandler;
 use App\Core\Readers\ToolsReader;
 use App\Core\Readers\SearchToolsReader;
 use App\Core\Readers\ToolsMutasiReader;
@@ -284,5 +285,21 @@ class ToolsController extends ApplicationController
      $msg = $this->resultException($e, $pos);
      return dd($msg);
    }
+ }
+
+ public function updateCode(Request $request)
+ {
+  $pos = "updateCode";
+  try {
+    $handler = new GenerateCodeToolsHandler($request);
+    $data = $handler->handle();
+    // $this->createAlert("info", $pos." Succeeded");
+
+    dd($data);
+    // return redirect($this->modul);
+  } catch (\Exception $e) {
+    $msg = $this->resultException($e, $pos);
+    return dd($msg);
+  }
  }
 }

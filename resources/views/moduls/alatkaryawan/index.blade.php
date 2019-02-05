@@ -71,7 +71,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
             <td>{{ optional($d->tools)->serial_number }}</td>
             <td>{{ optional($d->tools)->imei }}</td>
             <td>{{ optional($d->condition)->name }}</td>
-            <td>{{ optional($d->handover->project)->name }}</td>
+            <td>{{ optional($d->karyawan->project)->name }}</td>
             <td>{{ optional($d->karyawan)->name }}</td>
             <td>{{ optional($d->karyawan->homebasearea)->name }}</td>
             <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>

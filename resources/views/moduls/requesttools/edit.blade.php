@@ -85,6 +85,7 @@
             <h4 class="page-header">Items
               <!-- <button type="button" class="btn btn-primary pull-right btn-xs" id="btnListTools"><i class="fa fa-plus"></i> Add</button> -->
             </h4>
+            <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
                   <th>Item</th>
@@ -131,6 +132,7 @@
                 </tr>
                 </tfooter>
               </table>
+              </div>
           </section>
         </div>
         <!-- /.box-body -->

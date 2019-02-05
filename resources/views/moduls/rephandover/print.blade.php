@@ -48,7 +48,7 @@
           <td>{{ $d->tools->imei }}</td>
           <td>{{ $d->tools->merk }}</td>
           <td>{{ $d->tools->type }}</td>
-          <td>{{ optional($d->allhoactivities->sender)->name }}</td>
+          <td>@if($d->allhoactivities->type == 'user') {{ optional($d->allhoactivities->sender)->name }} @else {{ $d->allhoactivities->type }} @endif</td>
           <td>{{ optional($d->allhoactivities->karyawan)->name }}</td>
           <td>{{ optional($d->allhoactivities->delivery)->name }}</td>
           <td>{{ optional($d->allhoactivities->project)->name }}</td>
