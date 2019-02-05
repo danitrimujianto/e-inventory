@@ -29,7 +29,7 @@
           <th bgcolor="#CCCCCC">RECIPIENT</th>
           <th bgcolor="#CCCCCC">DELIVERY</th>
           <th bgcolor="#CCCCCC">PROJECT</th>
-          <th bgcolor="#CCCCCC">FROM CITY</th>
+          <!-- <th bgcolor="#CCCCCC">FROM CITY</th> -->
           <th bgcolor="#CCCCCC">TO CITY</th>
         </tr>
         </thead>
@@ -52,7 +52,7 @@
           <td>{{ optional($d->allhoactivities->karyawan)->name }}</td>
           <td>{{ optional($d->allhoactivities->delivery)->name }}</td>
           <td>{{ optional($d->allhoactivities->project)->name }}</td>
-          <td>{{ optional($d->allhoactivities->fromcity)->name }}</td>
+          <!-- <td>{{ optional($d->allhoactivities->fromcity)->name }}</td> -->
           <td>{{ optional($d->allhoactivities->tocity)->name }}</td>
         </tr>
         @endforeach
