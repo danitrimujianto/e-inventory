@@ -20,4 +20,9 @@ class Tools extends Model
     {
       return $this->belongsTo('App\Barang');
     }
+
+    public function supplier()
+    {
+      return $this->belongsTo('App\Supplier');
+    }
 }

@@ -69,6 +69,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="name">Supplier</label>
+            <div>
+              <input type="text" class="form-control" name="supplier" id="supplier" placeholder="" autocomplete="off" value="{{ optional($data->supplier)->name }}" readonly>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="name">Price</label>
             <div>
               <input type="text" class="form-control nominal" name="price" id="price" placeholder="" autocomplete="off" value="{{ HelpMe::cost($data->price) }}" disabled>

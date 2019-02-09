@@ -79,6 +79,13 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="name">Supplier</label>
+            <div>
+              <input type="hidden" class="form-control" name="supplier_id" id="supplier_id" placeholder="" autocomplete="off" value="{{ $data->supplier_id }}">
+              <input type="text" class="form-control" name="supplier" id="supplier" placeholder="" autocomplete="off" value="{{ optional($data->supplier)->name }}">
+            </div>
+          </div>
+          <div class="form-group">
             <label for="name">Price</label>
             <div>
               <input type="text" class="form-control nominal" name="price" id="price" placeholder="" autocomplete="off" value="{{ HelpMe::cost($data->price) }}">
@@ -136,6 +143,32 @@ $(document).ready(function(){
       }
   	});
   });
+
+
+    var listSupplier = [];
+    var listDataSupplier = {};
+    $('body').on('keyup', '#supplier', function(){
+      $(this).typeahead({
+    		source: function (query, result) {
+          $.ajax({
+    				url: "/supplier/search",
+    				data: 'sf=name&sq=' + query,
+    				dataType: "json",
+    				type: "GET",
+    				success: function (data) {
+      					result($.map(data, function (item) {
+                  listDataSupplier[item.name] = item.id;
+                  listSupplier.push(listDataSupplier);
+                  return item.name;
+      					}));
+    				}
+    			});
+    		},
+        afterSelect: function(data){
+          $('#supplier_id').val(listDataSupplier[data]);
+        }
+    	});
+    });
 });
 </script>
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnPurchase extends Migration
+class AddSupplierTool extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddColumnPurchase extends Migration
      */
     public function up()
     {
-        Schema::table('purchase_request', function (Blueprint $table) {
-          $table->unsignedInteger('approved_by')->nullable();
-          $table->foreign('approved_by')->references('id')->on('karyawan')->onDelete('NO ACTION');
+        Schema::table('tools', function (Blueprint $table) {
+          $table->unsignedInteger('supplier_id')->nullable();
+          $table->foreign('supplier_id')->references('id')->on('supplier')->onDelete('NO ACTION');
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnPurchase extends Migration
      */
     public function down()
     {
-        Schema::table('purchase_request', function (Blueprint $table) {
+        Schema::table('tools', function (Blueprint $table) {
             //
         });
     }

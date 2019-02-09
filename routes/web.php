@@ -145,6 +145,7 @@ Route::middleware('auth')->prefix("/position")->group(function() {
 /* Router Supplier */
 Route::middleware('auth')->prefix("/supplier")->group(function() {
     Route::get("/", 'SupplierController@index'); /* action get list of developers */
+    Route::get("/search", 'SupplierController@search'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'SupplierController@add'); /* action insert or add data to system*/

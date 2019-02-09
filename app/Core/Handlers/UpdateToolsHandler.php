@@ -37,6 +37,7 @@ class UpdateToolsHandler implements Handler
         $tab->price = HelpMe::normalNumber($request->price);
         $tab->remarks = $request->remarks;
         $tab->tgl = HelpMe::tgl_indo_to_sql($request->tgl);
+        $tab->supplier_id = $request->supplier_id;
         $tab->save();
 
         return $tab;

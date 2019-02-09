@@ -9,6 +9,7 @@ use App\Core\Handlers\UpdateSupplierHandler;
 use App\Core\Handlers\DeleteSupplierHandler;
 use App\Core\Readers\SupplierReader;
 use App\Core\Readers\GetSupplierReader;
+use App\Core\Readers\SearchSupplierReader;
 
 use Session;
 use HelpMe;
@@ -191,6 +192,20 @@ class SupplierController extends ApplicationController
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return redirect($this->modul);
+    }
+  }
+
+  public function search(Request $request)
+  {
+    $pos = "search";
+    try {
+      $reader = new SearchSupplierReader($request);
+      $data = $reader->read();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return dd($msg);
     }
   }
 }

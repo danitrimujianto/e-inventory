@@ -52,6 +52,7 @@ class AddToolsHandler implements Handler
         $tab->remarks = $request->remarks;
         $tab->created_by = Auth::user()->name;
         $tab->tgl = HelpMe::tgl_indo_to_sql($request->tgl);
+        $tab->supplier_id = $request->supplier_id;
         $tab->save();
 
         return $tab;
