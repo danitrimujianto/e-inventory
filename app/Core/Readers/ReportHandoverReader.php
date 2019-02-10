@@ -36,7 +36,7 @@ class ReportHandoverReader implements Reader
 
       $data = new AllhoActivitiesDetail;
       $data = $data->whereHas('allhoactivities', function ($q) use($first_date, $second_date){
-        $q->where('tgl', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tgl', '<=', HelpMe::tgl_indo_to_sql($second_date));
+        $q->where('tgl', '>=', HelpMe::tgl_indo_to_sql($first_date))->where('tgl', '<=', HelpMe::tgl_indo_to_sql($second_date))->where('status', '2');
       });
 
       if(!empty($sq))

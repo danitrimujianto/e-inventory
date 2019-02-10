@@ -37,6 +37,14 @@ class ServiceReader implements Reader
           $data = $data->with('Tools')->whereHas('Tools', function($q) use ($sq){
             $q->where('code', 'like', '%'.$sq.'%');
           });
+        }elseif($sf == 'serial_number'){
+          $data = $data->with('Tools')->whereHas('Tools', function($q) use ($sq){
+            $q->where('serial_number', 'like', '%'.$sq.'%');
+          });
+        }elseif($sf == 'imei'){
+          $data = $data->with('Tools')->whereHas('Tools', function($q) use ($sq){
+            $q->where('imei', 'like', '%'.$sq.'%');
+          });
         }else{
           $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
         }

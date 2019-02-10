@@ -44,6 +44,7 @@
             <th>Date</th>
             <th>Purchase No.</th>
             <th>User Request</th>
+            <th>Project</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
@@ -54,6 +55,7 @@
             <td>{{ HelpMe::tgl_sql_to_indo($d->tanggal) }}</td>
             <td>{{ $d->pr_no }}</td>
             <td>{{ optional($d->karyawan)->name }}</td>
+            <td>{{ optional($d->project)->name }}</td>
             <td>
               @if(Auth::user()->usertype_id != 3)
               @if($d->status >= 0 && $d->status < 1)
