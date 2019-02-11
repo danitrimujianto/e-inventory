@@ -83,8 +83,8 @@ class AllhoActivitiesAcceptReader implements Reader
         $opr = ">=";
         $status = "1";
 
-        $opr2 = "<";
-        $status2 = "99";
+        $opr2 = "<=";
+        $status2 = "98";
       }else{
         $opr = "=";
         $status = "0";
