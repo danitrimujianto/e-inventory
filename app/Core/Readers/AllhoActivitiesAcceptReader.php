@@ -77,10 +77,14 @@ class AllhoActivitiesAcceptReader implements Reader
       // $status = ((Auth::user()->usertype_id == "3") ? "0" :
       //             (Auth::user()->usertype_id == "4") ? "1" : "");
 
+      $status2 = "";
       if($usertype == 4 || $usertype == 5)
       {
-        $opr = "=";
+        $opr = ">=";
         $status = "1";
+
+        $opr2 = "<";
+        $status2 = "99";
       }else{
         $opr = "=";
         $status = "0";
@@ -94,7 +98,8 @@ class AllhoActivitiesAcceptReader implements Reader
       }
 
       $data = $data->where('status', $opr, $status);
-
+      if($status != ""){ $data = $data->where('status', $opr2, $status2); }
+      
       if(!empty($sq))
       {
         if($sf == 'from'){
