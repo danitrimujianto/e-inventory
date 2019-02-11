@@ -113,9 +113,9 @@ class AllhoActivitiesAcceptReader implements Reader
       if(Auth::user()->usertype_id == 4 || Auth::user()->usertype_id == 5){
         $data = $data->where('recipient_id', Auth::user()->karyawan_id);
       }
-      dd($data);
-      $data = $data->orderBy('id','desc')->get();
 
+      $data = $data->orderBy('id','desc')->get();
+      dd($usertype);
       return $data;
     }
 }
