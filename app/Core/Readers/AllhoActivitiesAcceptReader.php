@@ -79,7 +79,7 @@ class AllhoActivitiesAcceptReader implements Reader
 
       if($usertype == 4 || $usertype == 5)
       {
-        $opr = ">=";
+        $opr = "=";
         $status = "1";
       }else{
         $opr = "=";
