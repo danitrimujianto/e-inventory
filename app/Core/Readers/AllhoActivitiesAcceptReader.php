@@ -98,8 +98,8 @@ class AllhoActivitiesAcceptReader implements Reader
       }
 
       $data = $data->where('status', $opr, $status);
-      if($status != ""){ $data = $data->where('status', $opr2, $status2); }
-      
+      if($status2 != ""){ $data = $data->where('status', $opr2, $status2); }
+
       if(!empty($sq))
       {
         if($sf == 'from'){
