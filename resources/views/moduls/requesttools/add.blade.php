@@ -35,6 +35,16 @@
                 </div>
               </div>
             </div>
+            @if(Auth::user()->usertype_id != 1)
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Purchase No</label>
+                <div>
+                  <input type="text" class="form-control" name="pr_no" id="pr_no" placeholder="" autocomplete="off" readonly>
+                </div>
+              </div>
+            </div>
+            @endif
           </div>
           <div class="row">
             <div class="col-md-6">
@@ -48,27 +58,19 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Purchase No</label>
-                <div>
-                  <input type="text" class="form-control" name="pr_no" id="pr_no" placeholder="" autocomplete="off" readonly>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
                 <label for="name">Due Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="due_date" id="due_date" placeholder="" autocomplete="off" value="">
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+          </div>
+          <div class="row">
+            <div class="col-md-12">
               <div class="form-group">
                 <label for="name">Description</label>
                 <div>
-                  <textarea class="form-control" name="description" id="description"></textarea>
+                  <textarea class="form-control editor" name="description" id="description"></textarea>
                 </div>
               </div>
             </div>
@@ -107,7 +109,6 @@
           </section>
         </div>
         <!-- /.box-body -->
-
         <div class="box-footer">
           <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
           <button type="button" class="btn btn-success" id="saveButton"><i class="fa fa-save"></i>&nbsp;Save</button>
@@ -119,10 +120,14 @@
 </div>
 <!-- /.row (main row) -->
 @section('scriptAdd')
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script>
 $(document).ready(function(){
 
   var urut = 0;
+
+  $(".editor").wysihtml5();
 
   $('#btnListTools').click(function(){
     modalPage('', '/tools/list', 'Tools', 80);
@@ -255,4 +260,5 @@ function hitungTotal(){
   return val;
 }
 </script>
+
 @endsection

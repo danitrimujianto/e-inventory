@@ -41,6 +41,16 @@
                 </div>
               </div>
             </div>
+            @if(Auth::user()->usertype_id != 1)
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Purchase No</label>
+                <div>
+                  <input type="text" class="form-control" name="pr_no" id="pr_no" placeholder="" autocomplete="off" value="{{ $data->pr_no }}" readonly>
+                </div>
+              </div>
+            </div>
+            @endif
           </div>
           <div class="row">
             <div class="col-md-6">
@@ -54,28 +64,20 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Purchase No</label>
-                <div>
-                  <input type="text" class="form-control" name="pr_no" id="pr_no" placeholder="" autocomplete="off" value="{{ $data->pr_no }}" readonly>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
                 <label for="name">Due Date</label>
                 <div>
                   <input type="text" class="form-control" name="due_date" id="due_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->due_date) }}" readonly />
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
               <div class="form-group">
                 <label for="name">Description</label>
                 <div>
-                  <textarea class="form-control" name="description" id="description" readonly>{{ $data->description }}</textarea>
+                  <?php echo $data->description; ?>
                 </div>
               </div>
             </div>

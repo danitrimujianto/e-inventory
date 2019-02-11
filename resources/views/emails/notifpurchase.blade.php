@@ -45,6 +45,11 @@ Request detail
     <td>:</td>
     <td>{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}</td>
   </tr>
+  <tr>
+    <td>Description</td>
+    <td>:</td>
+    <td><?php echo $data->description; ?></td>
+  </tr>
 </table>
 <br>
 <br>
