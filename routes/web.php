@@ -507,15 +507,27 @@ Route::middleware('auth')->prefix("/repservice")->group(function() {
   });
 });
 
-Route::middleware('auth')->prefix("/repstoktools")->group(function() {
-  Route::get("/", 'ReportStokToolsController@index'); /* action insert or add data to system*/
-  Route::post("/", 'ReportStokToolsController@index'); /* action insert or add data to system*/
-  Route::post("/print", 'ReportStokToolsController@print'); /* action get data by id */
-  Route::get("/print", 'ReportStokToolsController@print'); /* action get data by id */
+Route::middleware('auth')->prefix("/reptools")->group(function() {
+  Route::get("/", 'ReportToolsController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportToolsController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportToolsController@print'); /* action get data by id */
+  Route::get("/print", 'ReportToolsController@print'); /* action get data by id */
 
   Route::prefix("/export")->group(function() {
-      Route::post("/excel", 'ReportStokToolsController@excel'); /* action get data by id */
-      Route::get("/excel", 'ReportStokToolsController@excel'); /* action get data by id */
+      Route::post("/excel", 'ReportToolsController@excel'); /* action get data by id */
+      Route::get("/excel", 'ReportToolsController@excel'); /* action get data by id */
+  });
+});
+
+Route::middleware('auth')->prefix("/repstoktools")->group(function() {
+  Route::get("/", 'ReportStockToolsController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportStockToolsController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportStockToolsController@print'); /* action get data by id */
+  Route::get("/print", 'ReportStockToolsController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportStockToolsController@excel'); /* action get data by id */
+      Route::get("/excel", 'ReportStockToolsController@excel'); /* action get data by id */
   });
 });
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Core\Handlers\AddToolsHandler;
 use App\Core\Handlers\UpdateToolsHandler;
 use App\Core\Handlers\DeleteToolsHandler;
-use App\Core\Readers\ReportStokToolsReader;
+use App\Core\Readers\ReportStockToolsReader;
 use App\Core\Readers\SearchToolsReader;
 use App\Core\Readers\ToolsMutasiReader;
 use App\Core\Readers\GetToolsReader;
@@ -16,15 +16,15 @@ use App\Core\Readers\SelectToolsReader;
 //others table
 use App\Core\Readers\DivisionReader;
 use App\Core\Readers\BarangReader;
-use App\Core\Export\ReportStokToolsExcel;
-use App\Core\Export\ReportStokToolsPrint;
+use App\Core\Export\ReportStockToolsExcel;
+use App\Core\Export\ReportStockToolsPrint;
 
 
 use Session;
 use HelpMe;
 use DB;
 
-class ReportStokToolsController extends ApplicationController
+class ReportStockToolsController extends ApplicationController
 {
   /**
    * Create a new controller instance.
@@ -34,8 +34,8 @@ class ReportStokToolsController extends ApplicationController
   public function __construct()
   {
       $this->middleware('auth');
-      $this->modul = "repstoktools"; //disetiap __construct controller harus ada
-      $this->modulName = "Report Stok Tools"; //disetiap __construct controller harus ada
+      $this->modul = "reptools"; //disetiap __construct controller harus ada
+      $this->modulName = "Report Tools"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -56,7 +56,7 @@ class ReportStokToolsController extends ApplicationController
       $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
 
       try {
-        $reader = new ReportStokToolsReader($request);
+        $reader = new ReportStockToolsReader($request);
         $data = $reader->read();
 
         if(session()->get('procMsg')){
@@ -292,7 +292,7 @@ class ReportStokToolsController extends ApplicationController
  {
    $pos = "Export Excel";
    try {
-     return (new ReportStokToolsExcel($request))->download('Report Stok Tools.xls');
+     return (new ReportToolsExcel($request))->download('Report Tools.xls');
      // return Excel::download(new AlatKaryawanExcel($request), 'alat-karyawan.xlsx');
    } catch (\Exception $e) {
      $msg = $this->resultException($e, $pos);
@@ -305,7 +305,7 @@ class ReportStokToolsController extends ApplicationController
    $pos = "Print";
    try {
 
-     $reader = new ReportStokToolsPrint($request);
+     $reader = new ReportToolsPrint($request);
      $data = $reader->read();
 
      return view('layouts.print', ['data' => $data, 'modul' => $this->modul]);

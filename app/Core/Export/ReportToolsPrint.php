@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Readers;
+namespace App\Core\Export;
 
 use App\Tools;
 use App\Core\Reader;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 
-class ReportStokToolsReader implements Reader
+class ReportToolsPrint implements Reader
 {
     private $request;
     /** constructor, fungsinya untuk memudahkan passing variable dari controller */
@@ -30,7 +30,7 @@ class ReportStokToolsReader implements Reader
       {
         $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
       }
-      $data = $data->orderBy('id', 'desc')->paginate($batas);
+      $data = $data->orderBy('id', 'desc')->get();
       return $data;
     }
 }

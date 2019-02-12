@@ -44,7 +44,7 @@ class AcceptAllhoActivitiesHandler implements Handler
 
         if($usertype == "4" || $usertype == "5")
         {
-          $tools_karyawan = ToolsKaryawan::where('karyawan_id', $tab->recipient_id)->get();
+          $tools_sender = ToolsKaryawan::where('karyawan_id', $tab->sender_id)->get();
           $detail = AllhoActivitiesDetail::where("allho_activities_id", '=', $id)->select('tools_id', 'goods_condition_id');
 
           $getDet = $detail->get();
@@ -77,8 +77,8 @@ class AcceptAllhoActivitiesHandler implements Handler
           // dd($delExist);
           if($tab->type == 'user')
           {
-            if($tools_karyawan->count() > 0)
-              \DB::insert($delExist);
+            if($tools_sender->count() > 0)
+              \DB::statement($delExist);
           }
         }
 

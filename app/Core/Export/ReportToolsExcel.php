@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 use DB;
 use HelpMe;
 
-class ReportStokToolsExcel implements FromView
+class ReportToolsExcel implements FromView
 {
     use Exportable;
 
     public function __construct(Request $request)
     {
         $this->request  = $request;
-        $this->modul    = 'repstoktools';
+        $this->modul    = 'reptools';
     }
 
     public function view(): View
