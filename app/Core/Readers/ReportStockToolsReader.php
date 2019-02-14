@@ -3,12 +3,12 @@ namespace App\Core\Readers;
 
 use App\Tools;
 use App\ToolsKaryawan;
+use App\Barang;
 use App\Core\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
-use Barang;
 
 class ReportStockToolsReader implements Reader
 {
