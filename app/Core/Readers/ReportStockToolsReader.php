@@ -96,7 +96,7 @@ class ReportStockToolsReader implements Reader
     private function getByType()
     {
       $req = $this->request;
-      $data = Tools::join('barang AS c', 'tools.barang_id', '=', 'c.id')->select('c.id', 'c.type', 'c.name')->get();
+      $data = Barang::select('id', 'type', 'name')->get();
 
       // dd($data);
       return $data;
