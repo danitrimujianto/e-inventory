@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Core\Readers\ReportStockToolsReader;
 use DB;
 
-class ReportToolsPrint implements Reader
+class ReportStockToolsPrint implements Reader
 {
     private $request;
     /** constructor, fungsinya untuk memudahkan passing variable dari controller */
@@ -24,7 +24,7 @@ class ReportToolsPrint implements Reader
 
       $reader = new ReportStockToolsReader($request);
       $data = $reader->read();
-      
+
       return $data;
     }
 }

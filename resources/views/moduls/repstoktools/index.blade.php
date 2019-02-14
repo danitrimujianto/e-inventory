@@ -16,9 +16,11 @@
             <th class="text-center">{{ $pr->name }}</th>
             <?php $grandTotalProject[$pr->id] = 0; $np++; ?>
             @endforeach
+            <th class="text-center" >Office</th>
             <th class="text-center">Grand Total</th>
           </tr>
           <?php $nf = 0; ?>
+          <?php $grandTotalOffice = 0; ?>
           @foreach($data['type'] AS $ty)
           <?php $grandtotalrow = 0; ?>
             <tr class="bg-gray-active color-palette">
@@ -30,6 +32,11 @@
               $grandtotalrow = $grandtotalrow+$data['jmlByProjectType'][$ty->id][$pr->id];
               ?>
               @endforeach
+              <?php
+                $grandtotalrow = $grandtotalrow+$data['jmlOffice'][$ty->id];
+                $grandTotalOffice = $grandTotalOffice+$data['jmlOffice'][$ty->id];
+              ?>
+              <th class="text-center">{{ $data['jmlOffice'][$ty->id] }}</th>
               <th class="text-center">{{ $grandtotalrow }}</th>
             </tr>
             @foreach($data['city'][$ty->id] AS $ct)
@@ -40,6 +47,7 @@
               <td class="text-center">{{ $data['jml'][$ty->id][$ct->id][$pr->id] }}</td>
               <?php $grandtotalrow = $grandtotalrow+$data['jml'][$ty->id][$ct->id][$pr->id]; ?>
               @endforeach
+              <th class="text-center">&nbsp;</th>
               <th class="text-center">{{ $grandtotalrow }}</th>
             </tr>
             @endforeach
@@ -51,6 +59,10 @@
             <td class="text-center">{{ $grandTotalProject[$pr->id] }}</td>
             <?php $grandtotalrow = $grandtotalrow+$grandTotalProject[$pr->id]; ?>
             @endforeach
+            <?php
+              $grandtotalrow = $grandtotalrow+$grandTotalOffice;
+            ?>
+            <th class="text-center">{{ $grandTotalOffice }}</th>
             <th class="text-center">{{ $grandtotalrow }}</th>
           </tr>
         </table>

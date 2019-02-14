@@ -35,6 +35,7 @@ class ReportStockToolsReader implements Reader
 
       $jml = array();
       foreach($type AS $ty){
+        $jmlOffice[$ty->id] = $this->getJmlOfficeByType($ty->id);
         foreach($project AS $pr){
           $jmlByProjectType[$ty->id][$pr->id] = $this->getJmlByProjectType($pr->id, $ty->id);
         }
@@ -46,7 +47,7 @@ class ReportStockToolsReader implements Reader
         }
       }
 
-      return array('project'=>$project, 'type'=>$type, 'city'=>$city, 'jml'=>$jml, 'jmlByProjectType'=>$jmlByProjectType);
+      return array('project'=>$project, 'type'=>$type, 'city'=>$city, 'jml'=>$jml, 'jmlByProjectType'=>$jmlByProjectType, 'jmlOffice'=>$jmlOffice);
     }
 
     private function getJml($project_id, $city_id, $barang_id)
@@ -72,6 +73,14 @@ class ReportStockToolsReader implements Reader
                    ->join('karyawan AS f', 'tools_karyawan.karyawan_id', '=', 'f.id')
                    ->join('city AS g', 'f.assignmentarea_id', '=', 'g.id')
                    ->where('c.id', $project_id)->where('e.id', $barang_id)->count();
+      return $data;
+    }
+
+    private function getJmlOfficeByType($barang_id)
+    {
+      $data = new Tools();
+      $data = $data->join('barang AS e', 'tools.barang_id', '=', 'e.id')
+                   ->where('e.id', $barang_id)->count();
       return $data;
     }
 
