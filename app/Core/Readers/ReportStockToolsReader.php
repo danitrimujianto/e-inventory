@@ -96,7 +96,7 @@ class ReportStockToolsReader implements Reader
     private function getByType()
     {
       $req = $this->request;
-      $data = ToolsKaryawan::join('tools AS b', 'tools_karyawan.tools_id', '=', 'b.id')->join('barang AS c', 'b.barang_id', '=', 'c.id')->groupBy('c.id', 'c.name')->select('c.id', 'c.name')->get();
+      $data = Tools::join('barang AS c', 'tools.barang_id', '=', 'c.id')->select('c.id', 'c.type', 'c.name')->get();
 
       // dd($data);
       return $data;

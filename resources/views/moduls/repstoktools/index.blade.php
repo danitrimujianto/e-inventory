@@ -24,7 +24,7 @@
           @foreach($data['type'] AS $ty)
           <?php $grandtotalrow = 0; ?>
             <tr class="bg-gray-active color-palette">
-              <th>{{ $ty->name }}</th>
+              <th>{{ $ty->type }}</th>
               @foreach($data['project'] AS $pr)
               <th class="text-center">{{ $data['jmlByProjectType'][$ty->id][$pr->id] }}</th>
               <?php

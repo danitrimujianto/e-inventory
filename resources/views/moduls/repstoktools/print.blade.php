@@ -18,7 +18,7 @@
         @foreach($data['type'] AS $ty)
         <?php $grandtotalrow = 0; ?>
           <tr class="bg-gray-active color-palette">
-            <th style="background-color: #b5bbc8; color: #090909; text-align: center; ">{{ $ty->name }}</th>
+            <th style="background-color: #b5bbc8; color: #090909; text-align: center; ">{{ $ty->type }}</th>
             @foreach($data['project'] AS $pr)
             <th style="background-color: #b5bbc8; color: #090909; text-align: center; " class="text-center">{{ $data['jmlByProjectType'][$ty->id][$pr->id] }}</th>
             <?php
