@@ -34,8 +34,8 @@ class ReportStockToolsController extends ApplicationController
   public function __construct()
   {
       $this->middleware('auth');
-      $this->modul = "reptools"; //disetiap __construct controller harus ada
-      $this->modulName = "Report Tools"; //disetiap __construct controller harus ada
+      $this->modul = "repstoktools"; //disetiap __construct controller harus ada
+      $this->modulName = "Report Stock Tools"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -292,7 +292,7 @@ class ReportStockToolsController extends ApplicationController
  {
    $pos = "Export Excel";
    try {
-     return (new ReportToolsExcel($request))->download('Report Tools.xls');
+     return (new ReportStockToolsExcel($request))->download('Report Stock Tools.xls');
      // return Excel::download(new AlatKaryawanExcel($request), 'alat-karyawan.xlsx');
    } catch (\Exception $e) {
      $msg = $this->resultException($e, $pos);
@@ -305,7 +305,7 @@ class ReportStockToolsController extends ApplicationController
    $pos = "Print";
    try {
 
-     $reader = new ReportToolsPrint($request);
+     $reader = new ReportStockToolsReader($request);
      $data = $reader->read();
 
      return view('layouts.print', ['data' => $data, 'modul' => $this->modul]);
