@@ -81,6 +81,8 @@ class ReportStockToolsReader implements Reader
     {
       $data = new Tools();
       $data = $data->join('barang AS e', 'tools.barang_id', '=', 'e.id')
+                   ->whereNull('tools.deleted_at');
+                   ->whereNotIn('tools.id', DB::table('tools_karyawan')->pluck('tools_id'))
                    ->where('e.id', $barang_id)->count();
       return $data;
     }
