@@ -17,7 +17,7 @@ class FunctionLocals {
         if($type == "office"){
       		  $ret = '<span class="badge bg-grey">Pending</span>';
         }else{
-        $ret = '<span class="badge bg-green">Admin Approved</span>';
+          $ret = '<span class="badge bg-green">Admin Approved</span>';
         }
     	}elseif($obj == "2"){
       $ret = '<span class="badge bg-green">Accepted</span>';
@@ -36,8 +36,10 @@ class FunctionLocals {
         if($type == "office"){
             $ret = '<span class="badge bg-grey">Pending</span>';
         }else{
-          if($obj == 2){
+          if($obj == 1){
             $ret = '<span class="badge bg-green">Admin Approved</span>';
+          }else if($obj == 2){
+            $ret = '<span class="badge bg-green">Accepted</span>';
           }else{
             $ret = '<span class="badge bg-red">Rejected</span>';
           }
