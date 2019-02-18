@@ -17,8 +17,8 @@
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
 				  <div class="col-md-5 col-xs-12">
   					<select name="sf" class="form-control">
-              <option value="outgoing_no" @if($sf == "outgoing_no") {{ 'selected' }} @endif>Outgoing No</option>
-              <option value="recipient" @if($sf == "recipient") {{ 'selected' }} @endif>Recipient</option>
+              <option value="code" @if($sf == "code") {{ 'selected' }} @endif>Code</option>
+              <option value="from" @if($sf == "from") {{ 'selected' }} @endif>Form</option>
   					</select>
 					</div>
 				  <div class="col-md-5 col-xs-12">

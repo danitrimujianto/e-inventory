@@ -36,7 +36,7 @@ class HandoverReturReader implements Reader
 
       if(!empty($sq))
       {
-        if($sf == 'recipient'){
+        if($sf == 'from'){
           $data = $data->with('Karyawan')->whereHas('Karyawan', function($q) use ($sq){
             $q->where('name', 'like', '%'.$sq.'%');
           });
@@ -51,6 +51,6 @@ class HandoverReturReader implements Reader
 
     public function readData()
     {
-      
+
     }
 }
