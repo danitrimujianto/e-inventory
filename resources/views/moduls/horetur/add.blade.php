@@ -17,14 +17,11 @@ $fromcity_id = $karyawan->assignmentarea_id;
       <!-- form start -->
       <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" class="" name="recipient_id" id="recipient_id" value="" />
+        <input type="hidden" class="" name="karyawan_id" id="karyawan_id" value="" />
         <input type="hidden" class="" name="delivery_id" id="delivery_id" value="" />
         <input type="hidden" class="" name="project_id" id="project_id" value="" />
-        <input type="hidden" class="" name="fromcity_id" id="fromcity_id" value="{{ $fromcity_id }}" />
-        <input type="hidden" class="" name="tocity_id" id="tocity_id" value="" />
         <div class="box-body">
           @if(Auth::user()->usertype_id == 1)
-          <input type="hidden" class="" name="sender_id" id="sender_id" value="{{ Auth::user()->karyawan_id }}" />
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -49,7 +46,7 @@ $fromcity_id = $karyawan->assignmentarea_id;
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Outgoing No</label>
+                <label for="name">Code</label>
                 <div>
                   <input type="text" class="form-control" name="outgoing_no" id="outgoing_no" placeholder="" autocomplete="off" readonly>
                 </div>
@@ -59,15 +56,6 @@ $fromcity_id = $karyawan->assignmentarea_id;
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Recipient</label>
-                <div>
-                  <input type="text" class="form-control needed" name="recipient_name" id="lookup_recipient" value="" autocomplete="off"/>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
                 <label for="name">Project</label>
                 <div>
                   <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="" autocomplete="off"/>
@@ -75,8 +63,6 @@ $fromcity_id = $karyawan->assignmentarea_id;
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Delivery By</label>
@@ -86,36 +72,16 @@ $fromcity_id = $karyawan->assignmentarea_id;
                 </div>
               </div>
             </div>
-              <div class="col-md-6">
+          </div>
+          <div class="row">
+              <div class="col-md-12">
                 <div class="form-group">
-                  <label for="name">Receipt No</label>
+                  <label for="name">Remarks</label>
                   <div>
-                    <input type="text" class="form-control" name="receipt_no" id="receipt_no" placeholder="" autocomplete="off">
+                    <textarea class="form-control" name="remarks" id="remarks"></textarea>
                   </div>
                 </div>
               </div>
-          </div>
-          <div class="row">
-            @if(Auth::user()->usertype_id == 1)
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">From City</label>
-                <div>
-                  <input type="text" class="form-control needed" name="fromcity_name" id="fromcity_name" value="" autocomplete="off" readonly/>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-            @endif
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">To City</label>
-                <div>
-                  <input type="text" class="form-control needed" name="tocity_name" id="tocity_name" value="" autocomplete="off" readonly/>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div class="row" style=" display:none; ">

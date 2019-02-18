@@ -59,7 +59,7 @@ class AddAllhoActivitiesHandler implements Handler
         $tab->save();
 
         $tools = array();
-        $isToll = false;
+        $isTool = false;
         $no=0;
         foreach($request->idTools AS $idTool){
           if(!empty($idTool)){

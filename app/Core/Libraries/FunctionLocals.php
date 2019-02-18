@@ -73,4 +73,18 @@ class FunctionLocals {
 
      return $ret;
     }
+
+    public static function checkReturStatus($obj){
+      if($obj == "0"){
+        $ret = '<span class="badge bg-grey">Pending</span>';
+      }elseif($obj == "1"){
+        $ret = '<span class="badge bg-green">Accepted</span>';
+      }elseif($obj == "98"){
+        $ret = '<span class="badge bg-red">Canceled</span>';
+      }elseif($obj == "99"){
+        $ret = '<span class="badge bg-red">Rejected</span>';
+      }
+
+      return $ret;
+    }
 }

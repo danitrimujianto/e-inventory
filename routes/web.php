@@ -378,6 +378,26 @@ Route::middleware('auth')->prefix("/handover")->group(function() {
     });
 });
 
+/* Router Handover Return */
+Route::middleware('auth')->prefix("/horetur")->group(function() {
+    Route::get("/", 'HandoverReturController@index'); /* action get list of developers */
+
+    Route::middleware('auth')->prefix("/add")->group(function() {
+      Route::get("/", 'HandoverReturController@add'); /* action insert or add data to system*/
+      Route::post("/", 'HandoverReturController@store'); /* action insert or add data to system*/
+    });
+
+    Route::prefix("/{id}")->group(function() {
+        Route::get("/", 'HandoverReturController@edit'); /* action get data by id */
+        Route::get("/detail", 'HandoverReturController@show'); /* action show data by id */
+        Route::get("/accept", 'HandoverReturController@accept'); /* action accept data by id */
+        Route::post("/cancel", 'HandoverReturController@cancel'); /* action accept data by id */
+        Route::post("/reject", 'HandoverReturController@reject'); /* action accept data by id */
+        Route::put("/", 'HandoverReturController@update'); /* action edit data by id */
+        Route::delete("/", 'HandoverReturController@destroy'); /* action delete data by id */
+    });
+});
+
 /* Router Handover Acceptance */
 Route::middleware('auth')->prefix("/hoaccept")->group(function() {
     Route::get("/", 'HandoverAcceptanceController@index'); /* action get list of developers */

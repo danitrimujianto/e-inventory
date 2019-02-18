@@ -53,7 +53,7 @@ class UpdateAllhoActivitiesHandler implements Handler
         $isToll = false;
         $no=0;
         foreach($request->idTools AS $idTool){
-          $tools[] = array('allho_activities_id'=>$tab->id, 'tools_id'=>$idTool, 'goods_condition_id'=>$request->goods_condition_id[$no]);
+          $tools[] = array('id'=>$request->id_detail[$no], 'allho_activities_id'=>$tab->id, 'tools_id'=>$idTool, 'goods_condition_id'=>$request->goods_condition_id[$no]);
           $isTool = true;
           $no++;
         }

@@ -1,30 +1,23 @@
 <?php
-$search = "";
-$fromcity_id = "";
-if(Auth::user()->usertype_id == 4){
-$karyawan = \App\Karyawan::find(Auth::user()->karyawan_id);
-$fromcity_id = $karyawan->assignmentarea_id;
-}
-?>
+ ?>
 <!-- Small boxes (Stat box) -->
 <div class="row">
   <div class="col-xs-12">
     <!-- general form elements -->
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Add New</h3>
+        <h3 class="box-title">Edit Data</h3>
       </div>
       <!-- form start -->
       <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="id" value="{{ $data->id }}">
         @csrf
-        <input type="hidden" class="" name="recipient_id" id="recipient_id" value="" />
-        <input type="hidden" class="" name="delivery_id" id="delivery_id" value="" />
-        <input type="hidden" class="" name="project_id" id="project_id" value="" />
-        <input type="hidden" class="" name="fromcity_id" id="fromcity_id" value="{{ $fromcity_id }}" />
-        <input type="hidden" class="" name="tocity_id" id="tocity_id" value="" />
+        <input type="hidden" class="" name="karyawan_id" id="karyawan_id" value="" />
+        <input type="hidden" class="" name="delivery_id" id="delivery_id" value="{{ $data->delivery_id }}" />
+        <input type="hidden" class="" name="project_id" id="project_id" value="{{ $data->project_id }}" />
         <div class="box-body">
           @if(Auth::user()->usertype_id == 1)
-          <input type="hidden" class="" name="sender_id" id="sender_id" value="{{ Auth::user()->karyawan_id }}" />
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -42,80 +35,49 @@ $fromcity_id = $karyawan->assignmentarea_id;
               <div class="form-group">
                 <label for="name">Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ date('d/m/Y') }}">
+                  <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tgl) }}">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Outgoing No</label>
+                <label for="name">Code</label>
                 <div>
-                  <input type="text" class="form-control" name="outgoing_no" id="outgoing_no" placeholder="" autocomplete="off" readonly>
+                  <input type="text" class="form-control" name="kode" id="kode" placeholder="" autocomplete="off" value="{{ $data->kode }}" readonly>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Recipient</label>
-                <div>
-                  <input type="text" class="form-control needed" name="recipient_name" id="lookup_recipient" value="" autocomplete="off"/>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Project</label>
                 <div>
-                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="{{ optional($data->project)->name }}" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Delivery By</label>
                 <div>
-                  <input type="text" class="form-control needed" name="delivery_name" id="lookup_delivery" value="" autocomplete="off"/>
+                  <input type="text" class="form-control needed" name="delivery_name" id="lookup_delivery" value="{{ optional($data->delivery)->name }}" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
-              <div class="col-md-6">
+          </div>
+          <div class="row">
+              <div class="col-md-12">
                 <div class="form-group">
-                  <label for="name">Receipt No</label>
+                  <label for="name">Remarks</label>
                   <div>
-                    <input type="text" class="form-control" name="receipt_no" id="receipt_no" placeholder="" autocomplete="off">
+                    <textarea class="form-control" name="remarks" id="remarks">{{ $data->remarks }}</textarea>
                   </div>
                 </div>
               </div>
-          </div>
-          <div class="row">
-            @if(Auth::user()->usertype_id == 1)
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">From City</label>
-                <div>
-                  <input type="text" class="form-control needed" name="fromcity_name" id="fromcity_name" value="" autocomplete="off" readonly/>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-            @endif
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">To City</label>
-                <div>
-                  <input type="text" class="form-control needed" name="tocity_name" id="tocity_name" value="" autocomplete="off" readonly/>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div class="row" style=" display:none; ">
@@ -137,7 +99,6 @@ $fromcity_id = $karyawan->assignmentarea_id;
             <h4 class="page-header">Tools
               <!-- <button type="button" class="btn btn-primary pull-right btn-xs" id="btnListTools"><i class="fa fa-plus"></i> Add</button> -->
             </h4>
-            <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
                   <th>Item</th>
@@ -149,9 +110,31 @@ $fromcity_id = $karyawan->assignmentarea_id;
                   <th style="width: 40px">Action</th>
                 </tr>
                 <tbody id="listTools">
+                <?php $tools = App\ReturTools::find($data->id)->ReturDetail; ?>
+                @foreach($tools AS $detail)
+                <input type="hidden" name="id_detail[]" value="{{ $detail->id }}" />
                 <tr>
-                  <td colspan="7" class="text-center">Empty</td>
+                    <td><input type="hidden" class="idTools" name="idTools[]" value="{{ $detail->tools_id }}" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="{{ optional($detail->tools)->code.' - '.optional($detail->tools)->item }}" autocomplete="off"/></td>
+                    <td>
+                      <select class="form-control goods_condition_id" name="goods_condition_id[]">
+                        <option value="">-- Choose Condition --</option>
+                        @foreach($dCondition AS $condition)
+                          <option value="{{ $condition->id }}" @if($detail->goods_condition_id == $condition->id) selected @endif>{{ $condition->name }}</option>
+                        @endforeach
+                      </select>
+                    </td>
+                    <td><input type="text" class="form-control merk" value="{{ optional($detail->tools)->merk }}" id="" readonly /></td>
+                    <td><input type="text" class="form-control type" value="{{ optional($detail->tools)->type }}" id="" readonly/></td>
+                    <td><input type="text" class="form-control serial_number" value="{{ optional($detail->tools)->serial_number }}"  id="" readonly/></td>
+                    <td><input type="text" class="form-control imei" value="{{ optional($detail->tools)->imei }}" id="" readonly/></td>
+                    <td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Hapus</button></td>
                 </tr>
+                @endforeach
+                @if(!$tools)
+                <tr>
+                  <td colspan="6" class="text-center">Empty</td>
+                </tr>
+                @endif
                 </tbody>
                 <tfooter>
                 <tr>
@@ -159,7 +142,6 @@ $fromcity_id = $karyawan->assignmentarea_id;
                 </tr>
                 </tfooter>
               </table>
-              </div>
           </section>
         </div>
         <!-- /.box-body -->

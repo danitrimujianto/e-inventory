@@ -1,14 +1,14 @@
 <?php
 namespace App\Core\Readers;
 
-use App\AllhoActivities;
+use App\ReturTools;
 use App\Core\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use DB;
 
-class AllhoActivitiesReader implements Reader
+class HandoverReturReader implements Reader
 {
     private $request;
     /** constructor, fungsinya untuk memudahkan passing variable dari controller */
@@ -25,8 +25,15 @@ class AllhoActivitiesReader implements Reader
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
       $sf = (isset($req->sf) ? $req->sf : '');
+      $usertype = Auth::user()->usertype_id;
+      $karyawan_id = Auth::user()->karyawan_id;
 
-      $data = AllhoActivities::where('type', 'office');
+      $data = new ReturTools();
+
+      if($usertype == 4){
+        $data = $data->where('karyawan_id', $karyawan_id);
+      }
+
       if(!empty($sq))
       {
         if($sf == 'recipient'){
@@ -37,8 +44,6 @@ class AllhoActivitiesReader implements Reader
           $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
         }
       }
-      
-      // if(Auth::user()->usertype_id != 1){ $data = $data->where('sender_id', Auth::user()->karyawan_id); }
 
       $data = $data->orderBy('id','desc')->paginate($batas);
       return $data;
@@ -46,26 +51,6 @@ class AllhoActivitiesReader implements Reader
 
     public function readData()
     {
-
-      $req = $this->request;
-      $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
-      $sq = (isset($req->sq) ? $req->sq : '');
-      $sf = (isset($req->sf) ? $req->sf : '');
-
-      $data = AllhoActivities::where('type', 'office');
-      if(!empty($sq))
-      {
-        if($sf == 'recipient'){
-          $data = $data->with('Karyawan')->whereHas('Karyawan', function($q) use ($sq){
-            $q->where('name', 'like', '%'.$sq.'%');
-          });
-        }else{
-          $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
-        }
-      }
-      // if(Auth::user()->usertype_id != 1){ $data = $data->where('sender_id', Auth::user()->karyawan_id); }
-
-      $data = $data->orderBy('id','desc')->get();
-      return $data;
+      
     }
 }

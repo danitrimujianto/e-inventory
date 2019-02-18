@@ -117,6 +117,7 @@
           <section id="tools">
             <?php $tools = App\AllhoActivities::find($data->id)->AllhoDetail; ?>
             <h4 class="page-header">Tools</h4>
+            <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
                   <th>Item</th>
@@ -144,6 +145,7 @@
                 @endif
                 </tbody>
               </table>
+            </div>
           </section>
         </div>
         <!-- /.box-body -->

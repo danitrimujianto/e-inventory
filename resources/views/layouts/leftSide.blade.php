@@ -103,8 +103,9 @@ $usertype = Auth::user()->usertype_id;
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> Handover Warehouse</a></li>
-          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> Warehouse</a></li>
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Acceptance</a></li>
+          <li><a href="/horetur"><i class="fa fa-ellipsis-v"></i> Retur Tools</a></li>
         </ul>
       </li>
       <li>
@@ -184,8 +185,9 @@ $usertype = Auth::user()->usertype_id;
         </a>
         <ul class="treeview-menu">
           <!-- <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li> -->
-          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
-          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Submission</a></li>
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Acceptance</a></li>
+          <li><a href="/horetur"><i class="fa fa-ellipsis-v"></i> Retur Tools</a></li>
         </ul>
       </li>
       <li>
@@ -210,8 +212,9 @@ $usertype = Auth::user()->usertype_id;
         </a>
         <ul class="treeview-menu">
           <!-- <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li> -->
-          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
-          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Submission</a></li>
+          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Acceptance</a></li>
+          <li><a href="/horetur"><i class="fa fa-ellipsis-v"></i> Retur Tools</a></li>
         </ul>
       </li>
       <li>

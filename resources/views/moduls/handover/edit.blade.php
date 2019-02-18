@@ -38,7 +38,7 @@
               <div class="form-group">
                 <label for="name">Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ date('d/m/Y') }}">
+                  <input type="text" class="form-control datepicker" name="tgl" id="tgl" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tgl) }}">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -133,6 +133,7 @@
             <h4 class="page-header">Tools
               <!-- <button type="button" class="btn btn-primary pull-right btn-xs" id="btnListTools"><i class="fa fa-plus"></i> Add</button> -->
             </h4>
+            <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
                   <th>Item</th>
@@ -146,6 +147,7 @@
                 <tbody id="listTools">
                 <?php $tools = App\AllhoActivities::find($data->id)->AllhoDetail; ?>
                 @foreach($tools AS $detail)
+                <input type="hidden" name="id_detail[]" value="{{ $detail->id }}" />
                 <tr>
                     <td><input type="hidden" class="idTools" name="idTools[]" value="{{ $detail->tools_id }}" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="{{ optional($detail->tools)->code.' - '.optional($detail->tools)->item }}" autocomplete="off"/></td>
                     <td>
@@ -175,6 +177,7 @@
                 </tr>
                 </tfooter>
               </table>
+            </div>
           </section>
         </div>
         <!-- /.box-body -->
