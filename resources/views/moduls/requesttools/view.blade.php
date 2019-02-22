@@ -121,12 +121,12 @@
                 </tr>
                 @endif
                 </tbody>
-                <tfooter>
+                <tfoot>
                 <tr  id="toolsTotal" style=" @if($totalDetail == 0) display: none; @endif ">
                   <td colspan="5" align="right"><strong>Total:</strong></td>
                   <td align="right">{{ HelpMe::cost2($total) }}</td>
                 </tr>
-                </tfooter>
+                </tfoot>
               </table>
             </div>
           </section>

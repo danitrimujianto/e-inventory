@@ -95,7 +95,7 @@
                   <td colspan="7" class="text-center">Empty</td>
                 </tr>
                 </tbody>
-                <tfooter>
+                <tfoot>
                 <tr  id="toolsTotal" style=" display: none; ">
                   <td colspan="5" align="right"><strong>Total:</strong></td>
                   <td><input type="text" class="form-control type" name="total" value="" id="total" readonly></td>
@@ -103,7 +103,7 @@
                 <tr>
                   <td colspan="7"><button type="button" id="tambahBaris" class="btn btn-default btn-xs">Tambah Baris</button></td>
                 </tr>
-                </tfooter>
+                </tfoot>
               </table>
               </div>
           </section>

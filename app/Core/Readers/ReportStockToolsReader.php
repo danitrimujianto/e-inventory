@@ -30,6 +30,7 @@ class ReportStockToolsReader implements Reader
       $project = $this->getByProject();
       $type = $this->getByType();
       $city = array();
+      // dd($type);
       foreach($type AS $ty){
         $city[$ty->id] = $this->getByCityByType($ty->id);
       }
@@ -99,7 +100,7 @@ class ReportStockToolsReader implements Reader
     private function getByType()
     {
       $req = $this->request;
-      $data = Barang::select('id', 'type', 'name')->orderBy('type', 'asc')->get();
+      $data = Barang::select('id', 'type', 'name')->orderBy('name', 'asc')->get();
 
       // dd($data);
       return $data;

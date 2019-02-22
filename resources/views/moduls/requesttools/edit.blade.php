@@ -124,7 +124,7 @@
                 </tr>
                 @endif
                 </tbody>
-                <tfooter>
+                <tfoot>
                 <tr  id="toolsTotal" style=" @if($totalDetail == 0) display: none; @endif ">
                   <td colspan="5" align="right"><strong>Total:</strong></td>
                   <td><input type="text" class="form-control type" name="total" value="{{ HelpMe::cost2($total) }}" id="total" readonly></td>
@@ -132,7 +132,7 @@
                 <tr>
                   <td colspan="7"><button type="button" id="tambahBaris" class="btn btn-default btn-xs">Tambah Baris</button></td>
                 </tr>
-                </tfooter>
+                </tfoot>
               </table>
               </div>
           </section>
