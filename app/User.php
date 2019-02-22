@@ -61,4 +61,11 @@ class User extends Authenticatable
     $this->notify(new NotificationHandover($data, $email));
 
     }
+
+    public function NotifHandoverRetur($data, $email)
+    {
+
+    $this->notify(new NotificationHandoverRetur($data, $email));
+
+    }
 }

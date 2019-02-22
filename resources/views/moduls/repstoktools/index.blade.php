@@ -10,21 +10,21 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr class="bg-purple-active color-palette">
-            <th class="text-center">Type</th>
+            <th class="text-center">TYPE</th>
             <?php $np = 0; ?>
             @foreach($data['project'] AS $pr)
-            <th class="text-center">{{ $pr->name }}</th>
+            <th class="text-center">{{ strtoupper($pr->name) }}</th>
             <?php $grandTotalProject[$pr->id] = 0; $np++; ?>
             @endforeach
-            <th class="text-center" >Office</th>
-            <th class="text-center">Grand Total</th>
+            <th class="text-center" >WAREHOUSE</th>
+            <th class="text-center">GRAND TOTAL</th>
           </tr>
           <?php $nf = 0; ?>
           <?php $grandTotalOffice = 0; ?>
           @foreach($data['type'] AS $ty)
           <?php $grandtotalrow = 0; ?>
             <tr class="bg-gray-active color-palette">
-              <th>{{ $ty->name }}</th>
+              <th>{{ strtoupper($ty->name) }}</th>
               @foreach($data['project'] AS $pr)
               <th class="text-center">{{ $data['jmlByProjectType'][$ty->id][$pr->id] }}</th>
               <?php
@@ -42,7 +42,7 @@
             @foreach($data['city'][$ty->id] AS $ct)
             <?php $grandtotalrow = 0; ?>
             <tr class="bg-gray color-palette">
-              <td>&nbsp;&nbsp;&nbsp;{{ $ct->name }}</td>
+              <td>&nbsp;&nbsp;&nbsp;{{ strtoupper($ct->name) }}</td>
               @foreach($data['project'] AS $pr)
               <td class="text-center">{{ $data['jml'][$ty->id][$ct->id][$pr->id] }}</td>
               <?php $grandtotalrow = $grandtotalrow+$data['jml'][$ty->id][$ct->id][$pr->id]; ?>
@@ -53,7 +53,7 @@
             @endforeach
           @endforeach
           <tr class="bg-light-blue color-palette">
-            <td>Grand Total</td>
+            <td>GRAND TOTAL</td>
             <?php $grandtotalrow = 0; ?>
             @foreach($data['project'] AS $pr)
             <td class="text-center">{{ $grandTotalProject[$pr->id] }}</td>

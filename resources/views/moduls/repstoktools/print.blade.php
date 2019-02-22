@@ -4,21 +4,21 @@
     <div class="col-xs-12">
       <table class="table table-hover">
         <tr>
-          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; " class="text-center">Type</th>
+          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; " class="text-center">TYPE</th>
           <?php $np = 0; ?>
           @foreach($data['project'] AS $pr)
-          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; ">{{ $pr->name }}</th>
+          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; ">{{ strtoupper($pr->name) }}</th>
           <?php $grandTotalProject[$pr->id] = 0; $np++; ?>
           @endforeach
-          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; " >Office</th>
-          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; " >Grand Total</th>
+          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; " >WAREHOUSE</th>
+          <th style="background-color: #605ca8; color: #FFFFFF; text-align: center; " >GRAND TOTAL</th>
         </tr>
         <?php $nf = 0; ?>
         <?php $grandTotalOffice = 0; ?>
         @foreach($data['type'] AS $ty)
         <?php $grandtotalrow = 0; ?>
           <tr class="bg-gray-active color-palette">
-            <th style="background-color: #b5bbc8; color: #090909; text-align: center; ">{{ $ty->name }}</th>
+            <th style="background-color: #b5bbc8; color: #090909; text-align: center; ">{{ strtoupper($ty->name) }}</th>
             @foreach($data['project'] AS $pr)
             <th style="background-color: #b5bbc8; color: #090909; text-align: center; " class="text-center">{{ $data['jmlByProjectType'][$ty->id][$pr->id] }}</th>
             <?php
@@ -47,7 +47,7 @@
           @endforeach
         @endforeach
         <tr class="bg-light-blue color-palette">
-          <td style="background-color: #3c8dbc; color: #FFFFFF; text-align: center; ">Grand Total</td>
+          <td style="background-color: #3c8dbc; color: #FFFFFF; text-align: center; ">GRAND TOTAL</td>
           <?php $grandtotalrow = 0; ?>
           @foreach($data['project'] AS $pr)
           <td style="background-color: #3c8dbc; color: #FFFFFF; text-align: center; " class="text-center">{{ $grandTotalProject[$pr->id] }}</td>

@@ -24,8 +24,8 @@ class AddHandoverReturHandler implements Handler
     {
         $request = $this->request;
         $data = $this->saveDB($request);
-        // $detail = $this->getHandoverDetail($data->id);
-        // if($data->type == 'user'){ $sendnotif = $this->sendnotif($data, $detail); }
+        $detail = $this->getHandoverDetail($data->id);
+        $sendnotif = $this->sendnotif($data, $detail);
 
         return $data;
     }
@@ -60,6 +60,18 @@ class AddHandoverReturHandler implements Handler
         return $tab;
     }
 
+    private function sendnotif($data, $detail)
+    {
+      $returnData['data'] = $data;
+      $returnData['detail'] = $detail;
+      $user = User::where('usertype_id', 2)->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifHandoverRetur($returnData, $val->email);
+      }
+    }
+
     private function kode()
     {
       $prefix = "RT";
@@ -82,5 +94,10 @@ class AddHandoverReturHandler implements Handler
 
       $new_no = $prefix.substr($thn, 2, 2).$bln.$new_no;
       return $new_no;
+    }
+
+    private function getHandoverDetail($id){
+      $data = ReturToolsDetail::where('retur_tools_id', $id)->get();
+      return $data;
     }
 }
