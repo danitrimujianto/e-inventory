@@ -47,7 +47,7 @@ class NotificationHandoverRetur extends Notification
     {
       $data = $this->data;
       $data['url'] = url(config('app.url')."/horetur/".$data['data']->id."/detail");
-      $subject = $data['data']->outgoing_no." Handover Retur Tools";
+      $subject = $data['data']->code." Handover Retur Tools";
       // $mail = new Mailable($notifiable, $data)->subject($subject)->to($notifiable->email);
       return (new Mailable($notifiable, $data))->subject($subject)->to($this->email);
     }

@@ -6,7 +6,7 @@ We recieved handover retur tools from:
 <br>
 <table width="100%" class="table">
   <tr>
-    <td width="40%">Outgoing Nomor</td>
+    <td width="40%">Code</td>
     <td width="1%">:</td>
     <td>{{ $data->kode }}</td>
   </tr>
@@ -36,6 +36,11 @@ We recieved handover retur tools from:
     <td>Assignment Area</td>
     <td>:</td>
     <td>{{ optional($data->karyawan->assignmentarea)->name }}</td>
+  </tr>
+  <tr>
+    <td>Remarks</td>
+    <td>:</td>
+    <td>{{ $data->remarks }}</td>
   </tr>
 </table>
 <br>
