@@ -16,10 +16,14 @@ class NotificationHandoverRetur extends Mailable
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+     protected $token;
+     protected $notifiable;
+     protected $data;
+     public function __construct($notifiable, $data)
+     {
+       $this->notifiable = $notifiable;
+       $this->data = $data;
+     }
 
     /**
      * Build the message.
@@ -28,6 +32,6 @@ class NotificationHandoverRetur extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.notificationhandoverretur');
+        return $this->markdown('emails.notificationhandoverretur', $this->data);
     }
 }

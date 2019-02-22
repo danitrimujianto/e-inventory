@@ -1,7 +1,6 @@
 @php $total = '0'; @endphp
 @component('mail::message')
 # Handover Retur Tools
-
 We recieved handover retur tools from:
 <br>
 <table width="100%" class="table">
@@ -10,13 +9,11 @@ We recieved handover retur tools from:
     <td width="1%">:</td>
     <td>{{ $data->kode }}</td>
   </tr>
-  @if($data->type == 'user')
   <tr>
     <td width="40%">Name</td>
     <td width="1%">:</td>
     <td>{{ optional($data->karyawan)->name }}</td>
   </tr>
-  @endif
   <tr>
     <td>Project</td>
     <td>:</td>
