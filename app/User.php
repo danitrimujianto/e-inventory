@@ -5,6 +5,7 @@ namespace App;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use App\Notifications\NotifPurchase as NotifPurchase;
 use App\Notifications\NotificationHandover as NotificationHandover;
+use App\Notifications\NotificationHandoverRetur as NotificationHandoverRetur;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
