@@ -497,6 +497,16 @@ Route::middleware('auth')->prefix("/rephandover")->group(function() {
   });
 });
 
+Route::middleware('auth')->prefix("/repretur")->group(function() {
+  Route::get("/", 'ReportReturController@index'); /* action insert or add data to system*/
+  Route::post("/", 'ReportReturController@index'); /* action insert or add data to system*/
+  Route::post("/print", 'ReportReturController@print'); /* action get data by id */
+
+  Route::prefix("/export")->group(function() {
+      Route::post("/excel", 'ReportReturController@excel'); /* action get data by id */
+  });
+});
+
 Route::middleware('auth')->prefix("/repreqtools")->group(function() {
   Route::get("/", 'ReportReqToolsController@index'); /* action insert or add data to system*/
   Route::post("/", 'ReportReqToolsController@index'); /* action insert or add data to system*/
