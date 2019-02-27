@@ -41,11 +41,23 @@ class ReportReturReader implements Reader
 
       if(!empty($sq))
       {
-        if($sf == 'karyawan'){
+        if($sf == 'From'){
           $data = $data->whereHas('retur', function($q) use ($sq){
             $q->whereHas('karyawan', function($q2) use ($sq){
               $q2->where('name', 'like', '%'.$sq.'%');
             });
+          });
+        }else if($sf == 'Item'){
+          $data = $data->whereHas('tools', function($q) use ($sq){
+              $q->where('item', 'like', '%'.$sq.'%');
+          });
+        }else if($sf == 'Imei'){
+          $data = $data->whereHas('tools', function($q) use ($sq){
+              $q->where('imei', 'like', '%'.$sq.'%');
+          });
+        }else if($sf == 'Serial Number'){
+          $data = $data->whereHas('tools', function($q) use ($sq){
+              $q->where('serial_number', 'like', '%'.$sq.'%');
           });
         }else{
           $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');

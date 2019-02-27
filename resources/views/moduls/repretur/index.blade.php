@@ -39,6 +39,9 @@
     				  <div class="col-md-5 col-xs-12">
       					<select name="sf" id="sf" class="form-control">
                   <option value="From" @if($sf == "From") {{ 'selected' }} @endif>From</option>
+                  <option value="Item" @if($sf == "Item") {{ 'selected' }} @endif>Item</option>
+                  <option value="Imei" @if($sf == "Imei") {{ 'selected' }} @endif>Imei</option>
+                  <option value="Serial Number" @if($sf == "Serial Number") {{ 'selected' }} @endif>Serial Number</option>
       					</select>
     					</div>
     				  <div class="col-md-5 col-xs-12">
