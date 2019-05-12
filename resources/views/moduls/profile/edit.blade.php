@@ -93,6 +93,28 @@ $search = "";
           </div>
           @endif
           <div class="form-group">
+            <label for="name">Project</label>
+            <div>
+              <select class="form-control" name="project_id" id="project_id">
+                <option value="">-- Choose Project --</option>
+                @foreach($dProject AS $project)
+                  <option value="{{ $project->id }}" @if($data->karyawan->project_id == $project->id) selected='selected' @endif>{{ $project->name }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="name">Assignment Area</label>
+            <div>
+              <select class="form-control" name="assignmentarea_id" id="assignmentarea_id">
+                <option value="">-- Choose Assignment --</option>
+                @foreach($dCity AS $city)
+                  <option value="{{ $city->id }}" @if($data->karyawan->assignmentarea_id == $city->id) selected='selected' @endif>{{ $city->name }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="email">Email</label>
             <div>
               <input type="email" class="form-control" name="email" id="email" value="{{ $data->email }}" placeholder="" autocomplete="off">

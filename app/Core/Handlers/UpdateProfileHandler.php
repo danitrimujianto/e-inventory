@@ -55,10 +55,12 @@ class UpdateProfileHandler implements Handler
         $tab->save();
 
         if(!empty($karyawan_id)){
-          $karyawan               = Karyawan::find($karyawan_id);
-          $karyawan->name         = $request->name;
-          $karyawan->phone_number = $request->phone_number;
-          $karyawan->email        = $request->email;
+          $karyawan                           = Karyawan::find($karyawan_id);
+          $karyawan->name                     = $request->name;
+          $karyawan->phone_number             = $request->phone_number;
+          $karyawan->email                    = $request->email;
+          $karyawan->project_id               = $request->project_id;
+          $karyawan->assignmentarea_id        = $request->assignmentarea_id;
           $karyawan->save();
         }
 

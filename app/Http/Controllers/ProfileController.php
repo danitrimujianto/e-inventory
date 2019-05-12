@@ -9,6 +9,10 @@ use App\Core\Readers\ProfileReader;
 use App\Core\Readers\GetProfileReader;
 use App\Core\Handlers\UpdateProfileHandler;
 
+//others reader
+use App\Core\Readers\ProjectReader;
+use App\Core\Readers\CityReader;
+
 use Session;
 use HelpMe;
 use DB;
@@ -148,30 +152,22 @@ class ProfileController extends ApplicationController
       $data = $reader->read();
       $this->returnData['data'] = $data;
 
+
+      $reader = new ProjectReader($request);
+      $dProject = $reader->readData();
+      $this->returnData['dProject'] = $dProject;
+
+      $reader = new CityReader($request);
+      $dCity = $reader->readData();
+      $this->returnData['dCity'] = $dCity;
+
       return view('home', $this->returnData);
     } catch (\Exception $e) {
       $msg = $this->resultException($e, $pos);
       return redirect($this->modul);
     }
   }
- public function editDeveloper($id, Request $request)
- {
-   $pos = "edit";
-   $this->theme["page"] = 'editDeveloper'; //disetiap class dan function controller harus ada
-   $this->returnData['theme'] = $this->theme;
-   $this->returnData['data'] = "";
 
-   try {
-     $reader = new GetDeveloperReader($request, $id);
-     $data = $reader->read();
-     $this->returnData['data'] = $data;
-
-     return view('home', $this->returnData);
-   } catch (\Exception $e) {
-     $msg = $this->resultException($e, $pos);
-     return redirect($this->modul);
-   }
- }
 
   /**
    * Update the specified resource in storage.

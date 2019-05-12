@@ -29,7 +29,6 @@
           <th bgcolor="#CCCCCC">RECIPIENT</th>
           <th bgcolor="#CCCCCC">DELIVERY</th>
           <th bgcolor="#CCCCCC">PROJECT</th>
-          <!-- <th bgcolor="#CCCCCC">FROM CITY</th> -->
           <th bgcolor="#CCCCCC">TO CITY</th>
         </tr>
         </thead>
@@ -41,18 +40,17 @@
           <td>{{ $no.'.' }}</td>
           <td>{{ HelpMe::tgl_sql_to_indo($d->allhoactivities->tgl) }}</td>
           <td>{{ $d->allhoactivities->outgoing_no }}</td>
-          <td>{{ $d->tools->code }}</td>
-          <td>{{ $d->tools->item }}</td>
+          <td>{{ optional($d->tools)->code }}</td>
+          <td>{{ optional($d->tools)->item }}</td>
           <td>{{ optional($d->condition)->name }}</td>
-          <td>{{ $d->tools->serial_number }}</td>
-          <td>{{ $d->tools->imei }}</td>
-          <td>{{ $d->tools->merk }}</td>
-          <td>{{ $d->tools->type }}</td>
+          <td>{{ optional($d->tools)->serial_number }}</td>
+          <td>{{ optional($d->tools)->imei }}</td>
+          <td>{{ optional($d->tools)->merk }}</td>
+          <td>{{ optional($d->tools)->type }}</td>
           <td>@if($d->allhoactivities->type == 'user') {{ optional($d->allhoactivities->sender)->name }} @else {{ $d->allhoactivities->type }} @endif</td>
           <td>{{ optional($d->allhoactivities->karyawan)->name }}</td>
           <td>{{ optional($d->allhoactivities->delivery)->name }}</td>
           <td>{{ optional($d->allhoactivities->project)->name }}</td>
-          <!-- <td>{{ optional($d->allhoactivities->fromcity)->name }}</td> -->
           <td>{{ optional($d->allhoactivities->tocity)->name }}</td>
         </tr>
         @endforeach
