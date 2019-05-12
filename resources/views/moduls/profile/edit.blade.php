@@ -91,7 +91,6 @@ $search = "";
               <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{ $data->karyawan->phone_number }}" placeholder="" autocomplete="off">
             </div>
           </div>
-          @endif
           <div class="form-group">
             <label for="name">Project</label>
             <div>
@@ -114,6 +113,7 @@ $search = "";
               </select>
             </div>
           </div>
+          @endif
           <div class="form-group">
             <label for="email">Email</label>
             <div>
