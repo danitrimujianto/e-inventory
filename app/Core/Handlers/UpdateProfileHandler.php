@@ -60,6 +60,7 @@ class UpdateProfileHandler implements Handler
           $karyawan->phone_number             = $request->phone_number;
           $karyawan->email                    = $request->email;
           $karyawan->project_id               = $request->project_id;
+          $karyawan->homebasearea_id          = $request->homebasearea_id;
           $karyawan->assignmentarea_id        = $request->assignmentarea_id;
           $karyawan->save();
         }

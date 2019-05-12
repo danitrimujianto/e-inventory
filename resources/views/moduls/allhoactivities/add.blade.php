@@ -174,7 +174,7 @@ $(document).ready(function(){
   $("#tambahBaris").click(function(){
     urut++;
     var listTools = $('#listTools');
-    var el ='<tr><td><input type="hidden" class="idTools" name="idTools[]" value="" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="" autocomplete="off"/></td><td>'+$('#conditionList').html()+'</td><td><input type="text" class="form-control merk" value="" id="" readonly /></td><td><input type="text" class="form-control type" value="" id="" readonly/></td><td><input type="text" class="form-control serial_number" value="" /></td><td><input type="text" class="form-control imei" value="" id="" readonly/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
+    var el ='<tr><td><input type="hidden" class="idTools" name="idTools[]" value="" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="" autocomplete="off"/></td><td>'+$('#conditionList').html()+'</td><td><input type="text" class="form-control merk" value="" id="" readonly /></td><td><input type="text" class="form-control type" value="" id="" readonly/></td><td><input type="text" class="form-control lookupTool" d-position="serial_number"  value="" /></td><td><input type="text" class="form-control lookupTool" d-position="imei" value="" id=""/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
 
 
     var chekEmpty = listTools.find('#item').length;
@@ -224,18 +224,19 @@ $(document).ready(function(){
   });
 
   var listBarang = {};
-  $('body').on('keyup', '.serial_number', function(){
+  $('body').on('keyup', '.lookupTool', function(){
+    var pos = $(this).attr("d-position");
     $(this).typeahead({
   		source: function (query, result) {
         $.ajax({
   				url: "/tools/search/mutasi",
-  				data: 'sf=serial_number&sq=' + query,
+  				data: 'sf='+pos+'&sq=' + query,
   				dataType: "json",
   				type: "GET",
   				success: function (data) {
-            // console.log(data);
+            console.log(data);
     					result($.map(data, function (item) {
-    						return item.serial_number;
+    						return item[pos];
     					}));
   				}
   			});
@@ -432,16 +433,17 @@ $(document).ready(function(){
     }
   });
 
-  $('body').on('change', '.serial_number', function(){
+  $('body').on('change', '.lookupTool', function(){
   // alert(code);
     var current = $(this).typeahead("getActive");
     if (current) {
+      var pos = $(this).attr("d-position");
       var code = current.split("-")[0].trim();
       var el = $(this).parent('td').parent('tr');
       // alert(code);
       $.ajax({
         url: "/tools/select",
-        data: 'sf=serial_number&sq=' + code,
+        data: 'sf='+pos+'&sq=' + code,
         dataType: "json",
         type: "GET",
         success: function (data) {

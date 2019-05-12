@@ -31,6 +31,9 @@
         <b><i class="fa fa-tasks margin-r-5"></i> Project</b> <a class="pull-right">{{ optional($data->karyawan->project)->name }}</a>
       </li>
       <li class="list-group-item">
+        <b><i class="fa fa-map-pin margin-r-5"></i> Homebase Area</b> <a class="pull-right">{{ optional($data->karyawan->homebasearea)->name }}</a>
+      </li>
+      <li class="list-group-item">
         <b><i class="fa fa-map-pin margin-r-5"></i> Assignment Area</b> <a class="pull-right">{{ optional($data->karyawan->assignmentarea)->name }}</a>
       </li>
       <li class="list-group-item">

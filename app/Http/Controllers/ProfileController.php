@@ -12,6 +12,7 @@ use App\Core\Handlers\UpdateProfileHandler;
 //others reader
 use App\Core\Readers\ProjectReader;
 use App\Core\Readers\CityReader;
+use App\Core\Readers\AreaReader;
 
 use Session;
 use HelpMe;
@@ -116,17 +117,6 @@ class ProfileController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetMarketingReader($id);
-      $data = $reader->read();
-      $this->returnData['data'] = $data;
-
-      $dProyek = new ProyekReader($request);
-      $dProyek = $dProyek->readOut();
-      $this->returnData['proyek'] = $dProyek;
-
-      $dProyekKerjasama = new MarketingProyekReader($data->profile_id);
-      $dProyekKerjasama = $dProyekKerjasama->read();
-      $this->returnData['proyekKerjasama'] = $dProyekKerjasama;
 
       return view('home', $this->returnData);
     } catch (\Exception $e) {
@@ -160,6 +150,10 @@ class ProfileController extends ApplicationController
       $reader = new CityReader($request);
       $dCity = $reader->readData();
       $this->returnData['dCity'] = $dCity;
+      
+      $reader = new AreaReader($request);
+      $dArea = $reader->readData();
+      $this->returnData['dArea'] = $dArea;
 
       return view('home', $this->returnData);
     } catch (\Exception $e) {

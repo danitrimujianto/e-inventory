@@ -103,6 +103,17 @@ $search = "";
             </div>
           </div>
           <div class="form-group">
+            <label for="name">Homebase Area</label>
+            <div>
+              <select class="form-control" name="homebasearea_id" id="homebasearea_id">
+                <option value="">-- Choose Area --</option>
+                @foreach($dArea AS $area)
+                  <option value="{{ $area->id }}" @if($data->karyawan->homebasearea_id == $area->id) selected='selected' @endif>{{ $area->name }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="name">Assignment Area</label>
             <div>
               <select class="form-control" name="assignmentarea_id" id="assignmentarea_id">

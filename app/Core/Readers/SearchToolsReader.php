@@ -32,7 +32,7 @@ class SearchToolsReader implements Reader
         $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
       }
 
-      $data = $data->get();
+      $data = $data->select($req->sf)->get();
       return $data;
     }
 }
