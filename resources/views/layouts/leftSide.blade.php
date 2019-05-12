@@ -104,8 +104,11 @@ $usertype = Auth::user()->usertype_id;
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
+        <li><a href="/supplier"><i class="fa fa-ellipsis-v"></i> Supplier</a></li>
           <li><a href="/barang"><i class="fa fa-ellipsis-v"></i> Goods</a></li>
           <li><a href="/tools"><i class="fa fa-ellipsis-v"></i> Tools</a></li>
+          <li><a href="/project"><i class="fa fa-ellipsis-v"></i> Projects</a></li>
+          <li><a href="/karyawan"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
         </ul>
       </li>
       <li class="treeview">

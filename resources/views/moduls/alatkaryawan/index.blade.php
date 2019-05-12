@@ -33,6 +33,8 @@ $price = ((Auth::user()->usertype_id == 4 ||
               <option value="code_tools" @if($sf == "code_tools") {{ 'selected' }} @endif>ID Tools</option>
               <option value="karyawan" @if($sf == "karyawan") {{ 'selected' }} @endif>Karyawan</option>
               <option value="project" @if($sf == "project") {{ 'selected' }} @endif>Project</option>
+              <option value="serial_number" @if($sf == "serial_number") {{ 'selected' }} @endif>Serial Number</option>
+              <option value="imei" @if($sf == "imei") {{ 'selected' }} @endif>Imei</option>
   					</select>
 					</div>
 				  <div class="col-md-5 col-xs-12">

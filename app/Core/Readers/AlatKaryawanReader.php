@@ -61,6 +61,18 @@ class AlatKaryawanReader implements Reader
             });
           });
         }
+        else if($sf == "serial_number")
+        {
+          $data = $data->whereHas('tools', function($q) use ($sq){
+            $q->where('serial_number', 'like', '%'.$sq.'%');
+          });
+        }
+        else if($sf == "imei")
+        {
+          $data = $data->whereHas('tools', function($q) use ($sq){
+            $q->where('imei', 'like', '%'.$sq.'%');
+          });
+        }
       }
 
       $data = $data->orderBy('id','desc')->paginate($batas);

@@ -19,6 +19,8 @@
   					<select name="sf" class="form-control">
               <option value="code" @if($sf == "code") {{ 'selected' }} @endif>Code</option>
               <option value="item" @if($sf == "item") {{ 'selected' }} @endif>Item</option>
+              <option value="serial_number" @if($sf == "serial_number") {{ 'selected' }} @endif>Serial Number</option>
+              <option value="imei" @if($sf == "imei") {{ 'selected' }} @endif>Imei</option>
   					</select>
 					</div>
 				  <div class="col-md-5 col-xs-12">

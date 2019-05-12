@@ -30,8 +30,6 @@
           <th>POSITION</th>
           <th>UPDATE DATE</th>
           <th>CONDITION</th>
-          <!-- <th>PURCHASE</th> -->
-          <!-- <th>PRICE</th> -->
         </tr>
         </thead>
         <tbody>
@@ -54,8 +52,6 @@
           <td>{{ optional($d->karyawan->position)->position }}</td>
           <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
           <td>{{ optional($d->condition)->name }}</td>
-          <!-- <td>{{ HelpMe::tgl_sql_to_indo($d->tools->date) }}</td>
-          <td>{{ HelpMe::cost($d->tools->price) }}</td> -->
         </tr>
         @endforeach
         </tbody>

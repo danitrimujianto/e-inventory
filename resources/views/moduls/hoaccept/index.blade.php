@@ -36,32 +36,31 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Status</th>
+            <th>Admin Status</th>
+            <th>Recipient Status</th>
             <th>Date</th>
             <th>Outgoing No</th>
-            <th>From</th>
-            @if(Auth::user()->usertype_id != 4)<th>To</th>@endif
-            <th>Delivery</th>
-            <th>Project</th>
+            <th>Sender</th>
             <th>From City</th>
+            <th>Recipient</th>
             <th>To City</th>
+            <th>Project</th>
+            <th>Delivery</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
-            <td><?php echo HelpLocal::checkStatusAllHo($d->status, $d->type) ?></td>
+            <td><?php echo HelpLocal::checkAdminStatus($d->status, $d->type) ?></td>
+            <td><?php echo HelpLocal::checkRecipient($d->accepted_date) ?></td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->tgl) }}</td>
             <td>{{ $d->outgoing_no }}</td>
             <td>@if($d->type == 'office') {{ ucwords($d->type) }} @else {{ optional($d->sender)->name }} @endif</td>
-            @if(Auth::user()->usertype_id != 4)
+            <td>@if($d->type == 'office') {{ ucwords($d->type) }} @else {{ optional($d->fromcity)->name }} @endif</td>
             <td>{{ optional($d->karyawan)->name }}</td>
-            @endif
-            <td>{{ optional($d->delivery)->name }}</td>
-            <td>{{ optional($d->project)->name }}</td>
-            <td>{{ optional($d->fromcity)->name }}</td>
             <td>{{ optional($d->tocity)->name }}</td>
+            <td>{{ optional($d->project)->name }}</td>
+            <td>{{ optional($d->delivery)->name }}</td>
             <td>
-              <!-- <button title="" type="button" class="btn btn-xs tooltips btn-warning viewButton"><i class="fa fa-eye"></i>&nbsp;View</button> -->
               @if($d->status >= 0 && $d->status < 2)
               <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Accept</button>
               <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>

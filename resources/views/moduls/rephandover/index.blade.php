@@ -41,6 +41,7 @@
                   <option value="ID Tools" @if($sf == "ID Tools") {{ 'selected' }} @endif>ID Tools</option>
                   <option value="Item" @if($sf == "Item") {{ 'selected' }} @endif>Item</option>
                   <option value="Serial Number" @if($sf == "Serial Number") {{ 'selected' }} @endif>Serial Number</option>
+                  <option value="Imei" @if($sf == "Imei") {{ 'selected' }} @endif>Imei</option>
                   <option value="Project" @if($sf == "Project") {{ 'selected' }} @endif>Project</option>
       					</select>
     					</div>

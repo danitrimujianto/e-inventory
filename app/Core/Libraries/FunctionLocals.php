@@ -34,7 +34,7 @@ class FunctionLocals {
       $ret = "";
       if($obj >= 1){
         if($type == "office"){
-            $ret = '<span class="badge bg-grey">Pending</span>';
+          $ret = '<span class="badge bg-green">Accepted</span>';
         }else{
           if($obj == 1){
             $ret = '<span class="badge bg-green">Admin Approved</span>';

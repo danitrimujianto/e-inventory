@@ -63,6 +63,10 @@ class ReportHandoverReader implements Reader
           $data = $data->whereHas('tools', function($q) use ($sq){
             $q->where('serial_number', 'like','%'.$sq.'%');
           });
+        }elseif($sf == 'Imei'){
+          $data = $data->whereHas('tools', function($q) use ($sq){
+            $q->where('imei', 'like','%'.$sq.'%');
+          });
         }elseif($sf == 'Project'){
           $data = $data->whereHas('allhoactivities', function($q) use ($sq){
             $q->whereHas('project', function($q2) use ($sq){
