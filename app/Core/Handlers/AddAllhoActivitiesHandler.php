@@ -56,6 +56,7 @@ class AddAllhoActivitiesHandler implements Handler
         $tab->sender_id = $sender;
         $tab->type = $type;
         $tab->status = $status;
+        $tab->remarks = $request->remarks;
         $tab->save();
 
         $tools = array();

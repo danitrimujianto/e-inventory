@@ -118,6 +118,13 @@ $fromcity_id = $karyawan->assignmentarea_id;
             </div>
           </div>
 
+          <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <div>
+              <textarea class="form-control needed" name="remarks" id="remarks"></textarea>
+              <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+            </div>
+          </div>
           <div class="row" style=" display:none; ">
             <div class="col-md-6">
               <div class="form-group">

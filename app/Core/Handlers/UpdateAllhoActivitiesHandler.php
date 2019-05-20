@@ -45,6 +45,7 @@ class UpdateAllhoActivitiesHandler implements Handler
         $tab->project_id = $request->project_id;
         $tab->receipt_no = $request->receipt_no;
         $tab->sender_id = $sender;
+        $tab->remarks = $request->remarks;
         $tab->save();
 
         $detailDelete = AllhoActivitiesDetail::where('allho_activities_id', '=', $id)->delete();
