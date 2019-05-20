@@ -38,6 +38,7 @@ Route::middleware('auth')->prefix("/profile")->group(function() {
 /* Router Modal */
 Route::middleware('auth')->prefix("/modal")->group(function() {
     Route::get("/reject", 'ModalController@reject'); /* action get list of developers */
+    Route::get("/inputTools", 'ModalController@inputTools'); /* action get list of developers */
 });
 
 /* Router User */
@@ -286,6 +287,7 @@ Route::middleware('auth')->prefix("/project")->group(function() {
 /* Router tools */
 Route::middleware('auth')->prefix("/tools")->group(function() {
     Route::get("/", 'ToolsController@index'); /* action get list of developers */
+    Route::post("/search", 'ToolsController@index'); /* action get list of developers */
     Route::get("/list", 'ToolsController@list'); /* action get list of developers */
     Route::get("/select", 'ToolsController@selectData'); /* action get list of developers */
     Route::get("/updatecode", 'ToolsController@updateCode'); /* action get list of developers */
@@ -463,9 +465,14 @@ Route::middleware('auth')->prefix("/requesttools")->group(function() {
         Route::get("/detail", 'RequestToolsController@show'); /* action show data by id */
         Route::post("/cancel", 'RequestToolsController@cancel'); /* action cancel data by id */
         Route::get("/accept", 'RequestToolsController@acc'); /* action accept data by id */
+        Route::get("/close", 'RequestToolsController@close'); /* action close data by id */
         Route::post("/reject", 'RequestToolsController@reject'); /* action reject data by id */
         Route::put("/", 'RequestToolsController@update'); /* action edit data by id */
         Route::delete("/", 'RequestToolsController@destroy'); /* action delete data by id */
+    });
+
+    Route::prefix("/input")->group(function() {
+        Route::get("/", 'RequestToolsController@formInput'); /* action get data by id */
     });
 });
 
@@ -483,6 +490,8 @@ Route::middleware('auth')->prefix("/service")->group(function() {
         Route::get("/detail", 'ServiceController@show'); /* action show data by id */
         Route::put("/", 'ServiceController@update'); /* action edit data by id */
         Route::delete("/", 'ServiceController@destroy'); /* action delete data by id */
+        Route::get("/accept", 'ServiceController@accept'); /* action accept data by id */
+        Route::post("/reject", 'ServiceController@reject'); /* action accept data by id */
     });
 });
 

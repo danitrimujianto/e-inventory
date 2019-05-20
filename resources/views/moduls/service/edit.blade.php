@@ -20,7 +20,7 @@
               <div class="form-group">
                 <label for="name">Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}">
+                  <input type="text" class="form-control datepicker needed" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -32,7 +32,7 @@
                 <label for="name">Item</label>
                 <div>
                   <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="{{ $data->tools_id }}">
-                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="{{ optional($data->tools)->item }}">
+                  <input type="text" class="form-control itemSearch needed" name="item" id="item" placeholder="" autocomplete="off" value="{{ optional($data->tools)->item }}">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -41,7 +41,7 @@
               <div class="form-group">
                 <label for="name">ID Tools</label>
                 <div>
-                  <input type="text" class="form-control" name="code" id="code" placeholder="" autocomplete="off" value="{{ optional($data->tools)->code }}" readonly>
+                  <input type="text" class="form-control needed" name="code" id="code" placeholder="" autocomplete="off" value="{{ optional($data->tools)->code }}" readonly>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -63,24 +63,6 @@
                 <div>
                   <input type="text" class="form-control imeiSearch" name="imei" id="imei" placeholder="" autocomplete="off" value="{{ optional($data->tools)->imei }}">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Start Date</label>
-                <div>
-                  <input type="text" class="form-control datepicker" name="start_date" id="start_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->start_date) }}">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Finish Date</label>
-                <div>
-                  <input type="text" class="form-control datepicker" name="finish_date" id="finish_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->finish_date) }}">
                 </div>
               </div>
             </div>
@@ -127,6 +109,26 @@
                       <option value="{{ $condition->id }}" @if($data->after_id == $condition->id) selected @endif>{{ $condition->name }}</option>
                     @endforeach
                   </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Start Date</label>
+                <div>
+                  <input type="text" class="form-control datepicker needed" name="start_date" id="start_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->start_date) }}">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Estimate Price</label>
+                <div>
+                  <input type="text" class="form-control nominal needed" name="price" id="price" placeholder="" autocomplete="off" value="{{ HelpMe::cost2($data->price) }}">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>

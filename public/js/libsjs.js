@@ -94,6 +94,15 @@ function actAccept(id, modulPage)
   document.fGlobal.submit();
 }
 
+function actClose(id, modulPage)
+{
+  document.fGlobal.id.value=id;
+  //$("#method").val();
+  document.fGlobal._method.value="get";
+  document.fGlobal.action="/"+modulPage+"/"+id+"/close";
+  document.fGlobal.submit();
+}
+
 function actReject(id, title, modulPage)
 {
   document.fGlobal.id.value=id;
@@ -149,6 +158,8 @@ function alertSweet(ket, id, field, kode, modulPage, pos)
         actRestore(id, modulPage)
       }else if(pos == 'Accept'){
         actAccept(id, modulPage)
+      }else if(pos == 'Close'){
+        actClose(id, modulPage)
       }else if(pos == 'Reject'){
         actReject(id, kode, modulPage)
       }else if(pos == 'Cancel'){

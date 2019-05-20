@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Core\Handlers\AddServiceHandler;
 use App\Core\Handlers\UpdateServiceHandler;
 use App\Core\Handlers\DeleteServiceHandler;
+use App\Core\Handlers\AcceptServiceHandler;
+use App\Core\Handlers\RejectServiceHandler;
 use App\Core\Readers\ServiceReader;
 use App\Core\Readers\GetServiceReader;
 
@@ -33,7 +35,7 @@ class ServiceController extends ApplicationController
   {
       $this->middleware('auth');
       $this->modul = "service"; //disetiap __construct controller harus ada
-      $this->modulName = "Service"; //disetiap __construct controller harus ada
+      $this->modulName = "Maintenance"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();
@@ -170,7 +172,7 @@ class ServiceController extends ApplicationController
       $reader = new GetServiceReader($id);
       $data = $reader->read();
       $this->returnData['data'] = $data;
-      
+
       $reader = new GoodsConditionReader($request);
       $dCondition = $reader->read();
       $this->returnData['dCondition'] = $dCondition;
@@ -216,6 +218,36 @@ class ServiceController extends ApplicationController
     $pos = "delete";
     try {
       $handler = new DeleteServiceHandler($id);
+      $data = $handler->handle();
+      $this->createAlert("info", $pos." Succeeded");
+
+      return redirect($this->modul);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return redirect($this->modul);
+    }
+  }
+
+  public function accept($id)
+  {
+    $pos = "accept";
+    try {
+      $handler = new AcceptServiceHandler($id);
+      $data = $handler->handle();
+      $this->createAlert("info", $pos." Succeeded");
+
+      return redirect($this->modul);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return redirect($this->modul);
+    }
+  }
+
+  public function reject(Request $request, $id)
+  {
+    $pos = "Reject";
+    try {
+      $handler = new RejectServiceHandler($request, $id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 

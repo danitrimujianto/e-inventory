@@ -31,4 +31,11 @@ class Service extends Model
       return $this->belongsTo('App\Karyawan', 'karyawan_id');
     }
 
+    public function status(){
+      if($this->status == '1'){
+        return '<span class="badge bg-green">Approved</span>';
+      }else{
+        return '<span class="badge bg-default">Pending</span>';
+      }
+    }
 }

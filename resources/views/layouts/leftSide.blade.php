@@ -63,7 +63,7 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <li>
         <a href="/service">
-          <i class="fa fa-th"></i> <span>Service</span>
+          <i class="fa fa-th"></i> <span>Maintenance</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -78,7 +78,7 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/repretur"><i class="fa fa-ellipsis-v"></i> Retur</a></li>
           <li><a href="/repreqtools"><i class="fa fa-ellipsis-v"></i> Request New Tools</a></li>
           <li><a href="/repemployeetools"><i class="fa fa-ellipsis-v"></i> Employee Tools</a></li>
-          <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Service</a></li>
+          <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Maintenance</a></li>
           <li><a href="/reptools"><i class="fa fa-ellipsis-v"></i> Tool</a></li>
           <li><a href="/repstoktools"><i class="fa fa-ellipsis-v"></i> Stock Tools</a></li>
           <li><a href="/repkaryawan"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
@@ -137,7 +137,7 @@ $usertype = Auth::user()->usertype_id;
       </li>
       <li>
         <a href="/service">
-          <i class="fa fa-th"></i> <span>Service</span>
+          <i class="fa fa-th"></i> <span>Maintenance</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
@@ -152,7 +152,7 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/repretur"><i class="fa fa-ellipsis-v"></i> Retur</a></li>
           <li><a href="/repreqtools"><i class="fa fa-ellipsis-v"></i> Request New Tools</a></li>
           <li><a href="/repemployeetools"><i class="fa fa-ellipsis-v"></i> Employee Tools</a></li>
-          <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Service</a></li>
+          <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Maintenance</a></li>
           <li><a href="/reptools"><i class="fa fa-ellipsis-v"></i> Tool</a></li>
           <li><a href="/repstoktools"><i class="fa fa-ellipsis-v"></i> Stock Tools</a></li>
           <li><a href="/repkaryawan"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
@@ -192,6 +192,12 @@ $usertype = Auth::user()->usertype_id;
           <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
       </li>
+      <li>
+        <a href="/service">
+          <i class="fa fa-th"></i> <span>Maintenance</span>
+          <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-book"></i>
@@ -203,7 +209,7 @@ $usertype = Auth::user()->usertype_id;
           <li><a href="/repretur"><i class="fa fa-ellipsis-v"></i> Retur</a></li>
           <li><a href="/repreqtools"><i class="fa fa-ellipsis-v"></i> Request New Tools</a></li>
           <li><a href="/repemployeetools"><i class="fa fa-ellipsis-v"></i> Employee Tools</a></li>
-          <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Service</a></li>
+          <li><a href="/repservice"><i class="fa fa-ellipsis-v"></i> Maintenance</a></li>
           <li><a href="/reptools"><i class="fa fa-ellipsis-v"></i> Tool</a></li>
           <li><a href="/repstoktools"><i class="fa fa-ellipsis-v"></i> Stock Tools</a></li>
           <li><a href="/repkaryawan"><i class="fa fa-ellipsis-v"></i> Employee</a></li>
@@ -265,6 +271,12 @@ $usertype = Auth::user()->usertype_id;
         <a href="/requesttools">
           <i class="fa fa-th"></i> <span>Request New Tools</span>
           <!-- <small class="label pull-right bg-green">new</small> -->
+        </a>
+      </li>
+      @elseif($usertype == 6)
+      <li>
+        <a href="/requesttools">
+          <i class="fa fa-th"></i> <span>Request New Tools</span>
         </a>
       </li>
       @endif

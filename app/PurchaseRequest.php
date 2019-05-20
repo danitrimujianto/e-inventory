@@ -35,4 +35,24 @@ class PurchaseRequest extends Model
     {
       return $this->belongsTo('App\Project', 'project_id');
     }
+
+    public function _callFinanceStatus($obj){
+      $res = '';
+      if($obj == "0"){
+        $res = '<span class="badge bg-grey">Pending</span>';
+      }elseif($obj == "1"){
+        $res = '<span class="badge bg-green">Outstanding</span>';
+      }elseif($obj == "2"){
+        $res = '<span class="badge bg-green">Accepted</span>';
+      }elseif($obj == "3"){
+        $res = '<span class="badge bg-green">Approved</span>';
+      }elseif($obj == "98"){
+        $res = '<span class="badge bg-red">Canceled</span>';
+      }elseif($obj == "99"){
+        $res = '<span class="badge bg-red">Rejected</span>';
+      }
+
+      return $res;
+    }
+
 }

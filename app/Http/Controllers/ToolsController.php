@@ -50,9 +50,9 @@ class ToolsController extends ApplicationController
       $pos = "index";
       $alert = "";
       $this->theme["page"] = 'index'; //disetiap class dan function controller harus ada
-      $sf = (isset($_GET['sf']) ? $_GET['sf'] : '');
-      $sq = (isset($_GET['sq']) ? $_GET['sq'] : '');
-      $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
+      $sf = (isset($_REQUEST['sf']) ? $_REQUEST['sf'] : '');
+      $sq = (isset($_REQUEST['sq']) ? $_REQUEST['sq'] : '');
+      $bts = (isset($_REQUEST['bts']) ? $_REQUEST['bts'] : '');
 
       try {
         $reader = new ToolsReader($request);
@@ -70,7 +70,6 @@ class ToolsController extends ApplicationController
         $this->returnData['sq'] = $sq;
         $this->returnData['bts'] = $bts;
         $this->returnData['alert'] = $alert;
-
         return view('home', $this->returnData);
       } catch (\Exception $e) {
         $msg = $this->resultException($e, $pos);

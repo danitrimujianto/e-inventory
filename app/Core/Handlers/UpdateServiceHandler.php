@@ -38,12 +38,12 @@ class UpdateServiceHandler implements Handler
         $tab->tools_id = $request->tools_id;
         $tab->tanggal = HelpMe::tgl_indo_to_sql($request->tanggal);
         $tab->start_date = HelpMe::tgl_indo_to_sql($request->start_date);
-        $tab->finish_date = HelpMe::tgl_indo_to_sql($request->finish_date);
         $tab->problem = $request->problem;
         $tab->service = $request->service;
         $tab->condition_id = $request->condition_id;
         $tab->after_id = $request->after_id;
         $tab->remarks = $request->remarks;
+        $tab->price = HelpMe::nominalSql2($request->price);
         $tab->karyawan_id = $karyawan_id;
         $tab->save();
 

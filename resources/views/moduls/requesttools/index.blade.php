@@ -39,10 +39,12 @@
             <th>Status {{ Auth::user()->karyawan_id }}</th>
             <th>Approved By</th>
             <th>Rejected By</th>
+            <th>Finance Status</th>
             <th>Date</th>
             <th>Purchase No.</th>
             <th>User Request</th>
             <th>Project</th>
+            <th>Total</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
@@ -50,22 +52,33 @@
             <td><?php echo HelpLocal::checkPurchaseRequest($d->status, $d->type) ?></td>
             <td><span class="label label-primary">{{ optional($d->acc_by)->name }}</span></td>
             <td><span class="label label-danger">{{ optional($d->reject_by)->name }}</span></td>
+            <td><?php echo $d->_callFinanceStatus($d->status); ?></td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->tanggal) }}</td>
             <td>{{ $d->pr_no }}</td>
             <td>{{ optional($d->karyawan)->name }}</td>
             <td>{{ optional($d->project)->name }}</td>
+            <td>{{ HelpMe::cost2(optional($d->purchase_detail)->sum('total')) }}</td>
             <td>
               @if(Auth::user()->usertype_id != 3)
-              @if($d->status >= 0 && $d->status < 1)
-                <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
-                <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button>
-                <!-- <button title="" type="button" class="btn btn-xs tooltips btn-danger deleteButton"><i class="fa fa-trash"></i>&nbsp;Hapus</button> -->
-              @endif
+                @if(Auth::user()->usertype_id == 6)
+                  @if($d->status == 1)
+                    <button title="" type="button" class="btn btn-xs tooltips btn-success closeButton"><i class="fa fa-check"></i>&nbsp;Close</button>
+                  @endif
+                @else
+                  @if(Auth::user()->usertype_id == 1 || Auth::user()->usertype_id == 2)
+                    <button title="" type="button" class="btn btn-xs tooltips btn-primary inputButton"><i class="fa fa-plus"></i>&nbsp;Input</button>
+                  @endif
+                  @if($d->status >= 0 && $d->status < 1)
+                    <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
+                    <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button>
+                    <!-- <button title="" type="button" class="btn btn-xs tooltips btn-danger deleteButton"><i class="fa fa-trash"></i>&nbsp;Hapus</button> -->
+                  @endif
+                @endif
               @elseif(Auth::user()->usertype_id == 3)
-              @if($d->status == 0)
-              <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button>
-              <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
-              @endif
+                @if($d->status == 0)
+                <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button>
+                <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
+                @endif
               @endif
             </td>
           </tr>
@@ -125,6 +138,14 @@ $(document).ready(function(){
     alertSweet("Are you sure to approve  ", id, field, value, modulPage, 'Accept');
   });
 
+  $(".closeButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to close  ", id, field, value, modulPage, 'Close');
+  });
+
   $(".rejectButton").click(function(){
     var modulPage = $("#modulPage").val();
     var id = $(this).parent('td').parent('tr').attr('data-id');
@@ -132,6 +153,14 @@ $(document).ready(function(){
     var value = $(this).parent('td').parent('tr').attr('data-value');
     alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
   });
+
+  $(".inputButton").click(function(){
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var urlModal = '/modal/inputTools/', titleModal='Input Tools';
+    var param = "";
+    modalPage(id, urlModal, titleModal, 80, param);
+  });
+
 });
 </script>
 @endsection

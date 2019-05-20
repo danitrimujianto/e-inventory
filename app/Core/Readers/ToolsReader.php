@@ -24,11 +24,15 @@ class ToolsReader implements Reader
       $req = $this->request;
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
+      $sf = (isset($req->sf) ? $req->sf : '');
 
       $data = new Tools;
-      if(!empty($sq))
-      {
-        $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
+      if(is_array($sf)){
+        foreach($sf AS $k=>$v){
+          if(!empty($v)){
+            $data = $data->where($k, 'like', '%'.$v.'%');
+          }
+        }
       }
 
       $data = $data->orderBy('id', 'desc')->paginate($batas);

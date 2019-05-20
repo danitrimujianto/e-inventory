@@ -22,7 +22,7 @@ class ReportServiceController extends ApplicationController
   {
       $this->middleware('auth');
       $this->modul = "repservice"; //disetiap __construct controller harus ada
-      $this->modulName = "Report Service"; //disetiap __construct controller harus ada
+      $this->modulName = "Report Maintenance"; //disetiap __construct controller harus ada
       $this->theme = array("modul"=>$this->modul, "modulName"=>$this->modulName); //disetiap __construct controller harus ada
       $this->returnData = array();
       $this->HelpMe = new HelpMe();

@@ -9,6 +9,7 @@ use App\Core\Handlers\UpdateRequestToolsHandler;
 use App\Core\Handlers\DeleteRequestToolsHandler;
 use App\Core\Handlers\CancelRequestToolsHandler;
 use App\Core\Handlers\AcceptRequestToolsHandler;
+use App\Core\Handlers\CloseRequestToolsHandler;
 use App\Core\Handlers\RejectRequestToolsHandler;
 use App\Core\Readers\RequestToolsReader;
 use App\Core\Readers\GetRequestToolsReader;
@@ -246,6 +247,21 @@ class RequestToolsController extends ApplicationController
     $pos = "accept";
     try {
       $handler = new AcceptRequestToolsHandler($id);
+      $data = $handler->handle();
+      $this->createAlert("info", $pos." Succeeded");
+
+      return redirect($this->modul);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return redirect($this->modul);
+    }
+  }
+
+  public function close($id)
+  {
+    $pos = "close";
+    try {
+      $handler = new CloseRequestToolsHandler($id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 

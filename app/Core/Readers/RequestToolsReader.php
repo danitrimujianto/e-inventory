@@ -20,7 +20,6 @@ class RequestToolsReader implements Reader
     /** method ini digunakan untuk mengeksekusi query */
     public function read()
     {
-
       $req = $this->request;
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
@@ -38,7 +37,6 @@ class RequestToolsReader implements Reader
         }
       }
       if(Auth::user()->usertype_id == 4 || Auth::user()->usertype_id == 5){ $data = $data->where('karyawan_id', Auth::user()->karyawan_id); }
-
       $data = $data->orderBy('id','desc')->paginate($batas);
       return $data;
     }

@@ -11,20 +11,17 @@
 				<div class="col-md-12" >
 					<h4>Filter</h4>
 				</div>
-        <form method="get" action="{{ '/'.$theme['modul'] }}">
+        <form method="post" action="{{ '/'.$theme['modul'].'/search' }}">
+          @csrf
 				<div class="form-group">
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Status</label>-->
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
+
 				  <div class="col-md-5 col-xs-12">
-  					<select name="sf" class="form-control">
-              <option value="code" @if($sf == "code") {{ 'selected' }} @endif>Code</option>
-              <option value="item" @if($sf == "item") {{ 'selected' }} @endif>Item</option>
-              <option value="serial_number" @if($sf == "serial_number") {{ 'selected' }} @endif>Serial Number</option>
-              <option value="imei" @if($sf == "imei") {{ 'selected' }} @endif>Imei</option>
-  					</select>
+					       <input type="text" name="sf[serial_number]" id="" class="form-control" placeholder="Serial Number" value="@if(is_array($sf)) {{ $sf['serial_number'] }} @endif">
 					</div>
 				  <div class="col-md-5 col-xs-12">
-					<input type="text" name="sq" id="sq" class="form-control" placeholder="" value="{{ $sq }}">
+					       <input type="text" name="sf[imei]" id="" class="form-control" placeholder="Imei" value="@if(is_array($sf)) {{ $sf['imei'] }} @endif">
 				  </div>
 				  <div class="col-sm-2 col-xs-12" style="  ">
 					<button class="btn btn-primary"><i class="fa fa-search"></i></button>

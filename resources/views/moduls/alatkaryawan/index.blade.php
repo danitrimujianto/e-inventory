@@ -27,7 +27,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
 				<div class="form-group">
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Status</label>-->
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
-				  <div class="col-md-5 col-xs-12">
+				  <!-- <div class="col-md-5 col-xs-12">
   					<select name="sf" id="sf" class="form-control">
               <option value="item" @if($sf == "item") {{ 'selected' }} @endif>Item</option>
               <option value="code_tools" @if($sf == "code_tools") {{ 'selected' }} @endif>ID Tools</option>
@@ -39,6 +39,12 @@ $price = ((Auth::user()->usertype_id == 4 ||
 					</div>
 				  <div class="col-md-5 col-xs-12">
 					<input type="text" name="sq" id="sq" class="form-control" placeholder="" value="{{ $sq }}">
+				  </div> -->
+				  <div class="col-md-5 col-xs-12">
+					       <input type="text" name="sf[serial_number]" id="" class="form-control" placeholder="Serial Number" value="@if(is_array($sf)) {{ $sf['serial_number'] }} @endif">
+					</div>
+				  <div class="col-md-5 col-xs-12">
+					       <input type="text" name="sf[imei]" id="" class="form-control" placeholder="Imei" value="@if(is_array($sf)) {{ $sf['imei'] }} @endif">
 				  </div>
 				  <div class="col-sm-2 col-xs-12" style="  ">
 					<button class="btn btn-primary"><i class="fa fa-search"></i></button>

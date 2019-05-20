@@ -485,6 +485,11 @@ class FunctionGlobals {
       return str_replace(".", "", $obj);
     }
 
+    public static function nominalSql2($obj)
+    {
+      return str_replace(",", "", $obj);
+    }
+
     public static function procMsg($status)
     {
 

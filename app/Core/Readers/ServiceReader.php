@@ -49,7 +49,7 @@ class ServiceReader implements Reader
           $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
         }
       }
-      if(Auth::user()->usertype_id != 1){ $data = $data->where('karyawan_id', Auth::user()->karyawan_id); }
+      if(Auth::user()->usertype_id == 4){ $data = $data->where('karyawan_id', Auth::user()->karyawan_id); }
 
       $data = $data->orderBy('id','desc')->paginate($batas);
       return $data;

@@ -56,6 +56,8 @@ class FunctionLocals {
        $ret = '<span class="badge bg-green">Manager Approved</span>';
      }elseif($obj == "2"){
        $ret = '<span class="badge bg-green">Accepted</span>';
+     }elseif($obj == "3"){
+       $ret = '<span class="badge bg-green">Close</span>';
      }elseif($obj == "98"){
        $ret = '<span class="badge bg-red">Canceled</span>';
      }elseif($obj == "99"){

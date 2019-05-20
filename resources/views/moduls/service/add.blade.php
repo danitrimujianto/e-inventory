@@ -17,7 +17,7 @@
               <div class="form-group">
                 <label for="name">Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ date('d/m/Y') }}">
+                  <input type="text" class="form-control datepicker needed" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ date('d/m/Y') }}">
                   <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                 <label for="name">Item</label>
                 <div>
                   <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="">
-                  <input type="text" class="form-control itemSearch" name="item" id="item" placeholder="" autocomplete="off" value="">
+                  <input type="text" class="form-control itemSearch needed" name="item" id="item" placeholder="" autocomplete="off" value="">
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -67,27 +67,10 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="name">Start Date</label>
-                <div>
-                  <input type="text" class="form-control datepicker" name="start_date" id="start_date" placeholder="" autocomplete="off" value="">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Finish Date</label>
-                <div>
-                  <input type="text" class="form-control datepicker" name="finish_date" id="finish_date" placeholder="" autocomplete="off" value="">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
                 <label for="name">Problem</label>
                 <div>
-                  <input type="text" class="form-control" name="problem" id="problem" placeholder="" autocomplete="off" value="">
+                  <input type="text" class="form-control needed" name="problem" id="problem" placeholder="" autocomplete="off" value="">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -95,7 +78,8 @@
               <div class="form-group">
                 <label for="name">Service</label>
                 <div>
-                  <input type="text" class="form-control" name="service" id="service" placeholder="" autocomplete="off" value="">
+                  <input type="text" class="form-control needed" name="service" id="service" placeholder="" autocomplete="off" value="">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -105,12 +89,13 @@
               <div class="form-group">
                 <label for="name">Condition</label>
                 <div>
-                  <select class="form-control" name="condition_id">
+                  <select class="form-control needed" name="condition_id">
                     <option value="">-- Choose Condition --</option>
                     @foreach($dCondition AS $condition)
                       <option value="{{ $condition->id }}">{{ $condition->name }}</option>
                     @endforeach
                   </select>
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -118,12 +103,33 @@
               <div class="form-group">
                 <label for="name">After</label>
                 <div>
-                  <select class="form-control" name="after_id">
+                  <select class="form-control needed" name="after_id">
                     <option value="">-- Choose After --</option>
                     @foreach($dCondition AS $condition)
                       <option value="{{ $condition->id }}">{{ $condition->name }}</option>
                     @endforeach
                   </select>
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Start Date</label>
+                <div>
+                  <input type="text" class="form-control datepicker needed" name="start_date" id="start_date" placeholder="" autocomplete="off" value="">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Estimate Price</label>
+                <div>
+                  <input type="text" class="form-control nominal needed" name="price" id="price" placeholder="" autocomplete="off" value="">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -131,7 +137,8 @@
           <div class="form-group">
             <label for="remarks">Remarks</label>
             <div>
-              <textarea class="form-control" name="remarks" id="remarks"></textarea>
+              <textarea class="form-control needed" name="remarks" id="remarks"></textarea>
+              <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
             </div>
           </div>
         </div>

@@ -3,10 +3,14 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Add New</button>
-        <div class="box-tools">
+        <div class="row">
+				<div class="col-md-12" >
+        @if(Auth::user()->usertype_id != 3) <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Add New</button> @endif
+        <div class="box-tools  pull-right">
           <button class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
         </div>
+      </div>
+    </div>
         <div class="row" id="searchForm" style=" display:none; ">
 				<div class="col-md-12" >
 					<h4>Filter</h4>
@@ -38,6 +42,7 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
+            <th>Status</th>
             <th>ID Tools</th>
             <th>Items</th>
             <th>Serial Number</th>
@@ -48,10 +53,12 @@
             <th>After</th>
             <th>Start Date</th>
             <th>Finish Date</th>
+            <th>Price</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Service' }}" data-value="{{ optional($d->tools)->item }}">
+            <td><?php echo $d->status() ?></td>
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
             <td>{{ optional($d->tools)->serial_number }}</td>
@@ -62,10 +69,18 @@
             <td>{{ optional($d->after)->name }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->start_date) }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->finish_date) }}</td>
+            <td>{{ HelpMe::cost2($d->price) }}</td>
             <td>
+            @if(Auth::user()->usertype_id == 3)
+              @if($d->status == 0)
+              <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button><br/><br/>
+              <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
+              @endif
+            @else
                 <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
                 <!-- <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button> -->
                 <button title="" type="button" class="btn btn-xs tooltips btn-danger deleteButton"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+              @endif
             </td>
           </tr>
           @endforeach
@@ -114,6 +129,30 @@ $(document).ready(function(){
     var field = $(this).parent('td').parent('tr').attr('data-field');
     var value = $(this).parent('td').parent('tr').attr('data-value');
     alertSweet("Are you sure to cancel  ", id, field, value, modulPage, 'Cancel');
+  });
+
+  $(".acceptButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to approve  ", id, field, value, modulPage, 'Accept');
+  });
+
+  $(".closeButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to close  ", id, field, value, modulPage, 'Close');
+  });
+
+  $(".rejectButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
   });
 });
 </script>
