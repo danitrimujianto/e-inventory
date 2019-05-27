@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
           view()->composer('*', function ($view)
           {
-                  if(Auth::user()->usertype_id){
+                  if(Session::has('users')){
               $handover = 0;
               $reader = new NotifLabelReader();
               $warehouse = $reader->getPendingWarehouse();
