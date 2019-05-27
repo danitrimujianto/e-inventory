@@ -2,6 +2,7 @@
 namespace App\Core\Readers;
 
 use App\PurchaseRequest;
+use App\PurchaseRequestDetail;
 use App\Core\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,15 @@ class GetRequestToolsReader implements Reader
       $id = $this->id;
 
       $data = PurchaseRequest::find($id);
+
+      return $data;
+    }
+
+    public function getItemDetail()
+    {
+      $id = $this->id;
+
+      $data = PurchaseRequestDetail::find($id);
 
       return $data;
     }

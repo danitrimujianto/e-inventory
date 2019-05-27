@@ -286,4 +286,18 @@ class RequestToolsController extends ApplicationController
       return redirect($this->modul);
     }
   }
+
+  public function getItem($id)
+  {
+    $pos = "getItem";
+    try {
+      $reader = new GetRequestToolsReader($id);
+      $data = $reader->getItemDetail();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return response()->json(array("err"=>1, "msg"=>$msg));
+    }
+  }
 }

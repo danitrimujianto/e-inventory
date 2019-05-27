@@ -1,10 +1,15 @@
 <?php $search = ""; ?>
 <!-- Small boxes (Stat box) -->
+<div class="alert alert-info alert-dismissible warn" style=" display: none;">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <h4 class="title"></h4>
+  <span class="description">
+  </span>
+</div>
 <div class="row">
     <!-- general form elements -->
-      <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
+      <form name="fProcess" id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="barang_id" id="barang_id" value="" />
         <div class="box-body">
           <div class="form-group">
             <label for="code">Date</label>
@@ -32,8 +37,12 @@
               <div class="form-group">
                 <label for="code">Goods</label>
                 <div>
-                  <input type="text" class="form-control" name="barang_name" id="barang_name" value="" />
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                  <select class="form-control needed" name="barang_id" id="barang_id">
+                    <option value="">-- Choose Goods --</option>
+                    @foreach($dBarang AS $barang)
+                      <option value="{{ $barang->id }}">{{ $barang->name }}</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
             </div>
@@ -41,7 +50,13 @@
           <div class="form-group">
             <label for="name">Item</label>
             <div>
-              <input type="text" class="form-control" name="item" id="item" placeholder="" autocomplete="off">
+              <select class="form-control" name="item_id" id="itemChoose">
+                <option value="">-- Choose Supplier --</option>
+                @foreach($dItems AS $items)
+                  <option value="{{ $items->id }}">{{ $items->item }}</option>
+                @endforeach
+              </select>
+              <!-- <input type="text" class="form-control" name="item" id="item" placeholder="" autocomplete="off"> -->
             </div>
           </div>
           <div class="form-group">
@@ -71,8 +86,12 @@
           <div class="form-group">
             <label for="name">Supplier</label>
             <div>
-              <input type="hidden" class="form-control" name="supplier_id" id="supplier_id" placeholder="" autocomplete="off">
-              <input type="text" class="form-control" name="supplier" id="supplier" placeholder="" autocomplete="off">
+              <select class="form-control" name="supplier_id" id="supplier_id">
+                <option value="">-- Choose Supplier --</option>
+                @foreach($dSupplier AS $supplier)
+                  <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
           <div class="form-group">
@@ -91,71 +110,62 @@
         <!-- /.box-body -->
 
         <div class="box-footer">
-          <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
-          <button type="button" class="btn btn-success" id="saveButton"><i class="fa fa-save"></i>&nbsp;Save</button>
+          <!-- <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button> -->
+          <button type="button" class="btn btn-success saveFormModal" id="saveFormModal"><i class="fa fa-save"></i>&nbsp;Save</button>
         </div>
       </form>
 </div>
 <!-- /.row (main row) -->
-@section('scriptAdd')
 <script>
 $(document).ready(function(){
-
-  var listBarang = [];
-  var listDataBarang = {};
-
-  $('body').on('keyup', '#barang_name', function(){
-    $(this).typeahead({
-  		source: function (query, result) {
-        $.ajax({
-  				url: "/barang/search",
-  				data: 'sf=name&sq=' + query,
-  				dataType: "json",
-  				type: "GET",
-  				success: function (data) {
-    					result($.map(data, function (item) {
-                listDataBarang[item.name] = [];
-                listDataBarang[item.name]['id'] = item.id;
-                listDataBarang[item.name]['name'] = item.name;
-                listDataBarang[item.name]['type'] = item.type;
-                listBarang.push(listDataBarang);
-                return item.name;
-    					}));
-  				}
-  			});
-  		},
-      afterSelect: function(data){
-        $('#barang_id').val(listDataBarang[data]['id']);
-        $('#item').val(listDataBarang[data]['name']);
-        $('#type').val(listDataBarang[data]['type']);
+  // $('#saveFormModal').click(function(){
+  //   alert('asd');
+  //
+  // });
+  $("body").on("change", "#itemChoose", function(){
+    var id = $(this).val();
+    $.ajax({
+      url: "/requesttools/detail/getItem/"+id,
+      type: "GET",
+      data: "",
+      dataType: "json",
+      success: function(data)
+      {
+        $("#merk").val(data.merk);
+        $("#type").val(data.type);
+        $("#price").val(nominal(data.price));
+        // console.log(data);
       }
-  	});
+    });
   });
 
-  var listSupplier = [];
-  var listDataSupplier = {};
-  $('body').on('keyup', '#supplier', function(){
-    $(this).typeahead({
-  		source: function (query, result) {
-        $.ajax({
-  				url: "/supplier/search",
-  				data: 'sf=name&sq=' + query,
-  				dataType: "json",
-  				type: "GET",
-  				success: function (data) {
-    					result($.map(data, function (item) {
-                listDataSupplier[item.name] = item.id;
-                listSupplier.push(listDataSupplier);
-                return item.name;
-    					}));
-  				}
-  			});
-  		},
-      afterSelect: function(data){
-        $('#supplier_id').val(listDataSupplier[data]);
+  $("body").on("click", ".saveFormModal", function(){
+    // alert('asd');
+    var data = $('#fProcess').serialize();
+    $.ajax({
+      url: "/tools/add/request",
+      type: "POST",
+      data: data,
+      dataType: "json",
+      success: function(data)
+      {
+        // console.log(data);
+				// $.map(data, function (item) {
+          if(data.status == "1"){
+            $(".warn").show();
+            $(".warn .title").html('<i class="icon fa fa-check"></i> '+data.description);
+            document.fProcess.reset();
+            $('#myModal').animate({ scrollTop: 0 }, 'slow');
+            // $("#fProcess").reset();
+          }else{
+            $(".warn").show();
+            $(".warn .title").html('<i class="icon fa fa-remove"></i> '+data.description);
+          }
+        // });
       }
-  	});
+    });
   });
+
+
 });
 </script>
-@endsection

@@ -299,6 +299,7 @@ Route::middleware('auth')->prefix("/tools")->group(function() {
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'ToolsController@add'); /* action insert or add data to system*/
       Route::post("/", 'ToolsController@store'); /* action insert or add data to system*/
+      Route::post("/request", 'ToolsController@storeRequestTools'); /* action insert or add data to system*/
     });
 
     Route::prefix("/{id}")->group(function() {
@@ -473,6 +474,10 @@ Route::middleware('auth')->prefix("/requesttools")->group(function() {
 
     Route::prefix("/input")->group(function() {
         Route::get("/", 'RequestToolsController@formInput'); /* action get data by id */
+    });
+
+    Route::prefix("/detail/getItem")->group(function() {
+        Route::get("/{id}", 'RequestToolsController@getItem'); /* action get data by id */
     });
 });
 

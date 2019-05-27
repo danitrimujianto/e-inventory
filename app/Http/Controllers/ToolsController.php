@@ -127,6 +127,20 @@ class ToolsController extends ApplicationController
     }
   }
 
+ public function storeRequestTools(Request $request)
+ {
+   $pos = "add";
+   try {
+     $handler = new AddToolsHandler($request);
+     $data = $handler->handle();
+
+     return response()->json(array("description"=>"Add Succeeded", "status"=>"1"));
+   } catch (\Exception $e) {
+     // $msg = $this->resultException($e, $pos);
+     return response()->json(array("description"=>"Add Failed ( ".$e." )", "status"=>"0"));
+   }
+ }
+
   /**
    * Display the specified resource.
    *
