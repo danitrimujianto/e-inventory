@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use App\Core\Readers\NotifLabelReader;
-
+use Session;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -21,30 +21,33 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        view()->composer('*', function ($view)
-        {
-            $reader = new NotifLabelReader();
-            $warehouse = $reader->getPendingWarehouse();
-            $submission = $reader->getPendingSubmission();
-            $acceptance = $reader->getPendingAcceptance();
-            $retur = $reader->getPendingRetur();
+        if(Session::has('user')){
+          view()->composer('*', function ($view)
+          {
+              $reader = new NotifLabelReader();
+              $warehouse = $reader->getPendingWarehouse();
+              $submission = $reader->getPendingSubmission();
+              $acceptance = $reader->getPendingAcceptance();
+              $retur = $reader->getPendingRetur();
 
-            if(Auth::user()->usertype_id == 1){
-              $handover = $warehouse;
-            }else if(Auth::user()->usertype_id == 2){
-              $handover = $warehouse+$acceptance+$retur;
-            }else if(Auth::user()->usertype_id == 4){
-              $handover = $submission+$acceptance+$retur;
-            }
-              // $handover = $warehouse+$submission+$acceptance+$retur;
+              if(Auth::user()->usertype_id == 1){
+                $handover = $warehouse;
+              }else if(Auth::user()->usertype_id == 2){
+                $handover = $warehouse+$acceptance+$retur;
+              }else if(Auth::user()->usertype_id == 4){
+                $handover = $submission+$acceptance+$retur;
+              }
+                // $handover = $warehouse+$submission+$acceptance+$retur;
 
-            //...with this variable
-            $view->with('handover', $handover );
-            $view->with('warehouse', $warehouse );
-            $view->with('submission', $submission );
-            $view->with('acceptance', $acceptance );
-            $view->with('retur', $retur );
-        });
+              //...with this variable
+              $view->with('handover', $handover );
+              $view->with('warehouse', $warehouse );
+              $view->with('submission', $submission );
+              $view->with('acceptance', $acceptance );
+              $view->with('retur', $retur );
+          });
+        }
+
     }
 
     /**
