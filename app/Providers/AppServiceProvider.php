@@ -21,9 +21,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        // if(Session::has('user')){
+        if(Session::has('user')){
           view()->composer('*', function ($view)
           {
+              $handover = 0;
               $reader = new NotifLabelReader();
               $warehouse = $reader->getPendingWarehouse();
               $submission = $reader->getPendingSubmission();
@@ -46,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
               $view->with('acceptance', $acceptance );
               $view->with('retur', $retur );
           });
-        // }
+        }
 
     }
 
