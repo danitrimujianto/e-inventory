@@ -1,5 +1,6 @@
 <?php
 $usertype = Auth::user()->usertype_id;
+
 ?>
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
@@ -41,12 +42,23 @@ $usertype = Auth::user()->usertype_id;
         <a href="#">
           <i class="fa fa-book"></i>
           <span>Handover</span>
+          <small class="label bg-red">{{ $handover }}</small>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> Handover Warehouse</a></li>
-          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission</a></li>
-          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance</a></li>
+          <li>
+            <a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> Handover Warehouse
+              <small class="label pull-right bg-red">{{ $warehouse }}</small>
+            </a>
+          </li>
+          <li>
+            <a href="/handover"><i class="fa fa-ellipsis-v"></i> Handover Submission
+            </a>
+          </li>
+          <li>
+            <a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Handover Acceptance
+            </a>
+          </li>
         </ul>
       </li>
       <li>
@@ -115,12 +127,25 @@ $usertype = Auth::user()->usertype_id;
         <a href="#">
           <i class="fa fa-book"></i>
           <span>Handover</span>
+          <small class="label bg-red">{{ $handover }}</small>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> Warehouse</a></li>
-          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Acceptance</a></li>
-          <li><a href="/horetur"><i class="fa fa-ellipsis-v"></i> Retur Tools</a></li>
+          <li>
+            <a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> Warehouse
+              <small class="label pull-right bg-red">{{ $warehouse }}</small>
+            </a>
+          </li>
+          <li>
+            <a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Acceptance
+              <small class="label pull-right bg-red">{{ $acceptance }}</small>
+            </a>
+          </li>
+          <li>
+            <a href="/horetur"><i class="fa fa-ellipsis-v"></i> Retur Tools
+              <small class="label pull-right bg-red">{{ $retur }}</small>
+            </a>
+          </li>
         </ul>
       </li>
       <li>
@@ -221,13 +246,26 @@ $usertype = Auth::user()->usertype_id;
         <a href="#">
           <i class="fa fa-book"></i>
           <span>Handover</span>
+          <small class="label bg-red">{{ $handover }}</small>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
           <!-- <li><a href="/allhoactivities"><i class="fa fa-ellipsis-v"></i> All HO Activities</a></li> -->
-          <li><a href="/handover"><i class="fa fa-ellipsis-v"></i> Submission</a></li>
-          <li><a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Acceptance</a></li>
-          <li><a href="/horetur"><i class="fa fa-ellipsis-v"></i> Retur Tools</a></li>
+          <li>
+            <a href="/handover"><i class="fa fa-ellipsis-v"></i> Submission
+              <small class="label pull-right bg-red">{{ $submission }}</small>
+            </a>
+          </li>
+          <li>
+            <a href="/hoaccept"><i class="fa fa-ellipsis-v"></i> Acceptance
+              <small class="label pull-right bg-red">{{ $acceptance }}</small>
+            </a>
+          </li>
+          <li>
+            <a href="/horetur"><i class="fa fa-ellipsis-v"></i> Retur Tools
+              <small class="label pull-right bg-red">{{ $retur }}</small>
+            </a>
+          </li>
         </ul>
       </li>
       <li>
