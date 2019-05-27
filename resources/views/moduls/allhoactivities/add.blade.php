@@ -288,8 +288,10 @@ $(document).ready(function(){
               listRecipient[item.name] = item.id;
               listRecipient[item.name+'-city'] = item.assignmentarea.name;
               listRecipient[item.name+'-idcity'] = item.assignmentarea.id;
-              listRecipient[item.name+'-idproject'] = item.project_id;
-              listRecipient[item.name+'-projectname'] = item.project.name;
+              if(item.project != null){
+                listRecipient[item.name+'-idproject'] = item.project_id;
+                listRecipient[item.name+'-projectname'] = item.project.name;
+              }
               return item.name;
             }));
           }

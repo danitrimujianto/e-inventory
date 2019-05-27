@@ -25,12 +25,14 @@ class SearchKaryawanReader implements Reader
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
 
-      $data = Karyawan::with('assignmentarea')->with('project');
+      $data = Karyawan::with('assignmentarea')->with(array('project'=>function($query){
+          $query->select('id','name');
+        }));
       if(!empty($sq))
       {
         $data = $data->where($req->sf, 'like', '%'.$req->sq.'%');
       }
-      $data = $data->select('')->get();
+      $data = $data->select('karyawan.*')->get();
       return $data;
     }
 }
