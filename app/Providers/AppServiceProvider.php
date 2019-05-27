@@ -23,7 +23,6 @@ class AppServiceProvider extends ServiceProvider
 
           view()->composer('*', function ($view)
           {
-                  if(Session::has('users')){
               $handover = 0;
               $reader = new NotifLabelReader();
               $warehouse = $reader->getPendingWarehouse();
@@ -46,7 +45,6 @@ class AppServiceProvider extends ServiceProvider
               $view->with('submission', $submission );
               $view->with('acceptance', $acceptance );
               $view->with('retur', $retur );
-            }
           });
 
     }

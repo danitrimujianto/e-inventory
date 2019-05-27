@@ -1,6 +1,5 @@
 <?php
 $usertype = Auth::user()->usertype_id;
-
 ?>
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
