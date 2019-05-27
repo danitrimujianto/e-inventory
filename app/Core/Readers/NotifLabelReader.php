@@ -26,10 +26,8 @@ class NotifLabelReader implements Reader
     }
 
     public function getPendingWarehouse(){
-      $status = "";
-      if($this->usertype == 1){
-        $status = 1;
-      }
+      $status = 1;
+
       $data = AllhoActivities::where('status', $status)->where('type', 'office')->whereNull('deleted_at')->count();
 
       return $data;
