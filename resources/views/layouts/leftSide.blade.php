@@ -1,5 +1,9 @@
 <?php
 $usertype = Auth::user()->usertype_id;
+$handover = "0";
+$warehouse = "0";
+$submission = "0";
+$acceptance = "0";
 ?>
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
