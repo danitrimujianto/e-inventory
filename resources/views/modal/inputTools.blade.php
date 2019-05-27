@@ -56,7 +56,7 @@
                   <option value="{{ $items->id }}">{{ $items->item }}</option>
                 @endforeach
               </select>
-              <!-- <input type="text" class="form-control" name="item" id="item" placeholder="" autocomplete="off"> -->
+              <input type="hidden" class="form-control" name="item" id="item" placeholder="" autocomplete="off">
             </div>
           </div>
           <div class="form-group">
@@ -131,6 +131,7 @@ $(document).ready(function(){
       dataType: "json",
       success: function(data)
       {
+        $("#item").val(data.item);
         $("#merk").val(data.merk);
         $("#type").val(data.type);
         $("#price").val(nominal(data.price));
