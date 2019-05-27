@@ -32,30 +32,30 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-      view()->composer('*', function ($view)
-      {
-          $handover = 0;
-          $reader = new NotifLabelReader();
-          $warehouse = $reader->getPendingWarehouse();
-          $submission = $reader->getPendingSubmission();
-          $acceptance = $reader->getPendingAcceptance();
-          $retur = $reader->getPendingRetur();
-
-          if(Auth::user()->usertype_id == 1){
-            $handover = $warehouse;
-          }else if(Auth::user()->usertype_id == 2){
-            $handover = $warehouse+$acceptance+$retur;
-          }else if(Auth::user()->usertype_id == 4){
-            $handover = $submission+$acceptance+$retur;
-          }
-            // $handover = $warehouse+$submission+$acceptance+$retur;
-
-          //...with this variable
-          $view->with('handover', $handover );
-          $view->with('warehouse', $warehouse );
-          $view->with('submission', $submission );
-          $view->with('acceptance', $acceptance );
-          $view->with('retur', $retur );
-      });
+      // view()->composer('*', function ($view)
+      // {
+      //     $handover = 0;
+      //     $reader = new NotifLabelReader();
+      //     $warehouse = $reader->getPendingWarehouse();
+      //     $submission = $reader->getPendingSubmission();
+      //     $acceptance = $reader->getPendingAcceptance();
+      //     $retur = $reader->getPendingRetur();
+      //
+      //     if(Auth::user()->usertype_id == 1){
+      //       $handover = $warehouse;
+      //     }else if(Auth::user()->usertype_id == 2){
+      //       $handover = $warehouse+$acceptance+$retur;
+      //     }else if(Auth::user()->usertype_id == 4){
+      //       $handover = $submission+$acceptance+$retur;
+      //     }
+      //       // $handover = $warehouse+$submission+$acceptance+$retur;
+      //
+      //     //...with this variable
+      //     $view->with('handover', $handover );
+      //     $view->with('warehouse', $warehouse );
+      //     $view->with('submission', $submission );
+      //     $view->with('acceptance', $acceptance );
+      //     $view->with('retur', $retur );
+      // });
     }
 }
