@@ -6,8 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Core\Readers\NotifLabelReader;
-use Session;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -21,9 +21,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        if(Session::has('user')){
           view()->composer('*', function ($view)
           {
+                  if(Auth::user()->usertype_id){
               $handover = 0;
               $reader = new NotifLabelReader();
               $warehouse = $reader->getPendingWarehouse();
@@ -46,8 +46,8 @@ class AppServiceProvider extends ServiceProvider
               $view->with('submission', $submission );
               $view->with('acceptance', $acceptance );
               $view->with('retur', $retur );
+            }
           });
-        }
 
     }
 
