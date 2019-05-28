@@ -61,7 +61,7 @@
             <td>{{ optional($d->project)->name }}</td>
             <td>{{ optional($d->delivery)->name }}</td>
             <td>
-              @if($d->status >= 0 && $d->status < 2)
+              @if((Auth::user()->usertype_id == 4 && $d->status >= 1 && $d->status < 2) || (Auth::user()->usertype_id == 2 && $d->status >= 0 && $d->status < 2))
               <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Accept</button>
               <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
               @endif

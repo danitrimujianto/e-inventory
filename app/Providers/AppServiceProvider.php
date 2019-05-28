@@ -23,6 +23,37 @@ class AppServiceProvider extends ServiceProvider
 
 
 
+          view()->composer('*', function ($view)
+          {
+            if(Auth::user()){
+              $handover = 0;
+              $reader = new NotifLabelReader();
+              $warehouse = $reader->getPendingWarehouse();
+              $submission = $reader->getPendingSubmission();
+              $acceptance = $reader->getPendingAcceptance();
+              $retur = $reader->getPendingRetur();
+              $requestTools = $reader->getPendingRequestTools();
+              $maintenance = $reader->getPendingMaintenance();
+
+              if(Auth::user()->usertype_id == 1){
+                $handover = $warehouse;
+              }else if(Auth::user()->usertype_id == 2){
+                $handover = $warehouse+$acceptance+$retur;
+              }else if(Auth::user()->usertype_id == 4){
+                $handover = $submission+$acceptance+$retur;
+              }
+                // $handover = $warehouse+$submission+$acceptance+$retur;
+
+              //...with this variable
+              $view->with('handover', $handover );
+              $view->with('warehouse', $warehouse );
+              $view->with('submission', $submission );
+              $view->with('acceptance', $acceptance );
+              $view->with('retur', $retur );
+              $view->with('requestTools', $requestTools );
+              $view->with('maintenance', $maintenance );
+            }
+          });
     }
 
     /**

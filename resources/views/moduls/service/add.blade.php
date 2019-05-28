@@ -237,6 +237,7 @@ $(document).ready(function(){
   				dataType: "json",
   				type: "GET",
   				success: function (data) {
+              console.log(data);
     					result($.map(data, function (item) {
                 listData[item.item] = [];
                 listData[item.item]['id'] = item.id;
@@ -256,7 +257,7 @@ $(document).ready(function(){
         $('#code').val(listData[data]['code']);
         $('#serial_number').val(listData[data]['serial_number']);
         $('#imei').val(listData[data]['imei']);
-        // console.log(listData[data]['']);
+        // console.log(listData[data]);
       }
   	});
   });

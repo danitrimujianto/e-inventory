@@ -1,9 +1,9 @@
 <?php
 $usertype = Auth::user()->usertype_id;
-$handover = "0";
-$warehouse = "0";
-$submission = "0";
-$acceptance = "0";
+// $handover = "0";
+// $warehouse = "0";
+// $submission = "0";
+// $acceptance = "0";
 ?>
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
@@ -160,13 +160,13 @@ $acceptance = "0";
       <li>
         <a href="/requesttools">
           <i class="fa fa-th"></i> <span>Request New Tools</span>
-          <!-- <small class="label pull-right bg-green">new</small> -->
+          <small class="label pull-right bg-red">{{ $requestTools }}</small>
         </a>
       </li>
       <li>
         <a href="/service">
           <i class="fa fa-th"></i> <span>Maintenance</span>
-          <!-- <small class="label pull-right bg-green">new</small> -->
+          <small class="label pull-right bg-red">{{ $maintenance }}</small>
         </a>
       </li>
       <li class="treeview">
@@ -217,13 +217,13 @@ $acceptance = "0";
       <li>
         <a href="/requesttools">
           <i class="fa fa-th"></i> <span>Request New Tools</span>
-          <!-- <small class="label pull-right bg-green">new</small> -->
+          <small class="label pull-right bg-red">{{ $requestTools }}</small>
         </a>
       </li>
       <li>
         <a href="/service">
           <i class="fa fa-th"></i> <span>Maintenance</span>
-          <!-- <small class="label pull-right bg-green">new</small> -->
+          <small class="label pull-right bg-red">{{ $maintenance }}</small>
         </a>
       </li>
       <li class="treeview">
@@ -308,16 +308,16 @@ $acceptance = "0";
           <i class="fa fa-th"></i> <span>Other Employee Tools</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="/requesttools">
           <i class="fa fa-th"></i> <span>Request New Tools</span>
-          <!-- <small class="label pull-right bg-green">new</small> -->
         </a>
-      </li>
+      </li> -->
       @elseif($usertype == 6)
       <li>
         <a href="/requesttools">
           <i class="fa fa-th"></i> <span>Request New Tools</span>
+          <small class="label pull-right bg-red">{{ $requestTools }}</small>
         </a>
       </li>
       @endif

@@ -70,7 +70,7 @@ $fromcity_id = $karyawan->assignmentarea_id;
               <div class="form-group">
                 <label for="name">Project</label>
                 <div>
-                  <input type="text" class="form-control needed" name="project_name" id="lookup_project" value="" autocomplete="off"/>
+                  <input type="text" class="form-control needed project_name" name="project_name" id="lookup_project" value="" autocomplete="off"/>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -313,6 +313,10 @@ $(document).ready(function(){
               listRecipient[item.name] = item.id;
               listRecipient[item.name+'-city'] = item.assignmentarea.name;
               listRecipient[item.name+'-idcity'] = item.assignmentarea.id;
+              if(item.project != null){
+                listRecipient[item.name+'-idproject'] = item.project_id;
+                listRecipient[item.name+'-projectname'] = item.project.name;
+              }
               return item.name;
             }));
           }
@@ -322,6 +326,8 @@ $(document).ready(function(){
         $("#recipient_id").val(listRecipient[data]);
         $("#tocity_name").val(listRecipient[data+'-city']);
         $("#tocity_id").val(listRecipient[data+'-idcity']);
+        $("#project_id").val(listRecipient[data+'-idproject']);
+        $(".project_name").val(listRecipient[data+'-projectname']);
       }
     });
   });
