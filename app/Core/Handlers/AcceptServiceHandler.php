@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\Service;
+use App\User;
 use App\Karyawan;
 use App\Core\Handler;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class AcceptServiceHandler implements Handler
     {
         $id = $this->id;
         $data = $this->saveDB($id);
+        $notif = $this->sendnotif($data);
         return $data;
     }
 
@@ -38,5 +40,17 @@ class AcceptServiceHandler implements Handler
         $tab->save();
 
         return $tab;
+    }
+
+    private function sendnotif($data)
+    {
+      $returnData['data'] = $data;
+      $returnData['target'] = $data->karyawan_id;
+      $user = User::where('karyawan_id', $returnData['target'])->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifService($returnData, $val->email);
+      }
     }
 }

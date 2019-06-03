@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\Service;
+use App\User;
 use App\Core\Handler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,8 @@ class AddServiceHandler implements Handler
     {
         $request = $this->request;
         $data = $this->saveDB($request);
+        $notif = $this->sendnotif($data);
+
         return $data;
     }
 
@@ -59,16 +62,28 @@ class AddServiceHandler implements Handler
 
       if(strlen($new_no) == 1)
       { $new_no = "0000".$new_no; }
-      if(strlen($new_no) == 2)
+      else if(strlen($new_no) == 2)
       { $new_no = "000".$new_no; }
-      if(strlen($new_no) == 3)
+      else if(strlen($new_no) == 3)
       { $new_no = "00".$new_no; }
-      if(strlen($new_no) == 4)
+      else if(strlen($new_no) == 4)
       { $new_no = "0".$new_no; }
-      if(strlen($new_no) == 5)
+      else if(strlen($new_no) == 5)
       { $new_no = $new_no; }
 
       $new_no = $prefix.substr($thn, 2, 2).$bln.$new_no;
       return $new_no;
+    }
+
+    private function sendnotif($data)
+    {
+      $returnData['data'] = $data;
+      $returnData['target'] = "3";
+      $user = User::where('usertype_id', 3)->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifService($returnData, $val->email);
+      }
     }
 }

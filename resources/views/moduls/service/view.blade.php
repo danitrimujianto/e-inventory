@@ -10,7 +10,7 @@
       <!-- form start -->
       <form id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="put">
-        <input type="hidden" name="id" value="{{ $data->id }}">
+        <input type="hidden" name="id" id="id_data" value="{{ $data->id }}">
         @csrf
         <div class="box-body">
           <div class="row">
@@ -151,6 +151,9 @@
 
         <div class="box-footer">
           <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
+
+          <button title="" type="button" class="btn btn-danger rejectButton pull-right"><i class="fa fa-remove"></i>&nbsp;Reject</button>
+          <button style="margin-right: 30px;" title="" type="button" class="btn btn-success acceptButton pull-right"><i class="fa fa-check"></i>&nbsp;Approve</button>
         </div>
       </form>
     </div>
@@ -160,3 +163,24 @@
 <div >
 </div>
 <!-- /.row (main row) -->
+@section('scriptAdd')
+<script>
+$(document).ready(function(){
+  $(".acceptButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $("#id_data").val();
+    var field = "Service";
+    var value = $("#item").val();
+    alertSweet("Are you sure to approve  ", id, field, value, modulPage, 'Accept');
+  });
+
+  $(".rejectButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $("#id_data").val();
+    var field = "Service";
+    var value = $("#item").val();
+    alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
+  });
+});
+</script>
+@endsection
