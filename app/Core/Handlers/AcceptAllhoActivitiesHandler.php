@@ -22,6 +22,7 @@ class AcceptAllhoActivitiesHandler implements Handler
 
     public function handle()
     {
+        $usertype = Auth::user()->usertype_id;
         $id = $this->id;
         $data = $this->saveDB($id);
         if($usertype == "2"){
