@@ -73,10 +73,10 @@ Thank You,<br>
     <br>
     <table width="100%" class="table">
       <tr>
-        <td><img src="{{ asset('dist/img/approved.png') }}"></td>
+        <td align="center"><img src="{{ asset('dist/img/approved.png') }}" style=" width: 150px; height: 150px; "></td>
       </tr>
       <tr>
-        <td><strong>APPROVED</strong></td>
+        <td align="center"><strong>APPROVED</strong></td>
       </tr>
     </table>
     @endcomponent
@@ -86,10 +86,10 @@ Thank You,<br>
     <br>
     <table width="100%" class="table">
       <tr>
-        <td><img src="{{ asset('dist/img/cancel.png') }}"></td>
+        <td align="center"><img src="{{ asset('dist/img/cancel.png') }}" style=" width: 150px; height: 150px; "></td>
       </tr>
       <tr>
-        <td><strong>REJECTED</strong></td>
+        <td align="center"><strong>REJECTED</strong></td>
       </tr>
     </table>
     @endcomponent
