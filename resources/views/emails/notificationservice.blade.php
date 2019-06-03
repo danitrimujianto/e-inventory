@@ -1,8 +1,8 @@
-@php $total = '0'; @endphp
+
+@if($target == '3')
 @component('mail::message')
 # Maintenance
 
-@if($target == '3')
 We recieved maintenance tool
 <br>
 <table width="100%" class="table">
@@ -65,8 +65,10 @@ Response
 <br>
 Thank You,<br>
 {{ config('app.name') }}
+@endcomponent
 @else
   @if($data->status == "1")
+  @component('mail::message')
     Congratulation, Maintenance Tools <strong>{{ $data->tools->code }}</strong>
     <br>
     <table width="100%" class="table">
@@ -77,7 +79,9 @@ Thank You,<br>
         <td><strong>APPROVED</strong></td>
       </tr>
     </table>
+    @endcomponent
   @else
+  @component('mail::message')
     Sorry, Maintenance Tools <strong>{{ $data->tools->code }}</strong>
     <br>
     <table width="100%" class="table">
@@ -88,6 +92,6 @@ Thank You,<br>
         <td><strong>REJECTED</strong></td>
       </tr>
     </table>
+    @endcomponent
   @endif
 @endif
-@endcomponent
