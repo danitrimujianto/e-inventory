@@ -4,6 +4,7 @@ namespace App\Core\Handlers;
 use App\AllhoActivities;
 use App\AllhoActivitiesDetail;
 use App\ToolsKaryawan;
+use App\User;
 use App\Core\Handler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class AcceptAllhoActivitiesHandler implements Handler
         $id = $this->id;
         $data = $this->saveDB($id);
         if($usertype == "2"){
-          $notif = $this->sendnotif($data);
+          $notif = $this->sendnotif($data, $data->recipient_id);
         }
         return $data;
     }
@@ -89,14 +90,14 @@ class AcceptAllhoActivitiesHandler implements Handler
         return $tab;
     }
 
-    private function sendnotif($data)
+    private function sendnotif($data, $target)
     {
       $id = $data->id;
       $detailData = AllhoActivitiesDetail::where('allho_activities_id', $id)->get();
 
       $returnData['data'] = $data;
       $returnData['detail'] = $detailData;
-      $user = User::where('usertype_id', 4)->get();
+      $user = User::where('usertype_id', $target)->get();
 
       $emails = array();
       foreach($user AS $val){
