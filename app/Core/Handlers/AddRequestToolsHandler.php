@@ -113,7 +113,7 @@ class AddRequestToolsHandler implements Handler
     {
       $returnData['data'] = $data;
       $returnData['detail'] = $detail;
-      $user = User::where('usertype_id', 3)->get();
+      $user = User::where('usertype_id', '>=', 2)->where('usertype_id', '<=', 3)->get();
 
       $emails = array();
       foreach($user AS $val){
