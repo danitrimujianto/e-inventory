@@ -97,7 +97,7 @@ class AcceptAllhoActivitiesHandler implements Handler
 
       $returnData['data'] = $data;
       $returnData['detail'] = $detailData;
-      $user = User::where('usertype_id', $target)->get();
+      $user = User::where('karyawan_id', $target)->get();
 
       $emails = array();
       foreach($user AS $val){
