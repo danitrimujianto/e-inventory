@@ -24,6 +24,9 @@ class AcceptAllhoActivitiesHandler implements Handler
     {
         $id = $this->id;
         $data = $this->saveDB($id);
+        if($usertype == "2"){
+          $notif = $this->sendnotif($data);
+        }
         return $data;
     }
 
@@ -83,5 +86,20 @@ class AcceptAllhoActivitiesHandler implements Handler
         }
 
         return $tab;
+    }
+
+    private function sendnotif($data)
+    {
+      $id = $data->id;
+      $detailData = AllhoActivitiesDetail::where('allho_activities_id', $id)->get();
+
+      $returnData['data'] = $data;
+      $returnData['detail'] = $detailData;
+      $user = User::where('usertype_id', 4)->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifHandover($returnData, $val->email);
+      }
     }
 }
