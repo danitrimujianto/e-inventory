@@ -19,17 +19,6 @@
                 <label for="name">Date</label>
                 <div>
                   <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}" readonly>
-                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Date</label>
-                <div>
-                  <input type="text" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->tanggal) }}" readonly>
       						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -81,7 +70,7 @@
               <div class="form-group">
                 <label for="name">Start Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="start_date" id="start_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->start_date) }}" readonly>
+                  <input type="text" class="form-control" name="start_date" id="start_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->start_date) }}" readonly>
                 </div>
               </div>
             </div>
@@ -89,7 +78,7 @@
               <div class="form-group">
                 <label for="name">Finish Date</label>
                 <div>
-                  <input type="text" class="form-control datepicker" name="finish_date" id="finish_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->finish_date) }}" readonly>
+                  <input type="text" class="form-control" name="finish_date" id="finish_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->finish_date) }}" readonly>
                 </div>
               </div>
             </div>
@@ -152,8 +141,12 @@
         <div class="box-footer">
           <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
 
-          <button title="" type="button" class="btn btn-danger rejectButton pull-right"><i class="fa fa-remove"></i>&nbsp;Reject</button>
-          <button style="margin-right: 30px;" title="" type="button" class="btn btn-success acceptButton pull-right"><i class="fa fa-check"></i>&nbsp;Approve</button>
+          @if($data->status == "0")
+            <button title="" type="button" class="btn btn-danger rejectButton pull-right"><i class="fa fa-remove"></i>&nbsp;Reject</button>
+            <button style="margin-right: 30px;" title="" type="button" class="btn btn-success acceptButton pull-right"><i class="fa fa-check"></i>&nbsp;Approve</button>
+          @elseif($data->status == "1")
+            <button title="" type="button" class="btn btn-primary finishButton pull-right"><i class="fa fa-minus-circle"></i>&nbsp;Finish</button>
+          @endif
         </div>
       </form>
     </div>
@@ -180,6 +173,14 @@ $(document).ready(function(){
     var field = "Service";
     var value = $("#item").val();
     alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
+  });
+
+  $(".finishButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $("#id_data").val();
+    var field = "Service";
+    var value = $("#item").val();
+    alertSweet("Are you sure to finish  ", id, field, value, modulPage, 'Finish');
   });
 });
 </script>

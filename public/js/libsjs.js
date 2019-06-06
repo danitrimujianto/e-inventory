@@ -112,6 +112,15 @@ function actReject(id, title, modulPage)
   $('#myModal').find('.modal-footer').hide();
 }
 
+function actFinish(id, title, modulPage)
+{
+  document.fGlobal.id.value=id;
+  var urlModal = '/modal/finish/', titleModal='Finish '+title;
+  var param = "&urlPos=/"+modulPage+"/"+id+"/finish";
+  modalPage(id, urlModal, titleModal, 80, param);
+  $('#myModal').find('.modal-footer').hide();
+}
+
 function actCancel(id, title, modulPage)
 {
   document.fGlobal.id.value=id;
@@ -164,6 +173,8 @@ function alertSweet(ket, id, field, kode, modulPage, pos)
         actReject(id, kode, modulPage)
       }else if(pos == 'Cancel'){
         actCancel(id, kode, modulPage)
+      }else if(pos == 'Finish'){
+        actFinish(id, kode, modulPage)
       }
 		}
 	});

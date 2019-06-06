@@ -9,6 +9,7 @@ use App\Core\Handlers\UpdateServiceHandler;
 use App\Core\Handlers\DeleteServiceHandler;
 use App\Core\Handlers\AcceptServiceHandler;
 use App\Core\Handlers\RejectServiceHandler;
+use App\Core\Handlers\FinishServiceHandler;
 use App\Core\Readers\ServiceReader;
 use App\Core\Readers\GetServiceReader;
 
@@ -248,6 +249,21 @@ class ServiceController extends ApplicationController
     $pos = "Reject";
     try {
       $handler = new RejectServiceHandler($request, $id);
+      $data = $handler->handle();
+      $this->createAlert("info", $pos." Succeeded");
+
+      return redirect($this->modul);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return redirect($this->modul);
+    }
+  }
+
+  public function finish(Request $request, $id)
+  {
+    $pos = "Finish";
+    try {
+      $handler = new FinishServiceHandler($request, $id);
       $data = $handler->handle();
       $this->createAlert("info", $pos." Succeeded");
 

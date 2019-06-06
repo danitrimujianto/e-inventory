@@ -32,10 +32,14 @@ class Service extends Model
     }
 
     public function status(){
-      if($this->status == '1'){
-        return '<span class="badge bg-green">Approved</span>';
-      }else{
+      if(empty($this->status) || $this->status == '0'){
         return '<span class="badge bg-default">Pending</span>';
+      }else if($this->status == '1'){
+        return '<span class="badge bg-green">Approved</span>';
+      }else if($this->status == '99'){
+        return '<span class="badge bg-red">Rejected</span>';
+      }else if($this->status == '2'){
+        return '<span class="badge bg-blue disabled">Finish</span>';
       }
     }
 }

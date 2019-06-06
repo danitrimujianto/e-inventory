@@ -7,6 +7,7 @@ use App\Core\Readers\DivisionReader;
 use App\Core\Readers\BarangReader;
 use App\Core\Readers\SupplierReader;
 use App\Core\Readers\RequestToolsReader;
+use App\Core\Readers\GoodsConditionReader;
 
 class ModalController extends Controller
 {
@@ -15,6 +16,18 @@ class ModalController extends Controller
       $pos = 'reject';
 
       return view('modal.'.$pos, $request);
+    }
+
+    public function finish(Request $request)
+    {
+      $pos = 'finish';
+
+      $reader = new GoodsConditionReader($request);
+      $dCondition = $reader->read();
+      $this->returnData['dCondition'] = $dCondition;
+      $this->returnData['urlPos'] = $request->urlPos;
+
+      return view('modal.'.$pos, $this->returnData);
     }
 
     public function inputTools(Request $request)
@@ -37,6 +50,7 @@ class ModalController extends Controller
       $reader = new RequestToolsReader($request);
       $dItems = $reader->getItem();
       $this->returnData['dItems'] = $dItems;
+
 
       return view('modal.'.$pos, $this->returnData);
     }

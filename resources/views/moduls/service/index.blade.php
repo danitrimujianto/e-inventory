@@ -72,7 +72,7 @@
             <td>{{ HelpMe::cost2($d->price) }}</td>
             <td>
             @if(Auth::user()->usertype_id == 3)
-              @if($d->status == 0)
+              @if(empty($d->status) || $d->status == 0)
               <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button><br/><br/>
               <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
               @endif

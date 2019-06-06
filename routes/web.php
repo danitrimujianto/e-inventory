@@ -38,6 +38,7 @@ Route::middleware('auth')->prefix("/profile")->group(function() {
 /* Router Modal */
 Route::middleware('auth')->prefix("/modal")->group(function() {
     Route::get("/reject", 'ModalController@reject'); /* action get list of developers */
+    Route::get("/finish", 'ModalController@finish'); /* action get list of developers */
     Route::get("/inputTools", 'ModalController@inputTools'); /* action get list of developers */
 });
 
@@ -497,6 +498,7 @@ Route::middleware('auth')->prefix("/service")->group(function() {
         Route::delete("/", 'ServiceController@destroy'); /* action delete data by id */
         Route::get("/accept", 'ServiceController@accept'); /* action accept data by id */
         Route::post("/reject", 'ServiceController@reject'); /* action accept data by id */
+        Route::post("/finish", 'ServiceController@finish'); /* action accept data by id */
     });
 });
 
