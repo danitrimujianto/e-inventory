@@ -30,6 +30,7 @@ class ToolsKaryawan extends Model
 
     public function lastUpdate(){
 
+        $obj = "";
       if(!empty($this->renew_date)){
       $ex = explode("-", $this->renew_date);
       $bln = $ex[1];
