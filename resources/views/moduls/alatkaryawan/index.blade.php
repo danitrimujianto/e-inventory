@@ -88,7 +88,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
           </tr>
           @foreach($data AS $d)
           <tr class="" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
-            <td><input type="checkbox" name="idTools[]" value="{{ optional($d->tools)->id }}" /></td>
+            <td><input type="checkbox" class="id_tool" name="idTools[]" value="{{ optional($d->tools)->id }}" /></td>
             <td>{{ optional($d->tools)->id }}</td>
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
@@ -161,24 +161,38 @@ $price = ((Auth::user()->usertype_id == 4 ||
 @section('scriptAdd')
 <script>
 $(document).ready(function(){
+
+  var jmlChecked = $(".id_tool:checked").length;
   $("#renewButton").click(function(){
-    var modulPage = $("#modulPage").val();
-    document.location.href='/'+modulPage+'/renew';
+      var modulPage = $("#modulPage").val();
+      document.location.href='/'+modulPage+'/renew';
   });
   $("#handoverBulk").click(function(){
-    var modulPage = $("#modulPage").val();
-    document.fList.action='/handover/add/bulk';
-    document.fList.submit();
+    if(jmlChecked > 0){
+      var modulPage = $("#modulPage").val();
+      document.fList.action='/handover/add/bulk';
+      document.fList.submit();
+    }else{
+      alert('Centang salah satu baris');
+    }
   });
   $("#returBulk").click(function(){
-    var modulPage = $("#modulPage").val();
-    document.fList.action='/horetur/add/bulk';
-    document.fList.submit();
+    if(jmlChecked > 0){
+      var modulPage = $("#modulPage").val();
+      document.fList.action='/horetur/add/bulk';
+      document.fList.submit();
+    }else{
+      alert('Centang salah satu baris');
+    }
   });
   $("#updateBulk").click(function(){
-    var modulPage = $("#modulPage").val();
-    document.fList.action='/'+modulPage+'/renew/bulk/?on=y';
-    document.fList.submit();
+    if(jmlChecked > 0){
+      var modulPage = $("#modulPage").val();
+      document.fList.action='/'+modulPage+'/renew/bulk/?on=y';
+      document.fList.submit();
+    }else{
+      alert('Centang salah satu baris');
+    }
   });
 });
 </script>
