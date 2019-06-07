@@ -26,4 +26,5 @@ class GetToolsReader implements Reader
 
       return $data;
     }
+
 }

@@ -19,6 +19,7 @@ use App\Core\Readers\GoodsConditionReader;
 use App\Core\Readers\KaryawanReader;
 use App\Core\Readers\ProjectReader;
 use App\Core\Readers\AreaReader;
+use App\Core\Readers\GetToolsReader;
 
 
 use Session;
@@ -112,6 +113,15 @@ class HandoverReturController extends ApplicationController
         $reader = new AreaReader($request);
         $dArea = $reader->read();
         $this->returnData['dArea'] = $dArea;
+
+        $dToolBulk = array();
+        if(isset($request->idTools)){
+          foreach($request->idTools AS $k=>$v){
+            $reader = new GetToolsReader($v);
+            $dToolBulk[] = $reader->read();
+          }
+        }
+        $this->returnData['dToolsBulk'] = $dToolBulk;
 
         return view('home', $this->returnData);
       }catch(\Exception $e){

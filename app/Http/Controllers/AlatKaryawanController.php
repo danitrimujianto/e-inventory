@@ -8,6 +8,7 @@ use App\Core\Export\AlatKaryawanExcel;
 use App\Core\Readers\AlatKaryawanReader;
 use App\Core\Readers\GetAlatKaryawanReader;
 use App\Core\Handlers\RenewAlatKaryawanHandler;
+use App\Core\Handlers\RenewAlatKaryawanBulkHandler;
 
 //others table
 use App\Core\Readers\DeliveryReader;
@@ -51,6 +52,7 @@ class AlatKaryawanController extends ApplicationController
       $sf = (isset($_GET['sf']) ? $_GET['sf'] : '');
       $sq = (isset($_GET['sq']) ? $_GET['sq'] : '');
       $bts = (isset($_GET['bts']) ? $_GET['bts'] : '');
+      $lastUpdate = (isset($_GET['lastUpdate']) ? $_GET['lastUpdate'] : '');
 
       try {
         $reader = new AlatKaryawanReader($request);
@@ -68,6 +70,7 @@ class AlatKaryawanController extends ApplicationController
         $this->returnData['sq'] = $sq;
         $this->returnData['bts'] = $bts;
         $this->returnData['alert'] = $alert;
+        $this->returnData['lastUpdate'] = $lastUpdate;
 
         return view('home', $this->returnData);
       } catch (\Exception $e) {
@@ -161,9 +164,6 @@ class AlatKaryawanController extends ApplicationController
     $this->returnData['data'] = "";
 
     try {
-      $reader = new GetAllhoActivitiesReader($id);
-      $data = $reader->read();
-      $this->returnData['data'] = $data;
 
       $reader = new DeliveryReader($request);
       $dDelivery = $reader->read();
@@ -286,10 +286,18 @@ class AlatKaryawanController extends ApplicationController
    public function renew(Request $request)
    {
      $pos = "Update Date";
+     $on = $request->on;
      try {
-       $handler = new RenewAlatKaryawanHandler($request);
-       $data = $handler->handle();
-       $this->createAlert("info", $pos." Succeeded");
+
+       if($on == 'y'){
+         $handler = new RenewAlatKaryawanBulkHandler($request);
+         $data = $handler->handle();
+         $this->createAlert("info", $pos." Succeeded");
+       }else{
+         $handler = new RenewAlatKaryawanHandler($request);
+         $data = $handler->handle();
+         $this->createAlert("info", $pos." Succeeded");
+       }
 
        return redirect($this->modul);
      } catch (\Exception $e) {

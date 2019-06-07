@@ -10,12 +10,23 @@ $price = ((Auth::user()->usertype_id == 4 ||
         <div class="row">
 				<div class="col-md-12" >
         @if(!$price)
-        <button class="btn btn-success" id="renewButton"><i class="fa fa-refresh"></i> Update Date </button>
+        <div class="col-md-2 col-xs-2">
+          <button class="btn btn-success" id="renewButton"><i class="fa fa-refresh"></i> Update Date </button>
+        </div>
         @endif
         <div class="box-tools pull-right">
           <button class="btn btn-danger " id="excelButton"><i class="fa fa-file-excel-o"></i> Excel</button>
           <button class="btn btn-primary " id="printButton"><i class="fa fa-print"></i> Print</button>
           <!-- <button class="btn btn-default " id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button> -->
+        </div>
+        <div class="col-md-4 col-xs-4">
+        <form method="get" action="{{ '/'.$theme['modul'] }}">
+          <select name="lastUpdate" id="lastUpdate" class="form-control" onchange="submit()" >
+            <option value="">-- Tampil Semua --</option>
+            <option value="sudah" @if($lastUpdate == 'sudah') selected @endif>Sudah Update</option>
+            <option value="belum" @if($lastUpdate == 'belum') selected @endif>Belum Update</option>
+          </select>
+        </form>
         </div>
       </div>
     </div>
@@ -25,8 +36,6 @@ $price = ((Auth::user()->usertype_id == 4 ||
 				</div>
         <form method="get" action="{{ '/'.$theme['modul'] }}">
 				<div class="form-group">
-				  <label for="list_price" class="col-sm-2 col-xs-12 control-label">Status</label>
-				  <label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>
 				  <div class="col-md-5 col-xs-12">
   					<select name="sf" id="sf" class="form-control">
               <option value="item" @if($sf == "item") {{ 'selected' }} @endif>Item</option>
@@ -55,10 +64,14 @@ $price = ((Auth::user()->usertype_id == 4 ||
 				</div>
       </div>
       <!-- /.box-header -->
+      <form name="fList" id="fList" method="post" action="{{ '/'.$theme['modul'] }}">
+        @csrf
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
+            <th>Check</th>
             <th>ID Tools</th>
+            <th>Code</th>
             <th>Item</th>
             <th>Serial Number</th>
             <th>Imei</th>
@@ -68,12 +81,15 @@ $price = ((Auth::user()->usertype_id == 4 ||
             <th>Homebase</th>
             <th>Assignment</th>
             <th>Update Date</th>
+            <th>Last Update</th>
             @if($price)
               <th>Price</th>
             @endif
           </tr>
           @foreach($data AS $d)
           <tr class="" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
+            <td><input type="checkbox" name="idTools[]" value="{{ optional($d->tools)->id }}" /></td>
+            <td>{{ optional($d->tools)->id }}</td>
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
             <td>{{ optional($d->tools)->serial_number }}</td>
@@ -84,6 +100,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
             <td>{{ optional($d->karyawan->homebasearea)->name }}</td>
             <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
+            <td>{{ HelpMe::tgl_sql_to_indo($d->lastUpdate()) }}</td>
             @if($price)
               <td>{{ HelpMe::cost(optional($d->tools)->price) }}</td>
             @endif
@@ -91,12 +108,28 @@ $price = ((Auth::user()->usertype_id == 4 ||
           @endforeach
         </table>
       </div>
+      </form>
       <!-- /.box-body -->
       <div class="box-footer clearfix">
 				<div class="col-md-6">
 					<table class="">
 						<tr>
-							<td>Menampilkan&nbsp;&nbsp;</td>
+              <td>
+								<div class="btn-group dropup">
+									  <button type="button" class="btn btn-default  ">Bulk Action</button>
+									  <button aria-expanded="false" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>
+									  </button>
+									  <ul class="dropdown-menu bulk-action" role="menu">
+										<li><a href="javascript:void(0)" id="handoverBulk"><i class="fa fa-hand-o-left"></i> Handover</a></li>
+										<li><a href="javascript:void(0)" id="returBulk"><i class="fa fa-refresh"></i> Retur</a></li>
+										<li class="divider">&nbsp;</li>
+										<li><a href="javascript:void(0)" id="updateBulk"><i class="fa fa-tasks"></i> Update Tool</a></li>
+									  </ul>
+								</div>
+							</td>
+							<td>&nbsp;&nbsp;Menampilkan&nbsp;&nbsp;</td>
 							<td>
 								<form name="fBatas" method="GET" action="{{ '/'.$theme['modul'] }}">
                   @if(!empty($sq))
@@ -131,6 +164,21 @@ $(document).ready(function(){
   $("#renewButton").click(function(){
     var modulPage = $("#modulPage").val();
     document.location.href='/'+modulPage+'/renew';
+  });
+  $("#handoverBulk").click(function(){
+    var modulPage = $("#modulPage").val();
+    document.fList.action='/handover/add/bulk';
+    document.fList.submit();
+  });
+  $("#returBulk").click(function(){
+    var modulPage = $("#modulPage").val();
+    document.fList.action='/horetur/add/bulk';
+    document.fList.submit();
+  });
+  $("#updateBulk").click(function(){
+    var modulPage = $("#modulPage").val();
+    document.fList.action='/'+modulPage+'/renew/bulk/?on=y';
+    document.fList.submit();
   });
 });
 </script>

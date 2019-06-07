@@ -27,4 +27,14 @@ class ToolsKaryawan extends Model
     {
       return $this->belongsTo('App\AllhoActivities', 'allho_activities_id');
     }
+
+    public function lastUpdate(){
+      $ex = explode("-", $this->renew_date);
+      $bln = $ex[1];
+      $thn = $ex[0];
+
+      if($bln == date("m") && $thn == date("Y")){
+        return $this->renew_date;
+      }
+    }
 }

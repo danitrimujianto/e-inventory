@@ -25,6 +25,7 @@ class AlatKaryawanReader implements Reader
       $batas = (isset($req->bts) && !empty($req->bts) ? $req->bts : '10');
       $sq = (isset($req->sq) ? $req->sq : '');
       $sf = (isset($req->sf) ? $req->sf : '');
+      $lastUpdate = (isset($req->lastUpdate) ? $req->lastUpdate : '');
       $usertype = Auth::user()->usertype_id;
 
       $data = new ToolsKaryawan;
@@ -44,6 +45,14 @@ class AlatKaryawanReader implements Reader
       //     }
       //   }
       // }
+
+      if(!empty($lastUpdate)){
+        if($lastUpdate == 'sudah'){
+          $data = $data->whereMonth('renew_date', date("m"))->whereYear('renew_date', date("Y"));
+        }else if($lastUpdate == 'belum'){
+          $data = $data->whereMonth('renew_date', '!=', date("m"))->whereYear('renew_date', '=', date("Y"));
+        }
+      }
 
       if(!empty($sq))
       {

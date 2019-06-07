@@ -156,9 +156,31 @@ $fromcity_id = $karyawan->assignmentarea_id;
                   <th style="width: 40px">Action</th>
                 </tr>
                 <tbody id="listTools">
+                @if($dToolsBulk)
+                @foreach($dToolsBulk AS $tool)
+                <tr>
+                    <td><input type="hidden" class="idTools" name="idTools[]" value="{{ $tool->id }}" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="{{ $tool->code.' - '.$tool->item }}" autocomplete="off"/></td>
+                    <td>
+                      <select class="form-control goods_condition_id" name="goods_condition_id[]">
+                        <option value="">-- Choose Condition --</option>
+                        @foreach($dCondition AS $condition)
+                          <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                        @endforeach
+                      </select>
+                    </td>
+                    <td><input type="text" class="form-control merk" value="{{ $tool->merk }}" id="" readonly /></td>
+                    <td><input type="text" class="form-control type" value="{{ $tool->type }}" id="" readonly/></td>
+                    <td><input type="text" class="form-control serial_number" value="{{ $tool->serial_number }}"  id="" readonly/></td>
+                    <td><input type="text" class="form-control imei" value="{{ $tool->imei }}" id="" readonly/></td>
+                    <td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Hapus</button></td>
+                </tr>
+                @endforeach
+                @endif
+                @if(!$dToolsBulk)
                 <tr>
                   <td colspan="7" class="text-center">Empty</td>
                 </tr>
+                @endif
                 </tbody>
                 <tfooter>
                 <tr>

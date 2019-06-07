@@ -371,6 +371,7 @@ Route::middleware('auth')->prefix("/handover")->group(function() {
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'HandoverController@add'); /* action insert or add data to system*/
       Route::post("/", 'HandoverController@store'); /* action insert or add data to system*/
+      Route::post("/bulk", 'HandoverController@add'); /* action insert or add data to system*/
     });
 
     Route::prefix("/{id}")->group(function() {
@@ -389,6 +390,7 @@ Route::middleware('auth')->prefix("/horetur")->group(function() {
     Route::middleware('auth')->prefix("/add")->group(function() {
       Route::get("/", 'HandoverReturController@add'); /* action insert or add data to system*/
       Route::post("/", 'HandoverReturController@store'); /* action insert or add data to system*/
+      Route::post("/bulk", 'HandoverController@add'); /* action insert or add data to system*/
     });
 
     Route::prefix("/{id}")->group(function() {
@@ -424,15 +426,18 @@ Route::middleware('auth')->prefix("/hoaccept")->group(function() {
 /* Router Alat Karyawan */
 Route::middleware('auth')->prefix("/alatkaryawan")->group(function() {
     Route::get("/", 'AlatKaryawanController@index'); /* action get list of developers */
-    Route::get("/renew", 'AlatKaryawanController@renew'); /* action get list of developers */
     Route::get("/print", 'AlatKaryawanController@print'); /* action get list of developers */
 
     Route::middleware('auth')->prefix("/export")->group(function() {
       Route::get("/excel", 'AlatKaryawanController@excel'); /* action insert or add data to system*/
     });
 
+    Route::prefix("/renew")->group(function() {
+      Route::get("/", 'AlatKaryawanController@renew'); /* action get list of developers */
+      Route::post("/bulk", 'AlatKaryawanController@renew'); /* action get list of developers */
+    });
+
     Route::prefix("/{id}")->group(function() {
-        Route::get("/", 'AlatKaryawanController@edit'); /* action get data by id */
         Route::get("/detail", 'AlatKaryawanController@show'); /* action show data by id */
     });
 });
