@@ -38,11 +38,16 @@
     				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
     				  <div class="col-md-5 col-xs-12">
       					<select name="sf" id="sf" class="form-control">
-                  <option value="ID Tools" @if($sf == "ID Tools") {{ 'selected' }} @endif>ID Tools</option>
+                  <option value="Outgoing No" @if($sf == "Outgoing No") {{ 'selected' }} @endif>Outgoing No</option>
+                  <option value="Code" @if($sf == "Code") {{ 'selected' }} @endif>Code</option>
                   <option value="Item" @if($sf == "Item") {{ 'selected' }} @endif>Item</option>
                   <option value="Serial Number" @if($sf == "Serial Number") {{ 'selected' }} @endif>Serial Number</option>
                   <option value="Imei" @if($sf == "Imei") {{ 'selected' }} @endif>Imei</option>
+                  <option value="Merk" @if($sf == "Merk") {{ 'selected' }} @endif>Merk</option>
+                  <option value="Type" @if($sf == "Type") {{ 'selected' }} @endif>Type</option>
                   <option value="Project" @if($sf == "Project") {{ 'selected' }} @endif>Project</option>
+                  <option value="Sender" @if($sf == "Sender") {{ 'selected' }} @endif>Sender</option>
+                  <option value="Recipient" @if($sf == "Recipient") {{ 'selected' }} @endif>Recipient</option>
       					</select>
     					</div>
     				  <div class="col-md-5 col-xs-12">
@@ -61,10 +66,10 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th bgcolor="#CCCCCC">NO.</th>
+            <th bgcolor="#CCCCCC">ID TOOLS</th>
             <th bgcolor="#CCCCCC">DATE</th>
             <th bgcolor="#CCCCCC">OUTGOING NO.</th>
-            <th bgcolor="#CCCCCC">ID TOOLS</th>
+            <th bgcolor="#CCCCCC">CODE</th>
             <th bgcolor="#CCCCCC">ITEM</th>
             <th bgcolor="#CCCCCC">CONDITION</th>
             <th bgcolor="#CCCCCC">SN</th>
@@ -84,7 +89,7 @@
           @foreach($data AS $d)
           @php $no++; @endphp
           <tr>
-            <td>{{ $no.'.' }}</td>
+            <td>{{ $d->tools->id }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->allhoactivities->tgl) }}</td>
             <td>{{ $d->allhoactivities->outgoing_no }}</td>
             <td>{{ $d->tools->code }}</td>

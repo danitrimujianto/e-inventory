@@ -86,15 +86,15 @@ class NotifLabelReader implements Reader
     public function getPendingRequestTools(){
       $status = "";
       $opr = "";
-      if($this->usertype == 3){
+      // if($this->usertype == 3 || $this->usertype == 2){
         $status = "0";
         $opr = "=";
-      }else {
-        $status = "1";
-        $opr = "<=";
-      }
+      // }else {
+      //   $status = "1";
+      //   $opr = "<=";
+      // }
 
-      $data = PurchaseRequest::where('status', $opr, $status)->whereNull('deleted_at')->count();
+      $data = PurchaseRequest::where('status', $opr, $status)->where('karyawan_id', $this->userid)->whereNull('deleted_at')->count();
 
       return $data;
     }

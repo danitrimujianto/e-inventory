@@ -15,10 +15,10 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th bgcolor="#CCCCCC">NO.</th>
+          <th bgcolor="#CCCCCC">ID TOOL</th>
           <th bgcolor="#CCCCCC">DATE</th>
           <th bgcolor="#CCCCCC">OUTGOING NO.</th>
-          <th bgcolor="#CCCCCC">ID TOOLS</th>
+          <th bgcolor="#CCCCCC">CODE</th>
           <th bgcolor="#CCCCCC">ITEM</th>
           <th bgcolor="#CCCCCC">CONDITION</th>
           <th bgcolor="#CCCCCC">SN</th>
@@ -37,7 +37,7 @@
         @foreach($data AS $d)
         @php $no++; @endphp
         <tr>
-          <td>{{ $no.'.' }}</td>
+          <td>{{ optional($d->tools)->id }}</td>
           <td>{{ HelpMe::tgl_sql_to_indo($d->allhoactivities->tgl) }}</td>
           <td>{{ $d->allhoactivities->outgoing_no }}</td>
           <td>{{ optional($d->tools)->code }}</td>

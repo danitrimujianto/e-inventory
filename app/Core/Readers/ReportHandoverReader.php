@@ -47,7 +47,7 @@ class ReportHandoverReader implements Reader
               $q2->where('name', 'like', '%'.$sq.'%');
             });
           });
-        }elseif($sf == 'outgoing_no'){
+        }elseif($sf == 'outgoing_no' || $sf == 'Outgoing No'){
           $data = $data->whereHas('allhoactivities', function($q) use ($sq){
             $q->where('outgoing_no', 'like','%'.$sq.'%');
           });
@@ -66,6 +66,32 @@ class ReportHandoverReader implements Reader
         }elseif($sf == 'Imei'){
           $data = $data->whereHas('tools', function($q) use ($sq){
             $q->where('imei', 'like','%'.$sq.'%');
+          });
+        }elseif($sf == 'Merk'){
+          $data = $data->whereHas('tools', function($q) use ($sq){
+            $q->where('merk', 'like','%'.$sq.'%');
+          });
+        }elseif($sf == 'Type'){
+          $data = $data->whereHas('tools', function($q) use ($sq){
+            $q->where('type', 'like','%'.$sq.'%');
+          });
+        }elseif($sf == 'Sender'){
+          $data = $data->whereHas('allhoactivities', function($q) use ($sq){
+            $q->whereHas('karyawan', function($q2) use ($sq){
+              $q2->where('name', 'like','%'.$sq.'%')->where('type', '!=', 'office');
+            });
+          });
+        }elseif($sf == 'Sender'){
+          $data = $data->whereHas('allhoactivities', function($q) use ($sq){
+            $q->whereHas('sender', function($q2) use ($sq){
+              $q2->where('name', 'like','%'.$sq.'%');
+            });
+          });
+        }elseif($sf == 'Recipient'){
+          $data = $data->whereHas('allhoactivities', function($q) use ($sq){
+            $q->whereHas('karyawan', function($q2) use ($sq){
+              $q2->where('name', 'like','%'.$sq.'%');
+            });
           });
         }elseif($sf == 'Project'){
           $data = $data->whereHas('allhoactivities', function($q) use ($sq){
