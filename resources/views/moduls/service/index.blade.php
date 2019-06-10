@@ -155,6 +155,14 @@ $(document).ready(function(){
     var value = $(this).parent('td').parent('tr').attr('data-value');
     alertSweet("Are you sure to reject  ", id, field, value, modulPage, 'Reject');
   });
+
+  $(".finishButton").click(function(){
+    var modulPage = $("#modulPage").val();
+    var id = $(this).parent('td').parent('tr').attr('data-id');
+    var field = $(this).parent('td').parent('tr').attr('data-field');
+    var value = $(this).parent('td').parent('tr').attr('data-value');
+    alertSweet("Are you sure to finish  ", id, field, value, modulPage, 'Finish');
+  });
 });
 </script>
 @endsection
