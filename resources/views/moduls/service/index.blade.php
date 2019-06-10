@@ -80,6 +80,7 @@
                 <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
                 <!-- <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button> -->
                 <button title="" type="button" class="btn btn-xs tooltips btn-danger deleteButton"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+                <button title="" type="button" class="btn btn-xs tooltips btn-primary finishButton"><i class="fa fa-minus-circle"></i>&nbsp;Finish</button>
               @endif
             </td>
           </tr>
