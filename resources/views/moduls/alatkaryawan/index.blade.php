@@ -165,7 +165,7 @@ $(document).ready(function(){
   $('.rowFocus').click(function(){
     var topRow = $(this).parent('td').parent('tr');
     if($(this).prop('checked')){
-      topRow.css('background','#EFEFEF');
+      topRow.css('background','#CCCCCC');
     }else{
       topRow.css('background','#FFFFFF');
     }
