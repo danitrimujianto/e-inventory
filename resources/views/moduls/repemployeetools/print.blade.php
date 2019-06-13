@@ -28,7 +28,7 @@
           <th>ID EMPLOYEE</th>
           <th>EMPLOYEE</th>
           <th>POSITION</th>
-          <th>UPDATE DATE</th>
+          <th>RENEW DATE</th>
           <th>CONDITION</th>
         </tr>
         </thead>
