@@ -65,6 +65,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
       </div>
       <!-- /.box-header -->
       <form name="fList" id="fList" method="post" action="{{ '/'.$theme['modul'] }}">
+        <input type="hidden" name="on" value="y"/>
         @csrf
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
@@ -199,7 +200,7 @@ $(document).ready(function(){
     var jmlChecked = $(".id_tool:checked").length;
     if(jmlChecked > 0){
       var modulPage = $("#modulPage").val();
-      document.fList.action='/'+modulPage+'/renew/bulk/?on=y';
+      document.fList.action='/'+modulPage+'/renew/bulk';
       document.fList.submit();
     }else{
       alert('Centang salah satu baris');
