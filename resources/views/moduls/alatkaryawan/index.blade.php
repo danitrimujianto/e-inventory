@@ -80,7 +80,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
             <th>Employee</th>
             <th>Homebase</th>
             <th>Assignment</th>
-            <th>Update Date</th>
+            <th>Prev Update</th>
             <th>Last Update</th>
             @if($price)
               <th>Price</th>
@@ -88,7 +88,7 @@ $price = ((Auth::user()->usertype_id == 4 ||
           </tr>
           @foreach($data AS $d)
           <tr class="" data-id="{{ $d->id }}" data-field="{{ 'Outgoing No' }}" data-value="{{ $d->outgoing_no }}">
-            <td><input type="checkbox" class="id_tool" name="idTools[]" value="{{ optional($d->tools)->id }}" /></td>
+            <td><input type="checkbox" class="id_tool rowFocus" name="idTools[]" value="{{ optional($d->tools)->id }}" /></td>
             <td>{{ optional($d->tools)->id }}</td>
             <td>{{ optional($d->tools)->code }}</td>
             <td>{{ optional($d->tools)->item }}</td>
@@ -99,8 +99,8 @@ $price = ((Auth::user()->usertype_id == 4 ||
             <td>{{ optional($d->karyawan)->name }}</td>
             <td>{{ optional($d->karyawan->homebasearea)->name }}</td>
             <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
+            <td>{{ HelpMe::tgl_sql_to_indo($d->prev_update) }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
-            <td>{{ HelpMe::tgl_sql_to_indo($d->lastUpdate()) }}</td>
             @if($price)
               <td>{{ HelpMe::cost(optional($d->tools)->price) }}</td>
             @endif
@@ -162,12 +162,21 @@ $price = ((Auth::user()->usertype_id == 4 ||
 <script>
 $(document).ready(function(){
 
-  var jmlChecked = $(".id_tool:checked").length;
+  $('.rowFocus').click(function(){
+    var topRow = $(this).parent('td').parent('tr');
+    if($(this).prop('checked')){
+      topRow.css('background','#EFEFEF');
+    }else{
+      topRow.css('background','#FFFFFF');
+    }
+  });
+
   $("#renewButton").click(function(){
       var modulPage = $("#modulPage").val();
       document.location.href='/'+modulPage+'/renew';
   });
   $("#handoverBulk").click(function(){
+    var jmlChecked = $(".id_tool:checked").length;
     if(jmlChecked > 0){
       var modulPage = $("#modulPage").val();
       document.fList.action='/handover/add/bulk';
@@ -177,6 +186,7 @@ $(document).ready(function(){
     }
   });
   $("#returBulk").click(function(){
+    var jmlChecked = $(".id_tool:checked").length;
     if(jmlChecked > 0){
       var modulPage = $("#modulPage").val();
       document.fList.action='/horetur/add/bulk';
@@ -186,6 +196,7 @@ $(document).ready(function(){
     }
   });
   $("#updateBulk").click(function(){
+    var jmlChecked = $(".id_tool:checked").length;
     if(jmlChecked > 0){
       var modulPage = $("#modulPage").val();
       document.fList.action='/'+modulPage+'/renew/bulk/?on=y';

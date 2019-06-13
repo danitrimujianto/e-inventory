@@ -31,7 +31,7 @@ class RenewAlatKaryawanBulkHandler implements Handler
         // dd($req);
         // echo $req['idTools'][0];
         foreach ($req->idTools as $key => $value) {
-          $tab = ToolsKaryawan::where('karyawan_id', Auth::user()->karyawan_id)->where('tools_id', $value)->update(['renew_date' => date('Y-m-d')]);
+          $tab = ToolsKaryawan::where('tools_id', $value)->update(['prev_update'=>DB::raw('renew_date'), 'renew_date' => date('Y-m-d')]);
         }
 
         return $tab;

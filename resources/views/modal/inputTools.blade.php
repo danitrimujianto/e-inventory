@@ -51,7 +51,7 @@
             <label for="name">Item</label>
             <div>
               <select class="form-control" name="item_id" id="itemChoose">
-                <option value="">-- Choose Supplier --</option>
+                <option value="">-- Choose Item --</option>
                 @foreach($dItems AS $items)
                   <option value="{{ $items->id }}">{{ $items->item }}</option>
                 @endforeach

@@ -29,7 +29,7 @@ class RenewAlatKaryawanHandler implements Handler
     {
         $usertype = Auth::user()->usertype_id;
 
-        $tab = ToolsKaryawan::where('karyawan_id', Auth::user()->karyawan_id)->update(['renew_date' => date('Y-m-d')]);
+        $tab = ToolsKaryawan::where('karyawan_id', Auth::user()->karyawan_id)->update(['prev_update'=>'renew_date', 'renew_date' => date('Y-m-d')]);
 
         return $tab;
     }
