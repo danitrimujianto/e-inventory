@@ -436,7 +436,6 @@ Route::middleware('auth')->prefix("/alatkaryawan")->group(function() {
       Route::get("/", 'AlatKaryawanController@renew'); /* action get list of developers */
       Route::post("/bulk", 'AlatKaryawanController@renew'); /* action get list of developers */
     });
-
     Route::prefix("/{id}")->group(function() {
         Route::get("/detail", 'AlatKaryawanController@show'); /* action show data by id */
     });
