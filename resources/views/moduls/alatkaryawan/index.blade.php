@@ -10,9 +10,9 @@ $price = ((Auth::user()->usertype_id == 4 ||
         <div class="row">
 				<div class="col-md-12" >
         @if(!$price)
-        <div class="col-md-2 col-xs-2">
+        <!-- <div class="col-md-2 col-xs-2">
           <button class="btn btn-success" id="renewButton"><i class="fa fa-refresh"></i> Update Date </button>
-        </div>
+        </div> -->
         @endif
         <div class="box-tools pull-right">
           <button class="btn btn-danger " id="excelButton"><i class="fa fa-file-excel-o"></i> Excel</button>
