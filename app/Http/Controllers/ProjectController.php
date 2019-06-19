@@ -90,15 +90,15 @@ class ProjectController extends ApplicationController
 
       try{
         $reader = new AreaReader($request);
-        $dArea = $reader->read();
+        $dArea = $reader->readData();
         $this->returnData['dArea'] = $dArea;
 
         $reader = new CityReader($request);
-        $dCity = $reader->read();
+        $dCity = $reader->readData();
         $this->returnData['dCity'] = $dCity;
 
         $reader = new VendorReader($request);
-        $dVendor = $reader->read();
+        $dVendor = $reader->readData();
         $this->returnData['dVendor'] = $dVendor;
 
         return view('home', $this->returnData);
@@ -149,15 +149,15 @@ class ProjectController extends ApplicationController
       $this->returnData['data'] = $data;
 
       $reader = new AreaReader($request);
-      $dArea = $reader->read();
+      $dArea = $reader->readData();
       $this->returnData['dArea'] = $dArea;
 
       $reader = new CityReader($request);
-      $dCity = $reader->read();
+      $dCity = $reader->readData();
       $this->returnData['dCity'] = $dCity;
 
       $reader = new VendorReader($request);
-      $dVendor = $reader->read();
+      $dVendor = $reader->readData();
       $this->returnData['dVendor'] = $dVendor;
 
       return view('home', $this->returnData);
@@ -186,15 +186,15 @@ class ProjectController extends ApplicationController
       $this->returnData['data'] = $data;
 
       $reader = new AreaReader($request);
-      $dArea = $reader->read();
+      $dArea = $reader->readData();
       $this->returnData['dArea'] = $dArea;
 
       $reader = new CityReader($request);
-      $dCity = $reader->read();
+      $dCity = $reader->readData();
       $this->returnData['dCity'] = $dCity;
 
       $reader = new VendorReader($request);
-      $dVendor = $reader->read();
+      $dVendor = $reader->readData();
       $this->returnData['dVendor'] = $dVendor;
 
       return view('home', $this->returnData);
