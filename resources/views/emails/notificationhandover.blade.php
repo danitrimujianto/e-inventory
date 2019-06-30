@@ -10,7 +10,7 @@ We recieved handover tool from:
     <td width="1%">:</td>
     <td>{{ $data->outgoing_no }}</td>
   </tr>
-  @if($data->type == 'user')
+  @if($data->type == 'office')
   <tr>
     <td width="40%">Name</td>
     <td width="1%">:</td>
