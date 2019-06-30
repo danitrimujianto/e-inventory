@@ -103,6 +103,7 @@ class AddAllhoActivitiesHandler implements Handler
     {
       $returnData['data'] = $data;
       $returnData['detail'] = $detail;
+      $returnData['target'] = '';
       $user = User::where('usertype_id', 2)->get();
 
       $emails = array();
