@@ -97,7 +97,11 @@ class AcceptAllhoActivitiesHandler implements Handler
 
       $returnData['data'] = $data;
       $returnData['detail'] = $detailData;
-      $returnData['target'] = 'reciever';
+      if($usertype == "2"){
+        $returnData['target'] = 'reciever';
+      }elseif($usertype == "4" || $usertype == "5"){
+        $returnData['target'] = 'sender';
+      }
       $user = User::where('karyawan_id', $target)->get();
 
       $emails = array();
