@@ -102,7 +102,8 @@ $search = "";
               </select>
             </div>
           </div>
-          <div class="form-group">
+          <input type="hidden" name="homebasearea_id" value="{{ $area->id }}">
+          <!-- <div class="form-group">
             <label for="name">Homebase Area</label>
             <div>
               <select class="form-control" name="homebasearea_id" id="homebasearea_id">
@@ -112,7 +113,7 @@ $search = "";
                 @endforeach
               </select>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="name">Assignment Area</label>
             <div>
