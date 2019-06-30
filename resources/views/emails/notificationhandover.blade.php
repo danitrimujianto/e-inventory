@@ -14,9 +14,15 @@ We recieved handover tool from:
   <tr>
     <td width="40%">Name</td>
     <td width="1%">:</td>
-    <td>{{ optional($data->sender)->name }}</td>
+    <td>Office</td>
   </tr>
   @endif
+  @if($data->type == 'user')
+  <tr>
+    <td width="40%">Name</td>
+    <td width="1%">:</td>
+    <td>{{ optional($data->sender)->name }}</td>
+  </tr>
   <tr>
     <td>Project</td>
     <td>:</td>
@@ -37,6 +43,7 @@ We recieved handover tool from:
     <td>:</td>
     <td>{{ optional($data->sender->assignmentarea)->name }}</td>
   </tr>
+  @endif
 </table>
 <br>
 To:
