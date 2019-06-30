@@ -28,6 +28,8 @@ class AcceptAllhoActivitiesHandler implements Handler
         $data = $this->saveDB($id);
         if($usertype == "2"){
           $notif = $this->sendnotif($data, $data->recipient_id);
+        }else if($usertype == "4" || $usertype == "5"){
+          $notif = $this->sendnotif($data, $data->sender_id);
         }
         return $data;
     }
