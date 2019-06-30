@@ -141,7 +141,7 @@
         <div class="box-footer">
           <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button>
 
-          @if($data->status == "0")
+          @if(empty($data->status) || $data->status == "0")
             <button title="" type="button" class="btn btn-danger rejectButton pull-right"><i class="fa fa-remove"></i>&nbsp;Reject</button>
             <button style="margin-right: 30px;" title="" type="button" class="btn btn-success acceptButton pull-right"><i class="fa fa-check"></i>&nbsp;Approve</button>
           @elseif($data->status == "1")
