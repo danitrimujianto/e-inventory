@@ -173,9 +173,11 @@ $(document).ready(function(){
   $("#handoverBulk").click(function(){
     var jmlChecked = $(".id_tool:checked").length;
     if(jmlChecked > 0){
-      var modulPage = $("#modulPage").val();
-      document.fList.action='/handover/add/bulk';
-      document.fList.submit();
+      if(confirm('Apakah data yang sudah dipilih sudah benar?')){
+        var modulPage = $("#modulPage").val();
+        document.fList.action='/handover/add/bulk';
+        document.fList.submit();
+      }
     }else{
       alert('Centang salah satu baris');
     }
@@ -183,9 +185,11 @@ $(document).ready(function(){
   $("#returBulk").click(function(){
     var jmlChecked = $(".id_tool:checked").length;
     if(jmlChecked > 0){
-      var modulPage = $("#modulPage").val();
-      document.fList.action='/horetur/add/bulk';
-      document.fList.submit();
+      if(confirm('Apakah data yang sudah dipilih sudah benar?')){
+        var modulPage = $("#modulPage").val();
+        document.fList.action='/horetur/add/bulk';
+        document.fList.submit();
+      }
     }else{
       alert('Centang salah satu baris');
     }
@@ -193,9 +197,11 @@ $(document).ready(function(){
   $("#updateBulk").click(function(){
     var jmlChecked = $(".id_tool:checked").length;
     if(jmlChecked > 0){
-      var modulPage = $("#modulPage").val();
-      document.fList.action='/'+modulPage+'/renew/bulk';
-      document.fList.submit();
+      if(confirm('Apakah data yang sudah dipilih sudah benar?')){
+        var modulPage = $("#modulPage").val();
+        document.fList.action='/'+modulPage+'/renew/bulk';
+        document.fList.submit();
+      }
     }else{
       alert('Centang salah satu baris');
     }
