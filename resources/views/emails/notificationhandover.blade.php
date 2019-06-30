@@ -2,7 +2,11 @@
 @component('mail::message')
 # Handover Tool
 
+@if($data->target != 'reciever')
 We recieved handover tool from:
+@else
+You recieved handover tool from:
+@endif
 <br>
 <table width="100%" class="table">
   <tr>
@@ -46,6 +50,7 @@ We recieved handover tool from:
   @endif
 </table>
 <br>
+@if($data->target != 'reciever')
 To:
 <table width="100%" class="table">
   <tr>
@@ -74,6 +79,7 @@ To:
     <td>{{ optional($data->karyawan->assignmentarea)->name }}</td>
   </tr>
 </table>
+@endif
 List Tools:
 <br>
 <br>
