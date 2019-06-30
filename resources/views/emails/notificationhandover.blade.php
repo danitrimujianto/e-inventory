@@ -1,9 +1,9 @@
 @php $total = '0'; @endphp
-@if($data->target != 'sender')
+@if($target != 'sender')
 @component('mail::message')
 # Handover Tool
 
-@if($data->target != 'reciever')
+@if($target != 'reciever')
 We recieved handover tool from:
 @else
 You recieved handover tool from:
@@ -51,7 +51,7 @@ You recieved handover tool from:
   @endif
 </table>
 <br>
-@if($data->target != 'reciever')
+@if($target != 'reciever')
 To:
 <table width="100%" class="table">
   <tr>
