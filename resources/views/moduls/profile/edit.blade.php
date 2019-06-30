@@ -102,7 +102,7 @@ $search = "";
               </select>
             </div>
           </div>
-          <!-- <input type="hidden" name="homebasearea_id" value="{{ $area->id }}"> -->
+          <!-- <input type="hidden" name="homebasearea_id" value="{{ $data->karyawan->homebasearea_id }}"> -->
           <div class="form-group">
             <label for="name">Homebase Area</label>
             <div>
