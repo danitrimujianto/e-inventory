@@ -95,6 +95,7 @@ class AcceptAllhoActivitiesHandler implements Handler
     private function sendnotif($data, $target)
     {
       $id = $data->id;
+      $usertype = Auth::user()->usertype_id;
       $detailData = AllhoActivitiesDetail::where('allho_activities_id', $id)->get();
 
       $returnData['data'] = $data;
