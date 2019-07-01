@@ -65,9 +65,9 @@
                     <button title="" type="button" class="btn btn-xs tooltips btn-success closeButton"><i class="fa fa-check"></i>&nbsp;Close</button>
                   @endif
                 @else
-                  @if(!empty($d->acc_by) && (Auth::user()->usertype_id == 1 || Auth::user()->usertype_id == 2))
+                <?php // !empty($d->acc_by) && (Auth::user()->usertype_id == 1 || Auth::user()->usertype_id == 2) ?>
+
                     <button title="" type="button" class="btn btn-xs tooltips btn-primary inputButton"><i class="fa fa-plus"></i>&nbsp;Input</button>
-                  @endif
                   @if($d->status >= 0 && $d->status < 1)
                     <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
                     <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button>
