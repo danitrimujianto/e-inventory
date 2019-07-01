@@ -94,8 +94,16 @@ class NotifLabelReader implements Reader
       //   $opr = "<=";
       // }
 
-      $data = PurchaseRequest::where('status', $opr, $status)->where('karyawan_id', $this->userid)->whereNull('deleted_at')->count();
-
+      if($this->usertype == 4){
+        $data = PurchaseRequest::where(function ($q) use ($opr, $status){
+          $q->where('status', $opr, $status)->orWHereNull('status');
+        })->where('karyawan_id', $this->userid)->whereNull('deleted_at')->count();
+      }else{
+        $data = PurchaseRequest::where(function ($q) use ($opr, $status){
+          $q->where('status', $opr, $status)->orWHereNull('status');
+        })->where('karyawan_id', $this->userid)->whereNull('deleted_at')->count();
+      }
+// ->where('status', $opr, $status)
       return $data;
     }
 
