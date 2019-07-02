@@ -25,8 +25,9 @@ class AddAllhoActivitiesHandler implements Handler
         $request = $this->request;
         $data = $this->saveDB($request);
         $detail = $this->getHandoverDetail($data->id);
-        if($data->type == 'user'){ $sendnotif = $this->sendnotif($data, $detail); }
-        else if($data->type == 'office'){ $sendnotif = $this->sendnotif($data, $detail); }
+        if($data->type == 'user'){ $sendnotif = $this->sendnotifAdmin($data, $detail); }
+        else if($data->type == 'office'){ $sendnotif = $this->sendnotifUser($data, $detail, $detail->recipient_id); }
+        // $sendnotif = $this->sendnotif($data, $detail);
 
         return $data;
     }
@@ -99,7 +100,7 @@ class AddAllhoActivitiesHandler implements Handler
       return $new_no;
     }
 
-    private function sendnotif($data, $detail)
+    private function sendnotifAdmin($data, $detail)
     {
       $returnData['data'] = $data;
       $returnData['detail'] = $detail;
@@ -110,6 +111,17 @@ class AddAllhoActivitiesHandler implements Handler
       foreach($user AS $val){
         $sendmail = $val->NotifHandover($returnData, $val->email);
       }
+    }
+
+    private function sendnotifUser($data, $detail, $receipt_id)
+    {
+      $returnData['data'] = $data;
+      $returnData['detail'] = $detail;
+      $returnData['target'] = 'reciever';
+      // $user = User::where('usertype_id', 2)->get();
+      $user = User::where('karyawan_id', $receipt_id)->get();
+
+      $sendmail = $val->NotifHandover($returnData, $user->email);
     }
 
     private function getHandoverDetail($id){
