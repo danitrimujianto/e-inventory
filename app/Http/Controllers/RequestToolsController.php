@@ -300,4 +300,18 @@ class RequestToolsController extends ApplicationController
       return response()->json(array("err"=>1, "msg"=>$msg));
     }
   }
+
+  public function checkitem($id)
+  {
+    $pos = "getItem";
+    try {
+      $reader = new RequestToolsReader($id);
+      $data = $reader->getItem();
+
+      return response()->json($data);
+    } catch (\Exception $e) {
+      $msg = $this->resultException($e, $pos);
+      return response()->json(array("err"=>1, "msg"=>$msg));
+    }
+  }
 }

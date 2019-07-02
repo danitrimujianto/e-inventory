@@ -34,6 +34,7 @@ class ModalController extends Controller
     {
       $pos = 'inputTools';
       $this->returnData['data'] = "";
+      $this->returnData['id'] = $request->id;
 
       $reader = new DivisionReader($request);
       $dDivision = $reader->readData();

@@ -4,6 +4,7 @@ namespace App\Core\Handlers;
 use App\Tools;
 use App\Division;
 use App\Barang;
+use App\PurchaseRequestDetail;
 use App\Core\Handler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,11 @@ class AddToolsHandler implements Handler
         $tab->supplier_id = $request->supplier_id;
         $tab->save();
 
+        if(!empty($request->purchase_request_id)){
+          $updateItem = PurchaseRequestDetail::find($request->item_id);
+          $updateItem->input = 1;
+          $updateItem->save();
+        }
         return $tab;
     }
 

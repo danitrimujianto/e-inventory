@@ -10,6 +10,7 @@
     <!-- general form elements -->
       <form name="fProcess" id="fProcess" class="fProcess2" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="purchase_request_id" id="purchase_request_id" value="{{ $id }}">
         <div class="box-body">
           <div class="form-group">
             <label for="code">Date</label>
@@ -153,6 +154,7 @@ $(document).ready(function(){
         // console.log(data);
 				// $.map(data, function (item) {
           if(data.status == "1"){
+            loadNewItem();
             $(".warn").show();
             $(".warn .title").html('<i class="icon fa fa-check"></i> '+data.description);
             document.fProcess.reset();
@@ -166,7 +168,26 @@ $(document).ready(function(){
       }
     });
   });
-
-
 });
+
+function loadNewItem(){
+  var id = $("#purchase_request_id").val();
+  var data = '';
+  var $el = $("#itemChoose");
+	$el.empty(); // remove old options
+	$el.append($("<option></option>").attr("value", "").text("-- Choose Item --"));
+
+  $.ajax({
+    url: "/requesttools/"+id+"/checkitem",
+    type: "GET",
+    data: data,
+    dataType: "json",
+    success: function(data)
+    {
+      $.map(data, function (item) {
+        $el.append($("<option></option>").attr("value", item.id).text(item.item));
+			});
+    }
+  });
+}
 </script>

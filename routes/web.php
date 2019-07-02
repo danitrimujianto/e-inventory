@@ -468,6 +468,7 @@ Route::middleware('auth')->prefix("/requesttools")->group(function() {
 
     Route::prefix("/{id}")->group(function() {
         Route::get("/", 'RequestToolsController@edit'); /* action get data by id */
+        Route::get("/checkitem", 'RequestToolsController@checkitem'); /* action get data by id */
         Route::get("/detail", 'RequestToolsController@show'); /* action show data by id */
         Route::post("/cancel", 'RequestToolsController@cancel'); /* action cancel data by id */
         Route::get("/accept", 'RequestToolsController@acc'); /* action accept data by id */

@@ -55,4 +55,15 @@ class PurchaseRequest extends Model
       return $res;
     }
 
+    public function _checkReadyItem(){
+      $re = true;
+      $total = $this->purchase_detail()->count();
+      $jml = $this->purchase_detail()->where('input', '1')->count();
+      if($jml == $total && $jml > 0){
+          $re = false;
+      }else{
+          $re = true;
+      }
+      return $re;
+    }
 }

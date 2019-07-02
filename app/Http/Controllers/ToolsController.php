@@ -133,7 +133,7 @@ class ToolsController extends ApplicationController
    try {
      $handler = new AddToolsHandler($request);
      $data = $handler->handle();
-
+          
      return response()->json(array("description"=>"Add Succeeded", "status"=>"1"));
    } catch (\Exception $e) {
      // $msg = $this->resultException($e, $pos);
