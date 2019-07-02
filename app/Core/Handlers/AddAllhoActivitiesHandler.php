@@ -121,7 +121,7 @@ class AddAllhoActivitiesHandler implements Handler
       // $user = User::where('usertype_id', 2)->get();
       $user = User::where('karyawan_id', $receipt_id)->get();
 
-      $sendmail = $val->NotifHandover($returnData, $user->email);
+      $sendmail = $user->NotifHandover($returnData, $user->email);
     }
 
     private function getHandoverDetail($id){
