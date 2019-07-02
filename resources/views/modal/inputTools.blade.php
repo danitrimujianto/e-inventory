@@ -172,7 +172,7 @@ $(document).ready(function(){
 
 function loadNewItem(){
   var id = $("#purchase_request_id").val();
-  var data = '';
+  var data = 'id='+id;
   var $el = $("#itemChoose");
 	$el.empty(); // remove old options
 	$el.append($("<option></option>").attr("value", "").text("-- Choose Item --"));

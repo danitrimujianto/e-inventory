@@ -301,11 +301,11 @@ class RequestToolsController extends ApplicationController
     }
   }
 
-  public function checkitem($id)
+  public function checkitem(Request $request, $id)
   {
     $pos = "getItem";
     try {
-      $reader = new RequestToolsReader($id);
+      $reader = new RequestToolsReader($request);
       $data = $reader->getItem();
 
       return response()->json($data);
