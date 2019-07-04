@@ -148,7 +148,6 @@ $(document).ready(function(){
     var division_id = $('#division_id').val();
     var barang_id = $('#barang_id').val();
     if(division_id == ''){
-      alert(division_id);
       var tp = $('#division_id').parent('div').find('.help-block2').show();
       $('#myModal').animate({ scrollTop: 0 }, 'slow');
     }else if(barang_id == ''){
