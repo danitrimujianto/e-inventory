@@ -58,8 +58,8 @@ class PurchaseRequest extends Model
     public function _checkReadyItem(){
       $re = true;
       $total = $this->purchase_detail()->count();
-      $jml = $this->purchase_detail()->where('input', '1')->count();
-      if($jml == $total && $jml > 0){
+      $jml = $this->purchase_detail()->whereRaw('jml_input >= quantity')->count();
+      if($jml == $total){
           $re = false;
       }else{
           $re = true;

@@ -44,6 +44,7 @@
                       <option value="{{ $barang->id }}">{{ $barang->name }}</option>
                     @endforeach
                   </select>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
             </div>
@@ -112,7 +113,7 @@
 
         <div class="box-footer">
           <!-- <button type="button" class="btn btn-default" id="backButton"><i class="fa fa-reply"></i>&nbsp;Back</button> -->
-          <button type="button" class="btn btn-success saveFormModal" id="saveFormModal"><i class="fa fa-save"></i>&nbsp;Save</button>
+          <button type="button" class="btn btn-success saveFormModal"><i class="fa fa-save"></i>&nbsp;Save</button>
         </div>
       </form>
 </div>
@@ -144,29 +145,47 @@ $(document).ready(function(){
   $("body").on("click", ".saveFormModal", function(){
     // alert('asd');
     var data = $('#fProcess').serialize();
-    $.ajax({
-      url: "/tools/add/request",
-      type: "POST",
-      data: data,
-      dataType: "json",
-      success: function(data)
-      {
-        // console.log(data);
-				// $.map(data, function (item) {
-          if(data.status == "1"){
-            loadNewItem();
-            $(".warn").show();
-            $(".warn .title").html('<i class="icon fa fa-check"></i> '+data.description);
-            document.fProcess.reset();
-            $('#myModal').animate({ scrollTop: 0 }, 'slow');
-            // $("#fProcess").reset();
-          }else{
-            $(".warn").show();
-            $(".warn .title").html('<i class="icon fa fa-remove"></i> '+data.description);
-          }
-        // });
-      }
-    });
+    var division_id = $('#division_id').val();
+    var barang_id = $('#barang_id').val();
+    if(division_id == ''){
+      alert(division_id);
+      var tp = $('#division_id').parent('div').find('.help-block2').show();
+      $('#myModal').animate({ scrollTop: 0 }, 'slow');
+    }else if(barang_id == ''){
+      var tp = $('#barang_id').parent('div').find('.help-block2').show();
+      $('#myModal').animate({ scrollTop: 0 }, 'slow');
+    }else{
+      $(this).html('<i class="fa fa-refresh fa-spin"></i>');
+      $(this).prop('disabled', 'true');
+      $.ajax({
+        url: "/tools/add/request",
+        type: "POST",
+        data: data,
+        dataType: "json",
+        success: function(data)
+        {
+          // console.log(data);
+  				// $.map(data, function (item) {
+            if(data.status == "1"){
+              loadNewItem();
+              $(".warn").show();
+              $(".warn .title").html('<i class="icon fa fa-check"></i> '+data.description);
+              document.fProcess.reset();
+              $('#myModal').animate({ scrollTop: 0 }, 'slow');
+              $('.help-block2').hide();
+
+              // $("#fProcess").reset();
+            }else{
+              $(".warn").show();
+              $(".warn .title").html('<i class="icon fa fa-remove"></i> '+data.description);
+            }
+            $('.saveFormModal').html('<i class="fa fa-save"></i> Save');
+            $('.saveFormModal').removeAttr('disabled');
+          // });
+        }
+      });
+
+    }
   });
 });
 

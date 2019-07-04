@@ -47,7 +47,7 @@ class RequestToolsReader implements Reader
     public function getItem(){
       $req = $this->request;
       $id = (isset($req->id) ? $req->id : '');
-      $find = PurchaseRequestDetail::where("purchase_request_id", $id)->where('input', '!=', '1')->get();
+      $find = PurchaseRequestDetail::where("purchase_request_id", $id)->whereRaw('jml_input < quantity')->get();
       // dd($find);
       return $find;
     }

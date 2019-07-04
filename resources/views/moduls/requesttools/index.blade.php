@@ -49,7 +49,7 @@
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Purchase No' }}" data-value="{{ $d->pr_no }}">
-            <td><?php echo HelpLocal::checkPurchaseRequest($d->status, $d->type) ?></td>
+            <td><?php echo HelpLocal::checkPurchaseRequest($d->status, $d->type); ?></td>
             <td><span class="label label-primary">{{ optional($d->acc_by)->name }}</span></td>
             <td><span class="label label-danger">{{ optional($d->reject_by)->name }}</span></td>
             <td><?php echo $d->_callFinanceStatus($d->status); ?></td>
@@ -66,7 +66,7 @@
                   @endif
                 @else
                 <?php // !empty($d->acc_by) && (Auth::user()->usertype_id == 1 || Auth::user()->usertype_id == 2) ?>
-                    @if($d->status >= 1 && $d->_checkReadyItem())
+                    @if(($d->status >= 1 && $d->status < 98) && $d->_checkReadyItem())
                       <button title="" type="button" class="btn btn-xs tooltips btn-primary inputButton"><i class="fa fa-plus"></i>&nbsp;Input</button>
                     @endif
                   @if($d->status >= 0 && $d->status < 1)

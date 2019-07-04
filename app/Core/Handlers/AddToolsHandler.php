@@ -59,6 +59,7 @@ class AddToolsHandler implements Handler
         if(!empty($request->purchase_request_id)){
           $updateItem = PurchaseRequestDetail::find($request->item_id);
           $updateItem->input = 1;
+          $updateItem->jml_input = $updateItem->jml_input+1;
           $updateItem->save();
         }
         return $tab;
