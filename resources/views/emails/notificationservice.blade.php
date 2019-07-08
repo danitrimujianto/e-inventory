@@ -1,5 +1,5 @@
 
-@if($target == '3')
+@if($target == '3' || $target == '6')
 @component('mail::message')
 # Maintenance
 

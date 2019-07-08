@@ -25,6 +25,7 @@ class AcceptServiceHandler implements Handler
         $id = $this->id;
         $data = $this->saveDB($id);
         $notif = $this->sendnotif($data);
+        $notifFinance = $this->sendnotifFinance($data);
         return $data;
     }
 
@@ -47,6 +48,18 @@ class AcceptServiceHandler implements Handler
       $returnData['data'] = $data;
       $returnData['target'] = $data->karyawan_id;
       $user = User::where('karyawan_id', $returnData['target'])->get();
+
+      $emails = array();
+      foreach($user AS $val){
+        $sendmail = $val->NotifService($returnData, $val->email);
+      }
+    }
+
+    private function sendnotifFinance($data)
+    {
+      $returnData['data'] = $data;
+      $returnData['target'] = '6';
+      $user = User::where('usertype_id', $returnData['target'])->get();
 
       $emails = array();
       foreach($user AS $val){
