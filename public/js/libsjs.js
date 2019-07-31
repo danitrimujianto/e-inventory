@@ -87,6 +87,8 @@ function actRestore(id, modulPage)
 
 function actAccept(id, modulPage)
 {
+  $('.acceptButton').html('<i class="fa fa-refresh fa-spin"></i>');
+
   document.fGlobal.id.value=id;
   //$("#method").val();
   document.fGlobal._method.value="get";

@@ -52,12 +52,13 @@
           <div class="form-group">
             <label for="name">Item</label>
             <div>
-              <select class="form-control" name="item_id" id="itemChoose">
+              <select class="form-control needed" name="item_id" id="itemChoose">
                 <option value="">-- Choose Item --</option>
                 @foreach($dItems AS $items)
                   <option value="{{ $items->id }}">{{ $items->item }}</option>
                 @endforeach
               </select>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
               <input type="hidden" class="form-control" name="item" id="item" placeholder="" autocomplete="off">
             </div>
           </div>
@@ -147,11 +148,15 @@ $(document).ready(function(){
     var data = $('#fProcess').serialize();
     var division_id = $('#division_id').val();
     var barang_id = $('#barang_id').val();
+    var itemChoose = $('#itemChoose').val();
     if(division_id == ''){
       var tp = $('#division_id').parent('div').find('.help-block2').show();
       $('#myModal').animate({ scrollTop: 0 }, 'slow');
     }else if(barang_id == ''){
       var tp = $('#barang_id').parent('div').find('.help-block2').show();
+      $('#myModal').animate({ scrollTop: 0 }, 'slow');
+    }else if(itemChoose == ''){
+      var tp = $('#itemChoose').parent('div').find('.help-block2').show();
       $('#myModal').animate({ scrollTop: 0 }, 'slow');
     }else{
       $(this).html('<i class="fa fa-refresh fa-spin"></i>');
