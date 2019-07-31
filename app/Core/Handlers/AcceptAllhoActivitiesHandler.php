@@ -62,7 +62,6 @@ class AcceptAllhoActivitiesHandler implements Handler
           $insertQuery = 'INSERT INTO tools_karyawan (allho_activities_id, accepted_date, karyawan_id,tools_id,goods_condition_id) '.$detail->toSql();
           $insertQuery = str_replace(") select ", ") select ".$tab->id.", NOW(), ".$tab->recipient_id.", ", $insertQuery);
 
-          \DB::insert($insertQuery, $bindings);
 
           $updet = 'UPDATE tools SET karyawan_id = CASE id ';
           $delExist = 'DELETE FROM tools_karyawan WHERE (karyawan_id, tools_id) IN ';
@@ -78,17 +77,16 @@ class AcceptAllhoActivitiesHandler implements Handler
           }
 
           $updet .= " END WHERE id IN(".$idUpdate.")";
+          \DB::insert($updet);
 
           $delExist .= '('.$idExist.')';
           // dd($delExist);
           if($tab->type == 'user')
           {
             if($tools_sender->count() > 0)
-              \DB::statement($delExist);
+            {  $delop = \DB::statement($delExist); }
+            \DB::insert($insertQuery, $bindings);
           }
-
-
-          \DB::insert($updet);
         }
 
         return $tab;
