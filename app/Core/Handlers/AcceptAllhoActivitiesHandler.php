@@ -78,7 +78,6 @@ class AcceptAllhoActivitiesHandler implements Handler
           }
 
           $updet .= " END WHERE id IN(".$idUpdate.")";
-          \DB::insert($updet);
 
           $delExist .= '('.$idExist.')';
           // dd($delExist);
@@ -87,6 +86,9 @@ class AcceptAllhoActivitiesHandler implements Handler
             if($tools_sender->count() > 0)
               \DB::statement($delExist);
           }
+
+
+          \DB::insert($updet);
         }
 
         return $tab;

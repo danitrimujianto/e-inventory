@@ -87,6 +87,7 @@ function actRestore(id, modulPage)
 
 function actAccept(id, modulPage)
 {
+  $('.acceptButton').attr('disabled', 'disabled')
   $('.acceptButton').html('<i class="fa fa-refresh fa-spin"></i>');
 
   document.fGlobal.id.value=id;
