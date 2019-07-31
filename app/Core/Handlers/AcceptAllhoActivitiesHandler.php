@@ -87,6 +87,8 @@ class AcceptAllhoActivitiesHandler implements Handler
             {  $delop = \DB::statement($delExist); }
 
             if($delop){ \DB::insert($insertQuery, $bindings); }
+          }else{
+            \DB::insert($insertQuery, $bindings);
           }
         }
 
