@@ -17,10 +17,13 @@
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Status</label>-->
 				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
 
-				  <div class="col-md-5 col-xs-12">
+				  <div class="col-md-4 col-xs-12">
+					       <input type="text" name="sf[item]" id="" class="form-control" placeholder="Item" value="@if(is_array($sf)) {{ $sf['item'] }} @endif">
+					</div>
+				  <div class="col-md-4 col-xs-12">
 					       <input type="text" name="sf[serial_number]" id="" class="form-control" placeholder="Serial Number" value="@if(is_array($sf)) {{ $sf['serial_number'] }} @endif">
 					</div>
-				  <div class="col-md-5 col-xs-12">
+				  <div class="col-md-2 col-xs-12">
 					       <input type="text" name="sf[imei]" id="" class="form-control" placeholder="Imei" value="@if(is_array($sf)) {{ $sf['imei'] }} @endif">
 				  </div>
 				  <div class="col-sm-2 col-xs-12" style="  ">
