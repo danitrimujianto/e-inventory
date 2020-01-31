@@ -630,11 +630,15 @@ class FunctionGlobals {
     ############################# FUNGSI MENCARI TGL, BULAN, TAHUN FORMAT INDONESIA #############################
     public static function tampiltgl2($valtgl)
     {
+    if(!empty($valtgl)) {
     $temp=explode(substr($valtgl, 2, 1),$valtgl);
     $tgl=$temp[0];
     $bulan=$temp[1];
     $tahun=$temp[2];
     return $tgl." ".self::bulan_c($bulan)." ".$tahun;
+   } else {
+   return "" ;
+  } 
     }
 
     #################### MENCARI BULAN DI DALAM FIELD ###################

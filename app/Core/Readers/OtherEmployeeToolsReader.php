@@ -29,12 +29,12 @@ class OtherEmployeeToolsReader implements Reader
       $usertype = Auth::user()->usertype_id;
 
       $user = Karyawan::find(Auth::user()->karyawan_id);
-      $assignmentarea_id = $user->assignmentarea_id;
+      $homebasearea_id = $user->homebasearea_id;
 
       $data = new ToolsKaryawan;
 
-      $data = $data->where('karyawan_id', '!=', Auth::user()->karyawan_id)->whereHas('karyawan', function($q) use($assignmentarea_id){
-        $q->where('assignmentarea_id', $assignmentarea_id);
+      $data = $data->where('karyawan_id', '!=', Auth::user()->karyawan_id)->whereHas('karyawan', function($q) use($homebasearea_id){
+        $q->where('homebasearea_id', $homebasearea_id);
       });
 
       if(!empty($sq))

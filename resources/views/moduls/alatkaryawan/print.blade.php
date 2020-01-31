@@ -38,10 +38,10 @@
           <td>{{ optional($d->tools)->type }}</td>
           <td>{{ optional($d->tools)->serial_number }}</td>
           <td>{{ optional($d->tools)->imei }}</td>
-          <td>{{ optional($d->handover->project)->name }}</td>
+          <td>{{ $d['handover']['project']['name'] }}</td>
           <td>{{ optional($d->karyawan)->id_karyawan }}</td>
           <td>{{ optional($d->karyawan)->name }}</td>
-          <td>{{ optional($d->handover->toarea)->name }}</td>
+          <td>{{ optional($d->karyawan->homebasearea)->name }}</td>
           <td>{{ optional($d->karyawan->assignmentarea)->name }}</td>
           <td>{{ optional($d->karyawan->position)->name }}</td>
           <td>{{ HelpMe::tgl_sql_to_indo($d->renew_date) }}</td>
