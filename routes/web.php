@@ -292,17 +292,22 @@ Route::middleware('auth')->prefix("/tools")->group(function() {
     Route::get("/list", 'ToolsController@list'); /* action get list of developers */
     Route::get("/select", 'ToolsController@selectData'); /* action get list of developers */
     Route::get("/updatecode", 'ToolsController@updateCode'); /* action get list of developers */
-    Route::middleware('auth')->prefix("/search")->group(function() {
+    Route::prefix("/search")->group(function() {
       Route::get("/", 'ToolsController@search'); /* action insert or add data to system*/
       Route::get("/mutasi", 'ToolsController@listMutasi'); /* action insert or add data to system*/
     });
 
-    Route::middleware('auth')->prefix("/add")->group(function() {
+    Route::prefix("/add")->group(function() {
       Route::get("/", 'ToolsController@add'); /* action insert or add data to system*/
       Route::post("/", 'ToolsController@store'); /* action insert or add data to system*/
       Route::post("/request", 'ToolsController@storeRequestTools'); /* action insert or add data to system*/
     });
 
+    Route::prefix("/export")->group(function() {
+        Route::post("/excel", 'ToolsController@excel'); /* action get data by id */
+        Route::get("/excel", 'ToolsController@excel'); /* action get data by id */
+    });
+	
     Route::prefix("/{id}")->group(function() {
         Route::get("/", 'ToolsController@edit'); /* action get data by id */
         Route::get("/detail", 'ToolsController@show'); /* action show data by id */

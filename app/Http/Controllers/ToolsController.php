@@ -17,6 +17,7 @@ use App\Core\Readers\SelectToolsReader;
 //others table
 use App\Core\Readers\DivisionReader;
 use App\Core\Readers\BarangReader;
+use App\Core\Export\ToolsExcel;
 
 
 use Session;
@@ -314,5 +315,18 @@ class ToolsController extends ApplicationController
     $msg = $this->resultException($e, $pos);
     return dd($msg);
   }
+ }
+
+ 
+ public function excel(Request $request)
+ {
+   $pos = "Export Excel";
+   try {
+     return (new ToolsExcel($request))->download('Master Tools.xls');
+     // return Excel::download(new AlatKaryawanExcel($request), 'alat-karyawan.xlsx');
+   } catch (\Exception $e) {
+     $msg = $this->resultException($e, $pos);
+     return dd($msg);
+   }
  }
 }

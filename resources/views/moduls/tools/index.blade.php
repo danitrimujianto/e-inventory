@@ -5,34 +5,8 @@
       <div class="box-header">
         <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Add New</button>
         <div class="box-tools">
-          <button class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
+            <button class="btn btn-danger " id="excelButton"><i class="fa fa-file-excel-o"></i> Excel</button>
         </div>
-        <div class="row" id="searchForm" style=" display:none; ">
-				<div class="col-md-12" >
-					<h4>Filter</h4>
-				</div>
-        <form method="post" action="{{ '/'.$theme['modul'].'/search' }}">
-          @csrf
-				<div class="form-group">
-				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Status</label>-->
-				  <!--<label for="list_price" class="col-sm-2 col-xs-12 control-label">Nomor</label>-->
-
-				  <div class="col-md-4 col-xs-12">
-					       <input type="text" name="sf[item]" id="" class="form-control" placeholder="Item" value="@if(is_array($sf)) {{ $sf['item'] }} @endif">
-					</div>
-				  <div class="col-md-3 col-xs-12">
-					       <input type="text" name="sf[serial_number]" id="" class="form-control" placeholder="Serial Number" value="@if(is_array($sf)) {{ $sf['serial_number'] }} @endif">
-					</div>
-				  <div class="col-md-3 col-xs-12">
-					       <input type="text" name="sf[imei]" id="" class="form-control" placeholder="Imei" value="@if(is_array($sf)) {{ $sf['imei'] }} @endif">
-				  </div>
-				  <div class="col-sm-2 col-xs-12" style="  ">
-					<button class="btn btn-primary"><i class="fa fa-search"></i></button>
-					<button type="button" id="resetFilter" class="btn btn-warning"><i class="fa fa-eraser"></i></button>
-				  </div>
-				</div>
-				</form>
-				</div>
       </div>
       <!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
@@ -49,6 +23,24 @@
             <th>Created By</th>
             <th style=" width: 16%; ">Action</th>
           </tr>
+          <form method="post" action="{{ '/'.$theme['modul'].'/search' }}">
+          @csrf
+          <tr>
+            <td><input type="text" name="sf[code]" class="form-control" placeholder="" value="@if(is_array($sf)){{trim($sf['code'])}}@endif" style="text-align:left;"></td>
+            <td><input type="text" name="sf[tgl]" id="" class="form-control" placeholder="" value="@if(is_array($sf)) {{trim($sf['tgl']) }} @endif" style="text-align:left;"></td>
+            <td><input type="text" name="sf[item]" id="" class="form-control" placeholder="" value="@if(is_array($sf)) {{trim($sf['item']) }} @endif" style="text-align:left;"></td>
+            <td><input type="text" name="sf[merk]" id="" class="form-control" placeholder="" value="@if(is_array($sf)) {{trim($sf['merk']) }} @endif" style="text-align:left;"></td>
+            <td><input type="text" name="sf[type]" id="" class="form-control" placeholder="" value="@if(is_array($sf)) {{trim($sf['type']) }} @endif" style="text-align:left;"></td>
+            <td><input type="text" name="sf[serial_number]" id="" class="form-control" placeholder="" value="@if(is_array($sf)) {{trim($sf['serial_number']) }} @endif" style="text-align:left;"></td>
+            <td><input type="text" name="sf[imei]" id="" class="form-control" placeholder="" value="@if(is_array($sf)) {{trim($sf['imei']) }} @endif" style="text-align:left;"></td>
+            <td>&nbsp;</td>
+            <td><input type="text" name="sf[created_by]" id="" class="form-control" placeholder="" value="@if(is_array($sf)) {{trim($sf['created_by']) }} @endif"></td>
+            <td>
+              <button class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button>
+              <button type="reset" id="resetFilter" class="btn btn-warning btn-sm"><i class="fa fa-eraser"></i></button>
+            </td>
+          </tr>
+				  </form>
           @foreach($data AS $d)
           <tr data-id="{{ $d->id }}" data-field="{{ 'Tool' }}" data-value="{{ $d->item }}">
             <td>{{ $d->code }}</td>
