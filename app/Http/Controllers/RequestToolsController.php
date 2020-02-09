@@ -141,6 +141,9 @@ class RequestToolsController extends ApplicationController
       $data = $reader->read();
       $this->returnData['data'] = $data;
 
+      $history = $reader->history();
+      $this->returnData['history'] = $history;
+      
       $reader = new KaryawanReader($request);
       $dKaryawan = $reader->read();
       $this->returnData['dKaryawan'] = $dKaryawan;

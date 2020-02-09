@@ -1,6 +1,7 @@
 <?php
 namespace App\Core\Readers;
 
+use App\InputTools;
 use App\PurchaseRequest;
 use App\PurchaseRequestDetail;
 use App\Core\Reader;
@@ -33,6 +34,14 @@ class GetRequestToolsReader implements Reader
       $id = $this->id;
 
       $data = PurchaseRequestDetail::find($id);
+
+      return $data;
+    }
+
+    public function history(){
+      
+      $id = $this->id;
+      $data = InputTools::where('purchase_request_id', $id)->get();
 
       return $data;
     }

@@ -130,6 +130,42 @@
               </table>
             </div>
           </section>
+          @php
+          $total = 0;
+          $totalHistory = count($history);
+          @endphp
+          @if($totalHistory > 0)
+          <section id="tools">
+            <h4 class="page-header">History Input
+            </h4>
+            <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                  <th>Item</th>
+                  <th>Merk</th>
+                  <th>Type</th>
+                  <th>Division</th>
+                  <th>Goods</th>
+                  <th>Serial Number</th>
+                  <th>Imei</th>
+                </tr>
+                <tbody>
+                @foreach($history AS $history)
+                <tr>
+                  <td>{{ $history->item }}</td>
+                  <td>{{ $history->merk }}</td>
+                  <td>{{ $history->type }}</td>
+                  <td>{{ $history->division->name }}</td>
+                  <td>{{ $history->barang->name }}</td>
+                  <td>{{ $history->serial_number }}</td>
+                  <td>{{ $history->imei }}</td>
+                </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+          </section>
+           @endif
         </div>
         <!-- /.box-body -->
 

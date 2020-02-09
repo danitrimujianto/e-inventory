@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\Tools;
+use App\InputTools;
 use App\Division;
 use App\Barang;
 use App\PurchaseRequestDetail;
@@ -61,6 +62,25 @@ class AddToolsHandler implements Handler
           $updateItem->input = 1;
           $updateItem->jml_input = $updateItem->jml_input+1;
           $updateItem->save();
+
+          $tabInput = new InputTools();
+          $tabInput->purchase_request_id = $request->purchase_request_id;
+          $tabInput->code = $tab->code;
+          $tabInput->urut = $tab->urut;
+          $tabInput->division_id = $tab->division_id;
+          $tabInput->barang_id = $tab->barang_id;
+          $tabInput->item = $tab->item;
+          $tabInput->merk = $tab->merk;
+          $tabInput->type = $tab->type;
+          $tabInput->serial_number = $tab->serial_number;
+          $tabInput->imei = $tab->imei;
+          $tabInput->price = $tab->price;
+          $tabInput->remarks = $tab->remarks;
+          $tabInput->created_by = $tab->created_by;
+          $tabInput->tgl = $tab->tgl;
+          $tabInput->supplier_id = $tab->supplier_id;
+          $tabInput->save();
+
         }
         return $tab;
     }
