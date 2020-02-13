@@ -3,7 +3,7 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        @if(Auth::user()->usertype_id == 4) <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Add New</button> @endif
+        @if(Auth::user()->usertype_id == 4 || Auth::user()->usertype_id == 5) <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Add New</button> @endif
         <div class="box-tools">
           <button class="btn btn-default" id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button>
         </div>

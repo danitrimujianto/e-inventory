@@ -72,7 +72,6 @@
                   @if($d->status >= 0 && $d->status < 1)
                     <button title="" type="button" class="btn btn-xs tooltips btn-info editButton"><i class="fa fa-pencil"></i>&nbsp;Edit</button>
                     <button title="" type="button" class="btn btn-xs tooltips btn-danger cancelButton"><i class="fa fa-remove"></i>&nbsp;Cancel</button>
-                    <!-- <button title="" type="button" class="btn btn-xs tooltips btn-danger deleteButton"><i class="fa fa-trash"></i>&nbsp;Hapus</button> -->
                   @endif
                 @endif
               @elseif(Auth::user()->usertype_id == 3)
@@ -80,6 +79,10 @@
                 <button title="" type="button" class="btn btn-xs tooltips btn-success acceptButton"><i class="fa fa-check"></i>&nbsp;Approve</button>
                 <button title="" type="button" class="btn btn-xs tooltips btn-danger rejectButton"><i class="fa fa-remove"></i>&nbsp;Reject</button>
                 @endif
+              @endif
+
+              @if($d->status == "0" || $d->status == "98")
+              <button title="" type="button" class="btn btn-xs tooltips btn-danger deleteButton"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
               @endif
             </td>
           </tr>

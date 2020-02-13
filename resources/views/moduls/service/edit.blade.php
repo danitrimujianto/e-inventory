@@ -25,109 +25,11 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Item</label>
-                <div>
-                  <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="{{ $data->tools_id }}">
-                  <input type="text" class="form-control itemSearch needed" name="item" id="item" placeholder="" autocomplete="off" value="{{ optional($data->tools)->item }}">
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">ID Tools</label>
-                <div>
-                  <input type="text" class="form-control needed" name="code" id="code" placeholder="" autocomplete="off" value="{{ optional($data->tools)->code }}" readonly>
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Serial Number</label>
-                <div>
-                  <input type="text" class="form-control serialSearch" name="serial_number" id="serial_number" placeholder="" autocomplete="off" value="{{ optional($data->tools)->serial_number }}">
-                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Imei</label>
-                <div>
-                  <input type="text" class="form-control imeiSearch" name="imei" id="imei" placeholder="" autocomplete="off" value="{{ optional($data->tools)->imei }}">
-      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Problem</label>
-                <div>
-                  <input type="text" class="form-control" name="problem" id="problem" placeholder="" autocomplete="off" value="{{ $data->problem }}">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Service</label>
-                <div>
-                  <input type="text" class="form-control" name="service" id="service" placeholder="" autocomplete="off" value="{{ $data->service }}">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Condition</label>
-                <div>
-                  <select class="form-control" name="condition_id">
-                    <option value="">-- Choose Condition --</option>
-                    @foreach($dCondition AS $condition)
-                      <option value="{{ $condition->id }}" @if($data->condition_id == $condition->id) selected @endif>{{ $condition->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">After</label>
-                <div>
-                  <select class="form-control" name="after_id">
-                    <option value="">-- Choose After --</option>
-                    @foreach($dCondition AS $condition)
-                      <option value="{{ $condition->id }}" @if($data->after_id == $condition->id) selected @endif>{{ $condition->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Start Date</label>
                 <div>
                   <input type="text" class="form-control datepicker needed" name="start_date" id="start_date" placeholder="" autocomplete="off" value="{{ HelpMe::tgl_sql_to_indo($data->start_date) }}">
-                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Estimate Price</label>
-                <div>
-                  <input type="text" class="form-control nominal needed" name="price" id="price" placeholder="" autocomplete="off" value="{{ HelpMe::cost2($data->price) }}">
                   <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -139,6 +41,82 @@
               <textarea class="form-control" name="remarks" id="remarks">{{ $data->remarks }}</textarea>
             </div>
           </div>
+
+          <div class="row" style=" display:none; ">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Condition</label>
+                <div id="conditionList">
+                  <select class="form-control goods_condition_id" name="goods_condition_id[]" disabled="true">
+                    <option value="">-- Choose Condition --</option>
+                    @foreach($dCondition AS $condition)
+                      <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <section id="tools">
+            <h4 class="page-header">Tools
+              <!-- <button type="button" class="btn btn-primary pull-right btn-xs" id="btnListTools"><i class="fa fa-plus"></i> Add</button> -->
+            </h4>
+            <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                  <th>Item</th>
+                  <th>Problem</th>
+                  <th>Condition</th>
+                  <th>Merk</th>
+                  <th>Serial Number</th>
+                  <th>Imei</th>
+                  <th>Estimate Price</th>
+                  <th style="width: 40px">Action</th>
+                </tr>
+                <tbody id="listTools">
+                <?php $detail = false; $total = 0; ?>
+                @if($data->ServiceDetail->count() > 0)
+                <?php $detail = true; ?>
+                @foreach($data->ServiceDetail AS $detil)
+                <tr>
+                  <td><input type="hidden" class="idTools" name="idTools[]" value="<?php echo $detil->tools_id; ?>" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="<?php echo $detil->tools->code." - ".$detil->tools->item; ?>" autocomplete="off"/></td>
+                  <td><input type="text" class="form-control" value="<?php echo $detil->problem; ?>" id="" name="problem[]"/></td>
+                  <td>
+                  <select class="form-control goods_condition_id" name="goods_condition_id[]">
+                    <option value="">-- Choose Condition --</option>
+                    @foreach($dCondition AS $condition)
+                      <option value="{{ $condition->id }}" <?php if($detil->condition_id === $condition->id) echo "selected"; ?>>{{ $condition->name }}</option>
+                    @endforeach
+                  </select>
+                  </td>
+                  <td><input type="text" class="form-control merk" value="<?php echo $detil->tools->merk; ?>" id="" readonly /></td>
+                  <td><input type="text" class="form-control lookupTool serial_number" d-position="serial_number"  value="<?php echo $detil->tools->serial_number; ?>" /></td>
+                  <td><input type="text" class="form-control lookupTool imei" d-position="imei" value="<?php echo $detil->tools->imei; ?>" id=""/></td>
+                  <td><input type="text" class="form-control nominal text-right estprice" value="<?php echo HelpMe::cost2($detil->price); ?>" id="" name="price[]"/></td>
+                  <td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td>
+                </tr>
+                <?php $total = $total+$detil->price; ?>
+                @endforeach
+                @else
+                <tr>
+                  <td colspan="8" class="text-center">Empty</td>
+                </tr>
+                @endif
+                </tbody>
+                <tbody class="disTotal" style="<?php if(!$detail) echo 'display:none;'; ?>">
+                  <tr>
+                    <td colspan="6" class="text-right">Total:</td>
+                    <td class="subtotal text-right"><?php echo HelpMe::cost2($total); ?></td>
+                  </tr>
+                </tbody>
+                <tfooter>
+                  <tr>
+                    <td colspan="7"><button type="button" id="tambahBaris" class="btn btn-default btn-xs">Tambah Baris</button></td>
+                  </tr>
+                </tfooter>
+              </table>
+            </div>
+          </section>
         </div>
         <!-- /.box-body -->
 
@@ -257,6 +235,166 @@ $(document).ready(function(){
         // console.log(listData[data]['']);
       }
   	});
+  });
+
+  
+  $("body").on("keyup", ".estprice", function(){
+    var t = 0, tot = 0;
+    
+    $(".estprice").each(function(){
+      t = parseInt($(this).val().replace(/,/g,""));
+      if(isNaN(t)){
+        t = 0;
+      }
+      tot = tot+t;
+    });
+    $(".subtotal").html(nominal(tot));
+  });
+
+  var urut = 0;
+  $("#tambahBaris").click(function(){
+    urut++;
+    var listTools = $('#listTools');
+    var el ='<tr><td><input type="hidden" class="idTools" name="idTools[]" value="" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="" autocomplete="off"/></td><td><input type="text" class="form-control" value="" id="" name="problem[]"/></td><td>'+$('#conditionList').html()+'</td><td><input type="text" class="form-control merk" value="" id="" readonly /></td><td><input type="text" class="form-control lookupTool serial_number" d-position="serial_number"  value="" /></td><td><input type="text" class="form-control lookupTool imei" d-position="imei" value="" id=""/></td><td><input type="text" class="form-control nominal text-right estprice" value="" id="" name="price[]"/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
+
+
+    var chekEmpty = listTools.find('#item').length;
+    if(chekEmpty == 0){
+      listTools.html(el);
+      $('.disTotal').show();
+    }else{
+      listTools.append(el);
+    }
+    listTools.find('.goods_condition_id').prop('disabled', false);
+    var er = $(this).parent('td').parent('tr').parent('tfooter').parent('table').find('#listTools').find('.goods_condition_id').prop('disabled');
+    // alert(er);
+
+  });
+
+  $('body').on('click', '.delRow', function(){
+    var listTools = $('#listTools');
+    var el ='<tr><td colspan="6" class="text-center">Empty</td></tr>';
+
+    $(this).parent('td').parent('tr').remove();
+    var chekEmpty = listTools.find('#item').length;
+
+    if(chekEmpty == 0)
+    { listTools.html(el); 
+      $('.disTotal').hide(); }
+
+    
+    var t = 0, tot = 0;
+    
+    $(".estprice").each(function(){
+      t = parseInt($(this).val().replace(/,/g,""));
+      if(isNaN(t)){
+        t = 0;
+      }
+      tot = tot+t;
+    });
+    $(".subtotal").html(nominal(tot));
+    
+    urut--;
+  });
+
+  $('body').on('keyup', '.SearchEl', function(){
+    $(this).typeahead({
+  		source: function (query, result) {
+        $.ajax({
+  				url: "/tools/search/mutasi",
+  				data: 'sf=items&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+    					result($.map(data, function (item) {
+    						return item.code+" - "+item.item;
+    					}));
+  				}
+  			});
+  		},
+      afterSelect: function(data){
+
+      }
+  	});
+  });
+
+  var listBarang = {};
+  $('body').on('keyup', '.lookupTool', function(){
+    var pos = $(this).attr("d-position");
+    $(this).typeahead({
+  		source: function (query, result) {
+        $.ajax({
+  				url: "/tools/search/mutasi",
+  				data: 'sf='+pos+'&sq=' + query,
+  				dataType: "json",
+  				type: "GET",
+  				success: function (data) {
+            console.log(data);
+    					result($.map(data, function (item) {
+    						return item[pos];
+    					}));
+  				}
+  			});
+  		},
+      afterSelect: function(data){
+
+      }
+  	});
+  });
+
+  $('body').on('change', '.SearchEl', function(){
+    var current = $(this).typeahead("getActive");
+    if (current) {
+      var code = current.split("-")[0].trim();
+      var el = $(this).parent('td').parent('tr');
+      // alert(el);
+      $.ajax({
+        url: "/tools/select",
+        data: 'sf=code&sq=' + code,
+        dataType: "json",
+        type: "GET",
+        success: function (data) {
+
+          el.find('.idTools').val(data.id);
+          el.find('.merk').val(data.merk);
+          el.find('.type').val(data.type);
+          el.find('.serial_number').val(data.serial_number);
+          el.find('.imei').val(data.imei);
+
+        }
+      });
+    } else {
+      // Nothing is active so it is a new value (or maybe empty value)
+    }
+  });
+
+  $('body').on('change', '.lookupTool', function(){
+  // alert(code);
+    var current = $(this).typeahead("getActive");
+    if (current) {
+      var pos = $(this).attr("d-position");
+      var code = current.split("-")[0].trim();
+      var el = $(this).parent('td').parent('tr');
+      // alert(code);
+      $.ajax({
+        url: "/tools/select",
+        data: 'sf='+pos+'&sq=' + code,
+        dataType: "json",
+        type: "GET",
+        success: function (data) {
+
+          el.find('.idTools').val(data.id);
+          el.find('.SearchEl').val(data.code+" - "+data.item);
+          el.find('.merk').val(data.merk);
+          el.find('.type').val(data.type);
+          el.find('.serial_number').val(data.serial_number);
+          el.find('.imei').val(data.imei);
+
+        }
+      });
+    } else {
+      // Nothing is active so it is a new value (or maybe empty value)
+    }
   });
 });
 

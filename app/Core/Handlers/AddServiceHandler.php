@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\Service;
+use App\ServiceDetail;
 use App\User;
 use App\Core\Handler;
 use Illuminate\Http\Request;
@@ -36,17 +37,21 @@ class AddServiceHandler implements Handler
         $karyawan_id = Auth::user()->karyawan_id;
 
         $tab = new Service();
-        $tab->tools_id = $request->tools_id;
         $tab->tanggal = HelpMe::tgl_indo_to_sql($request->tanggal);
         $tab->start_date = HelpMe::tgl_indo_to_sql($request->start_date);
-        $tab->problem = $request->problem;
-        $tab->service = $request->service;
-        $tab->condition_id = $request->condition_id;
-        $tab->after_id = $request->after_id;
         $tab->remarks = $request->remarks;
-        $tab->price = HelpMe::nominalSql2($request->price);
         $tab->karyawan_id = $karyawan_id;
         $tab->save();
+
+        foreach($request->idTools AS $k=>$v){
+          $model = new ServiceDetail;
+          $model->service_id = $tab->id;
+          $model->tools_id = $v;
+          $model->price = HelpMe::nominalSql2($request->price[$k]);
+          $model->condition_id = $request->goods_condition_id[$k];
+          $model->problem = $request->problem[$k];
+          $model->save();
+        }
 
         return $tab;
     }

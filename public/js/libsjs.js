@@ -374,3 +374,7 @@ function modalPage(id, url, title, width=40, param = null){
 	//$("#myModal .modal-body").load(page+".inc.php?id="+id);
 	$("#tombol-modal").click();
 }
+
+function normalNominal(obj){
+	return obj.replace(/./g,"");
+}

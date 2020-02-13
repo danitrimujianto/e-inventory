@@ -2,6 +2,7 @@
 namespace App\Core\Handlers;
 
 use App\Service;
+use App\ServiceDetail;
 use App\AllhoActivitiesDetail;
 use App\Core\Handler;
 use Illuminate\Http\Request;
@@ -32,20 +33,28 @@ class UpdateServiceHandler implements Handler
 
         $usertype = Auth::user()->usertype_id;
 
-                $karyawan_id = Auth::user()->karyawan_id;
+        $karyawan_id = Auth::user()->karyawan_id;
 
         $tab = Service::find($id);
-        $tab->tools_id = $request->tools_id;
         $tab->tanggal = HelpMe::tgl_indo_to_sql($request->tanggal);
         $tab->start_date = HelpMe::tgl_indo_to_sql($request->start_date);
-        $tab->problem = $request->problem;
-        $tab->service = $request->service;
-        $tab->condition_id = $request->condition_id;
-        $tab->after_id = $request->after_id;
         $tab->remarks = $request->remarks;
-        $tab->price = HelpMe::nominalSql2($request->price);
         $tab->karyawan_id = $karyawan_id;
         $tab->save();
+
+        $delDetil = ServiceDetail::where('service_id', $id)->delete();
+
+        if($delDetil){
+            foreach($request->idTools AS $k=>$v){
+                $model = new ServiceDetail;
+                $model->service_id = $tab->id;
+                $model->tools_id = $v;
+                $model->price = HelpMe::nominalSql2($request->price[$k]);
+                $model->condition_id = $request->goods_condition_id[$k];
+                $model->problem = $request->problem[$k];
+                $model->save();
+            }
+        }
 
         return $tab;
     }

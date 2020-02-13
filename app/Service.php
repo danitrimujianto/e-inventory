@@ -31,6 +31,11 @@ class Service extends Model
       return $this->belongsTo('App\Karyawan', 'karyawan_id');
     }
 
+    public function ServiceDetail()
+    {
+      return $this->hasMany('App\ServiceDetail', 'service_id');
+    }
+
     public function status(){
       if(empty($this->status) || $this->status == '0'){
         return '<span class="badge bg-default">Pending</span>';

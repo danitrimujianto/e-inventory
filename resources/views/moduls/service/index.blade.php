@@ -42,34 +42,18 @@
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>Status</th>
-            <th>ID Tools</th>
-            <th>Items</th>
-            <th>Serial Number</th>
-            <th>Imei</th>
-            <th>Problem</th>
-            <th>Service</th>
-            <th>Condition</th>
-            <th>After</th>
-            <th>Start Date</th>
-            <th>Finish Date</th>
-            <th>Price</th>
-            <th style=" width: 16%; ">Action</th>
+            <th style=" width: 10%; ">Status</th>
+            <th style=" width: 10%; ">Start Date</th>
+            <th style=" width: 10%; ">Finish Date</th>
+            <th>Remarks</th>
+            <th style=" width: 20%; ">Action</th>
           </tr>
           @foreach($data AS $d)
           <tr class="viewRowButton" data-id="{{ $d->id }}" data-field="{{ 'Service' }}" data-value="{{ optional($d->tools)->item }}">
             <td><?php echo $d->status() ?></td>
-            <td>{{ optional($d->tools)->code }}</td>
-            <td>{{ optional($d->tools)->item }}</td>
-            <td>{{ optional($d->tools)->serial_number }}</td>
-            <td>{{ optional($d->tools)->imei }}</td>
-            <td>{{ $d->problem }}</td>
-            <td>{{ $d->service }}</td>
-            <td>{{ optional($d->condition)->name }}</td>
-            <td>{{ optional($d->after)->name }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->start_date) }}</td>
             <td>{{ HelpMe::tgl_sql_to_indo($d->finish_date) }}</td>
-            <td>{{ HelpMe::cost2($d->price) }}</td>
+            <td>{{ $d->remarks }}</td>
             <td>
             @if(Auth::user()->usertype_id == 3)
               @if(empty($d->status) || $d->status == 0)

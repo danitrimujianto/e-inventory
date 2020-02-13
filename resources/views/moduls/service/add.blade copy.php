@@ -22,11 +22,113 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Item</label>
+                <div>
+                  <input type="hidden" class="form-control" name="tools_id" id="tools_id" placeholder="" autocomplete="off" value="">
+                  <input type="text" class="form-control itemSearch needed" name="item" id="item" placeholder="" autocomplete="off" value="">
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">ID Tools</label>
+                <div>
+                  <input type="text" class="form-control" name="code" id="code" placeholder="" autocomplete="off" value="" readonly>
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Serial Number</label>
+                <div>
+                  <input type="text" class="form-control serialSearch" name="serial_number" id="serial_number" placeholder="" autocomplete="off" value="">
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Imei</label>
+                <div>
+                  <input type="text" class="form-control imeiSearch" name="imei" id="imei" placeholder="" autocomplete="off" value="">
+      						<span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Problem</label>
+                <div>
+                  <input type="text" class="form-control needed" name="problem" id="problem" placeholder="" autocomplete="off" value="">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Service</label>
+                <div>
+                  <input type="text" class="form-control needed" name="service" id="service" placeholder="" autocomplete="off" value="">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Condition</label>
+                <div>
+                  <select class="form-control needed" name="condition_id">
+                    <option value="">-- Choose Condition --</option>
+                    @foreach($dCondition AS $condition)
+                      <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                    @endforeach
+                  </select>
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">After</label>
+                <div>
+                  <select class="form-control needed" name="after_id">
+                    <option value="">-- Choose After --</option>
+                    @foreach($dCondition AS $condition)
+                      <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                    @endforeach
+                  </select>
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Start Date</label>
                 <div>
                   <input type="text" class="form-control datepicker needed" name="start_date" id="start_date" placeholder="" autocomplete="off" value="">
+                  <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Estimate Price</label>
+                <div>
+                  <input type="text" class="form-control nominal needed" name="price" id="price" placeholder="" autocomplete="off" value="">
                   <span class="help-block2" style=" margin-top:0; margin-bottom: 0; clear:both;">Harus Diisi</span>
                 </div>
               </div>
@@ -64,29 +166,22 @@
             <table class="table table-bordered">
                 <tr>
                   <th>Item</th>
-                  <th>Problem</th>
                   <th>Condition</th>
                   <th>Merk</th>
+                  <th>Type</th>
                   <th>Serial Number</th>
                   <th>Imei</th>
-                  <th>Estimate Price</th>
                   <th style="width: 40px">Action</th>
                 </tr>
                 <tbody id="listTools">
                 <tr>
-                  <td colspan="8" class="text-center">Empty</td>
+                  <td colspan="7" class="text-center">Empty</td>
                 </tr>
                 </tbody>
-                <tbody class="disTotal" style="display:none;">
-                  <tr>
-                    <td colspan="6" class="text-right">Total:</td>
-                    <td class="subtotal text-right">&nbsp;</td>
-                  </tr>
-                </tbody>
                 <tfooter>
-                  <tr>
-                    <td colspan="7"><button type="button" id="tambahBaris" class="btn btn-default btn-xs">Tambah Baris</button></td>
-                  </tr>
+                <tr>
+                  <td colspan="7"><button type="button" id="tambahBaris" class="btn btn-default btn-xs">Tambah Baris</button></td>
+                </tr>
                 </tfooter>
               </table>
             </div>
@@ -212,30 +307,16 @@ $(document).ready(function(){
   	});
   });
 
-  $("body").on("keyup", ".estprice", function(){
-    var t = 0, tot = 0;
-    
-    $(".estprice").each(function(){
-      t = parseInt($(this).val().replace(/,/g,""));
-      if(isNaN(t)){
-        t = 0;
-      }
-      tot = tot+t;
-    });
-    $(".subtotal").html(nominal(tot));
-  });
-
   var urut = 0;
   $("#tambahBaris").click(function(){
     urut++;
     var listTools = $('#listTools');
-    var el ='<tr><td><input type="hidden" class="idTools" name="idTools[]" value="" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="" autocomplete="off"/></td><td><input type="text" class="form-control" value="" id="" name="problem[]"/></td><td>'+$('#conditionList').html()+'</td><td><input type="text" class="form-control merk" value="" id="" readonly /></td><td><input type="text" class="form-control lookupTool serial_number" d-position="serial_number"  value="" /></td><td><input type="text" class="form-control lookupTool imei" d-position="imei" value="" id=""/></td><td><input type="text" class="form-control nominal text-right estprice" value="" id="" name="price[]"/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
+    var el ='<tr><td><input type="hidden" class="idTools" name="idTools[]" value="" /><input type="text" class="form-control SearchEl" data-type="item" id="item" value="" autocomplete="off"/></td><td>'+$('#conditionList').html()+'</td><td><input type="text" class="form-control merk" value="" id="" readonly /></td><td><input type="text" class="form-control type" value="" id="" readonly/></td><td><input type="text" class="form-control lookupTool serial_number" d-position="serial_number"  value="" /></td><td><input type="text" class="form-control lookupTool imei" d-position="imei" value="" id=""/></td><td><button type="button" class="btn btn-danger btn-xs delRow"><i class="fa fa-remove"></i>&nbsp;Delete</button></td></tr>';
 
 
     var chekEmpty = listTools.find('#item').length;
     if(chekEmpty == 0){
       listTools.html(el);
-      $('.disTotal').show();
     }else{
       listTools.append(el);
     }
@@ -253,20 +334,7 @@ $(document).ready(function(){
     var chekEmpty = listTools.find('#item').length;
 
     if(chekEmpty == 0)
-    { listTools.html(el); 
-      $('.disTotal').hide(); }
-
-    
-    var t = 0, tot = 0;
-    
-    $(".estprice").each(function(){
-      t = parseInt($(this).val().replace(/,/g,""));
-      if(isNaN(t)){
-        t = 0;
-      }
-      tot = tot+t;
-    });
-    $(".subtotal").html(nominal(tot));
+    { listTools.html(el); }
 
     urut--;
   });
