@@ -22,11 +22,11 @@
   					</select>
 					</div>
 				  <div class="col-md-5 col-xs-12">
-					<input type="text" name="sq" id="sq" class="form-control" placeholder="" value="{{ $sq }}">
+					  <input type="text" name="sq" id="sq" class="form-control" placeholder="" value="{{ $sq }}">
 				  </div>
 				  <div class="col-sm-2 col-xs-12" style="  ">
-					<button class="btn btn-primary"><i class="fa fa-search"></i></button>
-					<button type="button" id="resetFilter" class="btn btn-warning"><i class="fa fa-eraser"></i></button>
+            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+            <button type="button" id="resetFilter" class="btn btn-warning"><i class="fa fa-eraser"></i></button>
 				  </div>
 				</div>
 				</form>

@@ -269,7 +269,7 @@ class OtherEmployeeToolsController extends ApplicationController
    {
      $pos = "Print";
      try {
-       $reader = new AlatKaryawanReader($request);
+       $reader = new OtherEmployeeToolsReader($request);
        $data = $reader->read();
 
        $this->returnData['modul'] = $this->modul;
@@ -301,7 +301,7 @@ class OtherEmployeeToolsController extends ApplicationController
    {
      $pos = "Export Excel";
      try {
-       return (new AlatKaryawanExcel($request))->download('alat-karyawan.xls');
+       return (new OtherEmployeeToolsExcel($request))->download('alat-karyawan.xls');
        // return Excel::download(new AlatKaryawanExcel($request), 'alat-karyawan.xlsx');
      } catch (\Exception $e) {
        $msg = $this->resultException($e, $pos);

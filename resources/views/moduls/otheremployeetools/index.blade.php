@@ -11,8 +11,8 @@ $price = ((Auth::user()->usertype_id == 4 ||
 				<div class="col-md-12" >
         <div class="box-tools pull-right">
           <button class="btn btn-danger " id="excelButton"><i class="fa fa-file-excel-o"></i> Excel</button>
-          <button class="btn btn-primary " id="printButton"><i class="fa fa-print"></i> Print</button>
-          <!-- <button class="btn btn-default " id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button> -->
+          <!-- <button class="btn btn-primary " id="printButton"><i class="fa fa-print"></i> Print</button>
+          <button class="btn btn-default " id="filterButton"><i class="fa fa-filter"></i> Filter @if(!empty($sq)) <small class="label bg-yellow "> ON</small> @endif</button> -->
         </div>
       </div>
     </div>
